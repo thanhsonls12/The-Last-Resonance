@@ -22,6 +22,7 @@ const ICON_VOLUME_ON := preload("res://assets/ui/icons/volume_on.svg")
 const ICON_VOLUME_OFF := preload("res://assets/ui/icons/volume_off.svg")
 
 var level_label: Label
+var core_label: Label
 var lock_label: Label
 var fragment_label: Label
 var win_panel: Control
@@ -52,6 +53,24 @@ func set_stats(level_name: String, moves: int, pushes: int, best_moves: int) -> 
 		pushes,
 		best_text,
 	]
+
+
+func set_core_progress(active: int, total: int) -> void:
+	if core_label == null:
+		return
+	core_label.visible = total > 0
+	if total <= 0:
+		return
+	var is_all := active >= total
+	core_label.text = "LUMINA CORE: %d/%d%s" % [
+		active,
+		total,
+		"  •  ĐÃ VÀO VỊ TRÍ" if is_all else "",
+	]
+	var settings := core_label.label_settings
+	if settings:
+		settings.font_color = Color(0.15, 0.95, 0.75) if is_all \
+			else (Color(1.0, 0.82, 0.20) if active > 0 else Color(0.70, 0.88, 1.0, 0.92))
 
 
 func set_fragment(fragment: String) -> void:
@@ -116,10 +135,10 @@ func set_bridge_available(available: bool) -> void:
 func _build_labels() -> void:
 	level_label = Label.new()
 	level_label.set_anchors_preset(Control.PRESET_TOP_WIDE)
-	level_label.offset_top = 24
+	level_label.offset_top = 20
 	level_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	var level_settings := LabelSettings.new()
-	level_settings.font_size = 24
+	level_settings.font_size = 22
 	level_settings.font_color = Color(0.78, 0.93, 1.0)
 	level_settings.outline_size = 8
 	level_settings.outline_color = Color(0.02, 0.04, 0.10, 0.95)
@@ -128,13 +147,28 @@ func _build_labels() -> void:
 	level_label.label_settings = level_settings
 	add_child(level_label)
 
+	core_label = Label.new()
+	core_label.set_anchors_preset(Control.PRESET_TOP_WIDE)
+	core_label.offset_top = 54
+	core_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	core_label.visible = false
+	var core_settings := LabelSettings.new()
+	core_settings.font_size = 16
+	core_settings.font_color = Color(0.70, 0.88, 1.0, 0.92)
+	core_settings.outline_size = 6
+	core_settings.outline_color = Color(0.02, 0.04, 0.10, 0.95)
+	core_settings.shadow_size = 6
+	core_settings.shadow_color = Color(0.0, 0.65, 1.0, 0.35)
+	core_label.label_settings = core_settings
+	add_child(core_label)
+
 	lock_label = Label.new()
 	lock_label.set_anchors_preset(Control.PRESET_TOP_WIDE)
-	lock_label.offset_top = 58
+	lock_label.offset_top = 80
 	lock_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	lock_label.visible = false
 	var lock_settings := LabelSettings.new()
-	lock_settings.font_size = 17
+	lock_settings.font_size = 15
 	lock_settings.font_color = Color(1.0, 0.30, 0.22)
 	lock_settings.outline_size = 6
 	lock_settings.outline_color = Color(0.02, 0.04, 0.10, 0.95)

@@ -182,6 +182,8 @@ func _build_ui() -> void:
 func _build_audio() -> void:
 	audio = EchoAudioManager.new()
 	add_child(audio)
+	if dialogue_box != null:
+		dialogue_box.set_audio_manager(audio)
 
 
 func _build_vfx() -> void:
@@ -214,12 +216,18 @@ func _active_plate_count() -> int:
 
 
 func _update_lock_feedback() -> void:
-	var total := logic.plates.size()
-	var active := _active_plate_count()
+	var total_plates := logic.plates.size()
+	var active_plates := _active_plate_count()
+	var placed_cores := logic.placed_core_count()
+	var total_targets := logic.required_target_count()
+	
+	if audio:
+		audio.update_core_resonance_layer(placed_cores, total_targets)
 	if board_view:
 		board_view.set_lock_state(logic)
 	if hud:
-		hud.set_lock_progress(active, total, logic.doors_open())
+		hud.set_core_progress(placed_cores, total_targets)
+		hud.set_lock_progress(active_plates, total_plates, logic.doors_open())
 
 
 # ---------- input ----------
@@ -477,6 +485,8 @@ func _step(dir: Vector3i, feedback := true, settle := true) -> bool:
 		if logic.plates.has(to):
 			audio.play_plate(true)
 			vfx.play_plate_activation(board_view.world_position(to), true)
+		if logic.slots.has(to):
+			audio.play_box_on_goal()
 		_update_lock_feedback()
 	if res["energy_advanced"]:
 		audio.play_energy()

@@ -281,7 +281,17 @@ func required_target_count() -> int:
 	for plate in plates.keys():
 		if plate_hold_required.get(plate, true):
 			required_plates += 1
-	return slots.size() + required_plates
+	var total := slots.size() + required_plates
+	return total if total > 0 else blocks.size()
+
+
+## Count of Cores currently in position (on goal slots or held plates)
+func placed_core_count() -> int:
+	var count := 0
+	for b in blocks.keys():
+		if slots.has(b) or (plates.has(b) and plate_hold_required.get(b, true)):
+			count += 1
+	return count
 
 
 func try_move(dir: Vector3i) -> Dictionary:
