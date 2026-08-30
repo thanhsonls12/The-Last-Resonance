@@ -233,9 +233,8 @@ const DIALOGUE_EVENTS: Dictionary = {
 		{"speaker": "KIRO-K7", "text": "[Mở mắt... Hệ thống thị giác trực tuyến]"},
 	],
 	"chapter_1_intro": [
-		{"speaker": "HỆ THỐNG", "text": "PHÁT HIỆN NGUỒN ĐIỆN KHẨN CẤP... 0.03%"},
-		{"speaker": "HỆ THỐNG", "text": "CHỈ THỊ TỪ QUẢN TRỊ VIÊN: TÁI KÍCH HOẠT ĐƠN VỊ BẢO TRÌ K-7..."},
-		{"speaker": "KIRO-K7", "text": "[Mở mắt... Hệ thống thị giác trực tuyến]"},
+		{"speaker": "HỆ THỐNG", "text": "PHÁT HIỆN NGUỒN ĐIỆN KHẨN CẤP... 0.03%\nCHỈ THỊ TỪ QUẢN TRỊ VIÊN: TÁI KÍCH HOẠT ĐƠN VỊ BẢO TRÌ K-7...", "voice_path": "res://assets/audio/voice/voice_ch1_intro_sys.mp3"},
+		{"speaker": "KIRO-K7", "text": "[Mở mắt... Hệ thống thị giác trực tuyến]", "voice_path": "res://assets/audio/voice/voice_ch1_kiro_boot.mp3"},
 	],
 	"chapter_2_intro": [
 		{"speaker": "HỆ THỐNG", "text": "TIẾP CẬN PHÂN KHU 02: LÒ RÈN CƠ KHÍ (THE MECHANICAL FOUNDRY)."},
@@ -260,27 +259,22 @@ const DIALOGUE_EVENTS: Dictionary = {
 		{"speaker": "TÍN HIỆU KHÔNG XÁC ĐỊNH", "text": "[NHIỄU SÓNG] ...K-7... kết nối... Core... [MẤT TÍN HIỆU]"},
 	],
 	"first_core_connected": [
-		{"speaker": "HỆ THỐNG", "text": "CORE CONNECTED."},
-		{"speaker": "HỆ THỐNG", "text": "POWER RESTORED: 0.07%"},
+		{"speaker": "HỆ THỐNG", "text": "CORE CONNECTED. POWER RESTORED: 0.07%", "voice_path": "res://assets/audio/voice/voice_ch1_first_core.mp3"},
 	],
 	"first_puzzle_done": [
-		{"speaker": "HỆ THỐNG", "text": "LUMINA CORE ĐÃ KẾT NỐI. KHÔI PHỤC KÊNH TRUYỀN DẪN TỪ LÕI TRUNG TÂM (CENTRAL CORE)..."},
-		{"speaker": "EVA", "text": "...Cuối cùng cũng bắt được tín hiệu. Ta là EVA — Trí tuệ quản trị của Asteria."},
-		{"speaker": "EVA", "text": "327 năm qua thành phố đã chìm trong bóng tối. Cảm ơn ngươi đã thức tỉnh, K-7. Hãy giúp ta kết nối các Core còn lại."},
-		{"speaker": "KIRO-K7", "text": "[Ghi nhận chỉ thị từ EVA] ...Đang định vị Lumina Core tiếp theo."},
+		{"speaker": "EVA", "text": "...Cuối cùng cũng bắt được tín hiệu. Ta là EVA — Trí tuệ quản trị của Asteria.\n327 năm qua thành phố đã chìm trong bóng tối. Cảm ơn ngươi đã thức tỉnh, K-7. Hãy giúp ta kết nối các Core còn lại.", "voice_path": "res://assets/audio/voice/voice_ch1_eva_intro.mp3"},
+		{"speaker": "KIRO-K7", "text": "[Ghi nhận chỉ thị từ EVA] ...Đang định vị Lumina Core tiếp theo.", "voice_path": "res://assets/audio/voice/voice_ch1_kiro_eva_ack.mp3"},
 	],
 	"level_2_mara_terminal": [
 		{"speaker": "HỆ THỐNG", "text": "TERMINAL KỸ THUẬT MARA // BẢN GHI KHÔNG HOÀN CHỈNH."},
 		{"speaker": "MARA", "text": "Dao động Lumina đang vượt khỏi mô hình dự đoán. EVA nói mọi thứ vẫn an toàn... nhưng số liệu không đồng ý."},
 	],
 	"level_3_elias_dossier": [
-		{"speaker": "HỆ THỐNG AN NINH", "text": "CỬA KHU VỰC CẤM ĐÃ MỞ. GIẢI MÃ HỒ SƠ XÂM NHẬP..."},
-		{"speaker": "HỆ THỐNG AN NINH", "text": "ĐỐI TƯỢNG: DR. ELIAS VALE. ĐIỂM ĐẾN: CENTRAL CORE. LỆNH BẮT GIỮ: TẠM HOÃN."},
+		{"speaker": "HỆ THỐNG AN NINH", "text": "CỬA KHU VỰC CẤM ĐÃ MỞ. GIẢI MÃ HỒ SƠ XÂM NHẬP...\nĐỐI TƯỢNG: DR. ELIAS VALE. ĐIỂM ĐẾN: CENTRAL CORE. LỆNH BẮT GIỮ: TẠM HOÃN.", "voice_path": "res://assets/audio/voice/voice_ch1_security_dossier.mp3"},
 	],
 	"level_4_eva_contact": [
-		{"speaker": "EVA", "text": "Khóa liên động đã được giải phóng. Dòng năng lượng đang chuyển sang Phân khu 02."},
-		{"speaker": "HỆ THỐNG", "text": "MECHANICAL FOUNDRY // KHỞI ĐỘNG DÂY CHUYỀN... 12%... 47%... 100%."},
-		{"speaker": "EVA", "text": "Hãy đến Lò Rèn, K-7. Các Core còn lại đang chờ ngươi."},
+		{"speaker": "EVA", "text": "Khóa liên động đã được giải phóng. Dòng năng lượng đang chuyển sang Phân khu 02.\nHãy đến Lò Rèn, K-7. Các Core còn lại đang chờ ngươi.", "voice_path": "res://assets/audio/voice/voice_ch1_eva_foundry.mp3"},
+		{"speaker": "HỆ THỐNG", "text": "MECHANICAL FOUNDRY // KHỞI ĐỘNG DÂY CHUYỀN... 12%... 47%... 100%.", "voice_path": "res://assets/audio/voice/voice_ch1_foundry_init.mp3"},
 	],
 	"chapter_2_warn": [
 		{"speaker": "EVA", "text": "Phân khu Lò Rèn đã nhận điện. Cảnh báo: Các công tắc áp lực và cửa chặn cơ khí có thể cản đường ngươi."},

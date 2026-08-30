@@ -13,6 +13,8 @@ var _dialogue_lines: Array = []
 var _current_index: int = 0
 var _is_typing: bool = false
 var _type_tween: Tween
+var _portrait_tween: Tween
+var _audio_manager: EchoAudioManager
 
 var _root_container: Control
 var _panel: PanelContainer
@@ -24,6 +26,10 @@ var _indicator: Label
 var _glitch_rect: ColorRect
 
 static var _portraits: Dictionary = {}
+
+
+func set_audio_manager(mgr: EchoAudioManager) -> void:
+	_audio_manager = mgr
 
 
 func _ready() -> void:
@@ -125,10 +131,13 @@ func _build_ui() -> void:
 
 	_speaker_label = Label.new()
 	var sps := LabelSettings.new()
-	sps.font_size = 16
+	sps.font_size = 17
 	sps.font_color = COLOR_EVA
 	sps.outline_size = 4
 	sps.outline_color = Color.BLACK
+	var font_speaker := load("res://assets/fonts/ChakraPetch-Bold.ttf") as Font
+	if font_speaker:
+		sps.font = font_speaker
 	_speaker_label.label_settings = sps
 	text_vbox.add_child(_speaker_label)
 
@@ -137,6 +146,10 @@ func _build_ui() -> void:
 	_text_label.bbcode_enabled = true
 	_text_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_text_label.scroll_active = false
+	var font_body := load("res://assets/fonts/Rajdhani-Bold.ttf") as Font
+	if font_body:
+		_text_label.add_theme_font_override("normal_font", font_body)
+		_text_label.add_theme_font_size_override("normal_font_size", 19)
 	text_vbox.add_child(_text_label)
 
 	# Continue indicator
@@ -179,9 +192,16 @@ func advance() -> void:
 		# Instant finish current line
 		if _type_tween:
 			_type_tween.kill()
+		if _portrait_tween:
+			_portrait_tween.kill()
 		_text_label.visible_ratio = 1.0
 		_is_typing = false
+		_stop_portrait_pulse()
 		return
+
+	if _audio_manager:
+		_audio_manager.stop_voice()
+	_stop_portrait_pulse()
 
 	_current_index += 1
 	if _current_index >= _dialogue_lines.size():
@@ -235,14 +255,64 @@ func _display_line(index: int) -> void:
 		var gt := create_tween()
 		gt.tween_property(sm, "shader_parameter/glitch_intensity", 0.0, 0.35)
 
-	# Fast & crisp Typewriter Tween
-	var duration: float = clampf(float(text.length()) * 0.015, 0.25, 0.45)
+	# Spoken Voice stream if provided
+	var voice_duration: float = 0.0
+	if item.has("voice_stream") and item["voice_stream"] is AudioStream:
+		var st := item["voice_stream"] as AudioStream
+		voice_duration = st.get_length()
+		if _audio_manager:
+			_audio_manager.play_voice_stream(st)
+	elif item.has("voice_path") and ResourceLoader.exists(str(item["voice_path"])):
+		var v_stream := load(str(item["voice_path"])) as AudioStream
+		if v_stream:
+			voice_duration = v_stream.get_length()
+			if _audio_manager:
+				_audio_manager.play_voice_stream(v_stream)
+
+	# Start Portrait Pulse Animation
+	_start_portrait_pulse(color)
+
+	# Fast & crisp Typewriter (quick 0.15s - 0.35s display)
+	var total_chars: int = text.length()
+	var duration: float = clampf(float(total_chars) * 0.006, 0.12, 0.30)
+
 	if _type_tween:
 		_type_tween.kill()
 	_type_tween = create_tween()
 	_type_tween.tween_property(_text_label, "visible_ratio", 1.0, duration)
 	_type_tween.finished.connect(func() -> void:
 		_is_typing = false
+		if voice_duration <= 0.2:
+			_stop_portrait_pulse()
 	)
+	
+	if voice_duration > 0.2:
+		get_tree().create_timer(voice_duration).timeout.connect(func() -> void:
+			_stop_portrait_pulse()
+		)
 
 	line_started.emit(index, speaker)
+
+
+func _start_portrait_pulse(color: Color) -> void:
+	if _portrait_tween:
+		_portrait_tween.kill()
+	if not _portrait.visible:
+		return
+	
+	_portrait_frame.pivot_offset = _portrait_frame.size * 0.5
+	_portrait_tween = create_tween()
+	_portrait_tween.set_loops()
+	_portrait_tween.tween_property(_portrait_frame, "scale", Vector2(1.03, 1.03), 0.14)
+	_portrait_tween.parallel().tween_property(_portrait, "modulate", Color(1.15, 1.15, 1.2), 0.14)
+	_portrait_tween.tween_property(_portrait_frame, "scale", Vector2(1.0, 1.0), 0.14)
+	_portrait_tween.parallel().tween_property(_portrait, "modulate", Color.WHITE, 0.14)
+
+
+func _stop_portrait_pulse() -> void:
+	if _portrait_tween:
+		_portrait_tween.kill()
+	if _portrait_frame:
+		_portrait_frame.scale = Vector2.ONE
+	if _portrait:
+		_portrait.modulate = Color.WHITE

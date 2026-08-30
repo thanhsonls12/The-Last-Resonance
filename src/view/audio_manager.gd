@@ -18,6 +18,7 @@ const SFX_STREAMS: Dictionary = {
 	&"portal": preload("res://assets/audio/sfx/SFX_Portal_Teleport.wav"),
 	&"elevator": preload("res://assets/audio/sfx/SFX_Elevator_Start.wav"),
 	&"bridge": preload("res://assets/audio/sfx/SFX_Bridge_Rotate.wav"),
+	&"box_on_goal": preload("res://assets/audio/sfx/SFX_Box_OnGoal.wav"),
 	&"energy": preload("res://assets/audio/sfx/SFX_Core_Insert.wav"),
 	&"win": preload("res://assets/audio/sfx/SFX_Level_Complete_Stinger.wav"),
 	&"win_pulse": preload("res://assets/audio/sfx/SFX_VFX_LevelComplete.wav"),
@@ -26,6 +27,10 @@ const SFX_STREAMS: Dictionary = {
 	&"ui_click": preload("res://assets/audio/sfx/SFX_UI_Click.wav"),
 	&"ui_confirm": preload("res://assets/audio/sfx/SFX_UI_Confirm.wav"),
 	&"ui_cancel": preload("res://assets/audio/sfx/SFX_UI_Cancel.wav"),
+	&"voice_eva": preload("res://assets/audio/sfx/SFX_Voice_EVA.wav"),
+	&"voice_elias": preload("res://assets/audio/sfx/SFX_Voice_Elias.wav"),
+	&"voice_kiro": preload("res://assets/audio/sfx/SFX_Voice_Kiro.wav"),
+	&"voice_system": preload("res://assets/audio/sfx/SFX_Voice_System.wav"),
 }
 
 const AMBIENCE_STREAMS: Dictionary = {
@@ -35,8 +40,12 @@ const AMBIENCE_STREAMS: Dictionary = {
 	&"core": preload("res://assets/audio/ambience/AMB_Core_Reactor_Loop.wav"),
 }
 
+const LAYER_CORE_HUM = preload("res://assets/audio/sfx/SFX_VFX_Core_Hum_Loop.wav")
+
 var sfx_players: Array[AudioStreamPlayer] = []
 var ambience_player: AudioStreamPlayer
+var reactor_layer_player: AudioStreamPlayer
+var voice_player: AudioStreamPlayer
 var _next_player := 0
 var _ambience_key: StringName = &""
 var _surface: StringName = &"stone"
@@ -53,6 +62,22 @@ func _ready() -> void:
 	ambience_player = AudioStreamPlayer.new()
 	ambience_player.name = "AmbiencePlayer"
 	add_child(ambience_player)
+	
+	reactor_layer_player = AudioStreamPlayer.new()
+	reactor_layer_player.name = "ReactorLayerPlayer"
+	if LAYER_CORE_HUM is AudioStreamWAV:
+		var hum_stream := LAYER_CORE_HUM.duplicate() as AudioStreamWAV
+		hum_stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
+		reactor_layer_player.stream = hum_stream
+	else:
+		reactor_layer_player.stream = LAYER_CORE_HUM
+	reactor_layer_player.volume_db = -80.0
+	add_child(reactor_layer_player)
+
+	voice_player = AudioStreamPlayer.new()
+	voice_player.name = "VoicePlayer"
+	add_child(voice_player)
+
 	set_ambience(DEFAULT_AMBIENCE)
 
 
@@ -139,6 +164,10 @@ func play_bridge() -> void:
 	_play_sfx(&"bridge", -3.0)
 
 
+func play_box_on_goal() -> void:
+	_play_sfx(&"box_on_goal", -2.0)
+
+
 func play_energy() -> void:
 	_play_sfx(&"energy", -2.5)
 
@@ -167,6 +196,64 @@ func play_ui_confirm() -> void:
 
 func play_ui_cancel() -> void:
 	_play_sfx(&"ui_cancel", -4.0)
+
+
+func play_voice_blip(speaker: String) -> void:
+	var upper := speaker.to_upper()
+	var key := &"voice_system"
+	var pitch := randf_range(0.96, 1.04)
+	var vol := -4.0
+	if "EVA" in upper:
+		key = &"voice_eva"
+		pitch = randf_range(0.98, 1.05)
+		vol = -3.0
+	elif "ELIAS" in upper:
+		key = &"voice_elias"
+		pitch = randf_range(0.92, 1.02)
+		vol = -2.5
+	elif "KIRO" in upper:
+		key = &"voice_kiro"
+		pitch = randf_range(0.95, 1.08)
+		vol = -4.5
+	_play_sfx(key, vol, pitch)
+
+
+func play_voice_stream(stream: AudioStream, volume_db := -2.0) -> void:
+	if not enabled or not GameState.sfx_enabled or voice_player == null or stream == null:
+		return
+	voice_player.stream = stream
+	voice_player.volume_db = volume_db
+	voice_player.play()
+
+
+func stop_voice() -> void:
+	if voice_player != null and voice_player.playing:
+		voice_player.stop()
+
+
+func update_core_resonance_layer(connected_cores: int, total_cores: int) -> void:
+	if reactor_layer_player == null or not enabled or not GameState.sfx_enabled:
+		return
+	if total_cores <= 0 or connected_cores <= 0:
+		var fade_out := create_tween()
+		fade_out.tween_property(reactor_layer_player, "volume_db", -80.0, 0.6)
+		fade_out.finished.connect(func() -> void:
+			if reactor_layer_player.volume_db <= -70.0:
+				reactor_layer_player.stop()
+		)
+		return
+	
+	var progress: float = clampf(float(connected_cores) / float(total_cores), 0.0, 1.0)
+	var target_vol: float = lerpf(-24.0, -10.0, progress)
+	var target_pitch: float = lerpf(0.95, 1.25, progress)
+	
+	if not reactor_layer_player.playing:
+		reactor_layer_player.play()
+	
+	var tween := create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(reactor_layer_player, "volume_db", target_vol, 0.45)
+	tween.tween_property(reactor_layer_player, "pitch_scale", target_pitch, 0.45)
 
 
 func _play_random(keys: Array[StringName], volume_db := 0.0) -> void:
