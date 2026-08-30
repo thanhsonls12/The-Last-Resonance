@@ -62,57 +62,55 @@ func _build_ui() -> void:
 	glass_style.shadow_size = 14
 	glass_style.content_margin_left = 38.0
 	glass_style.content_margin_right = 38.0
-	glass_style.content_margin_top = 30.0
-	glass_style.content_margin_bottom = 32.0
+	glass_style.content_margin_top = 18.0
+	glass_style.content_margin_bottom = 24.0
 	glass_panel.add_theme_stylebox_override("panel", glass_style)
 	center_container.add_child(glass_panel)
 
 	# Content Box inside Glass Panel
 	var content_box := VBoxContainer.new()
 	content_box.alignment = BoxContainer.ALIGNMENT_CENTER
-	content_box.add_theme_constant_override("separation", 22)
+	content_box.add_theme_constant_override("separation", 8)
 	glass_panel.add_child(content_box)
 
-	# Title Block
-	var title_box := VBoxContainer.new()
-	title_box.alignment = BoxContainer.ALIGNMENT_CENTER
-	title_box.add_theme_constant_override("separation", 6)
-	content_box.add_child(title_box)
+	# Title Block with Centered Crystal Logo (Sample B)
+	var logo_container := CenterContainer.new()
+	content_box.add_child(logo_container)
 
-	var title := Label.new()
-	title.text = "THE LAST RESONANCE"
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	var ts := LabelSettings.new()
-	ts.font_size = 48
-	ts.font_color = Color(0.90, 0.97, 1.0)
-	ts.outline_size = 8
-	ts.outline_color = Color(0.01, 0.04, 0.10, 0.95)
-	ts.shadow_size = 10
-	ts.shadow_color = Color(0.0, 0.65, 1.0, 0.5)
-	title.label_settings = ts
-	title_box.add_child(title)
+	var logo_rect := TextureRect.new()
+	logo_rect.custom_minimum_size = Vector2(480, 185)
+	logo_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	logo_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	var logo_tex := load("res://assets/ui/logo_title_center.jpg") as Texture2D
+	if logo_tex != null:
+		logo_rect.texture = logo_tex
 
-	var subtitle := Label.new()
-	subtitle.text = "S  O  L  V  E     T  H  E     S  I  G  N  A  L"
-	subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	var ss := LabelSettings.new()
-	ss.font_size = 13
-	ss.font_color = COLOR_ORANGE
-	ss.shadow_size = 6
-	ss.shadow_color = Color(1.0, 0.35, 0.0, 0.4)
-	subtitle.label_settings = ss
-	title_box.add_child(subtitle)
+	# Shader to remove black background and blend glowing crystal seamlessly with background
+	var shader := Shader.new()
+	shader.code = """
+shader_type canvas_item;
 
-	# Decorative separator line
-	var sep_line := ColorRect.new()
-	sep_line.custom_minimum_size = Vector2(260, 1)
-	sep_line.color = Color(COLOR_CYAN.r, COLOR_CYAN.g, COLOR_CYAN.b, 0.25)
-	content_box.add_child(sep_line)
+void fragment() {
+	vec4 col = texture(TEXTURE, UV);
+	float luma = max(col.r, max(col.g, col.b));
+	float alpha = smoothstep(0.03, 0.35, luma);
+	COLOR = vec4(col.rgb * COLOR.rgb, alpha * COLOR.a);
+}
+"""
+	var mat := ShaderMaterial.new()
+	mat.shader = shader
+	logo_rect.material = mat
+	logo_container.add_child(logo_rect)
+
+	# Gentle breathing glow animation (floating effect)
+	var logo_tween := create_tween().set_loops()
+	logo_tween.tween_property(logo_rect, "modulate", Color(1.15, 1.15, 1.30), 2.2).set_trans(Tween.TRANS_SINE)
+	logo_tween.tween_property(logo_rect, "modulate", Color(0.90, 0.95, 1.05), 2.2).set_trans(Tween.TRANS_SINE)
 
 	# Action Buttons List
 	var btn_box := VBoxContainer.new()
 	btn_box.alignment = BoxContainer.ALIGNMENT_CENTER
-	btn_box.add_theme_constant_override("separation", 12)
+	btn_box.add_theme_constant_override("separation", 10)
 	content_box.add_child(btn_box)
 
 	var has_progress := GameState.unlocked > 1 or GameState.current_level > 0

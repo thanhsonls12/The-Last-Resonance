@@ -86,17 +86,30 @@ func _build_ui() -> void:
 		get_tree().change_scene_to_file("res://scenes/ui/start_menu.tscn"))
 	top_bar.add_child(back_btn)
 
-	var title := Label.new()
-	title.text = "CHỌN MÀN CHƠI"
-	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	var ts := LabelSettings.new()
-	ts.font_size = 28
-	ts.font_color = Color(0.35, 0.9, 1.0)
-	ts.outline_size = 8
-	ts.outline_color = Color(0.01, 0.04, 0.10, 0.95)
-	title.label_settings = ts
-	top_bar.add_child(title)
+	var logo_rect := TextureRect.new()
+	logo_rect.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	logo_rect.custom_minimum_size = Vector2(340, 56)
+	logo_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	logo_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	var logo_tex := load("res://assets/ui/logo_header_horizontal.jpg") as Texture2D
+	if logo_tex != null:
+		logo_rect.texture = logo_tex
+
+	var shader := Shader.new()
+	shader.code = """
+shader_type canvas_item;
+
+void fragment() {
+	vec4 col = texture(TEXTURE, UV);
+	float luma = max(col.r, max(col.g, col.b));
+	float alpha = smoothstep(0.03, 0.35, luma);
+	COLOR = vec4(col.rgb * COLOR.rgb, alpha * COLOR.a);
+}
+"""
+	var mat := ShaderMaterial.new()
+	mat.shader = shader
+	logo_rect.material = mat
+	top_bar.add_child(logo_rect)
 
 	var spacer := Control.new()
 	spacer.custom_minimum_size = Vector2(140, 44)
