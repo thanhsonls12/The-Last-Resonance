@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="LevelData" format=3]
+
+[ext_resource type="Script" path="res://src/data/level_data.gd" id="1_level"]
+
+[resource]
+script = ExtResource("1_level")
+id = 3
+title = "Khóa liên động"
+chapter = 1
+difficulty = 4
+par_moves = 34
+power_level = 0.9
+landmark = "machine"
+map = Array[String](["#############", "###.#####.###", "###K#####L###", "#           #", "#  $     $  #", "#     @     #", "##  #####  ##", "#           #", "#  k $ $ l  #", "#           #", "#############"])
+maps = Array[String]([])
+entities = []
+decorations = [{ "type": "door_frame", "grid_position": Vector3i(2, 0, 2), "yaw": 180.0 }, { "type": "door_frame", "grid_position": Vector3i(4, 0, 2), "yaw": 180.0 }, { "type": "door_frame", "grid_position": Vector3i(8, 0, 2), "yaw": 180.0 }, { "type": "door_frame", "grid_position": Vector3i(10, 0, 2), "yaw": 180.0 }, { "type": "data_rack", "grid_position": Vector3i(1, 0, 1), "yaw": 180.0 }, { "type": "data_rack", "grid_position": Vector3i(11, 0, 1), "yaw": 180.0 }, { "type": "archive_shelf", "grid_position": Vector3i(5, 0, 1), "yaw": 180.0 }, { "type": "archive_shelf", "grid_position": Vector3i(7, 0, 1), "yaw": 180.0 }, { "type": "lamp", "grid_position": Vector3i(6, 0, 0), "yaw": 180.0 }, { "type": "machine", "grid_position": Vector3i(6, 0, 6), "yaw": 0.0 }, { "type": "broken_wall", "grid_position": Vector3i(5, 0, 6), "yaw": 90.0 }, { "type": "broken_wall", "grid_position": Vector3i(7, 0, 6), "yaw": -90.0 }, { "type": "broken_pillar", "grid_position": Vector3i(4, 0, 6), "yaw": 12.0 }, { "type": "broken_pillar", "grid_position": Vector3i(8, 0, 6), "yaw": -12.0 }, { "type": "crate", "grid_position": Vector3i(1, 0, 6), "yaw": 15.0 }, { "type": "crate", "grid_position": Vector3i(11, 0, 6), "yaw": -15.0 }, { "type": "moss", "grid_position": Vector3i(0, 0, 3) }, { "type": "cable", "grid_position": Vector3i(0, 0, 4), "yaw": 90.0 }, { "type": "broken_column", "grid_position": Vector3i(0, 0, 5), "yaw": 20.0 }, { "type": "pipe", "grid_position": Vector3i(0, 0, 8), "yaw": 90.0 }, { "type": "plant", "grid_position": Vector3i(0, 0, 9), "width": 0.55 }, { "type": "plant", "grid_position": Vector3i(12, 0, 3), "width": 0.6 }, { "type": "cable", "grid_position": Vector3i(12, 0, 4), "yaw": -90.0 }, { "type": "pipe", "grid_position": Vector3i(12, 0, 8), "yaw": -90.0 }, { "type": "moss", "grid_position": Vector3i(12, 0, 9) }, { "type": "broken_robot", "grid_position": Vector3i(6, 0, 10), "yaw": 45.0 }, { "type": "rubble", "grid_position": Vector3i(2, 0, 10), "yaw": 20.0 }, { "type": "debris", "grid_position": Vector3i(10, 0, 10), "yaw": -35.0 }]
+
+memory_fragment = "KÝ ỨC 04: [EVA // TRÍ TUỆ NHÂN TẠO] - 'Hệ thống đã nhận diện robot bảo trì K-7. Chào mừng trở lại sau 327 năm. Thông tin về vị trí của cư dân: DỮ LIỆU ĐÃ BỊ HỎNG. Hãy tiếp tục công việc.'"

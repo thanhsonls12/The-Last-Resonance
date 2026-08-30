@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://dn2nfv7aafaii"]
+
+[ext_resource type="Script" path="res://src/data/level_data.gd" id="1_level"]
+
+[resource]
+script = ExtResource("1_level")
+id = 0
+title = "Khởi động"
+chapter = 1
+difficulty = 1
+par_moves = 6
+power_level = 0.0
+landmark = "holo"
+map = Array[String](["###########", "#         #", "# ##  .## #", "#         #", "#  @ $    #", "#         #", "# ##   ## #", "#         #", "###########"])
+maps = Array[String]([])
+entities = []
+decorations = [{ "type": "door_frame", "grid_position": Vector3i(5, 0, 0), "yaw": 180.0 }, { "type": "holo", "grid_position": Vector3i(5, 0, 0), "offset_z": 0.45, "width": 0.95, "yaw": 180.0 }, { "type": "data_rack", "grid_position": Vector3i(2, 0, 2), "yaw": 180.0 }, { "type": "archive_shelf", "grid_position": Vector3i(3, 0, 2), "yaw": 180.0 }, { "type": "archive_shelf", "grid_position": Vector3i(7, 0, 2), "yaw": 180.0 }, { "type": "data_rack", "grid_position": Vector3i(8, 0, 2), "yaw": 180.0 }, { "type": "workbench", "grid_position": Vector3i(4, 0, 0), "yaw": 180.0 }, { "type": "workbench", "grid_position": Vector3i(6, 0, 0), "yaw": 180.0 }, { "type": "crate", "grid_position": Vector3i(1, 0, 0), "yaw": 15.0 }, { "type": "rubble", "grid_position": Vector3i(9, 0, 0), "yaw": -15.0 }, { "type": "broken_wall", "grid_position": Vector3i(2, 0, 6), "yaw": 90.0 }, { "type": "lamp", "grid_position": Vector3i(3, 0, 6), "yaw": 180.0 }, { "type": "lamp", "grid_position": Vector3i(7, 0, 6), "yaw": 180.0 }, { "type": "broken_wall", "grid_position": Vector3i(8, 0, 6), "yaw": -90.0 }, { "type": "rock", "grid_position": Vector3i(0, 0, 1) }, { "type": "debris", "grid_position": Vector3i(10, 0, 1), "yaw": 35.0 }, { "type": "cable", "grid_position": Vector3i(0, 0, 3), "yaw": 90.0 }, { "type": "pipe", "grid_position": Vector3i(0, 0, 4), "yaw": 90.0 }, { "type": "moss", "grid_position": Vector3i(10, 0, 3) }, { "type": "pipe", "grid_position": Vector3i(10, 0, 4), "yaw": -90.0 }, { "type": "moss", "grid_position": Vector3i(0, 0, 5) }, { "type": "cable", "grid_position": Vector3i(10, 0, 5), "yaw": -90.0 }, { "type": "plant", "grid_position": Vector3i(5, 0, 8), "width": 0.66 }, { "type": "rubble", "grid_position": Vector3i(4, 0, 8), "yaw": 20.0 }, { "type": "moss", "grid_position": Vector3i(6, 0, 8) }, { "type": "broken_robot", "grid_position": Vector3i(1, 0, 8), "yaw": -25.0 }, { "type": "broken_robot", "grid_position": Vector3i(9, 0, 8), "yaw": 45.0 }, { "type": "crate", "grid_position": Vector3i(8, 0, 8), "yaw": 25.0 }, { "type": "broken_pillar", "grid_position": Vector3i(10, 0, 7), "yaw": 12.0 }]
+
+memory_fragment = "KÝ ỨC 01: [TRẠM BẢO TRÌ AST-327] - 'Kiro-K7 kích hoạt sau 327 năm im lặng. Thành phố Asteria đã mất điện toàn phần. Nhiệm vụ duy nhất: Tìm và kết nối lại các Lumina Core.'"
