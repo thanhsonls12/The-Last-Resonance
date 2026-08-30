@@ -1,0 +1,43 @@
+# Godot 4.x
+.godot/
+.import/
+
+# Export builds
+build/
+*.apk
+*.ipa
+*.exe
+*.x86_64
+*.dmg
+*.zip
+
+# Logs and temp files
+*.log
+*.tmp
+__pycache__/
+*.pyc
+
+# Export credentials
+export_credentials.cfg
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Editor files
+.vscode/
+.idea/
+*.code-workspace
+
+# Blender backup files
+*.blend1
+*.blend2
+
+# QA/test artifacts
+.codex_qa/
+_qa_*/
+
+# User-specific files
+*.user
