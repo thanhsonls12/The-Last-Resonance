@@ -2,25 +2,29 @@ extends Node3D
 
 const MOVE_TIME := 0.14
 const STEP_TIME := 0.1
-const TAP_MAX_MS := 260
-const TAP_MAX_PX := 14.0
 
-const COLOR_BG := Color(0.022, 0.008, 0.065)
-const COLOR_FLOOR := Color(0.055, 0.075, 0.13)
-const COLOR_GRID := Color(0.08, 0.42, 0.72)
-const COLOR_WALL := Color(0.10, 0.15, 0.25)
-const COLOR_WALL_EDGE := Color(0.12, 0.58, 0.86)
-const COLOR_GOAL := Color(1.0, 0.38, 0.08)
-const COLOR_PLATE := Color(1.0, 0.72, 0.08)
-const COLOR_DOOR := Color(0.82, 0.10, 0.08)
-const COLOR_BLOCK := Color(0.48, 0.16, 0.72)
-const COLOR_BLOCK_EDGE := Color(0.72, 0.28, 1.0)
-const COLOR_PLAYER := Color(0.08, 0.78, 1.0)
+## Per-chapter lighting profiles; chapter N loads resources/visuals/chapter_N.tres.
+const CHAPTER_VISUALS_PATHS := {
+	1: "res://resources/visuals/chapter_01.tres",
+	2: "res://resources/visuals/chapter_02.tres",
+	3: "res://resources/visuals/chapter_03.tres",
+}
 
-var logic := GameLogic.new()
-var level_index := 0
-var busy := false
-var _decorations := []
+## Core managers extracted from the monolithic controller.
+var flow := LevelFlow.new()
+var hints := HintManager.new()
+var coordinator := GameCoordinator.new()
+
+## Convenience mirrors for legacy access patterns in this file.
+var logic: GameLogic:
+	get: return flow.logic
+var level_index: int:
+	get: return flow.level_index
+var busy: bool:
+	get: return coordinator.busy
+	set(v): coordinator.set_busy(v)
+var _decorations: Array:
+	get: return flow.decorations
 
 var camera_controller: EchoCameraController
 var board_view: BoardView
@@ -30,23 +34,20 @@ var chapter_intro_card: ChapterIntroCard
 var audio: EchoAudioManager
 var vfx: EchoVfxManager
 var world_environment: Environment
-var archive_key_light: DirectionalLight3D
-var archive_fill_light: DirectionalLight3D
+var sector_key_light: DirectionalLight3D
+var sector_fill_light: DirectionalLight3D
+var sector_wash_light: DirectionalLight3D
 
-var _dragging := false
-var _moved_far := false
-var _press_pos := Vector2.ZERO
-var _press_ms := 0
-var _pending_fragment := ""
 var _first_move_hinted := false
-var _story_event_flags := {}
+var input_controller: GameplayInput
+var story: StoryDirector
 
 
 func _ready() -> void:
-	_ensure_input_actions()
 	_build_environment()
 	_build_camera()
 	_build_board()
+	_build_input()
 	_build_ui()
 	_build_audio()
 	_build_vfx()
@@ -67,25 +68,40 @@ func _load_level(i: int) -> void:
 		hud.set_stats("Chua co level", 0, 0, 0)
 		hud.set_fragment("")
 		hud.set_bridge_available(false)
+		hud.set_hint_available(false)
 		vfx.clear_loops()
 		return
-	level_index = i
-	busy = false
-	_story_event_flags.clear()
-	var data: LevelData = Levels.get_data(i)
-	logic.load_level(data)
-	_decorations = data.decorations
+
+	# Advance session token to invalidate any in-flight async work from prior level.
+	coordinator.new_session()
+	coordinator.set_busy(false)
+
+	_first_move_hinted = false
+	hints.reset()
+
+	story.reset_for_level()
+	GameState.set_current_level(i)
+
+	var data: LevelData = flow.load_level(i)
+	if data == null:
+		return
+
 	audio.set_ambience_for_chapter(data.chapter)
 	vfx.refresh(logic, board_view)
 	hud.hide_win()
 	hud.set_fragment("")
-	_pending_fragment = data.memory_fragment
-	hud.set_bridge_available(logic.has_bridges())
+	hud.set_bridge_available(logic.bridge_control_available())
+	hints.load_route(data.hint_route)
+	hud.set_hint_available(hints.is_available())
+	hud.clear_hint()
+
+	board_view.chapter = data.chapter
 	board_view.power_level = data.power_level
 	board_view.build(logic, _decorations)
-	_reset_archive_lighting(data.power_level)
+	_apply_chapter_environment(data.chapter, data.power_level)
 	_update_label()
 	camera_controller.fit_to_cells(logic.floors)
+
 	var prev_data: LevelData = Levels.get_data(i - 1) if i > 0 else null
 	var is_first_level_of_chapter: bool = (i == 0) or (prev_data != null and prev_data.chapter != data.chapter)
 	if is_first_level_of_chapter and not GameState.has_seen_chapter(data.chapter):
@@ -122,31 +138,24 @@ func _build_environment() -> void:
 	add_child(we)
 
 
-	# Cold cyan key light: illuminating archive and background silhouettes
-	archive_key_light = DirectionalLight3D.new()
-	archive_key_light.rotation_degrees = Vector3(-54, -36, 0)
-	archive_key_light.shadow_enabled = true
-	archive_key_light.directional_shadow_max_distance = 48.0
-	archive_key_light.light_color = Color(0.52, 0.74, 0.98)
-	archive_key_light.light_energy = 0.92
-	add_child(archive_key_light)
+	sector_key_light = DirectionalLight3D.new()
+	sector_key_light.rotation_degrees = Vector3(-54, -36, 0)
+	sector_key_light.shadow_enabled = true
+	sector_key_light.directional_shadow_max_distance = 48.0
+	add_child(sector_key_light)
 
 	# Faint magenta rim light
-	archive_fill_light = DirectionalLight3D.new()
-	archive_fill_light.rotation_degrees = Vector3(38, 142, 0)
-	archive_fill_light.shadow_enabled = false
-	archive_fill_light.light_color = Color(0.58, 0.22, 0.34)
-	archive_fill_light.light_energy = 0.34
-	add_child(archive_fill_light)
+	sector_fill_light = DirectionalLight3D.new()
+	sector_fill_light.rotation_degrees = Vector3(38, 142, 0)
+	sector_fill_light.shadow_enabled = false
+	add_child(sector_fill_light)
 
 	# Low wash from the side the key light leaves in shadow, so the far half of the
 	# room keeps a readable face instead of dropping to black.
-	var wall_wash := DirectionalLight3D.new()
-	wall_wash.rotation_degrees = Vector3(-22, 148, 0)
-	wall_wash.shadow_enabled = false
-	wall_wash.light_color = Color(0.38, 0.54, 0.76)
-	wall_wash.light_energy = 0.42
-	add_child(wall_wash)
+	sector_wash_light = DirectionalLight3D.new()
+	sector_wash_light.rotation_degrees = Vector3(-22, 148, 0)
+	sector_wash_light.shadow_enabled = false
+	add_child(sector_wash_light)
 
 
 
@@ -162,6 +171,21 @@ func _build_board() -> void:
 	add_child(board_view)
 
 
+func _build_input() -> void:
+	input_controller = GameplayInput.new()
+	add_child(input_controller)
+	input_controller.setup(camera_controller)
+	input_controller.step_requested.connect(_on_step_requested)
+	input_controller.undo_requested.connect(_on_undo)
+	input_controller.restart_requested.connect(_on_restart)
+	input_controller.bridge_requested.connect(_on_bridge)
+	input_controller.hint_requested.connect(_on_hint)
+	input_controller.pause_requested.connect(_toggle_pause)
+	input_controller.camera_rotate_requested.connect(func(direction: int) -> void:
+		camera_controller.rotate_step(direction))
+	input_controller.tap_requested.connect(_handle_tap)
+
+
 func _build_ui() -> void:
 	hud = GameHud.new()
 	add_child(hud)
@@ -171,11 +195,14 @@ func _build_ui() -> void:
 	hud.resume_requested.connect(_toggle_pause)
 	hud.menu_requested.connect(_on_menu_requested)
 	hud.bridge_requested.connect(_on_bridge)
+	hud.hint_requested.connect(_on_hint)
 	hud.next_level_requested.connect(_on_next_level)
 	dialogue_box = DialogueBox.new()
 	add_child(dialogue_box)
 	chapter_intro_card = ChapterIntroCard.new()
 	add_child(chapter_intro_card)
+	story = StoryDirector.new()
+	story.setup(dialogue_box, board_view, chapter_intro_card, func() -> Vector3i: return logic.player)
 
 
 
@@ -199,12 +226,136 @@ func _on_menu_requested() -> void:
 
 func _update_label() -> void:
 	var record: Dictionary = GameState.get_level_record(level_index)
+	var current_data: LevelData = Levels.get_data(level_index)
+	var par_moves: int = current_data.par_moves if current_data else -1
 	hud.set_stats(
 		logic.level_name,
 		logic.moves,
 		logic.pushes,
-		int(record.get("best_moves", 0)))
+		int(record.get("best_moves", 0)),
+		par_moves)
+	hud.set_bridge_available(logic.bridge_control_available())
 	_update_lock_feedback()
+	_update_hint_ui()
+
+
+func _on_hint() -> void:
+	if busy or get_tree().paused or logic.won or not hints.is_available():
+		return
+	var new_stage := hints.advance_stage()
+	if new_stage == 0:
+		_update_hint_ui()
+		return
+	_update_hint_ui()
+
+
+func _update_hint_ui() -> void:
+	if hud == null or board_view == null:
+		return
+	if hints.stage <= 0 or logic.won or not hints.is_available():
+		board_view.set_hint_cell(Vector3i.ZERO, false)
+		hud.clear_hint()
+		return
+
+	var disp := hints.get_display()
+	if disp.get("desynced", false) or hints.cursor >= hints.route.length():
+		var fallback_cell := _fallback_hint_cell()
+		board_view.set_hint_cell(fallback_cell, true)
+		var fallback_text: String = disp.get("text", _fallback_hint_text())
+		if disp.get("desynced", false):
+			fallback_text = "Đường gợi ý đã lệch khỏi nước đi hiện tại. " + fallback_text
+		hud.set_hint_text("GỢI Ý %d/3 — %s" % [hints.stage, fallback_text])
+		return
+
+	var action: String = hints.get_current_action()
+	var target := _hint_target_for_action(action)
+	board_view.set_hint_cell(target, true)
+	hud.set_hint_text(disp.get("text", ""))
+
+
+func _hint_target_for_action(action: String) -> Vector3i:
+	if action == "B":
+		var controls := logic.bridge_controls.keys()
+		if controls.is_empty():
+			controls = logic.bridges.keys()
+		return _nearest_hint_cell(controls, logic.player)
+	var direction := _hint_direction(action)
+	if direction == Vector3i.ZERO:
+		return logic.player
+	var candidate := logic.player + direction
+	if logic.floors.has(candidate) and not logic.walls.has(candidate):
+		return candidate
+	return logic.player
+
+
+func _hint_direction(action: String) -> Vector3i:
+	match action:
+		"U": return Vector3i(0, 0, -1)
+		"D": return Vector3i(0, 0, 1)
+		"L": return Vector3i(-1, 0, 0)
+		"R": return Vector3i(1, 0, 0)
+	return Vector3i.ZERO
+
+
+func _hint_action_for_direction(direction: Vector3i) -> String:
+	if direction == Vector3i(0, 0, -1):
+		return "U"
+	if direction == Vector3i(0, 0, 1):
+		return "D"
+	if direction == Vector3i(-1, 0, 0):
+		return "L"
+	if direction == Vector3i(1, 0, 0):
+		return "R"
+	return ""
+
+
+func _nearest_hint_cell(cells: Array, origin: Vector3i) -> Vector3i:
+	if cells.is_empty():
+		return origin
+	var best: Vector3i = cells[0]
+	var best_distance := absi(best.x - origin.x) + absi(best.y - origin.y) + absi(best.z - origin.z)
+	for raw_cell in cells:
+		var cell: Vector3i = raw_cell
+		var distance := absi(cell.x - origin.x) + absi(cell.y - origin.y) + absi(cell.z - origin.z)
+		if distance < best_distance:
+			best = cell
+			best_distance = distance
+	return best
+
+
+func _fallback_hint_cell() -> Vector3i:
+	if not logic.bridge_open and not logic.bridge_controls.is_empty():
+		return _nearest_hint_cell(logic.bridge_controls.keys(), logic.player)
+	for slot in logic.slots.keys():
+		if not logic.blocks.has(slot):
+			return slot
+	for plate in logic.plates.keys():
+		if logic.plate_hold_required.get(plate, true) and not logic.blocks.has(plate):
+			return plate
+	if logic.energy_progress < logic.energy_nodes.size():
+		return logic.energy_nodes[logic.energy_progress]
+	return logic.player
+
+
+func _fallback_hint_text() -> String:
+	if not logic.bridge_open and not logic.bridge_controls.is_empty():
+		return "Mở cầu ở bảng điều khiển được đánh dấu."
+	for slot in logic.slots.keys():
+		if not logic.blocks.has(slot):
+			return "Đưa một Lumina Core vào ô đích được đánh dấu."
+	for plate in logic.plates.keys():
+		if logic.plate_hold_required.get(plate, true) and not logic.blocks.has(plate):
+			return "Đặt Core lên bàn áp lực được đánh dấu để mở khóa."
+	if logic.energy_progress < logic.energy_nodes.size():
+		return "Đưa Core tới nút năng lượng theo thứ tự được đánh dấu."
+	return "Tiếp tục di chuyển và quan sát các ô sáng."
+
+
+func _record_hint_action(action: String) -> void:
+	hints.record_action(action)
+
+func _undo_hint_action() -> void:
+	hints.undo_action()
 
 
 func _active_plate_count() -> int:
@@ -232,80 +383,8 @@ func _update_lock_feedback() -> void:
 
 # ---------- input ----------
 
-func _ensure_input_actions() -> void:
-	_add_key_action("move_left", [KEY_A, KEY_LEFT])
-	_add_key_action("move_right", [KEY_D, KEY_RIGHT])
-	_add_key_action("move_up", [KEY_W, KEY_UP])
-	_add_key_action("move_down", [KEY_S, KEY_DOWN])
-	_add_key_action("undo_move", [KEY_Z])
-	_add_key_action("restart_level", [KEY_R])
-	_add_key_action("rotate_camera_left", [KEY_Q])
-	_add_key_action("rotate_camera_right", [KEY_E])
-	_add_key_action("rotate_bridge", [KEY_F])
-	_add_key_action("pause_game", [KEY_ESCAPE])
-
-
-func _add_key_action(action: StringName, keys: Array) -> void:
-	if not InputMap.has_action(action):
-		InputMap.add_action(action)
-	if not InputMap.action_get_events(action).is_empty():
-		return
-	for key in keys:
-		var input_event := InputEventKey.new()
-		input_event.physical_keycode = key
-		InputMap.action_add_event(action, input_event)
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		var mb := event as InputEventMouseButton
-		if mb.button_index == MOUSE_BUTTON_LEFT:
-			if mb.pressed:
-				_dragging = true
-				_moved_far = false
-				_press_pos = mb.position
-				_press_ms = Time.get_ticks_msec()
-			else:
-				var elapsed: int = Time.get_ticks_msec() - _press_ms
-				var drag_dist: float = mb.position.distance_to(_press_pos)
-				if _dragging and drag_dist < TAP_MAX_PX and elapsed < TAP_MAX_MS:
-					_handle_tap(mb.position)
-				elif _dragging and elapsed < 450 and drag_dist >= 16.0 and not _moved_far:
-					var delta: Vector2 = mb.position - _press_pos
-					var swipe_dir := Vector3i.ZERO
-					if abs(delta.x) > abs(delta.y):
-						swipe_dir = Vector3i(1, 0, 0) if delta.x > 0 else Vector3i(-1, 0, 0)
-					else:
-						swipe_dir = Vector3i(0, 0, 1) if delta.y > 0 else Vector3i(0, 0, -1)
-					_try_step(_move_dir(swipe_dir))
-				_dragging = false
-	elif event is InputEventMouseMotion and _dragging:
-		var mm := event as InputEventMouseMotion
-		if mm.position.distance_to(_press_pos) > TAP_MAX_PX:
-			var elapsed: int = Time.get_ticks_msec() - _press_ms
-			if elapsed > 180:
-				_moved_far = true
-				camera_controller.drag_pixels(mm.relative.x)
-	elif event.is_action_pressed("move_left"):
-
-		_try_step(_move_dir(Vector3i(-1, 0, 0)))
-	elif event.is_action_pressed("move_right"):
-		_try_step(_move_dir(Vector3i(1, 0, 0)))
-	elif event.is_action_pressed("move_up"):
-		_try_step(_move_dir(Vector3i(0, 0, -1)))
-	elif event.is_action_pressed("move_down"):
-		_try_step(_move_dir(Vector3i(0, 0, 1)))
-	elif event.is_action_pressed("undo_move"):
-		_on_undo()
-	elif event.is_action_pressed("restart_level"):
-		_on_restart()
-	elif event.is_action_pressed("rotate_camera_left"):
-		_rotate_camera(-1)
-	elif event.is_action_pressed("rotate_camera_right"):
-		_rotate_camera(1)
-	elif event.is_action_pressed("rotate_bridge"):
-		_on_bridge()
-	elif event.is_action_pressed("pause_game"):
-		_toggle_pause()
+func _on_step_requested(dir: Vector3i) -> void:
+	_try_step(dir)
 
 
 func _toggle_pause() -> void:
@@ -314,27 +393,8 @@ func _toggle_pause() -> void:
 	hud.set_paused(paused)
 
 
-func _rotate_camera(direction: int) -> void:
-	camera_controller.rotate_step(direction)
-
-
-func _move_dir(base: Vector3i) -> Vector3i:
-	# Map a screen-relative input to a world grid axis so controls track the
-	# camera after Q/E rotation. Default view is a quarter turn (PI*0.25).
-	var steps := int(round((camera_controller.yaw - PI * 0.25) / (PI * 0.5)))
-	return _rotate_dir_y(base, steps)
-
-
-func _rotate_dir_y(dir: Vector3i, steps: int) -> Vector3i:
-	var result := dir
-	var count := ((steps % 4) + 4) % 4
-	for i in count:
-		result = Vector3i(result.z, 0, -result.x)
-	return result
-
-
 func _handle_tap(screen_pos: Vector2) -> void:
-	if busy:
+	if busy or get_tree().paused:
 		return
 	var target: Variant = camera_controller.screen_to_grid(screen_pos)
 	if target == null:
@@ -364,14 +424,18 @@ func _handle_tap(screen_pos: Vector2) -> void:
 					if not p.is_empty() and (best_path.is_empty() or p.size() < best_path.size()):
 						best_path = p
 			if not best_path.is_empty():
-				busy = true
+				var pid := coordinator.begin_operation()
 				for dir in best_path:
+					if not coordinator.guard(pid):
+						return
 					var moved: bool = await _step(dir, false, false)
 					if not moved:
 						break
+				if not coordinator.guard(pid):
+					return
 				board_view.face_player(grid_target - logic.player)
 				board_view.play_player_animation(&"Idle")
-				busy = false
+				coordinator.end_operation(pid)
 			return
 
 	_walk_to(grid_target)
@@ -386,13 +450,17 @@ func _walk_to(target: Vector3i) -> void:
 	var path := _path_to(target)
 	if path.is_empty():
 		return
-	busy = true
+	var pid := coordinator.begin_operation()
 	for dir in path:
+		if not coordinator.guard(pid):
+			return
 		var moved: bool = await _step(dir, false, false)
 		if not moved:
 			break
+	if not coordinator.guard(pid):
+		return
 	board_view.play_player_animation(&"Idle")
-	busy = false
+	coordinator.end_operation(pid)
 
 
 func _path_to(target: Vector3i) -> Array:
@@ -432,21 +500,25 @@ func _auto_walk_blocked(v: Vector3i) -> bool:
 
 
 func _try_step(dir: Vector3i) -> void:
-	if busy:
+	if busy or get_tree().paused:
 		return
-	busy = true
+	var pid := coordinator.begin_operation()
 	await _step(dir)
-	busy = false
+	coordinator.end_operation(pid)
 
 
 func _step(dir: Vector3i, feedback := true, settle := true) -> bool:
+	var pid := coordinator.play_id
 	# If a map starts beside a Core, teach pushing before accepting that push.
 	await _show_push_hint_if_near_core()
+	if not coordinator.guard(pid):
+		return false
 	var res: Dictionary = logic.try_move(dir)
 	if res.is_empty():
 		if feedback:
 			await _blocked_feedback(dir)
 		return false
+	_record_hint_action(_hint_action_for_direction(dir))
 	audio.play_move()
 	vfx.play_footstep_dust(board_view.world_position(logic.player))
 	board_view.face_player(dir)
@@ -487,6 +559,8 @@ func _step(dir: Vector3i, feedback := true, settle := true) -> bool:
 			vfx.play_plate_activation(board_view.world_position(to), true)
 		if logic.slots.has(to):
 			audio.play_box_on_goal()
+			vfx.play_goal_activation(board_view.world_position(to))
+			camera_controller.play_impulse(0.08)
 		_update_lock_feedback()
 	if res["energy_advanced"]:
 		audio.play_energy()
@@ -507,12 +581,16 @@ func _step(dir: Vector3i, feedback := true, settle := true) -> bool:
 			tw.parallel().tween_property(board_view.door_nodes[door_pos], "position", target, MOVE_TIME)
 	board_view.set_energy_progress(logic.energy_progress)
 	await tw.finished
+	if not coordinator.guard(pid):
+		return false
 	# Normal Level 1 flow reaches this point after Kiro walks beside the first Core.
 	# Keep the step busy until the tutorial line is dismissed so the next input
 	# cannot push the Core before the hint is read.
 	if not res["pushed"]:
 		await _show_push_hint_if_near_core()
 	await _play_post_step_story(res)
+	if not coordinator.guard(pid):
+		return false
 	if settle:
 		board_view.play_player_animation(&"Idle")
 	_update_label()
@@ -522,52 +600,12 @@ func _step(dir: Vector3i, feedback := true, settle := true) -> bool:
 
 
 func _play_post_step_story(move_result: Dictionary) -> void:
-	if level_index == 1:
-		for deco in _decorations:
-			if deco is Dictionary and str(deco.get("type", "")) == "terminal":
-				var terminal_position: Variant = deco.get("grid_position", null)
-				if terminal_position is Vector3i:
-					var offset: Vector3i = terminal_position - logic.player
-					if absi(offset.x) + absi(offset.y) + absi(offset.z) <= 1:
-						await _play_story_event_once("level_2_mara_terminal")
-						return
-	elif level_index == 2 \
-			and bool(move_result.get("doors_open_after", false)) \
-			and not bool(move_result.get("doors_open_before", false)):
-		await _play_story_event_once("level_3_elias_dossier")
-
-
-func _play_story_event_once(event_key: String) -> void:
-	if _story_event_flags.has(event_key) or not dialogue_box or dialogue_box.visible:
-		return
-	var lines := StoryData.get_dialogue_event(event_key)
-	if lines.is_empty():
-		return
-	_story_event_flags[event_key] = true
-	dialogue_box.play_dialogue(lines)
-	await dialogue_box.dialogue_finished
+	await story.play_post_step_story(level_index, _decorations, move_result, logic.player)
 
 
 func _show_push_hint_if_near_core() -> void:
-	if level_index != 0 or _first_move_hinted or not dialogue_box:
-		return
-	if dialogue_box.visible:
-		return
-	var near_core := false
-	for raw_position in logic.blocks.keys():
-		var block_position: Vector3i = raw_position
-		var offset: Vector3i = block_position - logic.player
-		if absi(offset.x) + absi(offset.y) + absi(offset.z) == 1:
-			near_core = true
-			break
-	if not near_core:
-		return
-	var hint_lines := StoryData.get_dialogue_event("first_move_hint")
-	if hint_lines.is_empty():
-		return
-	_first_move_hinted = true
-	dialogue_box.play_dialogue(hint_lines)
-	await dialogue_box.dialogue_finished
+	_first_move_hinted = await story.show_push_hint_if_near_core(
+		level_index, _first_move_hinted, logic.blocks, logic.player)
 
 
 func _blocked_feedback(dir: Vector3i) -> void:
@@ -587,46 +625,20 @@ func _blocked_feedback(dir: Vector3i) -> void:
 
 func _play_chapter_start_sequence(chapter: int) -> void:
 	busy = true
-	if chapter_intro_card:
-		chapter_intro_card.show_chapter(chapter)
-		await chapter_intro_card.finished
-
-	if chapter == 1:
-		board_view.set_kiro_powered(false, true)
-	
-	var lines := StoryData.get_chapter_intro_dialogue(chapter)
-	if not lines.is_empty() and dialogue_box:
-		var has_powered_on := false
-		var line_handler := func(index: int, speaker: String) -> void:
-			if chapter == 1 and not has_powered_on and (index >= 2 or "KIRO" in speaker.to_upper()):
-				has_powered_on = true
-				board_view.set_kiro_powered(true)
-				board_view.play_boot_awakening()
-				vfx.play_boot_sparks(board_view.world_position(logic.player))
-
-		dialogue_box.line_started.connect(line_handler)
-		dialogue_box.play_dialogue(lines)
-		await dialogue_box.dialogue_finished
-		if dialogue_box.line_started.is_connected(line_handler):
-			dialogue_box.line_started.disconnect(line_handler)
-		if chapter == 1 and not has_powered_on:
-			board_view.set_kiro_powered(true)
-			board_view.play_boot_awakening()
-	else:
-		if chapter == 1:
-			board_view.set_kiro_powered(true)
-			board_view.play_boot_awakening()
-	
+	await story.play_chapter_start_sequence(
+		chapter, vfx, func() -> Vector3i: return logic.player)
 	board_view.face_player(Vector3i(1, 0, 0))
 	busy = false
 
 
 func _on_win() -> void:
-	busy = true
+	var pid := coordinator.play_id
+	coordinator.set_busy(true)
 	board_view.play_player_animation(&"Victory")
-	board_view.set_archive_powered(true)
+	board_view.set_sector_powered(true)
 
-	_power_up_archive()
+	var current_data: LevelData = Levels.get_data(level_index)
+	_power_up_sector(current_data.chapter)
 	audio.play_win()
 	if not board_view.door_nodes.is_empty():
 		audio.play_door()
@@ -638,45 +650,47 @@ func _on_win() -> void:
 	var target_world_pos := board_view.world_position(target_slot)
 	vfx.play_power_restoration(target_world_pos)
 	vfx.play_level_complete(board_view.player_target(logic.player, logic.blocks))
-	
-	if level_index == 0:
-		var lines := StoryData.get_dialogue_event("first_puzzle_done")
-		if not lines.is_empty() and dialogue_box:
-			var player_world_pos := board_view.world_position(logic.player)
-			board_view.face_player(target_slot - logic.player)
-			await get_tree().create_timer(0.4).timeout
-			board_view.spawn_eva_hologram(target_world_pos, player_world_pos)
-			await get_tree().create_timer(0.4).timeout
-			dialogue_box.play_dialogue(lines)
-			await dialogue_box.dialogue_finished
-			board_view.dismiss_eva_hologram()
-			await get_tree().create_timer(0.3).timeout
-	elif level_index == 3:
-		var foundry_lines := StoryData.get_dialogue_event("level_4_eva_contact")
-		if not foundry_lines.is_empty() and dialogue_box:
-			var player_world_pos := board_view.world_position(logic.player)
-			board_view.face_player(target_slot - logic.player)
-			await get_tree().create_timer(0.35).timeout
-			board_view.spawn_eva_hologram(target_world_pos, player_world_pos)
-			audio.set_ambience(&"foundry")
-			vfx.play_resonance_ping(target_world_pos)
-			dialogue_box.play_dialogue(foundry_lines)
-			await dialogue_box.dialogue_finished
-			board_view.dismiss_eva_hologram()
-			await get_tree().create_timer(0.3).timeout
+
+	if level_index == 3:
+		await get_tree().create_timer(0.35).timeout
+		audio.set_ambience(&"foundry")
+		vfx.play_resonance_ping(target_world_pos)
+	if await story.play_win_skit(level_index, target_slot, target_world_pos):
+		if not coordinator.guard(pid):
+			return
 
 	# Save progress and records
-	if not _pending_fragment.is_empty():
-		hud.set_fragment(_pending_fragment)
-	var completed_data: LevelData = Levels.get_data(level_index)
+	var fragment := flow.get_memory_fragment()
+	if not fragment.is_empty():
+		hud.set_fragment(fragment)
 	GameState.complete_level(
 		level_index,
 		logic.moves,
 		logic.pushes,
-		completed_data != null and not completed_data.memory_fragment.is_empty())
+		current_data != null and not current_data.memory_fragment.is_empty(),
+		hints.get_hints_used())
 
-	var is_last := (level_index + 1 >= Levels.ALL.size())
-	hud.show_win(logic.level_name, logic.moves, logic.pushes, GameState.get_best_moves(level_index), is_last)
+	var next_data: LevelData = Levels.get_data(level_index + 1)
+	var next_button_text := "MÀN TIẾP THEO"
+	var completion_badge := "◆ NĂNG LƯỢNG ĐÃ KHÔI PHỤC ◆"
+	if next_data != null and next_data.chapter != current_data.chapter:
+		next_button_text = "SANG CHƯƠNG %s" % _roman_numeral(next_data.chapter)
+	elif next_data == null and Levels.is_chapter_final(level_index):
+		next_button_text = "VỀ CHỌN MÀN"
+		completion_badge = "◆ CHƯƠNG %s HOÀN TẤT ◆" % _roman_numeral(current_data.chapter)
+	elif next_data == null:
+		next_button_text = "VỀ CHỌN MÀN"
+		completion_badge = "◆ BẢN DỰNG HIỆN TẠI HOÀN TẤT ◆"
+	var par_moves: int = current_data.par_moves if current_data else -1
+	hud.show_win(
+		logic.level_name,
+		logic.moves,
+		logic.pushes,
+		GameState.get_best_moves(level_index),
+		par_moves,
+		next_button_text,
+		completion_badge,
+		hints.get_hints_used())
 
 
 func _on_next_level() -> void:
@@ -684,54 +698,68 @@ func _on_next_level() -> void:
 		return
 	var next := level_index + 1
 	if next >= Levels.ALL.size():
-		get_tree().change_scene_to_file("res://scenes/game/ending_cutscene.tscn")
+		var current_data: LevelData = Levels.get_data(level_index)
+		if current_data != null and Levels.is_campaign_final(level_index):
+			get_tree().change_scene_to_file("res://scenes/game/ending_cutscene.tscn")
+		else:
+			get_tree().change_scene_to_file("res://scenes/ui/menu.tscn")
 		return
-	level_index = next
-	GameState.current_level = next
-	_load_level(level_index)
+	_load_level(next)
 
 
 
-func _power_up_archive() -> void:
-	if not world_environment:
+func _chapter_visuals(chapter: int) -> ChapterVisuals:
+	var path: String = CHAPTER_VISUALS_PATHS.get(chapter, CHAPTER_VISUALS_PATHS[1])
+	return load(path) as ChapterVisuals
+
+
+func _power_up_sector(chapter: int) -> void:
+	if not world_environment or not sector_key_light or not sector_fill_light:
 		return
+	var profile := _chapter_visuals(chapter)
+	var powered := profile.powered
 	var tween := create_tween().set_parallel(true)
-	tween.tween_property(world_environment, "ambient_light_energy", 0.92, 0.9).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	tween.tween_property(world_environment, "fog_light_color", Color(0.10, 0.31, 0.42), 0.9)
-	tween.tween_property(archive_key_light, "light_energy", 1.72, 0.9)
-	tween.tween_property(archive_fill_light, "light_energy", 0.48, 0.9)
+	tween.tween_property(world_environment, "ambient_light_energy", powered.x, 0.9).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.tween_property(world_environment, "fog_light_color", profile.fog_awake, 0.9)
+	tween.tween_property(sector_key_light, "light_energy", powered.y, 0.9)
+	tween.tween_property(sector_fill_light, "light_energy", powered.z, 0.9)
 
 
 func _on_undo() -> void:
-	if busy or not logic.undo():
+	if busy or get_tree().paused or not logic.undo():
 		return
+	_undo_hint_action()
 	audio.play_undo()
 	_snap_visuals()
 
 
 func _on_bridge() -> void:
-	if busy:
+	if busy or get_tree().paused:
 		return
 	var result := logic.rotate_bridge()
 	if result.is_empty():
 		return
+	_record_hint_action("B")
+	var pid := coordinator.begin_operation()
 	audio.play_bridge()
 	vfx.play_bridge(board_view.player_target(logic.player, logic.blocks))
 	board_view.play_oneshot(&"Interact")
-	board_view.set_bridges_open(result["bridge_open"])
+	board_view.set_bridges_open(result["bridge_open"], true)
 	_update_label()
+	await get_tree().create_timer(0.48).timeout
+	if level_index == 6:
+		await story.play_story_event_once("level_7_bridge_warning")
+	coordinator.end_operation(pid)
 
 
 func _on_restart() -> void:
-	if busy or Levels.ALL.is_empty():
+	if Levels.ALL.is_empty():
 		return
+	if get_tree().paused:
+		get_tree().paused = false
+		hud.set_paused(false)
 	audio.play_reset()
-	var data: LevelData = Levels.get_data(level_index)
-	_reset_archive_lighting(data.power_level)
-	logic.load_level(data)
-	hud.set_fragment("")
-	board_view.power_level = data.power_level
-	_snap_visuals()
+	_load_level(level_index)
 
 
 func _snap_visuals() -> void:
@@ -740,15 +768,23 @@ func _snap_visuals() -> void:
 	_update_label()
 
 
-func _reset_archive_lighting(power_level := 0.0) -> void:
-	if not world_environment:
+func _apply_chapter_environment(chapter: int, power_level := 0.0) -> void:
+	if not world_environment or not sector_key_light or not sector_fill_light or not sector_wash_light:
 		return
-	# The chapter regains power level by level, so the darkest room is level 1.
+	var profile := _chapter_visuals(chapter)
 	var lift := clampf(power_level, 0.0, 1.0)
-	world_environment.ambient_light_energy = lerpf(0.20, 0.42, lift)
-	world_environment.fog_light_color = Color(0.04, 0.08, 0.14).lerp(Color(0.08, 0.16, 0.26), lift)
-	world_environment.fog_light_energy = lerpf(0.40, 0.70, lift)
-	if archive_key_light:
-		archive_key_light.light_energy = lerpf(0.38, 0.68, lift)
-	if archive_fill_light:
-		archive_fill_light.light_energy = lerpf(0.12, 0.24, lift)
+	world_environment.background_color = profile.background
+	world_environment.ambient_light_color = profile.ambient
+	world_environment.ambient_light_energy = lerpf(profile.ambient_range.x, profile.ambient_range.y, lift)
+	world_environment.fog_light_color = profile.fog.lerp(profile.fog_awake, lift)
+	world_environment.fog_light_energy = lerpf(profile.fog_energy_range.x, profile.fog_energy_range.y, lift)
+	sector_key_light.light_color = profile.key
+	sector_key_light.light_energy = lerpf(profile.key_range.x, profile.key_range.y, lift)
+	sector_fill_light.light_color = profile.fill
+	sector_fill_light.light_energy = lerpf(profile.fill_range.x, profile.fill_range.y, lift)
+	sector_wash_light.light_color = profile.wash
+	sector_wash_light.light_energy = lerpf(profile.wash_range.x, profile.wash_range.y, lift)
+
+
+func _roman_numeral(value: int) -> String:
+	return ["I", "II", "III", "IV"][clampi(value - 1, 0, 3)]

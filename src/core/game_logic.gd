@@ -9,6 +9,8 @@ const DOOR_GLYPHS := {"D": "", "K": "K", "L": "L", "M": "M"}
 const DECORATION_WALL_TYPES := [
 	"data_rack", "archive_shelf", "workbench", "crate", "machine",
 	"broken_robot", "broken_wall", "broken_pillar", "rock", "door_frame",
+	"archive_lock_node", "foundry_line", "k_series_mold", "bridge_console",
+	"reactor_switch",
 ]
 
 var level_name := ""
@@ -27,6 +29,8 @@ var portal_links := {}
 var elevators := {}
 var elevator_links := {}
 var bridges := {}
+## Solid console/decor cell next to which Kiro may change the bridge state.
+var bridge_controls := {}
 var bridge_open := true
 var energy_nodes: Array = []
 var energy_progress := 0
@@ -58,6 +62,7 @@ func _reset_state(p_name: String) -> void:
 	elevators.clear()
 	elevator_links.clear()
 	bridges.clear()
+	bridge_controls.clear()
 	bridge_open = true
 	energy_nodes.clear()
 	energy_progress = 0
@@ -184,6 +189,10 @@ func _apply_entities(entities: Array) -> void:
 		match str(entity.get("type", "")):
 			"bridge":
 				bridges[position] = true
+				if entity.has("starts_open"):
+					bridge_open = bool(entity["starts_open"])
+			"bridge_switch":
+				bridge_controls[position] = true
 			"plate":
 				# Refines a glyph-declared plate: regroup it, or let a Core leave it.
 				floors[position] = true
@@ -208,8 +217,22 @@ func has_bridges() -> bool:
 	return not bridges.is_empty()
 
 
-func rotate_bridge() -> Dictionary:
+func bridge_control_available() -> bool:
 	if bridges.is_empty():
+		return false
+	var controls: Array = bridge_controls.keys()
+	# Backward-compatible fallback for prototype maps without a console entity.
+	if controls.is_empty():
+		controls = bridges.keys()
+	for control_position in controls:
+		var offset: Vector3i = control_position - player
+		if absi(offset.x) + absi(offset.y) + absi(offset.z) == 1:
+			return true
+	return false
+
+
+func rotate_bridge() -> Dictionary:
+	if not bridge_control_available():
 		return {}
 	for bridge_position in bridges.keys():
 		if player == bridge_position or blocks.has(bridge_position):
@@ -219,12 +242,6 @@ func rotate_bridge() -> Dictionary:
 	moves += 1
 	won = _check_won()
 	return {"bridge_open": bridge_open}
-
-
-func cell_blocked(v: Vector3i) -> bool:
-	return not floors.has(v) or walls.has(v) or blocks.has(v) \
-			or (doors.has(v) and not door_open(v)) \
-			or (bridges.has(v) and not bridge_open)
 
 
 ## A door opens only when every plate of its own group carries a Core.
