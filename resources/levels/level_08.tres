@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="LevelData" format=3]
+
+[ext_resource type="Script" path="res://src/data/level_data.gd" id="1_level"]
+
+[resource]
+script = ExtResource("1_level")
+id = 7
+title = "Trái tim Foundry"
+chapter = 2
+difficulty = 5
+par_moves = 87
+power_level = 0.9
+landmark = "reactor_switch"
+hint_route = "LLLLLBRDDLDDLLUULUURRRRRDDDDLUUUUUDLLLLDDRULUUURRRRRLDDLLLDLUUDRRRRRDDDDRRUUUULLLLLLDLU"
+map = Array[String](["###########", "#.     .###", "#.###K#####", "#   $    @#", "#  ##  # ##", "# $#   # ##", "## # $ # ##", "##       ##", "###########"])
+maps = Array[String]([])
+entities = [{ "type": "plate", "grid_position": Vector3i(7, 0, 3), "group": "K", "hold_required": false }, { "type": "bridge", "grid_position": Vector3i(1, 0, 4), "starts_open": false }, { "type": "bridge_switch", "grid_position": Vector3i(4, 0, 2) }]
+decorations = [{ "type": "reactor_switch", "scale": 1.25, "grid_position": Vector3i(4, 0, 2), "yaw": 180.0 }, { "type": "door_frame", "grid_position": Vector3i(6, 0, 2), "yaw": 180.0 }, { "type": "machine", "grid_position": Vector3i(3, 0, 4), "yaw": 90.0 }, { "type": "machine", "grid_position": Vector3i(7, 0, 4), "yaw": -90.0 }, { "type": "conveyor", "grid_position": Vector3i(3, 0, 5), "yaw": 90.0 }, { "type": "conveyor", "grid_position": Vector3i(7, 0, 5), "yaw": -90.0 }, { "type": "broken_robot", "grid_position": Vector3i(3, 0, 6), "yaw": 90.0 }, { "type": "crate", "grid_position": Vector3i(7, 0, 6), "yaw": -90.0 }, { "type": "data_rack", "grid_position": Vector3i(2, 0, 2), "yaw": 180.0 }, { "type": "workbench", "grid_position": Vector3i(9, 0, 2), "yaw": 180.0 }, { "type": "broken_wall", "grid_position": Vector3i(8, 0, 8), "yaw": 0.0 }, { "type": "pipe", "grid_position": Vector3i(1, 0, 0), "yaw": 180.0 }, { "type": "pipe", "grid_position": Vector3i(9, 0, 0), "yaw": 180.0 }, { "type": "cable", "grid_position": Vector3i(0, 0, 3), "yaw": 90.0 }, { "type": "cable", "grid_position": Vector3i(10, 0, 5), "yaw": -90.0 }, { "type": "lamp", "grid_position": Vector3i(0, 0, 1), "yaw": 90.0 }, { "type": "lamp", "grid_position": Vector3i(10, 0, 7), "yaw": -90.0 }, { "type": "rubble", "grid_position": Vector3i(2, 0, 8), "yaw": 0.0 }, { "type": "debris", "grid_position": Vector3i(5, 0, 0), "yaw": 180.0 }, { "type": "moss", "grid_position": Vector3i(0, 0, 6) }, { "type": "plant", "grid_position": Vector3i(10, 0, 2), "width": 0.5 }]
+memory_fragment = "KÝ ỨC 08: [EVA // HỒ SƠ PHÂN LOẠI] - 'Đối tượng: Dr. Elias Vale. Phân loại mức độ: MỐI ĐE DỌA ĐẶC BIỆT CỦA THÀNH PHỐ. Yêu cầu đơn vị K-7 bỏ qua tệp tin này ngay lập tức.'"
