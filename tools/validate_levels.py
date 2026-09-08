@@ -46,6 +46,7 @@ class Logic:
         self.energy_nodes = []
         self.blocks = set()
         self.player = (0, 0, 0)
+        self.sequential_floors = bool(level.get("sequential_floors", False))
         if level.get("maps"):
             for y, layer in enumerate(level["maps"]):
                 self._parse(layer.split("\n"), y)
@@ -55,6 +56,8 @@ class Logic:
         self._build_elevator_links()
         self._apply_entities(level.get("entities", []))
         self._apply_decorations(level.get("decorations", []))
+        self.floor_count = max((v[1] for v in self.floors), default=0) + 1
+        self.sequential_floors = self.sequential_floors and self.floor_count > 1
 
     def _parse(self, rows, y):
         for z, row in enumerate(rows):
@@ -148,6 +151,31 @@ class Logic:
     def targets(self):
         return self.slots | set(self.plates)
 
+    def energy_nodes_on_floor(self, floor):
+        return [node for node in self.energy_nodes if node[1] == floor]
+
+    def floor_required_targets(self, floor, blocks=None):
+        held = {p for p, need in self.plate_hold_required.items()
+                if need and p[1] == floor}
+        slots = {p for p in self.slots if p[1] == floor}
+        total = slots | held
+        if total:
+            return total
+        source = self.blocks if blocks is None else blocks
+        return {block for block in source if block[1] == floor}
+
+    def floor_complete(self, floor, blocks, floor_energy):
+        nodes = self.energy_nodes_on_floor(floor)
+        if floor_energy[floor] < len(nodes):
+            return False
+        floor_blocks = {block for block in blocks if block[1] == floor}
+        required = self.floor_required_targets(floor, blocks)
+        if not floor_blocks:
+            return not required
+        if any(block not in self.targets() for block in floor_blocks):
+            return False
+        return all(target in blocks for target in required)
+
     def required_targets(self):
         held = {p for p, need in self.plate_hold_required.items() if need}
         return self.slots | held
@@ -155,6 +183,8 @@ class Logic:
     def door_open(self, v, blocks):
         group = self.doors[v]
         group_plates = [p for p, g in self.plates.items() if g == group]
+        if self.sequential_floors:
+            group_plates = [p for p in group_plates if p[1] == v[1]]
         if not group_plates:
             return False
         return all(p in blocks for p in group_plates)
@@ -162,79 +192,138 @@ class Logic:
     def door_state(self, blocks):
         return {v: self.door_open(v, blocks) for v in self.doors}
 
-    def terrain_blocked(self, v, doors, bridge_open):
-        return (v not in self.floors or v in self.walls
+    def terrain_blocked(self, v, doors, bridge_open, active_floor=None, allow_inactive=False):
+        return ((self.sequential_floors and not allow_inactive
+                 and active_floor is not None and v[1] != active_floor)
+                or v not in self.floors or v in self.walls
                 or (v in self.doors and not doors.get(v, False))
                 or (v in self.bridges and not bridge_open))
 
-    def energy_allowed(self, v, energy_progress):
+    def energy_allowed(self, v, energy_progress, active_floor=None, floor_energy=()):
+        if self.sequential_floors:
+            if v[1] != active_floor:
+                return False
+            nodes = self.energy_nodes_on_floor(v[1])
+            idx = nodes.index(v) if v in nodes else -1
+            return idx < 0 or idx <= floor_energy[v[1]]
         if not self.energy_nodes:
             return True
         idx = self.energy_nodes.index(v) if v in self.energy_nodes else -1
         return idx < 0 or idx <= energy_progress
 
-    def can_block_enter(self, v, blocks, doors, bridge_open, ep):
-        return (not self.terrain_blocked(v, doors, bridge_open)
-                and v not in blocks and self.energy_allowed(v, ep))
+    def can_block_enter(self, v, blocks, doors, bridge_open, ep, active_floor=None, floor_energy=()):
+        return (not self.terrain_blocked(v, doors, bridge_open, active_floor)
+                and v not in blocks
+                and self.energy_allowed(v, ep, active_floor, floor_energy))
+
+    def _unpack_state(self, state):
+        if self.sequential_floors:
+            return state
+        player, blocks, bridge_open, ep = state
+        return player, blocks, bridge_open, ep, player[1], frozenset(), ()
+
+    def _pack_state(self, player, blocks, bridge_open, ep, active_floor,
+                    completed_floors, floor_energy):
+        if not self.sequential_floors:
+            return (player, blocks, bridge_open, ep)
+        return (player, blocks, bridge_open, ep, active_floor,
+                frozenset(completed_floors), tuple(floor_energy))
 
     def try_move(self, state, d):
-        player, blocks, bridge_open, ep = state
+        (player, blocks, bridge_open, ep, active_floor,
+         completed_floors, floor_energy) = self._unpack_state(state)
         doors = self.door_state(blocks)
         target = (player[0] + d[0], player[1] + d[1], player[2] + d[2])
-        if self.terrain_blocked(target, doors, bridge_open):
+        if self.terrain_blocked(target, doors, bridge_open, active_floor):
             return None
         pushed = False
         dest = None
         if target in blocks:
+            if self.sequential_floors and active_floor in completed_floors:
+                return None
             beyond = (target[0] + d[0], target[1] + d[1], target[2] + d[2])
-            if self.terrain_blocked(beyond, doors, bridge_open) or beyond in blocks:
+            if self.terrain_blocked(beyond, doors, bridge_open, active_floor) or beyond in blocks:
                 return None
             dest = beyond
             if beyond in self.portal_links:
                 exit_ = self.portal_links[beyond]
-                if not self.can_block_enter(exit_, blocks, doors, bridge_open, ep) or exit_ == player:
+                if self.sequential_floors and exit_[1] != active_floor:
+                    return None
+                if (not self.can_block_enter(exit_, blocks, doors, bridge_open, ep,
+                                             active_floor, floor_energy)
+                        or exit_ == player):
                     return None
                 dest = exit_
             if beyond in self.elevator_links:
+                if self.sequential_floors:
+                    return None
                 exit_ = self.elevator_links[beyond]
-                if not self.can_block_enter(exit_, blocks, doors, bridge_open, ep):
+                if not self.can_block_enter(exit_, blocks, doors, bridge_open, ep,
+                                            active_floor, floor_energy):
                     return None
                 dest = exit_
-            if not self.energy_allowed(dest, ep):
+            if not self.energy_allowed(dest, ep, active_floor, floor_energy):
                 return None
             pushed = True
         player_dest = target
+        floor_transition = False
         if target in self.elevator_links:
             pe = self.elevator_links[target]
-            if self.terrain_blocked(pe, doors, bridge_open) or pe in blocks:
+            if self.sequential_floors:
+                if (target[1] != active_floor or pe[1] != active_floor + 1
+                        or active_floor not in completed_floors):
+                    return None
+                floor_transition = True
+            if self.terrain_blocked(pe, doors, bridge_open, active_floor,
+                                    allow_inactive=floor_transition) or pe in blocks:
                 return None
             player_dest = pe
         new_blocks = blocks
         new_ep = ep
+        new_floor_energy = list(floor_energy)
         if pushed:
             new_blocks = set(blocks)
             new_blocks.discard(target)
             new_blocks.add(dest)
             new_blocks = frozenset(new_blocks)
-            if new_ep < len(self.energy_nodes) and dest == self.energy_nodes[new_ep]:
+            if self.sequential_floors:
+                nodes = self.energy_nodes_on_floor(dest[1])
+                progress = new_floor_energy[dest[1]]
+                if progress < len(nodes) and dest == nodes[progress]:
+                    new_floor_energy[dest[1]] += 1
+            elif new_ep < len(self.energy_nodes) and dest == self.energy_nodes[new_ep]:
                 new_ep += 1
-        return (player_dest, new_blocks, bridge_open, new_ep)
+        new_completed = set(completed_floors)
+        if (self.sequential_floors and active_floor not in new_completed
+                and self.floor_complete(active_floor, new_blocks, new_floor_energy)):
+            new_completed.add(active_floor)
+        next_floor = player_dest[1] if floor_transition else active_floor
+        return self._pack_state(player_dest, new_blocks, bridge_open, new_ep,
+                                next_floor, new_completed, new_floor_energy)
 
     def rotate(self, state):
-        player, blocks, bridge_open, ep = state
+        (player, blocks, bridge_open, ep, active_floor,
+         completed_floors, floor_energy) = self._unpack_state(state)
         if not self.bridges:
             return None
         controls = self.bridge_controls or self.bridges
         if not any(sum(abs(a - b) for a, b in zip(player, control)) == 1
-                   for control in controls):
+                   for control in controls
+                   if not self.sequential_floors or control[1] == active_floor):
             return None
         for b in self.bridges:
+            if self.sequential_floors and b[1] != active_floor:
+                continue
             if player == b or b in blocks:
                 return None
-        return (player, blocks, not bridge_open, ep)
+        return self._pack_state(player, blocks, not bridge_open, ep,
+                                active_floor, completed_floors, floor_energy)
 
     def won(self, state):
-        _player, blocks, _bridge_open, ep = state
+        (_player, blocks, _bridge_open, ep, _active_floor,
+         completed_floors, _floor_energy) = self._unpack_state(state)
+        if self.sequential_floors:
+            return all(floor in completed_floors for floor in range(self.floor_count))
         if ep < len(self.energy_nodes):
             return False
         allowed = self.targets()
@@ -243,7 +332,10 @@ class Logic:
         return all(t in blocks for t in self.required_targets())
 
     def start_state(self):
-        return (self.player, frozenset(self.blocks), self.bridge_start, 0)
+        floor_energy = tuple(0 for _floor in range(self.floor_count))
+        return self._pack_state(self.player, frozenset(self.blocks),
+                                self.bridge_start, 0, self.player[1],
+                                frozenset(), floor_energy)
 
     def dead_squares(self):
         """Cells a Core can never be pulled out of, so no solution passes through.
@@ -371,7 +463,7 @@ def route_uses_portal(logic, route):
         direction = LETTER_DIRS.get(letter)
         if direction is None:
             return False
-        player, blocks, _bridge_open, _energy_progress = state
+        player, blocks, _bridge_open, _energy_progress, _active_floor, _completed, _floor_energy = logic._unpack_state(state)
         target = (player[0] + direction[0], player[1] + direction[1], player[2] + direction[2])
         beyond = (target[0] + direction[0], target[1] + direction[1], target[2] + direction[2])
         crossed = target in blocks and beyond in logic.portal_links
@@ -379,6 +471,64 @@ def route_uses_portal(logic, route):
         if state is None:
             return False
         if crossed:
+            return True
+    return False
+
+
+def route_uses_elevator(logic, route):
+    """Replay a route and report whether Kiro or a Core changes layer."""
+    return route_elevator_crossings(logic, route) > 0
+
+
+def route_elevator_crossings(logic, route):
+    """Count accepted moves that transfer Kiro or a Core between layers."""
+    if not logic.elevator_links:
+        return 0
+    state = logic.start_state()
+    crossings = 0
+    for letter in route:
+        if letter == "B":
+            state = logic.rotate(state)
+            if state is None:
+                return 0
+            continue
+        direction = LETTER_DIRS.get(letter)
+        if direction is None:
+            return 0
+        (before_player, before_blocks, _bridge_open, _energy_progress,
+         _active_floor, _completed, _floor_energy) = logic._unpack_state(state)
+        target = tuple(before_player[i] + direction[i] for i in range(3))
+        beyond = tuple(target[i] + direction[i] for i in range(3))
+        crosses_elevator = (target in logic.elevator_links
+                            or (target in before_blocks and beyond in logic.elevator_links))
+        state = logic.try_move(state, direction)
+        if state is None:
+            return 0
+        if crosses_elevator:
+            crossings += 1
+    return crossings
+
+
+def route_moves_core_between_floors(logic, route):
+    """True if a successful route transfers a Core between map layers."""
+    state = logic.start_state()
+    for letter in route:
+        if letter == "B":
+            state = logic.rotate(state)
+            if state is None:
+                return False
+            continue
+        direction = LETTER_DIRS.get(letter)
+        if direction is None:
+            return False
+        _player, before_blocks, *_rest = logic._unpack_state(state)
+        state = logic.try_move(state, direction)
+        if state is None:
+            return False
+        _player, after_blocks, *_rest = logic._unpack_state(state)
+        removed = set(before_blocks) - set(after_blocks)
+        added = set(after_blocks) - set(before_blocks)
+        if removed and added and next(iter(removed))[1] != next(iter(added))[1]:
             return True
     return False
 
@@ -393,16 +543,37 @@ def main():
     for i, level in enumerate(levels):
         name = Path(level["path"]).stem
         logic = Logic(level)
-        walkable = len(logic.floors - logic.walls)
+        walkable_by_layer = {}
+        for cell in logic.floors - logic.walls:
+            walkable_by_layer[cell[1]] = walkable_by_layer.get(cell[1], 0) + 1
         difficulty = int(level.get("difficulty", 0))
         if not 1 <= difficulty <= 5:
             ok = False
             print("%-10s DESIGN ERROR: difficulty=%d is outside 1-5" % (
                 name, difficulty))
-        if walkable > 42:
+        oversized_layers = {y: cells for y, cells in walkable_by_layer.items() if cells > 42}
+        if oversized_layers:
             ok = False
-            print("%-10s DESIGN ERROR: %d walkable cells exceeds finale cap 42" % (
-                name, walkable))
+            print("%-10s DESIGN ERROR: layer walkable counts %s exceed cap 42" % (
+                name, oversized_layers))
+        layers = level.get("maps") or []
+        if layers:
+            if name in ("level_11", "level_12", "level_14") and len(layers) != 2:
+                ok = False
+                print("%-10s DESIGN ERROR: %s requires exactly two layers" % (name, name))
+            for y, layer in enumerate(layers):
+                rows = layer.split("\n")
+                width = max((len(row) for row in rows), default=0)
+                if len(rows) > 9 or width > 11:
+                    ok = False
+                    print("%-10s DESIGN ERROR: layer %d is %dx%d; cap is 11x9" % (
+                        name, y, width, len(rows)))
+            if len(logic.elevators) != 2 or len(logic.elevator_links) != 2:
+                ok = False
+                print("%-10s DESIGN ERROR: multi-floor map needs one valid Elevator pair" % name)
+            if name in ("level_11", "level_12", "level_14") and not logic.sequential_floors:
+                ok = False
+                print("%-10s DESIGN ERROR: multi-floor map must enable sequential_floors" % name)
         if logic.bridges and not logic.bridge_controls:
             ok = False
             print("%-10s DESIGN ERROR: bridge has no local bridge_switch" % name)
@@ -432,6 +603,15 @@ def main():
             if logic.portal_links and not route_uses_portal(logic, route):
                 ok = False
                 print("    FAIL: route never sends a Core through its portal pair")
+            if logic.elevator_links and not route_uses_elevator(logic, route):
+                ok = False
+                print("    FAIL: route never crosses its Elevator pair")
+            if logic.sequential_floors and route_elevator_crossings(logic, route) != 1:
+                ok = False
+                print("    FAIL: sequential route must use its Elevator exactly once")
+            if logic.sequential_floors and route_moves_core_between_floors(logic, route):
+                ok = False
+                print("    FAIL: sequential route moved a Core between floors")
     print("==================================")
     print("RESULT:", "ALL SOLVABLE AND PAR CORRECT" if ok else "FAILURES PRESENT")
     return 0 if ok else 1
