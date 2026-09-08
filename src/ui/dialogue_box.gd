@@ -18,6 +18,8 @@ var _audio_manager: EchoAudioManager
 
 var _root_container: Control
 var _panel: PanelContainer
+var _dialogue_hbox: HBoxContainer
+var _text_vbox: VBoxContainer
 var _portrait_frame: PanelContainer
 var _portrait: TextureRect
 var _speaker_label: Label
@@ -37,6 +39,12 @@ func _ready() -> void:
 	_load_portraits()
 	_build_ui()
 	visible = false
+	if not GameState.settings_changed.is_connected(_on_settings_changed):
+		GameState.settings_changed.connect(_on_settings_changed)
+	if get_viewport() != null and not get_viewport().size_changed.is_connected(_layout_for_viewport):
+		get_viewport().size_changed.connect(_layout_for_viewport)
+	_layout_for_viewport()
+	_apply_accessibility()
 
 
 
@@ -102,9 +110,9 @@ func _build_ui() -> void:
 	_panel.add_theme_stylebox_override("panel", ps)
 	_root_container.add_child(_panel)
 
-	var hbox := HBoxContainer.new()
-	hbox.add_theme_constant_override("separation", 20)
-	_panel.add_child(hbox)
+	_dialogue_hbox = HBoxContainer.new()
+	_dialogue_hbox.add_theme_constant_override("separation", 20)
+	_panel.add_child(_dialogue_hbox)
 
 	# Portrait Container
 	_portrait_frame = PanelContainer.new()
@@ -115,7 +123,7 @@ func _build_ui() -> void:
 	pbs.set_border_width_all(1)
 	pbs.set_corner_radius_all(6)
 	_portrait_frame.add_theme_stylebox_override("panel", pbs)
-	hbox.add_child(_portrait_frame)
+	_dialogue_hbox.add_child(_portrait_frame)
 
 	_portrait = TextureRect.new()
 	_portrait.set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -124,10 +132,10 @@ func _build_ui() -> void:
 	_portrait_frame.add_child(_portrait)
 
 	# Text Content Column
-	var text_vbox := VBoxContainer.new()
-	text_vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	text_vbox.add_theme_constant_override("separation", 8)
-	hbox.add_child(text_vbox)
+	_text_vbox = VBoxContainer.new()
+	_text_vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_text_vbox.add_theme_constant_override("separation", 8)
+	_dialogue_hbox.add_child(_text_vbox)
 
 	_speaker_label = Label.new()
 	var sps := LabelSettings.new()
@@ -139,7 +147,7 @@ func _build_ui() -> void:
 	if font_speaker:
 		sps.font = font_speaker
 	_speaker_label.label_settings = sps
-	text_vbox.add_child(_speaker_label)
+	_text_vbox.add_child(_speaker_label)
 
 	_text_label = RichTextLabel.new()
 	_text_label.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -150,7 +158,7 @@ func _build_ui() -> void:
 	if font_body:
 		_text_label.add_theme_font_override("normal_font", font_body)
 		_text_label.add_theme_font_size_override("normal_font_size", 19)
-	text_vbox.add_child(_text_label)
+	_text_vbox.add_child(_text_label)
 
 	# Continue indicator
 	_indicator = Label.new()
@@ -160,7 +168,50 @@ func _build_ui() -> void:
 	ind_s.font_size = 12
 	ind_s.font_color = Color(0.5, 0.65, 0.75, 0.8)
 	_indicator.label_settings = ind_s
-	text_vbox.add_child(_indicator)
+	_text_vbox.add_child(_indicator)
+
+
+func _on_settings_changed() -> void:
+	_layout_for_viewport()
+	_apply_accessibility()
+
+
+func _layout_for_viewport() -> void:
+	if not is_instance_valid(_panel):
+		return
+	var viewport_size := get_viewport().get_visible_rect().size
+	var compact := viewport_size.x < 700.0 or viewport_size.y < 560.0
+	var edge := clampf(minf(viewport_size.x, viewport_size.y) * 0.04, 14.0, 42.0)
+	_panel.offset_left = edge
+	_panel.offset_right = -edge
+	_panel.offset_bottom = -edge
+	_panel.offset_top = -(150.0 if compact else 180.0)
+	_portrait_frame.custom_minimum_size = Vector2(86.0, 86.0) if compact else Vector2(120.0, 120.0)
+	_dialogue_hbox.add_theme_constant_override("separation", 10 if compact else 20)
+	_text_label.add_theme_font_size_override("normal_font_size", 16 if compact else 19)
+	_indicator.label_settings.font_size = 11 if compact else 12
+
+
+func _apply_accessibility() -> void:
+	var high := GameState.high_contrast
+	if _panel:
+		var style := StyleBoxFlat.new()
+		style.bg_color = Color.BLACK if high else Color(0.015, 0.03, 0.06, 0.95)
+		style.border_color = Color.WHITE if high else COLOR_EVA
+		style.set_border_width_all(3 if high else 2)
+		style.set_corner_radius_all(10)
+		style.shadow_color = Color(0.05, 0.45, 0.85, 0.35)
+		style.shadow_size = 14
+		style.content_margin_left = 18
+		style.content_margin_right = 18
+		style.content_margin_top = 14
+		style.content_margin_bottom = 14
+		_panel.add_theme_stylebox_override("panel", style)
+	if _speaker_label and _speaker_label.label_settings:
+		_speaker_label.label_settings.outline_size = 8 if high else 4
+		_speaker_label.label_settings.outline_color = Color.BLACK
+	if _text_label:
+		_text_label.add_theme_color_override("default_color", Color.WHITE if high else Color(0.88, 0.94, 1.0))
 
 
 func _input(event: InputEvent) -> void:
@@ -211,6 +262,21 @@ func advance() -> void:
 		_display_line(_current_index)
 
 
+func cancel() -> void:
+	var was_visible := visible
+	visible = false
+	if _type_tween:
+		_type_tween.kill()
+	if _portrait_tween:
+		_portrait_tween.kill()
+	_is_typing = false
+	_stop_portrait_pulse()
+	if _audio_manager:
+		_audio_manager.stop_voice()
+	if was_visible:
+		dialogue_finished.emit()
+
+
 func _display_line(index: int) -> void:
 	var item: Dictionary = _dialogue_lines[index]
 	var speaker: String = str(item.get("speaker", "HỆ THỐNG"))
@@ -231,7 +297,7 @@ func _display_line(index: int) -> void:
 	elif "KIRO" in upper_spk:
 		color = COLOR_KIRO
 
-	_speaker_label.label_settings.font_color = color
+	_speaker_label.label_settings.font_color = Color.WHITE if GameState.high_contrast else color
 	
 	# Portrait lookup
 	var port_tex: Texture2D = null
@@ -249,7 +315,7 @@ func _display_line(index: int) -> void:
 	_portrait_frame.visible = port_tex != null
 
 	# Trigger Glitch effect briefly on EVA alert or warning
-	if "EVA" in upper_spk and _glitch_rect.material is ShaderMaterial:
+	if not GameState.reduced_motion and "EVA" in upper_spk and _glitch_rect.material is ShaderMaterial:
 		var sm := _glitch_rect.material as ShaderMaterial
 		sm.set_shader_parameter("glitch_intensity", 0.4)
 		var gt := create_tween()
@@ -268,9 +334,18 @@ func _display_line(index: int) -> void:
 			voice_duration = v_stream.get_length()
 			if _audio_manager:
 				_audio_manager.play_voice_stream(v_stream)
+	elif _audio_manager:
+		_audio_manager.play_voice_blip(speaker)
 
 	# Start Portrait Pulse Animation
 	_start_portrait_pulse(color)
+
+	if GameState.reduced_motion:
+		_text_label.visible_ratio = 1.0
+		_is_typing = false
+		_stop_portrait_pulse()
+		line_started.emit(index, speaker)
+		return
 
 	# Fast & crisp Typewriter (quick 0.15s - 0.35s display)
 	var total_chars: int = text.length()
@@ -297,7 +372,7 @@ func _display_line(index: int) -> void:
 func _start_portrait_pulse(color: Color) -> void:
 	if _portrait_tween:
 		_portrait_tween.kill()
-	if not _portrait.visible:
+	if GameState.reduced_motion or not _portrait.visible:
 		return
 	
 	_portrait_frame.pivot_offset = _portrait_frame.size * 0.5

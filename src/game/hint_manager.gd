@@ -4,8 +4,8 @@ extends RefCounted
 ## Stateless-ish manager for the 3-tier in-game hint system.
 ## Owns route, cursor, stage, desync tracking, and hint usage count.
 ## Main scene provides the route on load, then calls record/undo/advance
-## and queries for display state. Hints are offline (pre-verified routes),
-## never computed at runtime.
+## and queries for display state. The puzzle solution stays offline/pre-verified;
+## Main may compute only a short walk-only recovery path back to that route.
 
 signal hint_changed
 
@@ -13,9 +13,10 @@ var route: String = ""
 var cursor: int = 0
 var stage: int = 0
 var desynced: bool = false
-var hints_used: int = 0
+var hint_penalty: int = 0
 
 var _recorded_actions: Array[String] = []
+var _revealed_action_ids: Dictionary = {}
 
 
 func reset() -> void:
@@ -23,8 +24,9 @@ func reset() -> void:
 	cursor = 0
 	stage = 0
 	desynced = false
-	hints_used = 0
+	hint_penalty = 0
 	_recorded_actions.clear()
+	_revealed_action_ids.clear()
 	hint_changed.emit()
 
 
@@ -33,8 +35,9 @@ func load_route(new_route: String) -> void:
 	cursor = 0
 	stage = 0
 	desynced = false
-	hints_used = 0
+	hint_penalty = 0
 	_recorded_actions.clear()
+	_revealed_action_ids.clear()
 	hint_changed.emit()
 
 
@@ -49,7 +52,6 @@ func advance_stage() -> int:
 		stage = 0
 	else:
 		stage += 1
-		hints_used += 1
 	hint_changed.emit()
 	return stage
 
@@ -71,6 +73,27 @@ func undo_action() -> void:
 	if not _recorded_actions.is_empty():
 		_recorded_actions.pop_back()
 	_rebuild_progress()
+	hint_changed.emit()
+
+
+func resync_to(new_cursor: int) -> void:
+	if route.is_empty():
+		return
+	var clamped_cursor := clampi(new_cursor, 0, route.length())
+	if cursor == clamped_cursor and not desynced:
+		return
+	cursor = clamped_cursor
+	desynced = false
+	_recorded_actions.clear()
+	for i in cursor:
+		_recorded_actions.append(route[i])
+	hint_changed.emit()
+
+
+func mark_desynced() -> void:
+	if desynced:
+		return
+	desynced = true
 	hint_changed.emit()
 
 
@@ -114,8 +137,28 @@ func get_preview(max_steps: int = 5) -> String:
 	return preview
 
 
+func reveal_current_stage() -> int:
+	if desynced or stage <= 0 or cursor >= route.length():
+		return 0
+	var end := cursor + 1
+	if stage >= 3:
+		end = mini(route.length(), cursor + 5)
+	var charged := 0
+	for action_id in range(cursor, end):
+		if _revealed_action_ids.has(action_id):
+			continue
+		_revealed_action_ids[action_id] = true
+		charged += 1
+	hint_penalty += charged
+	return charged
+
+
+func get_hint_penalty() -> int:
+	return hint_penalty
+
+
 func get_hints_used() -> int:
-	return hints_used
+	return hint_penalty
 
 
 func _rebuild_progress() -> void:

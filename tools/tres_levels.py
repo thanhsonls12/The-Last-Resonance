@@ -13,6 +13,7 @@ LEVEL_DIR = Path(__file__).resolve().parent.parent / "resources" / "levels"
 
 _STRING_ARRAY = re.compile(r'^(\w+) = Array\[String\]\(\[(.*)\]\)$', re.M)
 _SCALAR = re.compile(r'^(\w+) = (-?\d+(?:\.\d+)?)$', re.M)
+_BOOL = re.compile(r'^(\w+) = (true|false)$', re.M)
 _QUOTED = re.compile(r'^(\w+) = "((?:[^"\\]|\\.)*)"$', re.M)
 _ARRAY = re.compile(r'^(\w+) = (\[.*\])$', re.M)
 _VECTOR3I = re.compile(r'Vector3i\(\s*(-?\d+)\s*,\s*(-?\d+)\s*,\s*(-?\d+)\s*\)')
@@ -30,11 +31,19 @@ def _parse_gd_array(raw):
 
 def parse_level(path):
     text = path.read_text(encoding="utf-8")
-    level = {"path": str(path), "map": [], "maps": [], "entities": [], "decorations": []}
+    level = {
+        "path": str(path), "map": [], "maps": [], "entities": [],
+        "decorations": [], "sequential_floors": False,
+    }
     for key, body in _STRING_ARRAY.findall(text):
-        level[key] = [row for row in re.findall(r'"((?:[^"\\]|\\.)*)"', body)]
+        level[key] = [
+            row.replace('\\"', '"').replace("\\n", "\n").replace("\\\\", "\\")
+            for row in re.findall(r'"((?:[^"\\]|\\.)*)"', body)
+        ]
     for key, value in _SCALAR.findall(text):
         level[key] = float(value) if "." in value else int(value)
+    for key, value in _BOOL.findall(text):
+        level[key] = value == "true"
     for key, value in _QUOTED.findall(text):
         level[key] = value.replace('\\"', '"').replace("\\n", "\n")
     for key, value in _ARRAY.findall(text):

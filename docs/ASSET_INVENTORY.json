@@ -1,0 +1,5596 @@
+{
+  "method": "Static declarations; includes constant concatenation, %s and brace-template candidates. No runtime reachability, GLB embedded dependency, visual or audio validation.",
+  "total_files": 287,
+  "total_bytes": 95967506,
+  "status_counts": {
+    "project_reference": 199,
+    "no_reference_found": 37,
+    "tooling_or_test_only": 48,
+    "dynamic_candidate": 3
+  },
+  "missing_literal_references": {},
+  "identical_content_groups": [],
+  "same_stem_groups": [
+    [
+      "assets/audio/voice/voice_ch1_first_core.mp3",
+      "assets/audio/voice/voice_ch1_first_core.wav"
+    ],
+    [
+      "assets/audio/voice/voice_ch1_intro_sys.mp3",
+      "assets/audio/voice/voice_ch1_intro_sys.wav"
+    ],
+    [
+      "assets/models/baked/Archive-Shelf.glb",
+      "assets/models/props/Archive_Tech/Archive-Shelf.glb"
+    ],
+    [
+      "assets/models/baked/Archive-Workbench.glb",
+      "assets/models/props/Archive_Tech/Archive-Workbench.glb"
+    ],
+    [
+      "assets/models/baked/Bridge.glb",
+      "assets/models/gameplay/Mechanisms/Bridge.glb"
+    ],
+    [
+      "assets/models/baked/Broken-Pillar.glb",
+      "assets/models/environments/modular_kit/Ruins/Broken-Pillar.glb"
+    ],
+    [
+      "assets/models/baked/Broken-Robot.glb",
+      "assets/models/props/Ruins/Broken-Robot.glb"
+    ],
+    [
+      "assets/models/baked/Broken-Wall.glb",
+      "assets/models/environments/modular_kit/Ruins/Broken-Wall.glb"
+    ],
+    [
+      "assets/models/baked/Cable-Coil.glb",
+      "assets/models/props/Industrial/Cable-Coil.glb"
+    ],
+    [
+      "assets/models/baked/Cargo-Crate.glb",
+      "assets/models/props/Industrial/Cargo-Crate.glb"
+    ],
+    [
+      "assets/models/baked/Ceiling-Module.glb",
+      "assets/models/environments/modular_kit/Architecture/Ceiling-Module.glb"
+    ],
+    [
+      "assets/models/baked/Conveyor.glb",
+      "assets/models/gameplay/Mechanisms/Conveyor.glb"
+    ],
+    [
+      "assets/models/baked/Core-Pedestal.glb",
+      "assets/models/gameplay/Core/Core-Pedestal.glb"
+    ],
+    [
+      "assets/models/baked/Data-Storage-Rack.glb",
+      "assets/models/props/Archive_Tech/Data-Storage-Rack.glb"
+    ],
+    [
+      "assets/models/baked/Debris-Pile.glb",
+      "assets/models/props/Ruins/Debris-Pile.glb"
+    ],
+    [
+      "assets/models/baked/Door-Frame.glb",
+      "assets/models/environments/modular_kit/Architecture/Door-Frame.glb"
+    ],
+    [
+      "assets/models/baked/Door.glb",
+      "assets/models/gameplay/Mechanisms/Door.glb"
+    ],
+    [
+      "assets/models/baked/Elevator.glb",
+      "assets/models/gameplay/Mechanisms/Elevator.glb"
+    ],
+    [
+      "assets/models/baked/Energy-Cable.glb",
+      "assets/models/gameplay/Interaction/Energy-Cable.glb"
+    ],
+    [
+      "assets/models/baked/Energy-Core.glb",
+      "assets/models/gameplay/Core/Energy-Core.glb"
+    ],
+    [
+      "assets/models/baked/Floor-Tile.glb",
+      "assets/models/environments/modular_kit/Architecture/Floor-Tile.glb"
+    ],
+    [
+      "assets/models/baked/Hologram-Projector.glb",
+      "assets/models/props/Archive_Tech/Hologram-Projector.glb"
+    ],
+    [
+      "assets/models/baked/Machine-Unit.glb",
+      "assets/models/props/Industrial/Machine-Unit.glb"
+    ],
+    [
+      "assets/models/baked/Memory-Fragment.glb",
+      "assets/models/gameplay/Core/Memory-Fragment.glb"
+    ],
+    [
+      "assets/models/baked/Moss-Patch.glb",
+      "assets/models/props/Nature/Moss-Patch.glb"
+    ],
+    [
+      "assets/models/baked/Pillar.glb",
+      "assets/models/environments/modular_kit/Architecture/Pillar.glb"
+    ],
+    [
+      "assets/models/baked/Pipe-Cluster.glb",
+      "assets/models/props/Industrial/Pipe-Cluster.glb"
+    ],
+    [
+      "assets/models/baked/Plant-Cluster.glb",
+      "assets/models/props/Nature/Plant-Cluster.glb"
+    ],
+    [
+      "assets/models/baked/Platform-Module.glb",
+      "assets/models/environments/modular_kit/Architecture/Platform-Module.glb"
+    ],
+    [
+      "assets/models/baked/Portal.glb",
+      "assets/models/gameplay/Mechanisms/Portal.glb"
+    ],
+    [
+      "assets/models/baked/Pressure-Plate.glb",
+      "assets/models/gameplay/Mechanisms/Pressure-Plate.glb"
+    ],
+    [
+      "assets/models/baked/Railing-Module.glb",
+      "assets/models/environments/modular_kit/Architecture/Railing-Module.glb"
+    ],
+    [
+      "assets/models/baked/Rock-Cluster.glb",
+      "assets/models/props/Nature/Rock-Cluster.glb"
+    ],
+    [
+      "assets/models/baked/Rubble-Patch.glb",
+      "assets/models/environments/modular_kit/Ruins/Rubble-Patch.glb"
+    ],
+    [
+      "assets/models/baked/SciFi-Lamp.glb",
+      "assets/models/props/Industrial/SciFi-Lamp.glb"
+    ],
+    [
+      "assets/models/baked/Stair-Module.glb",
+      "assets/models/environments/modular_kit/Architecture/Stair-Module.glb"
+    ],
+    [
+      "assets/models/baked/Switch.glb",
+      "assets/models/gameplay/Interaction/Switch.glb"
+    ],
+    [
+      "assets/models/baked/Terminal.glb",
+      "assets/models/gameplay/Interaction/Terminal.glb"
+    ],
+    [
+      "assets/models/baked/Wall-Module.glb",
+      "assets/models/environments/modular_kit/Architecture/Wall-Module.glb"
+    ],
+    [
+      "assets/models/baked/Window-Module.glb",
+      "assets/models/environments/modular_kit/Architecture/Window-Module.glb"
+    ]
+  ],
+  "assets": [
+    {
+      "path": "assets/audio/ambience/AMB_Archive_Base_Loop.wav",
+      "group": "audio/ambience",
+      "bytes": 4560044,
+      "sha256": "4282dee327fda9c9cd67dee780901b7311c2a8a5bac277504307d159a81430cb",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 66,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/ambience/AMB_Core_Reactor_Loop.wav",
+      "group": "audio/ambience",
+      "bytes": 4560044,
+      "sha256": "beec2505982e739d167a1d25f9f8c05cd888d91d40bc4f9a18f5f9f8f96aaa6a",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 69,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/ambience/AMB_Electrical_Hum_Loop.wav",
+      "group": "audio/ambience",
+      "bytes": 4560044,
+      "sha256": "b649e7dd785e88de3d1e166f6a385ef96871c78154765ac0fabda33b3851aa5e",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 73,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 76,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/ambience/AMB_Foundry_Base_Loop.wav",
+      "group": "audio/ambience",
+      "bytes": 4560044,
+      "sha256": "164607343c8d606f6d9a6fbe857335ed91a57bef6966e512945e060fbc9e4725",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 67,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/ambience/AMB_Foundry_Furnace_Loop.wav",
+      "group": "audio/ambience",
+      "bytes": 4560044,
+      "sha256": "c92284334639884369c0c0c7a0c8b3a1ef3575e9d046abcb1e0e9128d5858725",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 88,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/ambience/AMB_Machinery_Distant_Loop.wav",
+      "group": "audio/ambience",
+      "bytes": 4560044,
+      "sha256": "c3d9bab1bcd8bbcea43bb1b83b65eec78c697dde7d7672a3575f0b991a9f78d8",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 74,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/ambience/AMB_Sanctuary_Base_Loop.wav",
+      "group": "audio/ambience",
+      "bytes": 4560044,
+      "sha256": "286630ab07f21b57c57c98bde9c049fd48374076cde5c18ee433befe268df38e",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 68,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/ambience/AMB_Water_Current_Loop.wav",
+      "group": "audio/ambience",
+      "bytes": 4560044,
+      "sha256": "ff17a36071c1838707dad54b601a59d4e3cca6514d967f7a608e4564579e324b",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 75,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/ambience/AMB_Water_Drip_Loop.wav",
+      "group": "audio/ambience",
+      "bytes": 4560044,
+      "sha256": "db2079d91b0a724cd32c6bf6fd58ff122c12e60edf341149875b89eb88f78343",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 89,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/ambience/AMB_Wind_Corridor_Loop.wav",
+      "group": "audio/ambience",
+      "bytes": 4560044,
+      "sha256": "7cf7ef1a51ad685c94cde164b771510c5f20800030635228b3ee90eccaa7d7e8",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 87,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Box_Blocked.wav",
+      "group": "audio/sfx",
+      "bytes": 57648,
+      "sha256": "f5d651c350d787842993451b7974fd93ba0b475c849c24a0c448682b23905b21",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 17,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Box_Impact.wav",
+      "group": "audio/sfx",
+      "bytes": 65324,
+      "sha256": "83fc535459976549021fa1c13d8557d00b01158a0fbfa6a8ef8d6abc01b37a76",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 18,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Box_OnGoal.wav",
+      "group": "audio/sfx",
+      "bytes": 92204,
+      "sha256": "a6e8daf5642a7664c3d08b2ae29ec4f7caf099d9b6ef65f925f8e2b03aa14e08",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 32,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Box_Scrape.wav",
+      "group": "audio/sfx",
+      "bytes": 57648,
+      "sha256": "c1421ad83917baa7328b45dc2a666dd6931c0e08e92bc3d70e40272e11cd419a",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 16,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Bridge_Lock.wav",
+      "group": "audio/sfx",
+      "bytes": 80684,
+      "sha256": "4aa2dfb43627aff4589b9475f73d0c26024f20936f17feb40d59d78199ccb053",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 31,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Bridge_Rotate.wav",
+      "group": "audio/sfx",
+      "bytes": 230448,
+      "sha256": "1ac827184b52a2e5e3fd663871970f5ff19b72af7a6cd472bb5847314bd24d7c",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 30,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Checkpoint_Activate.wav",
+      "group": "audio/sfx",
+      "bytes": 172844,
+      "sha256": "1d287444cd580db57fa18c36359ab058d2be11ed738155b9d0f3c8b0f8ed3d98",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Conveyor_Loop.wav",
+      "group": "audio/sfx",
+      "bytes": 240044,
+      "sha256": "8baf6ded07d3ce7295a0720b768af09b0a579af1350c13c495523fbdee5c8bcb",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Conveyor_Start.wav",
+      "group": "audio/sfx",
+      "bytes": 153644,
+      "sha256": "de6578f53ea2ea2292b7016f2cee285ba446847a0ea3b2e036517e019bfa51a1",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Conveyor_Stop.wav",
+      "group": "audio/sfx",
+      "bytes": 124844,
+      "sha256": "eb71e23665a7a472b709cdbb85c7b91ffe49e555b24801ef59d20f8a8ba5e89e",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Core_Insert.wav",
+      "group": "audio/sfx",
+      "bytes": 144044,
+      "sha256": "5b05d790df1640cfe7f774bbee43a97a54e3918df5af4aab43fa9207f78814dd",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 33,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Debris_Rumble.wav",
+      "group": "audio/sfx",
+      "bytes": 172844,
+      "sha256": "031624aa7cca5a0ac1e332c957d9eae586765540d98bcfd23f3afcd591794699",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Door_Close.wav",
+      "group": "audio/sfx",
+      "bytes": 163244,
+      "sha256": "866261c8cc3c126dc37d44667de945fe256a4238e2b80923a9c58a261b6ed34b",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 22,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Door_Locked.wav",
+      "group": "audio/sfx",
+      "bytes": 46124,
+      "sha256": "34b2bbfb7563382bf44e8e3cb3c385da18ee830c146000077ca1a8ee9321d957",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Door_Open.wav",
+      "group": "audio/sfx",
+      "bytes": 230448,
+      "sha256": "9ef4f93d8b0dc318a4fc0719315f1e8b1296af4842e8c0bf2dd3bec5a9010332",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 21,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Door_Unlock.wav",
+      "group": "audio/sfx",
+      "bytes": 182444,
+      "sha256": "0a260d90c2c93ef764d4bf4b122fc25adc0a4ea0b26643b5e49872e77ddefdec",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 23,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Elevator_Loop.wav",
+      "group": "audio/sfx",
+      "bytes": 297644,
+      "sha256": "09e62ac888961f389d6d36dd632245f4782916eedbfa9e3f08bf9de9e2a03c4e",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 28,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Elevator_Start.wav",
+      "group": "audio/sfx",
+      "bytes": 134444,
+      "sha256": "2da71e0a5ee3e6f68705100f0384145f217660ee1e28f5ac89525b72a35f3286",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 27,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Elevator_Stop.wav",
+      "group": "audio/sfx",
+      "bytes": 105644,
+      "sha256": "0f407fd9db352c7aad6e2f3309eda38758e7dd1b72b3a85f0a71075ef8181529",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 29,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Goal_Lock.wav",
+      "group": "audio/sfx",
+      "bytes": 92204,
+      "sha256": "c101c10b0782b59735c61dc9aebe00b18d7f94594f339706d76c7d95e1f88c85",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Level_Complete_Stinger.wav",
+      "group": "audio/sfx",
+      "bytes": 364844,
+      "sha256": "1249310ea76081b13b179df116de8d17ecfe5090fb064c5c13690063566b1fe9",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 41,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Level_Fail.wav",
+      "group": "audio/sfx",
+      "bytes": 153644,
+      "sha256": "cf6eed2145064f1615ac6f79d81f6be289af66b1c4dc5d5bcba0638c15bf61f0",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Level_Start.wav",
+      "group": "audio/sfx",
+      "bytes": 134444,
+      "sha256": "022eddf9ada66753f2aead4d1b18fae6985a0e34ceffa78d94001914c244bb95",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_MemoryFragment_Collect.wav",
+      "group": "audio/sfx",
+      "bytes": 182444,
+      "sha256": "b3c9b9a15af02ba23af5d63b3eea879793d92ba9337546d9042eaec497c956fa",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 35,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Player_Damage_Glitch.wav",
+      "group": "audio/sfx",
+      "bytes": 76844,
+      "sha256": "cb2960f52c05085b50bf7e1d14faf5180fcc67467e47ad92ecc55f27153c98f9",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Player_Dialogue_Bleep_01.wav",
+      "group": "audio/sfx",
+      "bytes": 30764,
+      "sha256": "7d938ec32cca700db8bf7cce932bc1b96ddf30d8e7dc1fc3829f1d4e2865abae",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 57,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Player_Dialogue_Bleep_02.wav",
+      "group": "audio/sfx",
+      "bytes": 30764,
+      "sha256": "81a58ef7839dcad3a85b18601a73361105ce47ac317b194fb652dce484475013",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 58,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Player_Footstep_Metal_01.wav",
+      "group": "audio/sfx",
+      "bytes": 57648,
+      "sha256": "1403765157ee3e20fb64665cca2438138f04872917f911e7bcbdab32a20286de",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 11,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Player_Footstep_Metal_02.wav",
+      "group": "audio/sfx",
+      "bytes": 53804,
+      "sha256": "3242ca8e3b6fde947e909f5f58dfe44f633d16d53bae40c9e84d38fc76dc633c",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 12,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Player_Footstep_Stone_01.wav",
+      "group": "audio/sfx",
+      "bytes": 42284,
+      "sha256": "21199f8bdff6cdc4750fa8a7822b7cf19a13c6a7dc87cef387c79493d57fc13f",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 9,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Player_Footstep_Stone_02.wav",
+      "group": "audio/sfx",
+      "bytes": 38444,
+      "sha256": "ffb6a43c644f9edeef9f39145854fbe1fc171590428c7d4f314763784dff18f5",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 10,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Player_Footstep_Water_01.wav",
+      "group": "audio/sfx",
+      "bytes": 69164,
+      "sha256": "51dafe266ed917838dc48e1943367f6ca5eaa2e4e339f5d44ea6fd80bd3766d6",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 13,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Player_Footstep_Water_02.wav",
+      "group": "audio/sfx",
+      "bytes": 61484,
+      "sha256": "8d3f4bbf61b3ecf92682f36b2d450391d448543756c453dae0a4d6c6d1f7e087",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 14,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Player_Interact.wav",
+      "group": "audio/sfx",
+      "bytes": 38444,
+      "sha256": "e1ba424caf66cba6f24c5c0c8c79c51563aed54ebee7a9f1cc4f3232b713678c",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Player_LowBattery.wav",
+      "group": "audio/sfx",
+      "bytes": 115248,
+      "sha256": "99273d643fbde590ccb0d7c75a395c81dca1bf9e5f3664a6b3bd7693bd01a020",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Player_Push_Impact.wav",
+      "group": "audio/sfx",
+      "bytes": 80684,
+      "sha256": "39cfd560f2e0ed3714e651ddc09a42dd360cefc6adbb4c9368328bf6d52ca07b",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 15,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Player_Push_Start.wav",
+      "group": "audio/sfx",
+      "bytes": 73004,
+      "sha256": "330b03fcb066b631e80519a3e88566603e7863bc22174cf4aba8e83188d6a1f2",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Player_Reset.wav",
+      "group": "audio/sfx",
+      "bytes": 96044,
+      "sha256": "bae7b5eae7aa3758a1bc283525c615cf05a030f14ae0a0d539aaa0392e2eb6aa",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 44,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Player_Robot_Alert.wav",
+      "group": "audio/sfx",
+      "bytes": 88364,
+      "sha256": "fba14b30eb9f80649048d51200126a6e82a825f9bb5ee4ef6438f2f7703ecc54",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Player_Robot_Beep.wav",
+      "group": "audio/sfx",
+      "bytes": 34604,
+      "sha256": "75da77f5e5eec7322e50c9f40c4c0a5e67683ab433edb80ed6a8d9207b784b99",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Player_Servo.wav",
+      "group": "audio/sfx",
+      "bytes": 80684,
+      "sha256": "f43e1c6fe39415f245f6a921b2ba9ec9d0cd3f1b52875b99a5f37502fb9139fe",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 8,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Player_Success_Beep.wav",
+      "group": "audio/sfx",
+      "bytes": 57648,
+      "sha256": "2cb85e10d4bd7c3c66a368f2a281fc1fa6a198a6f6a769a33650353ac7328d15",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Player_Turn.wav",
+      "group": "audio/sfx",
+      "bytes": 34604,
+      "sha256": "d099049dbd471089a7fed5f4b64ae339c7c86946e390d463ef62afe12f39f151",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Player_Undo.wav",
+      "group": "audio/sfx",
+      "bytes": 61484,
+      "sha256": "fc455b4b296580105d4ce364d4c6b9f3dd6fba854dd746a829a18baa20e40c08",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 43,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Portal_Activate.wav",
+      "group": "audio/sfx",
+      "bytes": 163244,
+      "sha256": "5f885e4860ebf1ef999584ac8fbe0e00b5f3e1190efb866c1058a4ff254f8bf7",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 25,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Portal_Charge.wav",
+      "group": "audio/sfx",
+      "bytes": 345644,
+      "sha256": "7a44f2d95322a1a56412f7491ed11790aafcab6ecea72c0ba06bda33e614c37a",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Portal_Reject.wav",
+      "group": "audio/sfx",
+      "bytes": 76844,
+      "sha256": "5db05c4c2c3701fe844575bb27f8a35e8b239ef96d26fe350a69b0aa09670cfc",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 26,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Portal_Teleport.wav",
+      "group": "audio/sfx",
+      "bytes": 134444,
+      "sha256": "f20cdd6a0ab39521c175bda8b315d5bac79a08e90736cf13ef9ae300bc1b37b4",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 24,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_PressurePlate_Press.wav",
+      "group": "audio/sfx",
+      "bytes": 67244,
+      "sha256": "848a0d3000dd0ed89232c0cd2ce5ac5d40fb446aaa44726249124afa76b96dd6",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 19,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_PressurePlate_Release.wav",
+      "group": "audio/sfx",
+      "bytes": 46124,
+      "sha256": "e41d2a882b6f713dd2e4ccd0a589baa28d703a13bbe56dbc5e2198272ac64206",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 20,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Switch_Toggle_Off.wav",
+      "group": "audio/sfx",
+      "bytes": 38444,
+      "sha256": "6adedc2876b60b90aa14840c42262e21f9d2a63bb126222025ac54c50e2c986b",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Switch_Toggle_On.wav",
+      "group": "audio/sfx",
+      "bytes": 42284,
+      "sha256": "e084d3b0662ab6e89aabaca8a3aaf48c654e69cb3baa9ec957750d722141fee0",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Terminal_Error.wav",
+      "group": "audio/sfx",
+      "bytes": 76844,
+      "sha256": "bb188385d952ec12a4034dfd9a57608e7ae30388e80884beaabf6615769441d4",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Terminal_On.wav",
+      "group": "audio/sfx",
+      "bytes": 99884,
+      "sha256": "576c6f57786d07b399da51ebb699c42bf88c486bb39f428778a022193dc02412",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_UI_Back.wav",
+      "group": "audio/sfx",
+      "bytes": 26924,
+      "sha256": "f8bc2012fe61a3f0ec7fa745d565ca3a7e1b87b05891f9cd63e64434e0ad8976",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_UI_Cancel.wav",
+      "group": "audio/sfx",
+      "bytes": 34604,
+      "sha256": "3fb5bba46976699770ff5f1d3be4c3477ef72401d12c5dbbfe7b32e15dbf490e",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 47,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_UI_Click.wav",
+      "group": "audio/sfx",
+      "bytes": 17324,
+      "sha256": "6fc484ce543a2edaf64dc2ad435ddf0b68e1ee3eec89c8e4914dcc28747bae79",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 45,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_UI_Confirm.wav",
+      "group": "audio/sfx",
+      "bytes": 46124,
+      "sha256": "3294cd4ad50ec5b560e82f3d2aa1cb6ea54e5a1791d3e23167a31905706f26b1",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 46,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_UI_Error.wav",
+      "group": "audio/sfx",
+      "bytes": 46124,
+      "sha256": "1fde97e0c304fc51a3955ae922801f6a45e57eaa09bd2a08d54f23d3ad94bcd7",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 52,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_UI_Hover.wav",
+      "group": "audio/sfx",
+      "bytes": 9644,
+      "sha256": "9bf25e52ee65e303559247a48430c04b469601ddbce3ce26f5361c94e18c46ea",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 48,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_UI_Level_Select.wav",
+      "group": "audio/sfx",
+      "bytes": 38444,
+      "sha256": "2fb0e9f0a2ee8838caa6a94970396056d76a52806be23f86bc4284a48cd18630",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 53,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_UI_Page_Next.wav",
+      "group": "audio/sfx",
+      "bytes": 26924,
+      "sha256": "ec4f0db5c364bd718aafd8fdf69549ac5bb040035c32707534efc0d65ebb0e28",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 54,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_UI_Page_Previous.wav",
+      "group": "audio/sfx",
+      "bytes": 26924,
+      "sha256": "99f98198389af1a5ca675cde643195334989984bf732d329b52956d4b9fd1f48",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 55,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_UI_Pause_Close.wav",
+      "group": "audio/sfx",
+      "bytes": 26924,
+      "sha256": "b3beb92ef61701402df8882089afcfb1b61b44741e22d26c8f59349a0f791220",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 50,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_UI_Pause_Open.wav",
+      "group": "audio/sfx",
+      "bytes": 34604,
+      "sha256": "09592c886d14a81b9335035541d1a3897d3280300e672e805d85755499eb58a2",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 49,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_UI_Resume.wav",
+      "group": "audio/sfx",
+      "bytes": 38444,
+      "sha256": "790f90acd55a216d54b1720f3608f4d5fec66fc55162ea29fba9a84c6c00c04b",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_UI_Save_Complete.wav",
+      "group": "audio/sfx",
+      "bytes": 46124,
+      "sha256": "adbc142c09dab3616b50b6f3f30f6d86baa3910d4994871a88e4d857efcaaee8",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 56,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_UI_Slider_Tick.wav",
+      "group": "audio/sfx",
+      "bytes": 9644,
+      "sha256": "920b68500f269687496c8cc1f7446cde43339ea64047e24e219ca4b2f00cc697",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 51,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_VFX_Core_Hum_Loop.wav",
+      "group": "audio/sfx",
+      "bytes": 336044,
+      "sha256": "39f581f187cf5d83e162653e0de4153840d9743d450276a80086df19219fedde",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 98,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_VFX_Core_Pulse.wav",
+      "group": "audio/sfx",
+      "bytes": 124844,
+      "sha256": "40c50d5a5bb94865ac8f189feef571d2cf7b4860ddda2941283263faea9631c6",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 34,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_VFX_Dust_Puff.wav",
+      "group": "audio/sfx",
+      "bytes": 99884,
+      "sha256": "647347d83cf3cafce8bc033f51a78b0e6d9fc48e260f49cc4d35aa89af4e8588",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 36,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_VFX_Ember_Crackle.wav",
+      "group": "audio/sfx",
+      "bytes": 268844,
+      "sha256": "b984fe812ecfb680e2ee0609dac0fd6e8ef62f3120c0848140120c4a04b36b72",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 39,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_VFX_LevelComplete.wav",
+      "group": "audio/sfx",
+      "bytes": 364844,
+      "sha256": "06b2de005e9ba026a9697b075f9ffbc14ba30e64630afa148e6f3befdbac2630",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 42,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_VFX_Spark.wav",
+      "group": "audio/sfx",
+      "bytes": 46124,
+      "sha256": "e40591df77b942a78b4b33c8852c91f81ef0e56b18a8c3b14837fc27772f4692",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 37,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_VFX_Steam_Hiss.wav",
+      "group": "audio/sfx",
+      "bytes": 307244,
+      "sha256": "789d5e85744903f39cf1c2f23798e78604d6b219d8e6c6cfa0e4b52fce8fa055",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 40,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_VFX_Water_Splash.wav",
+      "group": "audio/sfx",
+      "bytes": 163244,
+      "sha256": "b2b0c361b7550e9ec06dfc524f5e597c6c93d9740af21def23a5b32abe2ccace",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 38,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Voice_Elias.wav",
+      "group": "audio/sfx",
+      "bytes": 5776,
+      "sha256": "fb0fe56c468ba31650fdaca974a63ee366a341e52c532e783ae51e3ef3406b48",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 60,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Voice_EVA.wav",
+      "group": "audio/sfx",
+      "bytes": 4894,
+      "sha256": "9f3660bfa7d470f4293dabd1aac05b8584faa8f1b5f01886bb4d17cb4ceb2691",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 59,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Voice_Kiro.wav",
+      "group": "audio/sfx",
+      "bytes": 4012,
+      "sha256": "2bcaa49e0e390d623305affce8501d9c4dd39f1a222a79302b56aab55fb7ab28",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 61,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Voice_System.wav",
+      "group": "audio/sfx",
+      "bytes": 4454,
+      "sha256": "89b395746a5f4664264780d3b9671e8205b6dc08ff6d2ffeb345fc67c55101e5",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/audio_manager.gd",
+          "line": 62,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/voice/voice_ch1_eva_foundry.mp3",
+      "group": "audio/voice",
+      "bytes": 187708,
+      "sha256": "c41797195819cf52d98a184fe1d009b424d8ab8a2ba25baebc7ecbd5f09ebf69",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/story_data.gd",
+          "line": 307,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/voice/voice_ch1_eva_intro.mp3",
+      "group": "audio/voice",
+      "bytes": 254582,
+      "sha256": "82ce291cdf430f613f5e04e08072c6d0d52909b611bcce849364809696c26237",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/story_data.gd",
+          "line": 296,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/voice/voice_ch1_eva_intro_msg.wav",
+      "group": "audio/voice",
+      "bytes": 617976,
+      "sha256": "960a0b5a787fed77b833d065e12b63e739b9ef6ea615cd35543a04217286b8d4",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/voice/voice_ch1_first_core.mp3",
+      "group": "audio/voice",
+      "bytes": 66918,
+      "sha256": "877f94319d1d38c1ea2addf741a61b68b17ccfd25bcca006a173a0c69254eeb2",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/story_data.gd",
+          "line": 293,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/voice/voice_ch1_first_core.wav",
+      "group": "audio/voice",
+      "bytes": 175078,
+      "sha256": "441e28064cf51c9507c94638fc66ad034102b6d633067dea627b46430b8b151d",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/voice/voice_ch1_foundry_init.mp3",
+      "group": "audio/voice",
+      "bytes": 117909,
+      "sha256": "68dbfd43e58d2548fe9dfee4b240f0f72475a58ed6b487e0af82bd292d5aa220",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/story_data.gd",
+          "line": 308,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/voice/voice_ch1_intro_sys.mp3",
+      "group": "audio/voice",
+      "bytes": 148420,
+      "sha256": "99e0c1b0d7537eed61916301fc7b1c50cfee2e8a29d19cfd38bfafa0cfdf9962",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/story_data.gd",
+          "line": 236,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/voice/voice_ch1_intro_sys.wav",
+      "group": "audio/voice",
+      "bytes": 370398,
+      "sha256": "b9333f1e52924869c05d7af6fc696852bdb91c903d95d4fa7dad669f7fc184dc",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/voice/voice_ch1_kiro_boot.mp3",
+      "group": "audio/voice",
+      "bytes": 88234,
+      "sha256": "f0ab87f133ad60ede133d75269f4d33f3e28db6853680c19bc48de793a4a0ad8",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/story_data.gd",
+          "line": 237,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/voice/voice_ch1_kiro_eva_ack.mp3",
+      "group": "audio/voice",
+      "bytes": 97847,
+      "sha256": "4b1b37e4dbb2cd9c2156df1848691613b41d7006d677c48d90b23845cada736a",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/story_data.gd",
+          "line": 297,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/voice/voice_ch1_security_dossier.mp3",
+      "group": "audio/voice",
+      "bytes": 214040,
+      "sha256": "c1066ceed27a6eb4b65972f0193ff548293f55fba199d14f41957c844707c8b3",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/story_data.gd",
+          "line": 304,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/fonts/ChakraPetch-Bold.ttf",
+      "group": "fonts",
+      "bytes": 78384,
+      "sha256": "65fbf76d95651697275e19db4d717c0e95a789ddd3476478b05292104db278a0",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/ui/dialogue_box.gd",
+          "line": 146,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/fonts/ChakraPetch-Regular.ttf",
+      "group": "fonts",
+      "bytes": 78488,
+      "sha256": "98fcd638baa5c81ff0316b7538ce330ee3b23b1302726de3526d5933a8ecf986",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/fonts/ChakraPetch-SemiBold.ttf",
+      "group": "fonts",
+      "bytes": 78604,
+      "sha256": "45264de3204ddbd5fb3e14a2402acd5c630d16650ae5fc221d2c52da46a6734b",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "project.godot",
+          "line": 32,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/fonts/Rajdhani-Bold.ttf",
+      "group": "fonts",
+      "bytes": 400680,
+      "sha256": "691470dd3286a14e9677940d0bf75796179841ba5215cbda1a2c8910a3226afd",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/ui/dialogue_box.gd",
+          "line": 157,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/fonts/Rajdhani-Medium.ttf",
+      "group": "fonts",
+      "bytes": 384348,
+      "sha256": "12ff7dcfe4c206e3875ac53b1762eab57de6a2fa7f5a86c26b97b88d6591eac2",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/fonts/Rajdhani-Regular.ttf",
+      "group": "fonts",
+      "bytes": 377860,
+      "sha256": "6e1fc228a8318251a6e569502ec57bac1e4656c582f92f59ccecc4688e039b98",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/fonts/ShareTechMono-Regular.ttf",
+      "group": "fonts",
+      "bytes": 43272,
+      "sha256": "9ceab1f87414829af259c0f537573ae03ef7dd3147c0b27a36a1a0beb6732677",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/icons/the_last_resonance_icon.png",
+      "group": "icons",
+      "bytes": 578115,
+      "sha256": "7f6f64761dfc8b2046e6f63d1b55ff02b0fbd4c432d135638d911ab947ba4fa2",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "project.godot",
+          "line": 16,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/icons/the_last_resonance_icon_android_192.png",
+      "group": "icons",
+      "bytes": 88905,
+      "sha256": "e4301cfed9763d44cfdc82567d9087a3d086f06326e6a1d0ba5f220d6cf4e852",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "export_presets.cfg",
+          "line": 47,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/materials/Material_Texture_Library.glb",
+      "group": "materials",
+      "bytes": 251544,
+      "sha256": "9ffc50f54195d4bc4f26f810e211ec9aa0abcfd2bc32d60fbcb820aba94fb987",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/animations/Dr_Elias_Vale/Dr_Elias_Vale_Animation_Library.glb",
+      "group": "models/animations",
+      "bytes": 441616,
+      "sha256": "d14fbd1006087f011b1c67cf6ed30c5be7bb6743e3ecb417397782c8b31cda3b",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/animations/EVA/EVA_Animation_Library.glb",
+      "group": "models/animations",
+      "bytes": 431804,
+      "sha256": "f0d550c834d872e876ff15c5c28c1e177bcafbb70fa3bb2de14e94f415a1c911",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/animations/Kiro_K7/Kiro_K7_Animation_Library.glb",
+      "group": "models/animations",
+      "bytes": 526344,
+      "sha256": "a07160c37a5470afaa3aa2ea44850e3c712cd0bb0a76ad238778dd3f992fdedc",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 40,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Archive-Bookshelf.glb",
+      "group": "models/baked",
+      "bytes": 109212,
+      "sha256": "db62977e3dc88fc4157724ba0f3eed39d9a228ea905aa6b9b61955784305581b",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/map_clusters/archive_storage_bay.tscn",
+          "line": 3,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 14,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/board_view.gd",
+          "line": 88,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Archive-Broken-Column.glb",
+      "group": "models/baked",
+      "bytes": 46848,
+      "sha256": "9964f43e9accb1837b149a2c9cf326a4987ecd41cad2ec9184e4e7e16a838091",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 90,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Archive-Data-Vault.glb",
+      "group": "models/baked",
+      "bytes": 31840,
+      "sha256": "a761e3f029211c48790518f17ef8edeb3cadc906d57d70fc3c026f1d9372b1fb",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 89,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Archive-Holo-Projector.glb",
+      "group": "models/baked",
+      "bytes": 23220,
+      "sha256": "cbf942cb4f1c7ddb5664f79f9df12f7e89de617db62a8c923d683bb20b4c0788",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 16,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/board_view.gd",
+          "line": 93,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Archive-Plinth.glb",
+      "group": "models/baked",
+      "bytes": 8824,
+      "sha256": "e265ca121a6d68901f2662893e191a01e63d964fe2fa3daf9b543a3dab9e3800",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 92,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "src/view/board_view.gd",
+          "line": 110,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Archive-Shelf.glb",
+      "group": "models/baked",
+      "bytes": 155684,
+      "sha256": "5926211b3181ea6df311291e10cc4bf4e3cde1cd100c0b3029703e1751fe4ef7",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 69,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Archive-Terminal.glb",
+      "group": "models/baked",
+      "bytes": 33816,
+      "sha256": "6a9ec30bb9989da7e3f9c5c063656ceece157929accdaf58b1e3cbf255a0d11e",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 15,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/board_view.gd",
+          "line": 91,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Archive-Workbench.glb",
+      "group": "models/baked",
+      "bytes": 57100,
+      "sha256": "98777bff69a0454e6716d272f3ce2c12f2f6227ed98263b9c16d0f407d26308e",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 72,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Bridge.glb",
+      "group": "models/baked",
+      "bytes": 78512,
+      "sha256": "0eb56dcec7bd151efcf2489aae37cb32baa9f5fd0a338cf63500a2d3ff57494d",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Broken-Pillar.glb",
+      "group": "models/baked",
+      "bytes": 55072,
+      "sha256": "dc42d4d22376c698aa9a3ce1508ef30e243d97e534f006d02cf0a413e96b8e92",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 85,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Broken-Robot.glb",
+      "group": "models/baked",
+      "bytes": 82408,
+      "sha256": "4e98cad18dfd91b2d9cf624e11163ba83d392695e97d6f2321a65abffad944dc",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 73,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "src/view/board_view.gd",
+          "line": 103,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Broken-Wall.glb",
+      "group": "models/baked",
+      "bytes": 78864,
+      "sha256": "fdea28d490208d30957cf75668abd1457a27faa633299d75ed397abb5d02284e",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 87,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Cable-Coil.glb",
+      "group": "models/baked",
+      "bytes": 90484,
+      "sha256": "dc70efe7b570eb8cf0c17ce6d35de5f8d76d84de97f4a14855d9f884592d5cbf",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 78,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Cargo-Crate.glb",
+      "group": "models/baked",
+      "bytes": 108232,
+      "sha256": "b7e7ca74cedff8ec6b113ed97cfe244e7213d52537cb57d14adc852acc4dde00",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 79,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Ceiling-Module.glb",
+      "group": "models/baked",
+      "bytes": 87536,
+      "sha256": "72451858394c78d87453e8295e2c50f60e83b2924d7fd6be01ce82639a6856a2",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 97,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Conveyor.glb",
+      "group": "models/baked",
+      "bytes": 100720,
+      "sha256": "2e23810322467f56a6a51381f87ab064e9fb1c0bf0ccc4ac70bbf48208542566",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 82,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "src/view/board_view.gd",
+          "line": 102,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Core-Generator.glb",
+      "group": "models/baked",
+      "bytes": 33528,
+      "sha256": "bcc79b88dc5e91a263048d7c900875fca3efd871ddf3ece96f4597c7917e009d",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 38,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/chapter_props.gd",
+          "line": 24,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Core-Hologram-Dais.glb",
+      "group": "models/baked",
+      "bytes": 23160,
+      "sha256": "2f49a7b8cc88aa01c2802f9ba2dca9517e02316e94a0d3ee1147d64c21898121",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 39,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/chapter_props.gd",
+          "line": 26,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Core-Pedestal.glb",
+      "group": "models/baked",
+      "bytes": 95680,
+      "sha256": "f8c07a5649e0bcff07e77cd6ac0c6eb0d8e91edc79ef3d6d70ca55534689959a",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 62,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Core-Portal-Frame.glb",
+      "group": "models/baked",
+      "bytes": 41132,
+      "sha256": "743b74a81756e351a32d63562b10bdd6837fb1d229ae2106401966cdb31666cc",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/chapter_props.gd",
+          "line": 27,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Core-Reactor.glb",
+      "group": "models/baked",
+      "bytes": 54876,
+      "sha256": "a58997bf5c2e8d1fd6e6a56150796b3ea1461d3978c45bffa1f55b041da73c67",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 37,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/chapter_props.gd",
+          "line": 23,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Core-Wall.glb",
+      "group": "models/baked",
+      "bytes": 32208,
+      "sha256": "506243b21478cb1e04892354a6106351e8ed7dafa824ad565220958b264f14c7",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/map_clusters/core_data_wall.tscn",
+          "line": 4,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 40,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/chapter_props.gd",
+          "line": 25,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Data-Storage-Rack.glb",
+      "group": "models/baked",
+      "bytes": 109548,
+      "sha256": "83fe0dd47e95738b85a3ae31f8de3e09a8ca761dbb2d123a68ecf79b684894fe",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 70,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Debris-Pile.glb",
+      "group": "models/baked",
+      "bytes": 72888,
+      "sha256": "731f06fff160850aecfd5ee4fffe574f2a854ba65069d45ef0a8cda54573c2bf",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 74,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Door-Frame.glb",
+      "group": "models/baked",
+      "bytes": 40092,
+      "sha256": "57987ea85e2e09c22387850030b0c86dde49f46fa55dc5c342dab8e9e7c3ecee",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 83,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Door.glb",
+      "group": "models/baked",
+      "bytes": 82388,
+      "sha256": "a2f89b781d02d54f9ae2ef1711f11afbcf6f07788209559e071ef677bc6016cd",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Elevator.glb",
+      "group": "models/baked",
+      "bytes": 85796,
+      "sha256": "7c591e1a829aadd08522dcd5c9932ece7816339cd13bd3ed67630ba7b3ed2824",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Energy-Cable.glb",
+      "group": "models/baked",
+      "bytes": 44032,
+      "sha256": "996f718ed7276c89ebe8da5801e4ae607fa43977640fd58a735f3f778ce857c9",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Energy-Core.glb",
+      "group": "models/baked",
+      "bytes": 70592,
+      "sha256": "67e4a24ff1f676b1e1c62a6e45b6a2186474d2bd9be40148c6768e2cb9528026",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 63,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Floor-Tile.glb",
+      "group": "models/baked",
+      "bytes": 92444,
+      "sha256": "9299e300f652db665ecf2aed82bc3e8275c6076f70949ab609b62e6efc76cfaf",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 59,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Foundry-Furnace.glb",
+      "group": "models/baked",
+      "bytes": 31768,
+      "sha256": "e567d96264ff06a4665eef6957eb9b4481cea3d1ab33256b8cf5d53f479885bc",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 21,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/chapter_props.gd",
+          "line": 9,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tests/verify_material_profiles.gd",
+          "line": 4,
+          "scope": "test",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Foundry-Gear.glb",
+      "group": "models/baked",
+      "bytes": 113396,
+      "sha256": "8eadab7b16b55979c2ffe28f665f546a976af8acc84545d3c50b8aa1c50cefce",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/chapter_props.gd",
+          "line": 11,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Foundry-Lamp.glb",
+      "group": "models/baked",
+      "bytes": 24772,
+      "sha256": "3abbd11695b2fca4d74456917a70401e9d740c86824a0450ce2f354ddac4dd6c",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/chapter_props.gd",
+          "line": 13,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Foundry-Pipe-Valve.glb",
+      "group": "models/baked",
+      "bytes": 34820,
+      "sha256": "2ed45db42a2e075b10e375109e26335f3e6ba90d622cd8f5727e40f6420ef0af",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/chapter_props.gd",
+          "line": 12,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Foundry-Press.glb",
+      "group": "models/baked",
+      "bytes": 39176,
+      "sha256": "ea3234ad0686f544731f118fa8068797ee5899357dabe6ffdf96f1f257790910",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/map_clusters/foundry_maintenance_corner.tscn",
+          "line": 3,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 22,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/chapter_props.gd",
+          "line": 10,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Hologram-Projector.glb",
+      "group": "models/baked",
+      "bytes": 64280,
+      "sha256": "63eb5ce8ca58ace64fb97a16d451513d853290dde054e6caab85a0204c6d3afe",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 71,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Identity-archive_access_panel_broken.glb",
+      "group": "models/baked",
+      "bytes": 8784,
+      "sha256": "43f833b334268bde4fad096dc2d02c8a52dac621151c121d0e4f0c89c8a844b0",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/map_clusters/archive_storage_bay.tscn",
+          "line": 4,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 17,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/chapter_props.gd",
+          "line": 7,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Identity-archive_storage_tray_low.glb",
+      "group": "models/baked",
+      "bytes": 9848,
+      "sha256": "36753c91ef62706aa0b002c29b3ffa6737a225ea790f780cad4a8e96a1fd58f0",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/map_clusters/archive_storage_bay.tscn",
+          "line": 5,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 18,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/chapter_props.gd",
+          "line": 8,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Identity-core_data_cabinet_low.glb",
+      "group": "models/baked",
+      "bytes": 10148,
+      "sha256": "f937925b033865a9e5a18305d8275bb47d7301637a41c8c5d44cbe13e58ef6e0",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/map_clusters/core_data_wall.tscn",
+          "line": 3,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 41,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/chapter_props.gd",
+          "line": 28,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Identity-core_light_trim.glb",
+      "group": "models/baked",
+      "bytes": 8692,
+      "sha256": "3454b8447f292671148c9c23bdce277fd45dc9c27e9a16ef524a770eeb320683",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/map_clusters/core_data_wall.tscn",
+          "line": 5,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 42,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/chapter_props.gd",
+          "line": 29,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Identity-foundry_maintenance_box.glb",
+      "group": "models/baked",
+      "bytes": 8684,
+      "sha256": "3e334f964c44f9cc625ff31af51dfa78ea0bc0fe50d7533c49a1c332645d81d5",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/map_clusters/foundry_maintenance_corner.tscn",
+          "line": 7,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 28,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/chapter_props.gd",
+          "line": 14,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Identity-foundry_pipe_support.glb",
+      "group": "models/baked",
+      "bytes": 10560,
+      "sha256": "063ab7f870407f7be033af7e52e54e4dae52bb64caf6709d15eff6787b0d4d5c",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/map_clusters/foundry_maintenance_corner.tscn",
+          "line": 6,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 27,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/chapter_props.gd",
+          "line": 15,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Identity-sanctuary_bank_root.glb",
+      "group": "models/baked",
+      "bytes": 9732,
+      "sha256": "e67ada3c68ed48dbfa8cb9e1baaaa24b690385c1cae065b9b6e5618d10f51e98",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/map_clusters/sanctuary_flooded_bank.tscn",
+          "line": 7,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 35,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/chapter_props.gd",
+          "line": 22,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Identity-sanctuary_broken_plinth_low.glb",
+      "group": "models/baked",
+      "bytes": 7060,
+      "sha256": "bcfee8895aa63d271e720ce1d406fbd9236f637c28560d5e9213d041f17cecb7",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/map_clusters/sanctuary_flooded_bank.tscn",
+          "line": 6,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 36,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/chapter_props.gd",
+          "line": 21,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Machine-Unit.glb",
+      "group": "models/baked",
+      "bytes": 86916,
+      "sha256": "823ea818f36240ef2a0094c1d7e4e6d58e900fcb0d2ed7376993916b088006fa",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 81,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "src/view/board_view.gd",
+          "line": 101,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Memory-Fragment.glb",
+      "group": "models/baked",
+      "bytes": 58276,
+      "sha256": "e360951beb8e9bd3a7d25a288146c5f238e20ed8a93f1380e0d150054e6cc17c",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Moss-Patch.glb",
+      "group": "models/baked",
+      "bytes": 42268,
+      "sha256": "4b2db78f9e3418fdb0dce9cc6b5c52516776ba4e1a73f2398720edb3166639c5",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 76,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Narrative-elias_testament.glb",
+      "group": "models/baked",
+      "bytes": 8848,
+      "sha256": "71ddaa103f760928e9429333cce0a4d0226380b56a17ce51f62d1c01e197df4e",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/narrative_landmarks.tscn",
+          "line": 5,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/board_view.gd",
+          "line": 112,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/build_narrative_gallery.gd",
+          "line": 11,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Narrative-eva_conduit.glb",
+      "group": "models/baked",
+      "bytes": 16844,
+      "sha256": "46b1a8fd49ab4fd070b1a3cb773495182ae39975386cccb06ca38e86d01dbbac",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/narrative_landmarks.tscn",
+          "line": 7,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/board_view.gd",
+          "line": 113,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/build_narrative_gallery.gd",
+          "line": 11,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Narrative-judgement_engine.glb",
+      "group": "models/baked",
+      "bytes": 10076,
+      "sha256": "d80f4bb312f516d75cafdca3dc8c99715ea9117b4e4ae1084c28a7d52dede004",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/narrative_landmarks.tscn",
+          "line": 8,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/board_view.gd",
+          "line": 114,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/build_narrative_gallery.gd",
+          "line": 11,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Narrative-silence_reliquary.glb",
+      "group": "models/baked",
+      "bytes": 8772,
+      "sha256": "7b56b221193a4f4a872d21fa24a9575fc7fa79eea248b6b9ea36da13bc3d78dc",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/narrative_landmarks.tscn",
+          "line": 4,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/board_view.gd",
+          "line": 111,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/build_narrative_gallery.gd",
+          "line": 11,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Narrative-soul_archive.glb",
+      "group": "models/baked",
+      "bytes": 13112,
+      "sha256": "0374169226257f32a2db57e5936cbd34efab52052c24c667807a9681da22a109",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/narrative_landmarks.tscn",
+          "line": 6,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/board_view.gd",
+          "line": 106,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/build_narrative_gallery.gd",
+          "line": 11,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Pillar.glb",
+      "group": "models/baked",
+      "bytes": 109208,
+      "sha256": "5a7dac32b055bed60766bdaf8da96e4607b1e4790c2ee41cab02627118984d13",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 60,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Pipe-Cluster.glb",
+      "group": "models/baked",
+      "bytes": 134140,
+      "sha256": "42b151b83d91995c7a1b5fd0b9471c9dc223f5a3d0ffb40459328b19879bad04",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 80,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Plant-Cluster.glb",
+      "group": "models/baked",
+      "bytes": 70392,
+      "sha256": "4e275075b0e15fd0d6214926f13c0e7e6b9940050878badf5cf82593390dbaec",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 75,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Platform-Module.glb",
+      "group": "models/baked",
+      "bytes": 55752,
+      "sha256": "ada8b79785fbad6b6beb642c40edbbd1725df371ad368ef36a53c717a25c8949",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Portal.glb",
+      "group": "models/baked",
+      "bytes": 62244,
+      "sha256": "3df555c8023b6046b1d7ab7bf0f4d54dfcbe150c42944406ac05f04dc03fce50",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 109,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Pressure-Plate.glb",
+      "group": "models/baked",
+      "bytes": 67384,
+      "sha256": "1cd2549f2c6b85ad88821bf86b5d656159f0cdabf82c71fe66ad75fdbc8a4e1c",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 64,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Railing-Module.glb",
+      "group": "models/baked",
+      "bytes": 105092,
+      "sha256": "ccf2cceb0fb4fc03907a04fbfb30459e42cf1e0bd2442a397fb8532124089291",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 94,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Rock-Cluster.glb",
+      "group": "models/baked",
+      "bytes": 39056,
+      "sha256": "c87badabbaaff589bfa442562300ff940e6eb08d5756d1614fb5ce8fb05df2f2",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 77,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Rubble-Patch.glb",
+      "group": "models/baked",
+      "bytes": 71664,
+      "sha256": "4cff5af3435d006af797fc37d6f63462229c4bf9f7731c2f20d9e3da41f214d2",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 86,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Sanctuary-Pool.glb",
+      "group": "models/baked",
+      "bytes": 41424,
+      "sha256": "b322949521091cd9095f60bc430dd2b955daad7dfdce18e021d07542aa5e5e5c",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/chapter_props.gd",
+          "line": 16,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Sanctuary-Rocks.glb",
+      "group": "models/baked",
+      "bytes": 34908,
+      "sha256": "9716d5a3fdd98467a1c33eb385123d0674d22a6a4621d53dad9307dd1a33c347",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/map_clusters/sanctuary_flooded_bank.tscn",
+          "line": 3,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/chapter_props.gd",
+          "line": 20,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Sanctuary-Shrine.glb",
+      "group": "models/baked",
+      "bytes": 34676,
+      "sha256": "de9834b41087e2a645f6e4e51daa1ab892cd90dddc07632f3b32855c6e57088b",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 34,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/chapter_props.gd",
+          "line": 17,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Sanctuary-Tree.glb",
+      "group": "models/baked",
+      "bytes": 44504,
+      "sha256": "bbd6a62d28c6ff7c45132e59a7ab407abba82a8b1065e47a3caa88fb26ba797c",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 33,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/chapter_props.gd",
+          "line": 18,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Sanctuary-Vine-Arch.glb",
+      "group": "models/baked",
+      "bytes": 138672,
+      "sha256": "c753843b0ccfb58a4e375a57c2ababe8f1e62206f6dc7f68eb14e64a7370c53e",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/chapter_props.gd",
+          "line": 19,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/SciFi-Lamp.glb",
+      "group": "models/baked",
+      "bytes": 60356,
+      "sha256": "ffdc5fb8ef354bbb5113499dee25998a00615ac906eccb3e1182c9c6cd5da46e",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 84,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Stair-Module.glb",
+      "group": "models/baked",
+      "bytes": 93420,
+      "sha256": "c79feae9381cab16660c56a7b59060ba54a05f61e747c52e8351ba2da7c619d4",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 95,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Switch.glb",
+      "group": "models/baked",
+      "bytes": 47664,
+      "sha256": "11f8357cb2def7695584a2c650bd73ac640d83906416f59ea843095b8936da0f",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 100,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "src/view/board_view.gd",
+          "line": 105,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Terminal.glb",
+      "group": "models/baked",
+      "bytes": 77100,
+      "sha256": "f5a9b7e31af861ff6c350db2fb8544c84fefa4344faeb6399c1c868f9a936928",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 99,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "src/view/board_view.gd",
+          "line": 104,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Wall-Module.glb",
+      "group": "models/baked",
+      "bytes": 48028,
+      "sha256": "db1261d877cef26c76fc232489a69f29888edf8132053857e79c3b03ec959cc0",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 61,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/baked/Window-Module.glb",
+      "group": "models/baked",
+      "bytes": 56488,
+      "sha256": "db9148fa2f1488648e39d2a51cefad6917dc11c4a864e3bc78dbeafa801ad5e1",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 96,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tools/build_map_clusters.gd",
+          "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/characters/Dr-Elias-Vale_v3.glb",
+      "group": "models/characters",
+      "bytes": 441616,
+      "sha256": "e40e5352a1503006b75b4517baa38e594554e862de56da26a7be39dc0cb46f77",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/game/ending_cutscene.gd",
+          "line": 217,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/board_view.gd",
+          "line": 50,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/characters/EVA_v5.glb",
+      "group": "models/characters",
+      "bytes": 1809540,
+      "sha256": "9b8a71916f22884954a6732543fb224d6d2fb036c9b54d8dafbe101c203f3cff",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/game/ending_cutscene.gd",
+          "line": 210,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/board_view.gd",
+          "line": 43,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/environments/chapters/Central_Core/Central_Core_Asset_Roster.glb",
+      "group": "models/environments",
+      "bytes": 184004,
+      "sha256": "cd1efdc1abe42e35e833db3efc8c4c1dd12d4e35981104f1e421044be21799b3",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "tools/bake_chapter_props.py",
+          "line": 44,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/environments/chapters/Flooded_Sanctuary/Flooded_Sanctuary_Asset_Roster.glb",
+      "group": "models/environments",
+      "bytes": 286120,
+      "sha256": "e44de6fd26d8f772907b222729e80ee8155b82492caf92b4443e81bbd1fb127b",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "tools/bake_chapter_props.py",
+          "line": 44,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/environments/chapters/Forgotten_Archive/Forgotten_Archive_Asset_Roster.glb",
+      "group": "models/environments",
+      "bytes": 247692,
+      "sha256": "d7b9c4711831dad163a9c935ba916fb9ce2aba568e503c7561b28e99d3dd99e3",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "tools/bake_asset_library.py",
+          "line": 73,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "tools/bake_chapter_props.py",
+          "line": 44,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/environments/chapters/Mechanical_Foundry/Mechanical_Foundry_Asset_Roster.glb",
+      "group": "models/environments",
+      "bytes": 244016,
+      "sha256": "c25412c073a799b10198d20548441b894ad36f7cdd3f9b9d597e4b9a6c7c1270",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "tools/bake_chapter_props.py",
+          "line": 44,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/environments/modular_kit/Architecture/Ceiling-Module.glb",
+      "group": "models/environments",
+      "bytes": 96300,
+      "sha256": "86e9de62a8a5136bfe12e552756242cad910cb8eae9ed02e1a57e4480eaf642b",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/environments/modular_kit/Architecture/Corner-Wall.glb",
+      "group": "models/environments",
+      "bytes": 66352,
+      "sha256": "8a22c24a5f92289dafbf391f67b0d02e85ed8a84b84177dd01fa34f605a6c5f5",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 15,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/environments/modular_kit/Architecture/Door-Frame.glb",
+      "group": "models/environments",
+      "bytes": 49792,
+      "sha256": "af0d66b95ef1b1ab57d31667c0fa58931cfc4499ec198db2e71a60c4f12c487c",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 16,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/environments/modular_kit/Architecture/Floor-Tile.glb",
+      "group": "models/environments",
+      "bytes": 102216,
+      "sha256": "4aeda2197cb9ae0b5e2044e1c0ae74d0d2310c7412887f664ff56f214d9e0699",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 12,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/environments/modular_kit/Architecture/Pillar.glb",
+      "group": "models/environments",
+      "bytes": 117960,
+      "sha256": "864fe663dfed044fed0a94dea8b3d911c5bfa89bb24ba59b4185d054c79135b2",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 13,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/environments/modular_kit/Architecture/Platform-Module.glb",
+      "group": "models/environments",
+      "bytes": 65480,
+      "sha256": "25bc491587f27dd8011fdca7494a4be3fafc886de80c228d8ed80ba0d8f77cc2",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 17,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/environments/modular_kit/Architecture/Railing-Module.glb",
+      "group": "models/environments",
+      "bytes": 111796,
+      "sha256": "bec4f76adf8733cf53c6bb7e5551b5bfefd6b3c2126c176cd2aabfe82bb36588",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 18,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/environments/modular_kit/Architecture/Stair-Module.glb",
+      "group": "models/environments",
+      "bytes": 103552,
+      "sha256": "6296de6a006b60619dcb78868c01a1d67d0457a30baf0719a9f7928d14cdbb78",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 19,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/environments/modular_kit/Architecture/Wall-Module.glb",
+      "group": "models/environments",
+      "bytes": 57792,
+      "sha256": "c3131be93963423403b735cf7288563a17d57ceda5adf0235a621136bb9f52cb",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 14,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/environments/modular_kit/Architecture/Window-Module.glb",
+      "group": "models/environments",
+      "bytes": 66240,
+      "sha256": "a790e50dc98d4d24b700757e58d26239c67ee5325af02757209aec5d8df6cba5",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/environments/modular_kit/Environment_Modular_Kit_Roster.glb",
+      "group": "models/environments",
+      "bytes": 991396,
+      "sha256": "f7986c64d95b784899139f24440741fe3e12791bb98104d30a997b20623ec718",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "tools/bake_asset_library.py",
+          "line": 29,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/environments/modular_kit/Ruins/Broken-Pillar.glb",
+      "group": "models/environments",
+      "bytes": 64836,
+      "sha256": "daf3a8d5b5ec05d8e9b2ddbc350a0fe5658143243b4136fc52cb3fdf545ed989",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 49,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/environments/modular_kit/Ruins/Broken-Wall.glb",
+      "group": "models/environments",
+      "bytes": 85340,
+      "sha256": "cb3f84bd2139c971520bed02dc5222f3dc72d0a693e88657ea19e24f71a63dab",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 48,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/environments/modular_kit/Ruins/Rubble-Patch.glb",
+      "group": "models/environments",
+      "bytes": 81388,
+      "sha256": "3d17299a0e0508a9d6ea64c202b5557d782da6d32eca3333b0120e69f99ebd5a",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 52,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/gameplay/Core/Core-Pedestal.glb",
+      "group": "models/gameplay",
+      "bytes": 913480,
+      "sha256": "58e7cb2c63c0296bb807a686cb34340c253d763f5f49f808033586dff931fa52",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 22,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/gameplay/Core/Energy-Core.glb",
+      "group": "models/gameplay",
+      "bytes": 868584,
+      "sha256": "29a379c4734a5b665b3de7aebfe0fd46c8d53a17ebf4a8198a80d5594c2f37be",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 23,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/gameplay/Core/Memory-Fragment.glb",
+      "group": "models/gameplay",
+      "bytes": 874628,
+      "sha256": "34b8036cd6b777bd18c492b1d00b24050e5469265e23fa79ee223c662c3c9d53",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 24,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/board_view.gd",
+          "line": 49,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/gameplay/Gameplay_Objects_Roster.glb",
+      "group": "models/gameplay",
+      "bytes": 837544,
+      "sha256": "a900330fa2173e0162c75902c079ff90683547bb5a1e47801d121dd27ef84679",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "tools/bake_asset_library.py",
+          "line": 43,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/gameplay/Interaction/Energy-Cable.glb",
+      "group": "models/gameplay",
+      "bytes": 856628,
+      "sha256": "767d4070be7e4b79d1ff9b6a0d26b8a5a6ea8e0ed62f744ff56a8e11682530c1",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 48,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/board_view.gd",
+          "line": 98,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/gameplay/Interaction/Switch.glb",
+      "group": "models/gameplay",
+      "bytes": 872200,
+      "sha256": "e5a95113d3e751ba01c3c188d520016e142a21b43c212a21bdd931c1338adce4",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 31,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/gameplay/Interaction/Terminal.glb",
+      "group": "models/gameplay",
+      "bytes": 909940,
+      "sha256": "b8fc1d4d35f9ad1b4aecc9512404cc7f34348cfbcfa92a0d88a8ce8f1b918933",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 32,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/gameplay/Mechanisms/Bridge.glb",
+      "group": "models/gameplay",
+      "bytes": 914088,
+      "sha256": "e1ae69e84ced97d3283ee40b9614467120dd4a76a4e3c692f23c3c6ee6fe61c5",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 27,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/gameplay/Mechanisms/Conveyor.glb",
+      "group": "models/gameplay",
+      "bytes": 935080,
+      "sha256": "b2e636388696e11330fbea8d7935fe861956e73f99aa8a77ec948a01ceb5ac7c",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 30,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/gameplay/Mechanisms/Door.glb",
+      "group": "models/gameplay",
+      "bytes": 915876,
+      "sha256": "86a5e0a06f5c0aca87b49e68bfce00e2c93a6b1241b3174fcb17663d4ee9a62d",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 26,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/gameplay/Mechanisms/Elevator.glb",
+      "group": "models/gameplay",
+      "bytes": 905132,
+      "sha256": "432e43e8654fe07cb136d6100e646060e0695eaae90fb2e316392063ef388650",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 29,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/gameplay/Mechanisms/Portal.glb",
+      "group": "models/gameplay",
+      "bytes": 858844,
+      "sha256": "b729bf0d182a9d5bb0f56e08ece0985c06f5802e53c4a900d254e52f2935f0a0",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 28,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/gameplay/Mechanisms/Pressure-Plate.glb",
+      "group": "models/gameplay",
+      "bytes": 902324,
+      "sha256": "ed489fbb71f7bdd4fa57d7499cd9fc7e046aca6c8f1df3fff228877633fbb428",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 25,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/modular/floor_corner.glb",
+      "group": "models/modular",
+      "bytes": 6804,
+      "sha256": "5293afb61f51e9868aba96b84e1eb57a3a14ebbe1a1c51e4dd91e65d5cfb0e1b",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 5,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/modular_props.gd",
+          "line": 8,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_modular_kit.py",
+          "line": 242,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/modular/floor_edge.glb",
+      "group": "models/modular",
+      "bytes": 5548,
+      "sha256": "57a44cf57df270e1506b273d8286d9ee135b3c6b7a940386eab39cba3b84b684",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 4,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/modular_props.gd",
+          "line": 7,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_modular_kit.py",
+          "line": 242,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/modular/floor_end.glb",
+      "group": "models/modular",
+      "bytes": 2160,
+      "sha256": "fb30ad76ed7f90169b51c09487c3979ea5f1cc7f446dd6ee79c07be16766f9bc",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 19,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/modular_props.gd",
+          "line": 10,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_modular_kit.py",
+          "line": 242,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/modular/floor_end_reverse.glb",
+      "group": "models/modular",
+      "bytes": 2164,
+      "sha256": "31b7ab94de8446131371fd7e0c1e9fbb4c7b20582854a7d6e5cc2c594614a6e8",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 20,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/modular_props.gd",
+          "line": 11,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_modular_kit.py",
+          "line": 242,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/modular/floor_inner_corner.glb",
+      "group": "models/modular",
+      "bytes": 6904,
+      "sha256": "e9d2a89bfcc4b554d154c582d73e118af15b5f8c66cd7700b7f3185faf2a6da2",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 6,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/modular_props.gd",
+          "line": 9,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_modular_kit.py",
+          "line": 242,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/modular/pipe_elbow.glb",
+      "group": "models/modular",
+      "bytes": 20108,
+      "sha256": "1c77e19398dd929baae6ea28f9a282affc1954d175a15f78d1f6795104375768",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 26,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/modular_props.gd",
+          "line": 20,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_modular_kit.py",
+          "line": 242,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/modular/pipe_end.glb",
+      "group": "models/modular",
+      "bytes": 10996,
+      "sha256": "c584c06ca694ea1112f8ed6e7fa894d89493758e8adaeddaf41b68c531e5e49c",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/map_clusters/foundry_maintenance_corner.tscn",
+          "line": 4,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 23,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/modular_props.gd",
+          "line": 22,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_modular_kit.py",
+          "line": 242,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/modular/pipe_straight.glb",
+      "group": "models/modular",
+      "bytes": 10996,
+      "sha256": "008b385079b1f26b982b27c4cabec1319ed53a067d23e3df4412ab428ff210e9",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/map_clusters/foundry_maintenance_corner.tscn",
+          "line": 5,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 24,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/modular_props.gd",
+          "line": 19,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_modular_kit.py",
+          "line": 242,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/modular/pipe_tee.glb",
+      "group": "models/modular",
+      "bytes": 19080,
+      "sha256": "43f1a08acf9f8d8f34d2031226ff82ce7e4fea59309d52e9a627b03e97e21cf7",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 25,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/modular_props.gd",
+          "line": 21,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_modular_kit.py",
+          "line": 242,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/modular/rail_corner.glb",
+      "group": "models/modular",
+      "bytes": 9936,
+      "sha256": "e072c4e4e70ede392a0bc11590624691685de028275b8de2297d827888ea53f4",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 8,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/modular_props.gd",
+          "line": 13,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_modular_kit.py",
+          "line": 242,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/modular/rail_end.glb",
+      "group": "models/modular",
+      "bytes": 6780,
+      "sha256": "8fa48183643fce950415eec766361c2286c845b64d27fad1cd5381fa60387ae6",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 9,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/modular_props.gd",
+          "line": 14,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_modular_kit.py",
+          "line": 242,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/modular/rail_end_reverse.glb",
+      "group": "models/modular",
+      "bytes": 6792,
+      "sha256": "3798beef15915c8f389354c53889c172567db3cbed499513e69a962d7c1998d0",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 10,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/modular_props.gd",
+          "line": 15,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_modular_kit.py",
+          "line": 242,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/modular/rail_straight.glb",
+      "group": "models/modular",
+      "bytes": 6760,
+      "sha256": "7f77dc31e81289a7a821810657dc71752a83d00ac2e32918cdcce917e1e777f3",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 7,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/modular_props.gd",
+          "line": 12,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_modular_kit.py",
+          "line": 242,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/modular/wall_low_corner.glb",
+      "group": "models/modular",
+      "bytes": 8668,
+      "sha256": "1e7b0b3421c8513f32f14b61e3ad0d67cc2332e1f7ac80e4c50513ac22657813",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 12,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/modular_props.gd",
+          "line": 17,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_modular_kit.py",
+          "line": 242,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/modular/wall_low_end.glb",
+      "group": "models/modular",
+      "bytes": 5332,
+      "sha256": "cf4ff86381816a1113291126e157e7793872c3f271494ff35062e14cd042341a",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 13,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/modular_props.gd",
+          "line": 18,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_modular_kit.py",
+          "line": 242,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/modular/wall_low_straight.glb",
+      "group": "models/modular",
+      "bytes": 5584,
+      "sha256": "36e76574441a0724a762d7a8a326a9ecef1fe3220bcfaf3e007ad6016e5fc86c",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 11,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/modular_props.gd",
+          "line": 16,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_modular_kit.py",
+          "line": 242,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/modular/water_corner.glb",
+      "group": "models/modular",
+      "bytes": 13200,
+      "sha256": "90d5a55f020ecb15abf69c7b27e1aa87a99cd6815035633bf1104518033c1c5c",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/map_clusters/sanctuary_flooded_bank.tscn",
+          "line": 4,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 29,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/modular_props.gd",
+          "line": 25,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_modular_kit.py",
+          "line": 242,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/modular/water_edge.glb",
+      "group": "models/modular",
+      "bytes": 10124,
+      "sha256": "15d207b5a2489b7b33fc977087e74c75b4a0a70d3a9b5286015836744ed115e1",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/map_clusters/sanctuary_flooded_bank.tscn",
+          "line": 5,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 30,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/modular_props.gd",
+          "line": 24,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_modular_kit.py",
+          "line": 242,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/modular/water_inner_corner.glb",
+      "group": "models/modular",
+      "bytes": 11740,
+      "sha256": "59bae7df10cf8a2980838852b703f7b36dd328265a7e54a102fdd6afb9a5c378",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 32,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/modular_props.gd",
+          "line": 26,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_modular_kit.py",
+          "line": 242,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/modular/water_tile.glb",
+      "group": "models/modular",
+      "bytes": 6944,
+      "sha256": "71c0019a7cd15d1329a2a1ed6ca3b5087197f6387e63468b3b4a147bb74d69c0",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/modular_map_showcase.tscn",
+          "line": 31,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/modular_props.gd",
+          "line": 23,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_modular_kit.py",
+          "line": 242,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/props/Archive_Tech/Archive-Shelf.glb",
+      "group": "models/props",
+      "bytes": 166404,
+      "sha256": "c5c5f7c697ccfc9bc1dcab29996290005506763087ab08ba110c8cbaf6136270",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 36,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/props/Archive_Tech/Archive-Workbench.glb",
+      "group": "models/props",
+      "bytes": 67756,
+      "sha256": "0c4955e64de37c3f5dff11c7a4252b1adfac4015ac41e8a3bfd571e27f631dd4",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 37,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/props/Archive_Tech/Data-Storage-Rack.glb",
+      "group": "models/props",
+      "bytes": 120272,
+      "sha256": "6b6f9b9dfbf1e6e9a8089d4add0d3433cbbb6ab8a8bece07615650752413c35e",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 35,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/props/Archive_Tech/Hologram-Projector.glb",
+      "group": "models/props",
+      "bytes": 75668,
+      "sha256": "ad510d4938e07a4112de98d2668a3f0e3c8b02afa0ab927ba9dc92f554490b84",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 38,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/props/Decorative_Props_Roster.glb",
+      "group": "models/props",
+      "bytes": 1210460,
+      "sha256": "7ea3526c51f10ccd82c8714349c5fce7e674b8e814dc8efdc3f150bcb45ebacd",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "tools/bake_asset_library.py",
+          "line": 57,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/props/Industrial/Cable-Coil.glb",
+      "group": "models/props",
+      "bytes": 101624,
+      "sha256": "af535fd5cd534b2ec88cef2dd54b6f6ffcddbbdf73a540455442abfa002b9625",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 44,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/props/Industrial/Cargo-Crate.glb",
+      "group": "models/props",
+      "bytes": 118964,
+      "sha256": "e2f3ed515c4a339bfa6bd37dcc086e2a1ea7b2fbf849a1b1155b7fa587a062dc",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 41,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/props/Industrial/Machine-Unit.glb",
+      "group": "models/props",
+      "bytes": 97616,
+      "sha256": "fe18f276192dd39076dd8754938eb59f042444ab2b4501b3abe26dbe9a9f6aa2",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 42,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/props/Industrial/Pipe-Cluster.glb",
+      "group": "models/props",
+      "bytes": 143172,
+      "sha256": "d8599fb86d796b7c751fd7561a682f9b500368ecb98d797c89e40d4c77bff6db",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 43,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/props/Industrial/SciFi-Lamp.glb",
+      "group": "models/props",
+      "bytes": 69980,
+      "sha256": "c12f8e54b55dcbe98878cc05993ca5cb5dd65bd280bb611ef36b1a9dbfdbb239",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 45,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/props/Nature/Moss-Patch.glb",
+      "group": "models/props",
+      "bytes": 53384,
+      "sha256": "22a1bd126e15b89d17cea968e3485c18e19767c760468c73f5485d04df7d8de8",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 53,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/props/Nature/Plant-Cluster.glb",
+      "group": "models/props",
+      "bytes": 80104,
+      "sha256": "193ccc8943ad99c62daffcaed776c3865ec76fea502e251857645ec2552ab419",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 54,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/props/Nature/Rock-Cluster.glb",
+      "group": "models/props",
+      "bytes": 50176,
+      "sha256": "24220c77572f71f9c245f6bf4fe1b96122729b5a118de6ea2412b6ec64d4fcc9",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 55,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/props/Ruins/Broken-Robot.glb",
+      "group": "models/props",
+      "bytes": 89748,
+      "sha256": "72cb938c3e402b15d65f31fb550792499f9a9fcb74a9976d8fea5b5c2098b7bd",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 50,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/props/Ruins/Debris-Pile.glb",
+      "group": "models/props",
+      "bytes": 83600,
+      "sha256": "3e9d8221bf244770b457293f0d72a06a79851b84c041bc2973912d87deb72763",
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 51,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/shaders/energy_cable_flow.gdshader",
+      "group": "shaders",
+      "bytes": 1547,
+      "sha256": "61b29e874d952393de1bc384e90254a3fba527cba783b82b74bf1e972d048550",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 45,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/shaders/hologram_eva.gdshader",
+      "group": "shaders",
+      "bytes": 2096,
+      "sha256": "0b4e069b7c3c2635c506ef13881acc2c972f5bd12286cec01a46ff9708f64265",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/game/ending_cutscene.gd",
+          "line": 255,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/board_view.gd",
+          "line": 44,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/shaders/ice_water_sanctuary.gdshader",
+      "group": "shaders",
+      "bytes": 2138,
+      "sha256": "a4e847d98a5c4f4af2f4c27b9d94a72435b4b39cb628595925c8ae8fd1c35124",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 46,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/shaders/resonance_fragment.gdshader",
+      "group": "shaders",
+      "bytes": 1607,
+      "sha256": "a3844bd7cc7bb69e39aee972f2ba9b94301c5cbb30ccc6c564cf33131548b008",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_view.gd",
+          "line": 47,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/shaders/screen_glitch_corruption.gdshader",
+      "group": "shaders",
+      "bytes": 1847,
+      "sha256": "e721d69307f489643cb8cadc8ea4f814f9ff60e34ab9bd63d92d1cd0b11a0686",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/ui/dialogue_box.gd",
+          "line": 83,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/ui/endings/ending_preserve_cg.jpg",
+      "group": "ui",
+      "bytes": 821163,
+      "sha256": "cbfaadf7883c89c0770b0e7103a4bbabe191d6995591aa58cf4e2473c84eb255",
+      "status": "dynamic_candidate",
+      "references": [
+        {
+          "file": "src/game/ending_cutscene.gd",
+          "line": 334,
+          "scope": "project",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/ui/endings/ending_release_cg.jpg",
+      "group": "ui",
+      "bytes": 845056,
+      "sha256": "f0934b1f7cf72fb71c0b9b62d5ca3d1876a86034e9cd2bd775d4e04604606479",
+      "status": "dynamic_candidate",
+      "references": [
+        {
+          "file": "src/game/ending_cutscene.gd",
+          "line": 334,
+          "scope": "project",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/ui/endings/ending_restore_cg.jpg",
+      "group": "ui",
+      "bytes": 940680,
+      "sha256": "1aae73d629326dfe470df2e632a76b6d7dcf168d73f61079e28b2405ca7b4ac3",
+      "status": "dynamic_candidate",
+      "references": [
+        {
+          "file": "src/game/ending_cutscene.gd",
+          "line": 334,
+          "scope": "project",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/ui/icons/back.svg",
+      "group": "ui",
+      "bytes": 203,
+      "sha256": "30f5fddd4b46be7409d5158139b3458206067b2d0c9bbc9308eed0cafbaed65a",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/ui/memory_codex.gd",
+          "line": 84,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/ui/settings.gd",
+          "line": 144,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/ui/icons/bridge.svg",
+      "group": "ui",
+      "bytes": 344,
+      "sha256": "1bf8235b2b1023da8d0daa2ce21fcd3ce8fc6540adde237e039c12f01850afa0",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/game_hud.gd",
+          "line": 18,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/ui/icons/check.svg",
+      "group": "ui",
+      "bytes": 261,
+      "sha256": "2bfe965d064f3e6cf15ede2c370fec9dd837ddca1c75589d4d82deb0573273a2",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/game_hud.gd",
+          "line": 28,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/ui/icons/close.svg",
+      "group": "ui",
+      "bytes": 245,
+      "sha256": "e46bfe42b0fe479167c185d0a8dc96c9b5a1ce715412c469cd6744790d4dd3a9",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/game_hud.gd",
+          "line": 27,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/ui/icons/energy_core.svg",
+      "group": "ui",
+      "bytes": 473,
+      "sha256": "17df1f50996fd8ae51f4f551dba0affec6b5d8331f45636678a866c659a610c4",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/game_hud.gd",
+          "line": 24,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/ui/icons/fullscreen.svg",
+      "group": "ui",
+      "bytes": 348,
+      "sha256": "1201d9684a1cee1d18378712a7abf4bb391ae88fd0a0299c875501b82a082d62",
+      "status": "no_reference_found",
+      "references": [],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/ui/icons/lock.svg",
+      "group": "ui",
+      "bytes": 397,
+      "sha256": "72b7acd6d8862e1582c0e1c59c91042f89a1bcfb9bd2bcdcb18c849265e29e44",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/ui/memory_codex.gd",
+          "line": 385,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/ui/menu.gd",
+          "line": 332,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/game_hud.gd",
+          "line": 25,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/ui/icons/memory_fragment.svg",
+      "group": "ui",
+      "bytes": 1471,
+      "sha256": "caa591552ca27dcc864d6b0565ca4cbcd0c43ced1eb9ff09320249cc1732cc31",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/ui/start_menu.gd",
+          "line": 155,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/ui/icons/menu.svg",
+      "group": "ui",
+      "bytes": 179,
+      "sha256": "a70dc5aa2dd2e8e7587d457944a49bc9d556d34c44c8e7f5a7d5fd58a931a027",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/ui/start_menu.gd",
+          "line": 145,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/game_hud.gd",
+          "line": 19,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/ui/icons/pause.svg",
+      "group": "ui",
+      "bytes": 239,
+      "sha256": "4f2dc5391f9b7b59a2a9a064b8ade3c6d0f185d630ca24a8d2466112f92bde5f",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/game_hud.gd",
+          "line": 20,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/ui/icons/play.svg",
+      "group": "ui",
+      "bytes": 207,
+      "sha256": "c1bdb7e4d1542cbe1cd5c40b0dc301a19be2535b2ea77333139a79876efc08e6",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/ui/start_menu.gd",
+          "line": 135,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/game_hud.gd",
+          "line": 21,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/ui/icons/quit.svg",
+      "group": "ui",
+      "bytes": 318,
+      "sha256": "dc67fc66a5c3a7612fe575a7262039271a14013d6fb647e5ab7b24ffe5b916fd",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/ui/start_menu.gd",
+          "line": 238,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/ui/icons/restart.svg",
+      "group": "ui",
+      "bytes": 287,
+      "sha256": "29735e72e29c243071cdb69fb07990069a57be8bf8c61f16d1056acc45a8ac07",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/game_hud.gd",
+          "line": 17,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/ui/icons/settings.svg",
+      "group": "ui",
+      "bytes": 557,
+      "sha256": "a2660fb3eeaa153ee54ba02ce24ea7d84aed9953d252785987d8f402ed9f240a",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/ui/start_menu.gd",
+          "line": 223,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/ui/icons/undo.svg",
+      "group": "ui",
+      "bytes": 316,
+      "sha256": "2a9f27a03e425e8a29133f7165151118d81c7512d564f68eb698bd1c823e7a93",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/game_hud.gd",
+          "line": 16,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/ui/icons/unlock.svg",
+      "group": "ui",
+      "bytes": 395,
+      "sha256": "142ff95c420268205b6035686791be3fa953a8b116a3f1a8a0fa3b3834e44702",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/ui/memory_codex.gd",
+          "line": 394,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/ui/menu.gd",
+          "line": 324,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/game_hud.gd",
+          "line": 26,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/ui/icons/volume_off.svg",
+      "group": "ui",
+      "bytes": 238,
+      "sha256": "734aa6654f50fb825b31ee6be5907176fe9a92fbcefd8675f041ebcdacce54c6",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/game_hud.gd",
+          "line": 23,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/ui/icons/volume_on.svg",
+      "group": "ui",
+      "bytes": 258,
+      "sha256": "b95f8443d0652204e3e380b77ef2f5667549f434260b89cd2dce86078668c09e",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/game_hud.gd",
+          "line": 22,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/ui/logo_header_horizontal.jpg",
+      "group": "ui",
+      "bytes": 614030,
+      "sha256": "ffa08288c31579a92cbe01cc6ba0255079daf5521b418ae08447960f25e23d94",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/ui/menu.gd",
+          "line": 109,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/ui/logo_title_center.jpg",
+      "group": "ui",
+      "bytes": 623051,
+      "sha256": "b9c98e93a66beec0d1d58968057f94b8f481cf677de1476bd54ab9452a2df9f4",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/ui/start_menu.gd",
+          "line": 98,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/ui/portraits/elias_avatar_dialogue.png",
+      "group": "ui",
+      "bytes": 1291828,
+      "sha256": "d19777c62901495753db9ed9b3d2e11058ff61e006732a2bae9b9b01a43cd69b",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/ui/dialogue_box.gd",
+          "line": 55,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/ui/memory_codex.gd",
+          "line": 473,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/ui/portraits/eva_avatar_dialogue.png",
+      "group": "ui",
+      "bytes": 2199350,
+      "sha256": "89249bcb71efa87b9b1a8a1f45c39c7b1822fc07d4a2ca985d4b23a324385b4b",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/ui/dialogue_box.gd",
+          "line": 54,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/ui/memory_codex.gd",
+          "line": 471,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/ui/portraits/kiro_avatar_dialogue.png",
+      "group": "ui",
+      "bytes": 1557544,
+      "sha256": "192b38f3d76cb5e4dd91794f3cd1ef5ffa2e865c187dad27d9f7532ffe43bd8e",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/ui/dialogue_box.gd",
+          "line": 56,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/ui/memory_codex.gd",
+          "line": 475,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/ui/portraits/system_avatar_dialogue.png",
+      "group": "ui",
+      "bytes": 1950579,
+      "sha256": "4f106f4d9098ff7d3371127d7dc7c7adbe181719052eaf69f19a36ca046fed63",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/ui/dialogue_box.gd",
+          "line": 57,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/ui/memory_codex.gd",
+          "line": 439,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/ui/memory_codex.gd",
+          "line": 476,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/ui/start_menu_background_android_v2.png",
+      "group": "ui",
+      "bytes": 1667888,
+      "sha256": "2044bc0f7707aeb7b9bc26c060d394d87c760db7fc471f4fa801d859295cf2f3",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/game/ending_cutscene.gd",
+          "line": 27,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/ui/memory_codex.gd",
+          "line": 48,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/ui/menu.gd",
+          "line": 61,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/ui/settings.gd",
+          "line": 55,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/ui/start_menu.gd",
+          "line": 31,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    }
+  ]
+}

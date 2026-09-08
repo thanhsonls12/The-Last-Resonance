@@ -22,6 +22,12 @@ func _ready() -> void:
 	layer = 12
 	_build_ui()
 	visible = false
+	if not GameState.settings_changed.is_connected(_on_settings_changed):
+		GameState.settings_changed.connect(_on_settings_changed)
+	if get_viewport() != null and not get_viewport().size_changed.is_connected(_layout_for_viewport):
+		get_viewport().size_changed.connect(_layout_for_viewport)
+	_layout_for_viewport()
+	_apply_accessibility()
 
 
 func _build_ui() -> void:
@@ -149,23 +155,23 @@ func show_chapter(chapter_id: int) -> void:
 
 	# Format text
 	_roman_label.text = "─── %s ───" % roman
-	_roman_label.label_settings.font_color = accent
+	_roman_label.label_settings.font_color = Color.WHITE if GameState.high_contrast else accent
 	_title_label.text = title
 	_subtitle_label.text = subtitle
-	_subtitle_label.label_settings.font_color = Color(accent.r, accent.g, accent.b, 0.85)
-	_divider.color = Color(accent.r, accent.g, accent.b, 0.6)
+	_subtitle_label.label_settings.font_color = Color.WHITE if GameState.high_contrast else Color(accent.r, accent.g, accent.b, 0.85)
+	_divider.color = Color.WHITE if GameState.high_contrast else Color(accent.r, accent.g, accent.b, 0.6)
 	_lore_label.text = lore
 	_protocol_label.text = protocol
-	_continue_prompt.label_settings.font_color = accent
+	_continue_prompt.label_settings.font_color = Color.WHITE if GameState.high_contrast else accent
 
 	# Styling Card Panel
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.015, 0.025, 0.045, 0.90)
-	style.border_width_left = 2
-	style.border_width_top = 2
-	style.border_width_right = 2
-	style.border_width_bottom = 2
-	style.border_color = Color(accent.r, accent.g, accent.b, 0.75)
+	style.bg_color = Color.BLACK if GameState.high_contrast else Color(0.015, 0.025, 0.045, 0.90)
+	style.border_width_left = 3 if GameState.high_contrast else 2
+	style.border_width_top = 3 if GameState.high_contrast else 2
+	style.border_width_right = 3 if GameState.high_contrast else 2
+	style.border_width_bottom = 3 if GameState.high_contrast else 2
+	style.border_color = Color.WHITE if GameState.high_contrast else Color(accent.r, accent.g, accent.b, 0.75)
 	style.corner_radius_top_left = 12
 	style.corner_radius_top_right = 12
 	style.corner_radius_bottom_left = 12
@@ -181,15 +187,59 @@ func show_chapter(chapter_id: int) -> void:
 
 	if _fade_tween:
 		_fade_tween.kill()
-	_fade_tween = create_tween()
-	_fade_tween.tween_property(_root_panel, "modulate:a", 1.0, 0.45).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	if GameState.reduced_motion:
+		_root_panel.modulate.a = 1.0
+	else:
+		_fade_tween = create_tween()
+		_fade_tween.tween_property(_root_panel, "modulate:a", 1.0, 0.45).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
 	# Start Pulsing Prompt Animation
 	if _pulse_tween:
 		_pulse_tween.kill()
-	_pulse_tween = create_tween().set_loops()
-	_pulse_tween.tween_property(_continue_prompt, "modulate:a", 0.35, 0.75).set_trans(Tween.TRANS_SINE)
-	_pulse_tween.tween_property(_continue_prompt, "modulate:a", 1.0, 0.75).set_trans(Tween.TRANS_SINE)
+	if GameState.reduced_motion:
+		_continue_prompt.modulate.a = 1.0
+	else:
+		_pulse_tween = create_tween().set_loops()
+		_pulse_tween.tween_property(_continue_prompt, "modulate:a", 0.35, 0.75).set_trans(Tween.TRANS_SINE)
+		_pulse_tween.tween_property(_continue_prompt, "modulate:a", 1.0, 0.75).set_trans(Tween.TRANS_SINE)
+
+
+func _on_settings_changed() -> void:
+	_layout_for_viewport()
+	_apply_accessibility()
+
+
+func _layout_for_viewport() -> void:
+	if not is_instance_valid(_card_panel):
+		return
+	var viewport_size := get_viewport().get_visible_rect().size
+	var compact := viewport_size.x < 760.0 or viewport_size.y < 600.0
+	var edge := clampf(minf(viewport_size.x, viewport_size.y) * 0.04, 16.0, 36.0)
+	var card_width := minf(640.0, maxf(260.0, viewport_size.x - edge * 2.0))
+	_card_panel.custom_minimum_size = Vector2(card_width, 390.0 if compact else 420.0)
+	_roman_label.label_settings.font_size = 12 if compact else 14
+	_title_label.label_settings.font_size = 21 if compact else 26
+	_subtitle_label.label_settings.font_size = 14 if compact else 16
+	_lore_label.label_settings.font_size = 12 if compact else 13
+	_protocol_label.label_settings.font_size = 10 if compact else 11
+	_continue_prompt.label_settings.font_size = 11 if compact else 12
+
+
+func _apply_accessibility() -> void:
+	var high := GameState.high_contrast
+	for label in [_roman_label, _title_label, _subtitle_label, _lore_label, _protocol_label, _continue_prompt]:
+		if label == null or label.label_settings == null:
+			continue
+		label.label_settings.outline_size = 8 if high else (4 if label == _title_label else 0)
+		label.label_settings.outline_color = Color.BLACK
+	if _card_panel:
+		var style := StyleBoxFlat.new()
+		style.bg_color = Color.BLACK if high else Color(0.015, 0.025, 0.045, 0.90)
+		style.border_color = Color.WHITE if high else Color(0.12, 0.82, 1.0, 0.75)
+		style.set_border_width_all(3 if high else 2)
+		style.set_corner_radius_all(12)
+		style.shadow_size = 18
+		_card_panel.add_theme_stylebox_override("panel", style)
 
 
 func _input(event: InputEvent) -> void:
@@ -204,6 +254,18 @@ func _input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 
+func cancel() -> void:
+	var was_visible := visible
+	_is_active = false
+	visible = false
+	if _fade_tween:
+		_fade_tween.kill()
+	if _pulse_tween:
+		_pulse_tween.kill()
+	if was_visible:
+		finished.emit()
+
+
 func _dismiss() -> void:
 	if not _is_active:
 		return
@@ -213,9 +275,11 @@ func _dismiss() -> void:
 		_pulse_tween.kill()
 	if _fade_tween:
 		_fade_tween.kill()
-
-	_fade_tween = create_tween()
-	_fade_tween.tween_property(_root_panel, "modulate:a", 0.0, 0.35).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
-	await _fade_tween.finished
+	if GameState.reduced_motion:
+		_root_panel.modulate.a = 0.0
+	else:
+		_fade_tween = create_tween()
+		_fade_tween.tween_property(_root_panel, "modulate:a", 0.0, 0.35).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+		await _fade_tween.finished
 	visible = false
 	finished.emit()

@@ -1,0 +1,38 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/baked/Foundry-Press.glb" id="1_gv0dd"]
+[ext_resource type="PackedScene" path="res://assets/models/modular/pipe_end.glb" id="2_jaj5x"]
+[ext_resource type="PackedScene" path="res://assets/models/modular/pipe_straight.glb" id="3_sels7"]
+[ext_resource type="PackedScene" path="res://assets/models/baked/Identity-foundry_pipe_support.glb" id="4_cducx"]
+[ext_resource type="PackedScene" path="res://assets/models/baked/Identity-foundry_maintenance_box.glb" id="5_4s6ur"]
+
+[node name="FoundryMaintenanceCorner" type="Node3D" unique_id=934746024]
+metadata/cluster_id = "foundry_maintenance_corner"
+metadata/chapter = 2
+metadata/display_name = "Foundry — Maintenance Corner"
+metadata/footprint_cells = Vector2i(3, 3)
+metadata/outward_face = "south"
+metadata/blocked_cells = [Vector2i(-1, -1), Vector2i(0, -1), Vector2i(1, -1), Vector2i(-1, 0), Vector2i(1, 0)]
+metadata/walkable_cells = [Vector2i(0, 0), Vector2i(-1, 1), Vector2i(0, 1), Vector2i(1, 1)]
+metadata/geometry_checked_yaws = PackedFloat32Array(0, 90, 180, 270)
+metadata/visual_camera_review = "pending"
+metadata/notes = "One heavy machine, a short terminated pipe run, and a low maintenance pocket."
+metadata/measured_bounds_position = Vector3(-1.5, 0, -1.275)
+metadata/measured_bounds_size = Vector3(3, 0.85, 1.605)
+
+[node name="Components" type="Node3D" parent="." unique_id=580155569]
+
+[node name="foundry_press" type="Node3D" parent="Components" unique_id=624978567 instance=ExtResource("1_gv0dd")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1, 0, -1)
+
+[node name="kit_pipe_end" type="Node3D" parent="Components" unique_id=1009096869 instance=ExtResource("2_jaj5x")]
+transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5, 0, 0, -1)
+
+[node name="kit_pipe_straight" type="Node3D" parent="Components" unique_id=156293337 instance=ExtResource("3_sels7")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, -1)
+
+[node name="foundry_pipe_support" type="Node3D" parent="Components" unique_id=1195185725 instance=ExtResource("4_cducx")]
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.1855694e-08, 1, 0, 0)
+
+[node name="foundry_maintenance_box" type="Node3D" parent="Components" unique_id=1156210816 instance=ExtResource("5_4s6ur")]
+transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5, -1, 0, 0)

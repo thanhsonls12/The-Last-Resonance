@@ -7,9 +7,19 @@ const COLOR_ORANGE := Color(1.0, 0.52, 0.12)
 const COLOR_GLASS := Color(0.01, 0.02, 0.04, 0.28)
 const TOTAL_MEMORIES := 15
 
+var _glass_panel: PanelContainer
+var _logo_rect: TextureRect
+var _content_box: VBoxContainer
+var _action_box: VBoxContainer
+var _top_bar: HBoxContainer
+var _bottom_bar: HBoxContainer
+
 
 func _ready() -> void:
 	_build_ui()
+	if get_viewport() != null and not get_viewport().size_changed.is_connected(_layout_for_viewport):
+		get_viewport().size_changed.connect(_layout_for_viewport)
+	_layout_for_viewport()
 
 
 func _build_ui() -> void:
@@ -46,7 +56,7 @@ func _build_ui() -> void:
 	add_child(center_container)
 
 	# 5. Semi-Transparent Glassmorphism Hero Panel
-	var glass_panel := PanelContainer.new()
+	_glass_panel = PanelContainer.new()
 	var glass_style := StyleBoxFlat.new()
 	glass_style.bg_color = COLOR_GLASS
 	glass_style.border_width_left = 1
@@ -64,26 +74,30 @@ func _build_ui() -> void:
 	glass_style.content_margin_right = 38.0
 	glass_style.content_margin_top = 18.0
 	glass_style.content_margin_bottom = 24.0
-	glass_panel.add_theme_stylebox_override("panel", glass_style)
-	center_container.add_child(glass_panel)
+	if GameState.high_contrast:
+		glass_style.bg_color = Color.BLACK
+		glass_style.border_color = Color.WHITE
+		glass_style.set_border_width_all(3)
+	_glass_panel.add_theme_stylebox_override("panel", glass_style)
+	center_container.add_child(_glass_panel)
 
 	# Content Box inside Glass Panel
-	var content_box := VBoxContainer.new()
-	content_box.alignment = BoxContainer.ALIGNMENT_CENTER
-	content_box.add_theme_constant_override("separation", 8)
-	glass_panel.add_child(content_box)
+	_content_box = VBoxContainer.new()
+	_content_box.alignment = BoxContainer.ALIGNMENT_CENTER
+	_content_box.add_theme_constant_override("separation", 8)
+	_glass_panel.add_child(_content_box)
 
 	# Title Block with Centered Crystal Logo (Sample B)
 	var logo_container := CenterContainer.new()
-	content_box.add_child(logo_container)
+	_content_box.add_child(logo_container)
 
-	var logo_rect := TextureRect.new()
-	logo_rect.custom_minimum_size = Vector2(480, 185)
-	logo_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	logo_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	_logo_rect = TextureRect.new()
+	_logo_rect.custom_minimum_size = Vector2(480, 185)
+	_logo_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_logo_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	var logo_tex := load("res://assets/ui/logo_title_center.jpg") as Texture2D
 	if logo_tex != null:
-		logo_rect.texture = logo_tex
+		_logo_rect.texture = logo_tex
 
 	# Shader to remove black background and blend glowing crystal seamlessly with background
 	var shader := Shader.new()
@@ -99,19 +113,20 @@ void fragment() {
 """
 	var mat := ShaderMaterial.new()
 	mat.shader = shader
-	logo_rect.material = mat
-	logo_container.add_child(logo_rect)
+	_logo_rect.material = mat
+	logo_container.add_child(_logo_rect)
 
 	# Gentle breathing glow animation (floating effect)
-	var logo_tween := create_tween().set_loops()
-	logo_tween.tween_property(logo_rect, "modulate", Color(1.15, 1.15, 1.30), 2.2).set_trans(Tween.TRANS_SINE)
-	logo_tween.tween_property(logo_rect, "modulate", Color(0.90, 0.95, 1.05), 2.2).set_trans(Tween.TRANS_SINE)
+	if not GameState.reduced_motion:
+		var logo_tween := create_tween().set_loops()
+		logo_tween.tween_property(_logo_rect, "modulate", Color(1.15, 1.15, 1.30), 2.2).set_trans(Tween.TRANS_SINE)
+		logo_tween.tween_property(_logo_rect, "modulate", Color(0.90, 0.95, 1.05), 2.2).set_trans(Tween.TRANS_SINE)
 
 	# Action Buttons List
-	var btn_box := VBoxContainer.new()
-	btn_box.alignment = BoxContainer.ALIGNMENT_CENTER
-	btn_box.add_theme_constant_override("separation", 10)
-	content_box.add_child(btn_box)
+	_action_box = VBoxContainer.new()
+	_action_box.alignment = BoxContainer.ALIGNMENT_CENTER
+	_action_box.add_theme_constant_override("separation", 10)
+	_content_box.add_child(_action_box)
 
 	var has_progress := GameState.unlocked > 1 or GameState.current_level > 0
 	var play_btn := Button.new()
@@ -120,8 +135,9 @@ void fragment() {
 	play_btn.icon = load("res://assets/ui/icons/play.svg")
 	play_btn.expand_icon = true
 	_style_button(play_btn, COLOR_CYAN)
+	EchoAudioManager.bind_button_sfx(self, play_btn, &"ui_confirm")
 	play_btn.pressed.connect(_on_continue)
-	btn_box.add_child(play_btn)
+	_action_box.add_child(play_btn)
 
 	var select_btn := Button.new()
 	select_btn.text = "  CHỌN MÀN CHƠI"
@@ -129,8 +145,9 @@ void fragment() {
 	select_btn.icon = load("res://assets/ui/icons/menu.svg")
 	select_btn.expand_icon = true
 	_style_button(select_btn, COLOR_CYAN)
+	EchoAudioManager.bind_button_sfx(self, select_btn, &"ui_click")
 	select_btn.pressed.connect(_on_level_select)
-	btn_box.add_child(select_btn)
+	_action_box.add_child(select_btn)
 
 	var archive_btn := Button.new()
 	archive_btn.text = "  THƯ VIỆN KÝ ỨC"
@@ -138,17 +155,18 @@ void fragment() {
 	archive_btn.icon = load("res://assets/ui/icons/memory_fragment.svg")
 	archive_btn.expand_icon = true
 	_style_button(archive_btn, COLOR_CYAN)
+	EchoAudioManager.bind_button_sfx(self, archive_btn, &"ui_click")
 	archive_btn.pressed.connect(_on_archive)
-	btn_box.add_child(archive_btn)
+	_action_box.add_child(archive_btn)
 
 	# 6. Top Bar Header
-	var top_bar := HBoxContainer.new()
-	top_bar.set_anchors_preset(Control.PRESET_TOP_WIDE)
-	top_bar.offset_left = 32
-	top_bar.offset_right = -32
-	top_bar.offset_top = 22
-	top_bar.offset_bottom = 68
-	add_child(top_bar)
+	_top_bar = HBoxContainer.new()
+	_top_bar.set_anchors_preset(Control.PRESET_TOP_WIDE)
+	_top_bar.offset_left = 32
+	_top_bar.offset_right = -32
+	_top_bar.offset_top = 22
+	_top_bar.offset_bottom = 68
+	add_child(_top_bar)
 
 	var memory_badge := PanelContainer.new()
 	var badge_style := StyleBoxFlat.new()
@@ -167,7 +185,7 @@ void fragment() {
 	badge_style.content_margin_top = 6.0
 	badge_style.content_margin_bottom = 6.0
 	memory_badge.add_theme_stylebox_override("panel", badge_style)
-	top_bar.add_child(memory_badge)
+	_top_bar.add_child(memory_badge)
 
 	var memory_lbl := Label.new()
 	var mem_count := mini(GameState.memory_fragment_count(), TOTAL_MEMORIES)
@@ -180,7 +198,7 @@ void fragment() {
 
 	var top_spacer := Control.new()
 	top_spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	top_bar.add_child(top_spacer)
+	_top_bar.add_child(top_spacer)
 
 	var version_lbl := Label.new()
 	version_lbl.text = "ASTERIA // SYS-327"
@@ -188,17 +206,17 @@ void fragment() {
 	vs.font_size = 13
 	vs.font_color = Color(0.55, 0.72, 0.88, 0.7)
 	version_lbl.label_settings = vs
-	top_bar.add_child(version_lbl)
+	_top_bar.add_child(version_lbl)
 
 	# 7. Bottom Bar
-	var bottom_bar := HBoxContainer.new()
-	bottom_bar.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
-	bottom_bar.offset_left = 32
-	bottom_bar.offset_right = -32
-	bottom_bar.offset_bottom = -22
-	bottom_bar.offset_top = -68
-	bottom_bar.alignment = BoxContainer.ALIGNMENT_BEGIN
-	add_child(bottom_bar)
+	_bottom_bar = HBoxContainer.new()
+	_bottom_bar.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
+	_bottom_bar.offset_left = 32
+	_bottom_bar.offset_right = -32
+	_bottom_bar.offset_bottom = -22
+	_bottom_bar.offset_top = -68
+	_bottom_bar.alignment = BoxContainer.ALIGNMENT_BEGIN
+	add_child(_bottom_bar)
 
 	var settings_btn := Button.new()
 	settings_btn.text = "  CÀI ĐẶT"
@@ -206,12 +224,13 @@ void fragment() {
 	settings_btn.expand_icon = true
 	settings_btn.custom_minimum_size = Vector2(140, 44)
 	_style_button(settings_btn, COLOR_CYAN)
+	EchoAudioManager.bind_button_sfx(self, settings_btn, &"ui_click")
 	settings_btn.pressed.connect(_on_settings)
-	bottom_bar.add_child(settings_btn)
+	_bottom_bar.add_child(settings_btn)
 
 	var bottom_spacer := Control.new()
 	bottom_spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	bottom_bar.add_child(bottom_spacer)
+	_bottom_bar.add_child(bottom_spacer)
 
 	if not OS.has_feature("android"):
 		var quit_btn := Button.new()
@@ -221,17 +240,55 @@ void fragment() {
 		quit_btn.custom_minimum_size = Vector2(130, 44)
 		_style_button(quit_btn, COLOR_ORANGE)
 		quit_btn.pressed.connect(_on_quit)
-		bottom_bar.add_child(quit_btn)
+		_bottom_bar.add_child(quit_btn)
+
+
+func _layout_for_viewport() -> void:
+	if not is_instance_valid(_glass_panel):
+		return
+	var viewport_size := get_viewport().get_visible_rect().size
+	var compact := viewport_size.x < 700.0 or viewport_size.y < 560.0
+	var edge := clampf(minf(viewport_size.x, viewport_size.y) * 0.045, 16.0, 34.0)
+	var panel_width := minf(560.0, maxf(280.0, viewport_size.x - edge * 2.0))
+	_glass_panel.custom_minimum_size = Vector2(panel_width, 0)
+	_logo_rect.custom_minimum_size = Vector2(maxf(240.0, panel_width - 76.0), 130.0 if compact else 185.0)
+	if _action_box:
+		var button_width := maxf(220.0, minf(340.0, panel_width - 76.0))
+		for child in _action_box.get_children():
+			if child is Button:
+				(child as Button).custom_minimum_size.x = button_width
+	if _top_bar:
+		_top_bar.offset_left = edge
+		_top_bar.offset_right = -edge
+		if _top_bar.get_child_count() > 2 and _top_bar.get_child(2) is Label:
+			(_top_bar.get_child(2) as Label).visible = not compact
+	if _bottom_bar:
+		_bottom_bar.offset_left = edge
+		_bottom_bar.offset_right = -edge
+		_bottom_bar.offset_bottom = -edge
+		_bottom_bar.offset_top = -edge - 52.0
+		for child in _bottom_bar.get_children():
+			if child is Button:
+				(child as Button).custom_minimum_size.x = maxf(110.0, minf(150.0, (viewport_size.x - edge * 2.0) * 0.38))
 
 
 func _style_button(button: Button, accent: Color) -> void:
-	button.add_theme_font_size_override("font_size", 16)
-	button.add_theme_color_override("font_color", Color(0.80, 0.92, 1.0, 0.88))
+	var high := GameState.high_contrast
+	button.add_theme_font_size_override("font_size", 17 if high else 16)
+	button.add_theme_color_override("font_color", Color.WHITE if high else Color(0.80, 0.92, 1.0, 0.88))
 	button.add_theme_color_override("font_hover_color", Color.WHITE)
 	button.add_theme_color_override("font_pressed_color", Color.WHITE)
-	for state in ["normal", "hover", "pressed"]:
+	button.add_theme_color_override("font_outline_color", Color.BLACK)
+	for state in ["normal", "hover", "pressed", "focus"]:
 		var style := StyleBoxFlat.new()
-		if state == "hover":
+		if high:
+			style.bg_color = Color.BLACK
+			style.border_width_left = 3
+			style.border_width_top = 3
+			style.border_width_right = 3
+			style.border_width_bottom = 3
+			style.border_color = Color.WHITE
+		elif state == "hover":
 			style.bg_color = Color(0.04, 0.16, 0.30, 0.88)
 			style.border_width_left = 2
 			style.border_width_top = 2

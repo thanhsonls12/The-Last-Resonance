@@ -11,6 +11,13 @@ const RESOURCE_LEVELS: Dictionary = {
 	5: "res://resources/levels/level_06.tres",
 	6: "res://resources/levels/level_07.tres",
 	7: "res://resources/levels/level_08.tres",
+	8: "res://resources/levels/level_09.tres",
+	9: "res://resources/levels/level_10.tres",
+	10: "res://resources/levels/level_11.tres",
+	11: "res://resources/levels/level_12.tres",
+	12: "res://resources/levels/level_13.tres",
+	13: "res://resources/levels/level_14.tres",
+	14: "res://resources/levels/level_15.tres",
 }
 const ALL: Array = [
 	{"name": "Khởi động", "chapter": 1, "difficulty": 1},
@@ -21,8 +28,15 @@ const ALL: Array = [
 	{"name": "Khuôn đúc K-Series", "chapter": 2, "difficulty": 3},
 	{"name": "Khoang niêm phong", "chapter": 2, "difficulty": 4},
 	{"name": "Trái tim Foundry", "chapter": 2, "difficulty": 5},
+	{"name": "Giấc mơ chung", "chapter": 3, "difficulty": 2},
+	{"name": "Mạng lưới cộng hưởng", "chapter": 3, "difficulty": 3},
+	{"name": "Giao thức im lặng", "chapter": 3, "difficulty": 4},
+	{"name": "Dự án K-7", "chapter": 3, "difficulty": 5},
+	{"name": "Những linh hồn đã mất", "chapter": 4, "difficulty": 2},
+	{"name": "Lời thú nhận của EVA", "chapter": 4, "difficulty": 4},
+	{"name": "Phán quyết", "chapter": 4, "difficulty": 5},
 ]
-const CHAPTER_FINAL_LEVELS := {1: 3, 2: 7, 3: 9}
+const CHAPTER_FINAL_LEVELS := {1: 3, 2: 7, 3: 11, 4: 14}
 
 
 static func get_data(index: int) -> LevelData:
@@ -43,7 +57,9 @@ static func is_chapter_final(index: int) -> bool:
 
 
 static func is_campaign_final(index: int) -> bool:
-	return index == ALL.size() - 1
+	# The authored campaign ends at Level 15. A temporary content boundary must
+	# return to level select instead of opening the ending choice early.
+	return index == 14 and index < ALL.size()
 
 
 static func reconciled_unlocked(records: Dictionary, stored_unlocked: int) -> int:
