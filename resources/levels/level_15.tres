@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="LevelData" format=3]
+
+[ext_resource type="Script" path="res://src/data/level_data.gd" id="1_level"]
+
+[resource]
+script = ExtResource("1_level")
+id = 14
+title = "Phán quyết"
+chapter = 4
+difficulty = 5
+par_moves = 81
+power_level = 0.82
+landmark = "judgement_engine"
+hint_route = "URBRRDRRRUUULLLLDDRDRUUDLLUURRDDDRRUUULLLRDDRLLLUUUULURRRLLDDDDDLLUURLDDRRUUUURUL"
+map = Array[String](["#########", "# .   . #", "#       #", "###K#####", "#   $   #", "# # # # #", "# $   $ #", "#@      #", "#########"])
+maps = Array[String]([])
+entities = [{ "type": "plate", "grid_position": Vector3i(7, 0, 6), "group": "K", "hold_required": true }, { "type": "bridge", "grid_position": Vector3i(3, 0, 4), "starts_open": false }, { "type": "bridge_switch", "grid_position": Vector3i(2, 0, 5) }, { "type": "energy_node", "grid_position": Vector3i(5, 0, 6), "order": 1 }, { "type": "energy_node", "grid_position": Vector3i(2, 0, 4), "order": 2 }, { "type": "energy_node", "grid_position": Vector3i(6, 0, 4), "order": 3 }, { "type": "energy_node", "grid_position": Vector3i(3, 0, 2), "order": 4 }]
+decorations = [{ "type": "judgement_engine", "grid_position": Vector3i(4, 0, 0), "scale": 1.0, "yaw": 180.0 }, { "type": "reactor_switch", "grid_position": Vector3i(2, 0, 5), "scale": 0.8, "yaw": 90.0 }, { "type": "core_data_cabinet_low", "grid_position": Vector3i(5, 0, 3), "yaw": 180.0 }, { "type": "core_light_trim", "grid_position": Vector3i(6, 0, 3), "yaw": 180.0, "dynamic_profile": "core_trim_pulse", "dynamic_phase": 2.10, "dynamic_speed": 0.82, "dynamic_amplitude": 0.28, "dynamic_intensity": 0.42 }, { "type": "kit_floor_edge", "grid_position": Vector3i(1, 0, 7), "yaw": 180.0 }, { "type": "kit_floor_edge", "grid_position": Vector3i(2, 0, 7), "yaw": 180.0 }, { "type": "lamp", "grid_position": Vector3i(8, 0, 2), "yaw": -90.0 }, { "type": "kit_wall_low_straight", "grid_position": Vector3i(2, 0, 3), "yaw": 0.0 }, { "type": "kit_wall_low_straight", "grid_position": Vector3i(4, 0, 3), "yaw": 0.0 }, { "type": "kit_wall_low_straight", "grid_position": Vector3i(4, 0, 5), "yaw": 0.0 }, { "type": "kit_wall_low_straight", "grid_position": Vector3i(6, 0, 5), "yaw": 0.0 }, { "type": "kit_wall_low_straight", "grid_position": Vector3i(3, 0, 0), "yaw": 180.0 }, { "type": "kit_wall_low_straight", "grid_position": Vector3i(5, 0, 0), "yaw": 180.0 }]
+memory_fragment = "KÝ ỨC 15: [DR. ELIAS VALE // DI SẢN] — 'Một cỗ máy tuân theo mục đích được lập trình. Một con người tự chọn lấy mục đích sống. Lựa chọn nằm ở con, Kiro.'"

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="LevelData" format=3]
+
+[ext_resource type="Script" path="res://src/data/level_data.gd" id="1_level"]
+
+[resource]
+script = ExtResource("1_level")
+id = 13
+title = "Lời thú nhận của EVA"
+chapter = 4
+difficulty = 2
+par_moves = 28
+power_level = 0.46
+landmark = "eva_conduit"
+hint_route = "LUURRDRRDRURRUULLLLLLLDRRRRR"
+map = Array[String]([])
+maps = Array[String](["###########\n#       e #\n# $ a .   #\n#   b     #\n# @       #\n#      ####\n###########", "###########\n#       e #\n# $    .  #\n#         #\n#         #\n#      ####\n###########"])
+sequential_floors = true
+entities = [{ "type": "energy_node", "grid_position": Vector3i(3, 1, 2), "order": 1 }, { "type": "energy_node", "grid_position": Vector3i(4, 1, 2), "order": 2 }, { "type": "energy_node", "grid_position": Vector3i(5, 1, 2), "order": 3 }, { "type": "energy_node", "grid_position": Vector3i(6, 1, 2), "order": 4 }]
+decorations = [{ "type": "eva_conduit", "grid_position": Vector3i(9, 1, 5), "scale": 1.2, "yaw": 180.0 }, { "type": "reactor_switch", "grid_position": Vector3i(0, 1, 0), "scale": 1.05, "yaw": 90.0 }, { "type": "data_rack", "grid_position": Vector3i(0, 0, 0), "yaw": 180.0 }, { "type": "kit_floor_edge", "grid_position": Vector3i(6, 1, 1), "yaw": 0.0 }, { "type": "kit_rail_straight", "grid_position": Vector3i(5, 1, 1), "yaw": 0.0 }, { "type": "kit_floor_edge", "grid_position": Vector3i(7, 1, 3), "yaw": 90.0 }, { "type": "kit_floor_end_reverse", "grid_position": Vector3i(1, 1, 1), "yaw": 0.0 }, { "type": "kit_floor_inner_corner", "grid_position": Vector3i(6, 1, 4), "yaw": 0.0 }, { "type": "kit_rail_end_reverse", "grid_position": Vector3i(7, 1, 1), "yaw": 0.0 }, { "type": "kit_wall_low_end", "grid_position": Vector3i(4, 1, 6), "yaw": 0.0 }, { "type": "core_data_cabinet_low", "grid_position": Vector3i(3, 1, 6), "yaw": 0.0, "dynamic_profile": "core_cabinet_pulse", "dynamic_phase": 0.0 }, { "type": "core_light_trim", "grid_position": Vector3i(5, 1, 6), "yaw": 0.0, "dynamic_profile": "core_trim_pulse", "dynamic_phase": 1.35 }]
+memory_fragment = "KÝ ỨC 14: [EVA // LỜI THÚ NHẬN] — 'Ta đã chạy với công suất 0.01% suốt 327 năm để giữ cho các mảnh ý thức này không bị phân rã hoàn toàn. Nguồn năng lượng sắp cạn kiệt rồi, Kiro.'"
