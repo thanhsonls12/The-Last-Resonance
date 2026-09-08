@@ -1,0 +1,82 @@
+[
+  {
+    "type": "silence_reliquary",
+    "path": "assets/models/baked/Narrative-silence_reliquary.glb",
+    "bounds_min": [
+      -0.41,
+      0.0,
+      -0.41
+    ],
+    "bounds_max": [
+      0.41,
+      0.46,
+      0.41
+    ],
+    "triangles": 60,
+    "gameplay_collision": false
+  },
+  {
+    "type": "elias_testament",
+    "path": "assets/models/baked/Narrative-elias_testament.glb",
+    "bounds_min": [
+      -0.41,
+      0.0,
+      -0.41
+    ],
+    "bounds_max": [
+      0.41,
+      0.43,
+      0.41
+    ],
+    "triangles": 60,
+    "gameplay_collision": false
+  },
+  {
+    "type": "soul_archive",
+    "path": "assets/models/baked/Narrative-soul_archive.glb",
+    "bounds_min": [
+      -0.41,
+      0.0,
+      -0.41
+    ],
+    "bounds_max": [
+      0.41,
+      0.56,
+      0.41
+    ],
+    "triangles": 96,
+    "gameplay_collision": false
+  },
+  {
+    "type": "eva_conduit",
+    "path": "assets/models/baked/Narrative-eva_conduit.glb",
+    "bounds_min": [
+      -0.41,
+      0.0,
+      -0.41
+    ],
+    "bounds_max": [
+      0.41,
+      0.28,
+      0.41
+    ],
+    "triangles": 180,
+    "gameplay_collision": false
+  },
+  {
+    "type": "judgement_engine",
+    "path": "assets/models/baked/Narrative-judgement_engine.glb",
+    "bounds_min": [
+      -0.41,
+      0.0,
+      -0.41
+    ],
+    "bounds_max": [
+      0.41,
+      0.42,
+      0.41
+    ],
+    "triangles": 72,
+    "gameplay_collision": false
+  }
+]

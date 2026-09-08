@@ -1,87 +1,175 @@
 # The Last Resonance
 
-> **Trạng thái**: Chương I (Forgotten Archive) hoàn chỉnh với 4 level gameplay, hệ thống hội thoại, ký ức (Memory Codex), giao diện HUD tích hợp icon SVG, hiệu ứng Hologram EVA 3D và 3 phân nhánh kết thúc (Endings).
+**Trạng thái (2026-09-08):** campaign đã có **15 level**, 4 chương và 3 nhánh kết
+thúc. Gameplay, hội thoại, Memory Codex, HUD icon SVG, hologram EVA 3D, save/unlock,
+gợi ý offline, chấm sao và visual desktop đã được triển khai. Solver xác nhận 15/15
+level đúng par tối ưu; APK debug đã qua preflight. Chưa có benchmark FPS, nhiệt, RAM
+hoặc cảm giác chạm trên thiết bị Android thật.
 
-Game giải đố Sokoban 3D/Isometric phong cách Sci-Fi xây dựng trên **Godot 4.7** và **GDScript**. Trò chơi kết hợp giữa cơ chế giải đố logic chuẩn xác (deterministic) và không khí khám phá trạm không gian/khu tàng thư cổ hoang tàn Asteria.
+Game giải đố Sokoban 3D/isometric phong cách sci-fi, xây dựng bằng **Godot 4.7** và
+**GDScript**. Người chơi điều khiển robot Kiro đẩy các Lumina Core trong trạm Asteria,
+khám phá các lớp ký ức và quyết định số phận thành phố.
 
----
+![Logo](assets/ui/logo_header_horizontal.jpg)
 
-## 📱 Trải nghiệm & Điều khiển Cảm ứng (Mobile / Android)
-
-Trò chơi được thiết kế tối ưu hóa 100% cho thao tác chạm và vuốt trên màn hình cảm ứng Android:
-
-* **Chạm vào ô (Tap-to-Move)**: Chạm vào bất kỳ ô hợp lệ nào trên mặt sàn để robot Kiro tự động di chuyển hoặc đẩy khối Core.
-* **Vuốt màn hình (Swipe Gesture)**: Vuốt ngang sang trái / phải để xoay góc nhìn camera 90°, giúp quan sát toàn cảnh 3D và các góc khuất của câu đố.
-* **Hệ thống nút bấm HUD cảm ứng**:
-  * **Hoàn tác (`undo.svg`)**: Lùi lại một bước đi trước đó.
-  * **Chơi lại (`restart.svg`)**: Đặt lại màn chơi về trạng thái ban đầu.
-  * **Xoay cầu (`bridge.svg`)**: Kích hoạt cơ chế xoay cầu khi đứng tại vị trí điều khiển.
-  * **Tạm dừng (`pause.svg`)**: Mở bảng tùy chọn, bật/tắt nhanh âm thanh hoặc thoát về menu.
-
-*(Dành cho lập trình viên khi test nhanh trên máy tính trong Godot Editor: Có thể dùng `WASD` để đi, `Q`/`E` xoay camera, `Z` undo, `R` restart).*
+Tài liệu chi tiết: [docs/README.md](docs/README.md).
 
 ---
 
-## 🧩 Cấu trúc Hệ thống & Tính năng
+## Trải nghiệm & điều khiển cảm ứng (Mobile / Android)
+
+Trò chơi hỗ trợ thao tác chạm và vuốt trên Android:
+
+- **Chạm vào ô (Tap-to-Move):** chạm ô hợp lệ để Kiro đi hoặc đẩy Core.
+- **Vuốt ngắn:** thực hiện một bước theo hướng camera.
+- **Kéo giữ:** xoay góc nhìn yaw; trên PC dùng `Q`/`E` để xoay camera 90°.
+- **Hoàn tác (`undo.svg`):** lùi lại một nước đi.
+- **Chơi lại (`restart.svg`):** đặt level về trạng thái ban đầu.
+- **Xoay cầu (`bridge.svg`):** kích hoạt cầu khi đứng cạnh console tương ứng.
+- **Gợi ý:** hiển thị theo 3 cấp bằng `hint_route`; không tăng số bước thật/par nhưng
+  hành động được tiết lộ sẽ cộng phí vào điểm tính sao.
+- **Tạm dừng (`pause.svg`):** mở tùy chọn âm thanh, accessibility hoặc về menu.
+
+Khi puzzle lệch khỏi đường gợi ý, HUD chỉ hướng phục hồi hoặc đề nghị Undo. Trên
+Godot Editor/PC: `WASD` di chuyển, `Z` undo, `R` restart, `H` gợi ý.
+
+---
+
+## Chiến dịch hiện tại
+
+| Chương | Level | Khu vực | Trọng tâm | Par |
+| --- | ---: | --- | --- | --- |
+| I — Archive | 1–4 | Forgotten Archive | Đẩy Core, thứ tự, cửa | 12 · 28 · 34 · 53 |
+| II — Foundry | 5–8 | Mechanical Foundry | Cửa, cầu xoay, puzzle tổng hợp | 57 · 73 · 75 · 87 |
+| III — Sanctuary | 9–12 | Flooded Sanctuary | Portal, Elevator, nhiều tầng | 46 · 42 · 61 · 85 |
+| IV — Core | 13–15 | Central Core | Energy Node, phối hợp, phán quyết | 40 · 28 · 81 |
+
+Level 11, 12 và 14 dùng hai tầng với Elevator một chiều: phải hoàn thành tầng hiện
+tại trước khi lên tầng tiếp theo. Core không đi qua Elevator; Undo hoàn tác trọn thao
+tác chuyển tầng.
+
+---
+
+## Cấu trúc hệ thống & tính năng
 
 ### 1. Gameplay & Core Logic
-* **`src/core/game_logic.gd`**: Engine xử lý luật Sokoban deterministic, quản lý ngăn xếp Undo/Redo, cửa khóa liên động (interlocking gates), cầu xoay, cổng dịch chuyển, thang máy và điều kiện hoàn thành.
-* **`src/core/game_state.gd`**: Autoload toàn cục lưu trữ tiến độ mở khóa màn chơi, số bước kỷ lục, mảnh ký ức thu thập và cấu hình âm thanh/độ nhạy.
-* **`src/data/levels.gd` & `src/data/level_data.gd`**: Hệ thống định nghĩa dữ liệu màn chơi độc lập thông qua các file Resource `.tres`.
+
+- `src/core/game_logic.gd`: engine Sokoban deterministic; Undo/Restart; Core,
+  Pedestal, Plate/Door, cầu xoay, Portal, Elevator, Energy Node và điều kiện thắng.
+- `src/core/game_state.gd`: autoload lưu unlock, thành tích, ký ức, âm lượng,
+  haptics, reduced motion và high contrast.
+- `src/core/progress_store.gd`: đọc/ghi save có kiểm tra dữ liệu, backup và migration
+  từ định dạng cũ.
+- `src/core/score_rules.gd`: ngưỡng 1–3 sao, `score_moves`, `hint_penalty` và cờ
+  perfect cho từng level.
+- `src/data/levels.gd` và `src/data/level_data.gd`: catalogue/schema level; dữ liệu
+  map nằm trong các Resource `.tres`.
 
 ### 2. Giao diện (UI / UX)
-* **Start Menu (`scenes/ui/start_menu.tscn`)**: Menu chính phong cách Sci-Fi với nền artwork Asteria, hỗ trợ tiếp tục nhanh, chọn màn, đọc ký ức, cài đặt và thoát.
-* **Level Select (`scenes/ui/menu.tscn`)**: Danh sách màn chơi trực quan kèm thông tin độ khó, kỷ lục số bước đẩy.
-* **In-Game HUD (`src/view/game_hud.gd`)**: Giao diện trong màn chơi hiển thị tiến độ khóa liên động, bước đi, mảnh ký ức; tích hợp đầy đủ bộ icon SVG cho các nút Hoàn tác, Chơi lại, Xoay cầu, Menu, Tạm dừng, Âm thanh và Modal Chiến thắng.
-* **Dialogue Box (`scenes/ui/dialogue_box.tscn`)**: Khung hội thoại tương tác giữa Kiro, EVA và Dr. Elias Vale với hiệu ứng typewriter, avatar 2D, âm bleep và glitch.
-* **Memory Codex (`scenes/ui/memory_codex.tscn`)**: Kho lưu trữ bản thảo ký ức để người chơi đọc lại các lore/mẩu truyện đã thu thập.
-* **Ending Cutscene (`scenes/ui/ending_cutscene.tscn`)**: Cảnh kết cốt truyện với 3 phân nhánh kết thúc (Preserve, Release, Restore).
 
-### 3. Đồ họa 3D & Nhân vật
-* **Kiro-K7 (`Kiro_K7_Animation_Library.glb`)**: Robot nhân vật chính có gắn xương (rig) và thư viện chuyển động, phản hồi phát sáng khi đẩy năng lượng.
-* **EVA (`EVA_v5.glb`)**: Trí tuệ nhân tạo AI Hologram 3D xuất hiện trực tiếp trên bàn chơi khi có hội thoại/gợi ý kèm Hologram Shader (`assets/shaders/hologram_eva.gdshader`).
-* **Hiệu ứng & Âm thanh**: `vfx_manager.gd` (bụi di chuyển, tia lửa, hào quang chiến thắng) và `audio_manager.gd` (hệ thống âm thanh ambience đa kênh theo từng chương và bộ SFX cơ chế).
+- `scenes/ui/start_menu.tscn`: menu chính, Continue, chọn level, Memory Codex,
+  Settings và thoát.
+- `scenes/ui/menu.tscn`: level select theo chương, par, sao và kỷ lục.
+- `src/view/game_hud.gd`: bước đi, Core/Plate/Door, tầng, Undo, Restart, Bridge,
+  Hint, Pause và modal chiến thắng.
+- `scenes/ui/dialogue_box.tscn`: hội thoại Kiro, EVA, Dr. Elias với typewriter,
+  avatar, bleep và glitch.
+- `scenes/ui/memory_codex.tscn`: đọc lại 15 mảnh ký ức theo chương.
+- `scenes/game/ending_cutscene.tscn`: ba ending `PRESERVE`, `RELEASE`, `RESTORE`.
 
-### 4. Công cụ Biên tập & Kiểm thử (Tools)
-* **GridMap Level Editor (`scenes/editor/gridmap_level_editor.tscn`)**: Bộ công cụ thiết kế màn chơi trực quan trong Godot Editor.
-* **Headless Test (`tests/verify.gd`)**: Script kiểm tra tự động replay lời giải của cả 4 level để xác minh tính toàn vẹn của logic game.
+### 3. Đồ họa 3D, nhân vật, hiệu ứng & âm thanh
+
+- Kiro-K7: `assets/models/animations/Kiro_K7/Kiro_K7_Animation_Library.glb`.
+- EVA: `assets/models/characters/EVA_v5.glb` và
+  `assets/shaders/hologram_eva.gdshader`.
+- Dr. Elias Vale: `assets/models/characters/Dr-Elias-Vale_v3.glb`.
+- Board 3D, camera, multi-floor framing và decoration: `src/view/board_view.gd`,
+  `src/view/camera_controller.gd`.
+- Hiệu ứng gameplay: `src/view/vfx_manager.gd`; ambience, SFX, Elevator và Portal:
+  `src/view/audio_manager.gd`.
+- Material/render theo chương và mobile quality: `src/data/chapter_material_profiles.gd`
+  và `src/data/render_quality.gd`.
+
+### 4. Công cụ biên tập & kiểm thử
+
+- `scenes/editor/gridmap_level_editor.tscn`: thiết kế level trong Godot Editor.
+- `tests/verify.gd`: replay route, schema, par, save, score, Undo/Restart và
+  progression của toàn campaign.
+- Các scene `tests/verify_*.tscn`: interaction, multi-floor, audio, material,
+  decoration, modular runtime, narrative và mobile render budget.
+- `tools/`: validator/baker Python và script dựng asset; `src/tools/` là công cụ
+  chạy bên trong Godot Editor.
 
 ---
 
-## 📁 Sơ đồ Cây Thư mục
+## Sơ đồ cây thư mục
 
 ```text
 The Last Resonance/
-├── assets/
-│   ├── audio/              # Nhạc nền Ambience và bộ hiệu ứng SFX
-│   ├── icons/              # Icon game và icon xuất bản Android
-│   ├── materials/          # Shader và vật liệu PBR
-│   ├── models/             # 3D Model: characters, animations, modular kit, props
-│   ├── shaders/            # Shader Hologram EVA, glitch, v.v.
-│   └── ui/                 # Avatar nhân vật, icon SVG và background art
-├── resources/
-│   └── levels/             # Resource dữ liệu .tres của các level
-├── scenes/
-│   ├── editor/             # Scene công cụ Level Editor
-│   ├── game/               # Scene Gameplay chính và Ending Cutscene
-│   └── ui/                 # Các scene Menu, HUD, Settings, Dialogue, Codex
-├── src/
-│   ├── core/               # GameLogic, GameState (Luật chơi & Save)
-│   ├── data/               # Cấu trúc dữ liệu Level & Story
-│   ├── game/               # Bộ điều khiển vòng đời màn chơi
-│   ├── tools/              # GridMap Sync & MeshLibrary Builder
-│   ├── ui/                 # Mã nguồn điều khiển các màn hình UI
-│   └── view/               # BoardView, CameraController, GameHud, VFX & Audio
-├── tests/
-│   └── verify.gd           # Headless Verification Test
-└── tools/                  # Các Python script hỗ trợ bake asset, rig model, validate
+├── assets/                    # Model, texture, shader, icon, font, audio và VFX
+│   ├── audio/                 # Nhạc nền, ambience, SFX, voice
+│   ├── fonts/                 # Font giao diện
+│   ├── icons/                 # Icon ứng dụng/Android
+│   ├── materials/             # Material dùng lại
+│   ├── models/                # Nhân vật, environment, props, modular kit
+│   ├── shaders/               # Hologram và shader môi trường
+│   ├── textures/              # Texture đồ họa
+│   ├── ui/                    # Logo, background, portrait, HUD art
+│   └── vfx/                   # Asset hiệu ứng hình ảnh
+├── resources/                 # Dữ liệu Resource tách khỏi code/scene
+│   ├── levels/                # Nguồn chuẩn map, entity, par, hint_route
+│   ├── mesh_libraries/        # MeshLibrary cho GridMap
+│   └── visuals/               # Profile hình ảnh theo chương
+├── scenes/                    # Scene Godot chạy trong editor/runtime
+│   ├── editor/                # Level editor, gallery, cluster/showcase
+│   ├── game/                  # Gameplay chính và ending
+│   └── ui/                    # Menu, HUD, dialogue, codex, settings
+├── src/                       # Mã GDScript
+│   ├── core/                  # Luật puzzle, save/progress, score
+│   ├── data/                  # Schema level, story, props, material, render
+│   ├── game/                  # Flow màn, input, hint, story
+│   ├── tools/                 # Tool chạy trong Godot Editor
+│   ├── ui/                    # Controller cho giao diện
+│   └── view/                  # Board, camera, HUD, audio, VFX
+├── tests/                     # Regression, smoke test runtime, capture QA
+├── tools/                     # Validator/baker và công cụ thiết kế level
+├── docs/                      # Tài liệu hiện hành và archive các pass cũ
+├── project.godot              # Cấu hình dự án, input map, autoload
+└── export_presets.cfg         # Preset export Android
 ```
+
+`resources/levels/level_XX.tres` là nguồn chuẩn của gameplay. `.godot/`, `build/`
+và `.codex_qa/` là cache/output/artifact sinh tự động, không phải nơi sửa logic game.
 
 ---
 
-## 📱 Xuất bản Android
+## Xuất bản Android
 
-Dự án đã được cấu hình sẵn export preset cho Android:
-1. Cấu hình Android SDK / JDK trong cài đặt Godot Editor.
-2. Xuất bản thông qua menu `Project -> Export...` với preset `Android`.
-3. File APK xuất ra tại: `build/TheLastResonance-debug.apk`.
+Yêu cầu Python 3 và Godot 4.7.x có trong `PATH` dưới tên `godot` (`godot.exe` trên
+Windows cũng được PowerShell nhận).
+
+1. Cấu hình Android SDK/JDK trong Godot Editor.
+2. Chọn `Project → Export → Android` với preset `Android`.
+3. APK xuất tại `build/TheLastResonance-debug.apk`.
+
+```powershell
+godot --headless --path . --export-debug Android build/TheLastResonance-debug.apk
+python tools/validate_android_export.py
+```
+
+Preflight kiểm tra preset arm64, PCK, manifest, zip integrity, chữ ký và loại trừ
+thư mục development khỏi APK. Đây không thay thế playtest trên thiết bị Android thật.
+
+---
+
+## Kiểm tra nhanh
+
+```powershell
+python tools/validate_levels.py
+godot --headless --path . -s tests/verify.gd
+godot --headless --path . tests/verify_interactions.tscn
+python tools/validate_map_decorations.py
+python tools/audit_assets.py
+```
+
+Kết quả kiểm thử và hướng dẫn đầy đủ: [docs/README.md](docs/README.md).

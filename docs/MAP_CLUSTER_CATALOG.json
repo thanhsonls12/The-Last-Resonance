@@ -1,0 +1,302 @@
+[
+  {
+    "blocked_cells": [
+      [
+        -1,
+        -1
+      ],
+      [
+        0,
+        -1
+      ],
+      [
+        1,
+        -1
+      ]
+    ],
+    "chapter": 1,
+    "components": [
+      "Archive-Bookshelf",
+      "archive_access_panel_broken",
+      "archive_storage_tray_low"
+    ],
+    "display_name": "Archive — Powered Storage Bay",
+    "footprint_cells": [
+      3,
+      3
+    ],
+    "geometry_checked_yaws": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "id": "archive_storage_bay",
+    "measured_bounds_position": [
+      -1.36000001430511,
+      0.0,
+      -1.23000001907349
+    ],
+    "measured_bounds_size": [
+      2.75,
+      1.25499999523163,
+      0.460000038146973
+    ],
+    "notes": "Back-wall storage rhythm; damaged access panel beside a surviving powered bay.",
+    "outward_face": "south",
+    "scene": "res://scenes/editor/map_clusters/archive_storage_bay.tscn",
+    "visual_camera_review": "pending",
+    "walkable_cells": [
+      [
+        -1,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        -1,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        1
+      ]
+    ]
+  },
+  {
+    "blocked_cells": [
+      [
+        -1,
+        -1
+      ],
+      [
+        0,
+        -1
+      ],
+      [
+        1,
+        -1
+      ],
+      [
+        -1,
+        0
+      ],
+      [
+        1,
+        0
+      ]
+    ],
+    "chapter": 2,
+    "components": [
+      "foundry_press",
+      "kit_pipe_end",
+      "kit_pipe_straight",
+      "foundry_pipe_support",
+      "foundry_maintenance_box"
+    ],
+    "display_name": "Foundry — Maintenance Corner",
+    "footprint_cells": [
+      3,
+      3
+    ],
+    "geometry_checked_yaws": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "id": "foundry_maintenance_corner",
+    "measured_bounds_position": [
+      -1.5,
+      0.0,
+      -1.27499997615814
+    ],
+    "measured_bounds_size": [
+      3.0,
+      0.850000023841858,
+      1.60500001907349
+    ],
+    "notes": "One heavy machine, a short terminated pipe run, and a low maintenance pocket.",
+    "outward_face": "south",
+    "scene": "res://scenes/editor/map_clusters/foundry_maintenance_corner.tscn",
+    "visual_camera_review": "pending",
+    "walkable_cells": [
+      [
+        0,
+        0
+      ],
+      [
+        -1,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        1
+      ]
+    ]
+  },
+  {
+    "blocked_cells": [
+      [
+        -1,
+        -1
+      ],
+      [
+        0,
+        -1
+      ],
+      [
+        1,
+        -1
+      ],
+      [
+        -1,
+        0
+      ],
+      [
+        1,
+        0
+      ]
+    ],
+    "chapter": 3,
+    "components": [
+      "sanctuary_rocks",
+      "kit_water_corner",
+      "kit_water_edge",
+      "sanctuary_broken_plinth_low",
+      "sanctuary_bank_root"
+    ],
+    "display_name": "Sanctuary — Flooded Bank",
+    "footprint_cells": [
+      3,
+      3
+    ],
+    "geometry_checked_yaws": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "id": "sanctuary_flooded_bank",
+    "measured_bounds_position": [
+      -1.5191684961319,
+      0.0,
+      -1.5
+    ],
+    "measured_bounds_size": [
+      3.01916837692261,
+      0.449999988079071,
+      1.88456928730011
+    ],
+    "notes": "Asymmetric flooded edge with eroded stone, broken plinth and roots kept off the Core route.",
+    "outward_face": "south",
+    "scene": "res://scenes/editor/map_clusters/sanctuary_flooded_bank.tscn",
+    "visual_camera_review": "pending",
+    "walkable_cells": [
+      [
+        0,
+        0
+      ],
+      [
+        -1,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        1
+      ]
+    ]
+  },
+  {
+    "blocked_cells": [
+      [
+        -1,
+        -1
+      ],
+      [
+        0,
+        -1
+      ],
+      [
+        1,
+        -1
+      ]
+    ],
+    "chapter": 4,
+    "components": [
+      "core_data_cabinet_low",
+      "core_wall",
+      "core_light_trim"
+    ],
+    "display_name": "Central Core — Data Wall",
+    "footprint_cells": [
+      3,
+      3
+    ],
+    "geometry_checked_yaws": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "id": "core_data_wall",
+    "measured_bounds_position": [
+      -1.37000000476837,
+      0.0,
+      -1.24199998378754
+    ],
+    "measured_bounds_size": [
+      2.80999994277954,
+      1.25,
+      0.680749952793121
+    ],
+    "notes": "Precise data-wall rhythm; secondary emission stays below Energy Node/Portal prominence.",
+    "outward_face": "south",
+    "scene": "res://scenes/editor/map_clusters/core_data_wall.tscn",
+    "visual_camera_review": "pending",
+    "walkable_cells": [
+      [
+        -1,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        -1,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        1
+      ]
+    ]
+  }
+]

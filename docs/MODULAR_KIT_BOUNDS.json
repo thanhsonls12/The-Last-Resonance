@@ -1,0 +1,468 @@
+[
+  {
+    "type": "kit_floor_edge",
+    "path": "assets/models/modular/floor_edge.glb",
+    "bounds_min": [
+      -0.5,
+      -0.4,
+      -0.504
+    ],
+    "bounds_max": [
+      0.5,
+      0.024,
+      -0.34
+    ],
+    "ports": [],
+    "triangles": 36,
+    "source": "tools/build_modular_kit.py",
+    "gameplay_collision": false
+  },
+  {
+    "type": "kit_floor_corner",
+    "path": "assets/models/modular/floor_corner.glb",
+    "bounds_min": [
+      -0.5,
+      -0.4,
+      -0.5
+    ],
+    "bounds_max": [
+      0.5,
+      0.024,
+      0.5
+    ],
+    "ports": [],
+    "triangles": 48,
+    "source": "tools/build_modular_kit.py",
+    "gameplay_collision": false
+  },
+  {
+    "type": "kit_floor_inner_corner",
+    "path": "assets/models/modular/floor_inner_corner.glb",
+    "bounds_min": [
+      -0.5,
+      -0.4,
+      -0.5
+    ],
+    "bounds_max": [
+      0.5,
+      0.024,
+      0.5
+    ],
+    "ports": [],
+    "triangles": 48,
+    "source": "tools/build_modular_kit.py",
+    "gameplay_collision": false
+  },
+  {
+    "type": "kit_floor_end",
+    "path": "assets/models/modular/floor_end.glb",
+    "bounds_min": [
+      0.42,
+      -0.4,
+      -0.5
+    ],
+    "bounds_max": [
+      0.5,
+      0.0,
+      -0.34
+    ],
+    "ports": [],
+    "triangles": 12,
+    "source": "tools/build_modular_kit.py",
+    "gameplay_collision": false
+  },
+  {
+    "type": "kit_floor_end_reverse",
+    "path": "assets/models/modular/floor_end_reverse.glb",
+    "bounds_min": [
+      -0.5,
+      -0.4,
+      -0.5
+    ],
+    "bounds_max": [
+      -0.42,
+      0.0,
+      -0.34
+    ],
+    "ports": [],
+    "triangles": 12,
+    "source": "tools/build_modular_kit.py",
+    "gameplay_collision": false
+  },
+  {
+    "type": "kit_rail_straight",
+    "path": "assets/models/modular/rail_straight.glb",
+    "bounds_min": [
+      -0.5,
+      0.0,
+      -0.5
+    ],
+    "bounds_max": [
+      0.5,
+      0.6675,
+      -0.36
+    ],
+    "ports": [
+      [
+        -0.5,
+        0.64,
+        -0.43
+      ],
+      [
+        0.5,
+        0.64,
+        -0.43
+      ]
+    ],
+    "triangles": 48,
+    "source": "tools/build_modular_kit.py",
+    "gameplay_collision": false
+  },
+  {
+    "type": "kit_rail_corner",
+    "path": "assets/models/modular/rail_corner.glb",
+    "bounds_min": [
+      -0.5,
+      0.0,
+      -0.5
+    ],
+    "bounds_max": [
+      0.5,
+      0.6675,
+      0.5
+    ],
+    "ports": [
+      [
+        -0.5,
+        0.64,
+        -0.43
+      ],
+      [
+        0.43,
+        0.64,
+        0.5
+      ]
+    ],
+    "triangles": 72,
+    "source": "tools/build_modular_kit.py",
+    "gameplay_collision": false
+  },
+  {
+    "type": "kit_rail_end",
+    "path": "assets/models/modular/rail_end.glb",
+    "bounds_min": [
+      -0.5,
+      0.0,
+      -0.5
+    ],
+    "bounds_max": [
+      0.07,
+      0.6675,
+      -0.36
+    ],
+    "ports": [
+      [
+        -0.5,
+        0.64,
+        -0.43
+      ]
+    ],
+    "triangles": 48,
+    "source": "tools/build_modular_kit.py",
+    "gameplay_collision": false
+  },
+  {
+    "type": "kit_rail_end_reverse",
+    "path": "assets/models/modular/rail_end_reverse.glb",
+    "bounds_min": [
+      -0.07,
+      0.0,
+      -0.5
+    ],
+    "bounds_max": [
+      0.5,
+      0.6675,
+      -0.36
+    ],
+    "ports": [
+      [
+        0.5,
+        0.64,
+        -0.43
+      ]
+    ],
+    "triangles": 48,
+    "source": "tools/build_modular_kit.py",
+    "gameplay_collision": false
+  },
+  {
+    "type": "kit_wall_low_straight",
+    "path": "assets/models/modular/wall_low_straight.glb",
+    "bounds_min": [
+      -0.48,
+      0.0,
+      -0.102
+    ],
+    "bounds_max": [
+      0.48,
+      0.3675,
+      0.09
+    ],
+    "ports": [
+      [
+        -0.5,
+        0.175,
+        0
+      ],
+      [
+        0.5,
+        0.175,
+        0
+      ]
+    ],
+    "triangles": 36,
+    "source": "tools/build_modular_kit.py",
+    "gameplay_collision": false
+  },
+  {
+    "type": "kit_wall_low_corner",
+    "path": "assets/models/modular/wall_low_corner.glb",
+    "bounds_min": [
+      -0.48,
+      0.0,
+      -0.4
+    ],
+    "bounds_max": [
+      0.44,
+      0.3675,
+      0.48
+    ],
+    "ports": [
+      [
+        -0.5,
+        0.175,
+        0
+      ],
+      [
+        0.35,
+        0.175,
+        0.5
+      ]
+    ],
+    "triangles": 60,
+    "source": "tools/build_modular_kit.py",
+    "gameplay_collision": false
+  },
+  {
+    "type": "kit_wall_low_end",
+    "path": "assets/models/modular/wall_low_end.glb",
+    "bounds_min": [
+      -0.48,
+      0.0,
+      -0.12
+    ],
+    "bounds_max": [
+      0.03,
+      0.3675,
+      0.12
+    ],
+    "ports": [
+      [
+        -0.5,
+        0.175,
+        0
+      ]
+    ],
+    "triangles": 36,
+    "source": "tools/build_modular_kit.py",
+    "gameplay_collision": false
+  },
+  {
+    "type": "kit_pipe_straight",
+    "path": "assets/models/modular/pipe_straight.glb",
+    "bounds_min": [
+      -0.5,
+      0.0,
+      -0.13
+    ],
+    "bounds_max": [
+      0.5,
+      0.35,
+      0.13
+    ],
+    "ports": [
+      [
+        -0.5,
+        0.22,
+        0
+      ],
+      [
+        0.5,
+        0.22,
+        0
+      ]
+    ],
+    "triangles": 124,
+    "source": "tools/build_modular_kit.py",
+    "gameplay_collision": false
+  },
+  {
+    "type": "kit_pipe_elbow",
+    "path": "assets/models/modular/pipe_elbow.glb",
+    "bounds_min": [
+      -0.5,
+      0.0,
+      -0.13
+    ],
+    "bounds_max": [
+      0.13,
+      0.35,
+      0.5
+    ],
+    "ports": [
+      [
+        -0.5,
+        0.22,
+        0
+      ],
+      [
+        0,
+        0.22,
+        0.5
+      ]
+    ],
+    "triangles": 292,
+    "source": "tools/build_modular_kit.py",
+    "gameplay_collision": false
+  },
+  {
+    "type": "kit_pipe_tee",
+    "path": "assets/models/modular/pipe_tee.glb",
+    "bounds_min": [
+      -0.5,
+      0.0,
+      -0.135
+    ],
+    "bounds_max": [
+      0.5,
+      0.35,
+      0.5
+    ],
+    "ports": [
+      [
+        -0.5,
+        0.22,
+        0
+      ],
+      [
+        0.5,
+        0.22,
+        0
+      ],
+      [
+        0,
+        0.22,
+        0.5
+      ]
+    ],
+    "triangles": 236,
+    "source": "tools/build_modular_kit.py",
+    "gameplay_collision": false
+  },
+  {
+    "type": "kit_pipe_end",
+    "path": "assets/models/modular/pipe_end.glb",
+    "bounds_min": [
+      -0.5,
+      0.0,
+      -0.13
+    ],
+    "bounds_max": [
+      0.035,
+      0.35,
+      0.13
+    ],
+    "ports": [
+      [
+        -0.5,
+        0.22,
+        0
+      ]
+    ],
+    "triangles": 124,
+    "source": "tools/build_modular_kit.py",
+    "gameplay_collision": false
+  },
+  {
+    "type": "kit_water_tile",
+    "path": "assets/models/modular/water_tile.glb",
+    "bounds_min": [
+      -0.5,
+      0.0,
+      -0.5
+    ],
+    "bounds_max": [
+      0.5,
+      0.0785,
+      0.5
+    ],
+    "ports": [],
+    "triangles": 48,
+    "source": "tools/build_modular_kit.py",
+    "gameplay_collision": false
+  },
+  {
+    "type": "kit_water_edge",
+    "path": "assets/models/modular/water_edge.glb",
+    "bounds_min": [
+      -0.5,
+      0.0,
+      -0.5
+    ],
+    "bounds_max": [
+      0.5,
+      0.22,
+      0.5
+    ],
+    "ports": [],
+    "triangles": 72,
+    "source": "tools/build_modular_kit.py",
+    "gameplay_collision": false
+  },
+  {
+    "type": "kit_water_corner",
+    "path": "assets/models/modular/water_corner.glb",
+    "bounds_min": [
+      -0.5,
+      0.0,
+      -0.5
+    ],
+    "bounds_max": [
+      0.5,
+      0.22,
+      0.5
+    ],
+    "ports": [],
+    "triangles": 96,
+    "source": "tools/build_modular_kit.py",
+    "gameplay_collision": false
+  },
+  {
+    "type": "kit_water_inner_corner",
+    "path": "assets/models/modular/water_inner_corner.glb",
+    "bounds_min": [
+      -0.5,
+      0.0,
+      -0.5
+    ],
+    "bounds_max": [
+      0.5,
+      0.22,
+      0.5
+    ],
+    "ports": [],
+    "triangles": 84,
+    "source": "tools/build_modular_kit.py",
+    "gameplay_collision": false
+  }
+]

@@ -1,0 +1,154 @@
+[
+  {
+    "type": "archive_access_panel_broken",
+    "chapter": 1,
+    "path": "assets/models/baked/Identity-archive_access_panel_broken.glb",
+    "bounds_min": [
+      -0.36,
+      0.0,
+      -0.09993
+    ],
+    "bounds_max": [
+      0.36,
+      0.4,
+      0.09993
+    ],
+    "triangles": 60,
+    "surfaces": 5,
+    "gameplay_collision": false,
+    "source": "tools/build_chapter_identity_props.py"
+  },
+  {
+    "type": "archive_storage_tray_low",
+    "chapter": 1,
+    "path": "assets/models/baked/Identity-archive_storage_tray_low.glb",
+    "bounds_min": [
+      -0.39,
+      0.0,
+      -0.23
+    ],
+    "bounds_max": [
+      0.39,
+      0.205,
+      0.23
+    ],
+    "triangles": 72,
+    "surfaces": 6,
+    "gameplay_collision": false,
+    "source": "tools/build_chapter_identity_props.py"
+  },
+  {
+    "type": "foundry_maintenance_box",
+    "chapter": 2,
+    "path": "assets/models/baked/Identity-foundry_maintenance_box.glb",
+    "bounds_min": [
+      -0.36,
+      0.0,
+      -0.2825
+    ],
+    "bounds_max": [
+      0.36,
+      0.355,
+      0.2825
+    ],
+    "triangles": 60,
+    "surfaces": 5,
+    "gameplay_collision": false,
+    "source": "tools/build_chapter_identity_props.py"
+  },
+  {
+    "type": "foundry_pipe_support",
+    "chapter": 2,
+    "path": "assets/models/baked/Identity-foundry_pipe_support.glb",
+    "bounds_min": [
+      -0.33,
+      0.0,
+      -0.23
+    ],
+    "bounds_max": [
+      0.33,
+      0.435,
+      0.23
+    ],
+    "triangles": 92,
+    "surfaces": 5,
+    "gameplay_collision": false,
+    "source": "tools/build_chapter_identity_props.py"
+  },
+  {
+    "type": "sanctuary_broken_plinth_low",
+    "chapter": 3,
+    "path": "assets/models/baked/Identity-sanctuary_broken_plinth_low.glb",
+    "bounds_min": [
+      -0.34402,
+      0.0,
+      -0.34
+    ],
+    "bounds_max": [
+      0.34402,
+      0.355,
+      0.34
+    ],
+    "triangles": 48,
+    "surfaces": 4,
+    "gameplay_collision": false,
+    "source": "tools/build_chapter_identity_props.py"
+  },
+  {
+    "type": "sanctuary_bank_root",
+    "chapter": 3,
+    "path": "assets/models/baked/Identity-sanctuary_bank_root.glb",
+    "bounds_min": [
+      -0.37,
+      0.0,
+      -0.26
+    ],
+    "bounds_max": [
+      0.37,
+      0.32224,
+      0.26
+    ],
+    "triangles": 96,
+    "surfaces": 4,
+    "gameplay_collision": false,
+    "source": "tools/build_chapter_identity_props.py"
+  },
+  {
+    "type": "core_data_cabinet_low",
+    "chapter": 4,
+    "path": "assets/models/baked/Identity-core_data_cabinet_low.glb",
+    "bounds_min": [
+      -0.37,
+      0.0,
+      -0.242
+    ],
+    "bounds_max": [
+      0.37,
+      0.36,
+      0.242
+    ],
+    "triangles": 72,
+    "surfaces": 6,
+    "gameplay_collision": false,
+    "source": "tools/build_chapter_identity_props.py"
+  },
+  {
+    "type": "core_light_trim",
+    "chapter": 4,
+    "path": "assets/models/baked/Identity-core_light_trim.glb",
+    "bounds_min": [
+      -0.44,
+      0.0,
+      -0.107
+    ],
+    "bounds_max": [
+      0.44,
+      0.22,
+      0.107
+    ],
+    "triangles": 60,
+    "surfaces": 5,
+    "gameplay_collision": false,
+    "source": "tools/build_chapter_identity_props.py"
+  }
+]
