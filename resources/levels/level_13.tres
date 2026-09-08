@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="LevelData" format=3]
+
+[ext_resource type="Script" path="res://src/data/level_data.gd" id="1_level"]
+
+[resource]
+script = ExtResource("1_level")
+id = 12
+title = "Những linh hồn đã mất"
+chapter = 4
+difficulty = 2
+par_moves = 40
+power_level = 0.18
+landmark = "soul_archive"
+hint_route = "DDRULURRRURDDRDLLLLULDLDRDRULURRRLUURRDD"
+map = Array[String](["#########", "#   #   #", "# @     #", "#  $ #  #", "#       #", "#   # . #", "#       #", "#########"])
+entities = [{ "type": "energy_node", "grid_position": Vector3i(3, 0, 2), "order": 1 }, { "type": "energy_node", "grid_position": Vector3i(5, 0, 4), "order": 2 }, { "type": "energy_node", "grid_position": Vector3i(2, 0, 5), "order": 3 }]
+decorations = [{ "type": "soul_archive", "grid_position": Vector3i(4, 0, 1), "scale": 1.15 }, { "type": "core_generator", "grid_position": Vector3i(1, 0, 1), "scale": 0.8, "yaw": 90.0 }, { "type": "reactor_switch", "grid_position": Vector3i(4, 0, 5) }, { "type": "data_rack", "grid_position": Vector3i(5, 0, 3) }, { "type": "core_reactor", "grid_position": Vector3i(7, 0, 4), "scale": 0.8, "yaw": 180.0 }, { "type": "core_hologram_dais", "grid_position": Vector3i(7, 0, 6), "scale": 0.78, "yaw": 0.0 }, { "type": "kit_floor_edge", "grid_position": Vector3i(1, 0, 6), "yaw": 90.0 }, { "type": "core_data_cabinet_low", "grid_position": Vector3i(3, 0, 0), "yaw": 180.0 }, { "type": "core_light_trim", "grid_position": Vector3i(5, 0, 0), "yaw": 180.0, "dynamic_profile": "core_trim_pulse", "dynamic_phase": 0.60, "dynamic_speed": 0.72, "dynamic_amplitude": 0.24, "dynamic_intensity": 0.38 }, { "type": "kit_wall_low_straight", "grid_position": Vector3i(4, 0, 7), "yaw": 0.0 }]
+memory_fragment = "KÝ ỨC 13: [DỮ LIỆU TÀN DƯ LÕI TRUNG TÂM] — Hàng trăm năm đã trôi qua, cơ thể vật lý của con người không còn nữa. Những gì nằm trong các Core này chính là phần hồn còn sót lại của Asteria."
