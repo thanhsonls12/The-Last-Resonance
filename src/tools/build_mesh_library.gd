@@ -110,7 +110,12 @@ func _run() -> void:
 		item_id += 1
 		instance.free()
 	
+	preload("res://src/data/chapter_props.gd").add_to_library(mesh_library)
+	preload("res://src/data/modular_props.gd").add_to_library(mesh_library)
+	var original_uid := ResourceLoader.get_resource_uid(OUTPUT_PATH)
 	var err := ResourceSaver.save(mesh_library, OUTPUT_PATH)
+	if err == OK and original_uid != ResourceUID.INVALID_ID:
+		err = ResourceSaver.set_uid(OUTPUT_PATH, original_uid)
 	if err == OK:
 		print("--------------------------------------------------")
 		print("[SUCCESS] MeshLibrary generated: ", OUTPUT_PATH)

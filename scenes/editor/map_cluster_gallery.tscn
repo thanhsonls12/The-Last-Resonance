@@ -1,0 +1,118 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/editor/map_clusters/archive_storage_bay.tscn" id="1_lsfg5"]
+[ext_resource type="PackedScene" path="res://scenes/editor/map_clusters/foundry_maintenance_corner.tscn" id="2_ft4u5"]
+[ext_resource type="PackedScene" path="res://scenes/editor/map_clusters/sanctuary_flooded_bank.tscn" id="3_dexsn"]
+[ext_resource type="PackedScene" path="res://scenes/editor/map_clusters/core_data_wall.tscn" id="4_12745"]
+
+[sub_resource type="Environment" id="Environment_5aasa"]
+background_mode = 1
+background_color = Color(0.0627451, 0.105882354, 0.15686275, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.76862746, 0.87058824, 0.9411765, 1)
+ambient_light_energy = 0.55
+
+[node name="MapClusterGallery" type="Node3D" unique_id=2001822223]
+
+[node name="ArchiveStorageBay" type="Node3D" parent="." unique_id=1937118707 instance=ExtResource("1_lsfg5")]
+metadata/cluster_id = "archive_storage_bay"
+metadata/chapter = 1
+metadata/display_name = "Archive — Powered Storage Bay"
+metadata/footprint_cells = Vector2i(3, 3)
+metadata/outward_face = "south"
+metadata/blocked_cells = [Vector2i(-1, -1), Vector2i(0, -1), Vector2i(1, -1)]
+metadata/walkable_cells = [Vector2i(-1, 0), Vector2i(0, 0), Vector2i(1, 0), Vector2i(-1, 1), Vector2i(0, 1), Vector2i(1, 1)]
+metadata/geometry_checked_yaws = PackedFloat32Array(0, 90, 180, 270)
+metadata/visual_camera_review = "pending"
+metadata/notes = "Back-wall storage rhythm; damaged access panel beside a surviving powered bay."
+metadata/measured_bounds_position = Vector3(-1.36, 0, -1.23)
+metadata/measured_bounds_size = Vector3(2.75, 1.255, 0.46000004)
+
+[node name="@Label3D@2" type="Label3D" parent="." unique_id=52824181]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, 1.75)
+pixel_size = 0.006
+billboard = 1
+no_depth_test = true
+text = "Archive — Powered Storage Bay"
+font_size = 42
+
+[node name="FoundryMaintenanceCorner" type="Node3D" parent="." unique_id=934746024 instance=ExtResource("2_ft4u5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+metadata/cluster_id = "foundry_maintenance_corner"
+metadata/chapter = 2
+metadata/display_name = "Foundry — Maintenance Corner"
+metadata/footprint_cells = Vector2i(3, 3)
+metadata/outward_face = "south"
+metadata/blocked_cells = [Vector2i(-1, -1), Vector2i(0, -1), Vector2i(1, -1), Vector2i(-1, 0), Vector2i(1, 0)]
+metadata/walkable_cells = [Vector2i(0, 0), Vector2i(-1, 1), Vector2i(0, 1), Vector2i(1, 1)]
+metadata/geometry_checked_yaws = PackedFloat32Array(0, 90, 180, 270)
+metadata/visual_camera_review = "pending"
+metadata/notes = "One heavy machine, a short terminated pipe run, and a low maintenance pocket."
+metadata/measured_bounds_position = Vector3(-1.5, 0, -1.275)
+metadata/measured_bounds_size = Vector3(3, 0.85, 1.605)
+
+[node name="@Label3D@3" type="Label3D" parent="." unique_id=938313495]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.08, 1.75)
+pixel_size = 0.006
+billboard = 1
+no_depth_test = true
+text = "Foundry — Maintenance Corner"
+font_size = 42
+
+[node name="SanctuaryFloodedBank" type="Node3D" parent="." unique_id=612659513 instance=ExtResource("3_dexsn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+metadata/cluster_id = "sanctuary_flooded_bank"
+metadata/chapter = 3
+metadata/display_name = "Sanctuary — Flooded Bank"
+metadata/footprint_cells = Vector2i(3, 3)
+metadata/outward_face = "south"
+metadata/blocked_cells = [Vector2i(-1, -1), Vector2i(0, -1), Vector2i(1, -1), Vector2i(-1, 0), Vector2i(1, 0)]
+metadata/walkable_cells = [Vector2i(0, 0), Vector2i(-1, 1), Vector2i(0, 1), Vector2i(1, 1)]
+metadata/geometry_checked_yaws = PackedFloat32Array(0, 90, 180, 270)
+metadata/visual_camera_review = "pending"
+metadata/notes = "Asymmetric flooded edge with eroded stone, broken plinth and roots kept off the Core route."
+metadata/measured_bounds_position = Vector3(-1.5191685, 0, -1.5)
+metadata/measured_bounds_size = Vector3(3.0191684, 0.45, 1.8845693)
+
+[node name="@Label3D@4" type="Label3D" parent="." unique_id=777123816]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, 6.75)
+pixel_size = 0.006
+billboard = 1
+no_depth_test = true
+text = "Sanctuary — Flooded Bank"
+font_size = 42
+
+[node name="CoreDataWall" type="Node3D" parent="." unique_id=2004145882 instance=ExtResource("4_12745")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
+metadata/cluster_id = "core_data_wall"
+metadata/chapter = 4
+metadata/display_name = "Central Core — Data Wall"
+metadata/footprint_cells = Vector2i(3, 3)
+metadata/outward_face = "south"
+metadata/blocked_cells = [Vector2i(-1, -1), Vector2i(0, -1), Vector2i(1, -1)]
+metadata/walkable_cells = [Vector2i(-1, 0), Vector2i(0, 0), Vector2i(1, 0), Vector2i(-1, 1), Vector2i(0, 1), Vector2i(1, 1)]
+metadata/geometry_checked_yaws = PackedFloat32Array(0, 90, 180, 270)
+metadata/visual_camera_review = "pending"
+metadata/notes = "Precise data-wall rhythm; secondary emission stays below Energy Node/Portal prominence."
+metadata/measured_bounds_position = Vector3(-1.37, 0, -1.242)
+metadata/measured_bounds_size = Vector3(2.81, 1.25, 0.68074995)
+
+[node name="@Label3D@5" type="Label3D" parent="." unique_id=1499656815]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.08, 6.75)
+pixel_size = 0.006
+billboard = 1
+no_depth_test = true
+text = "Central Core — Data Wall"
+font_size = 42
+
+[node name="@WorldEnvironment@6" type="WorldEnvironment" parent="." unique_id=957092691]
+environment = SubResource("Environment_5aasa")
+
+[node name="@DirectionalLight3D@7" type="DirectionalLight3D" parent="." unique_id=788444067]
+transform = Transform3D(0.90630776, 0.34618863, -0.24240388, 0, 0.57357645, 0.81915206, 0.42261827, -0.74240386, 0.5198368, 0, 0, 0)
+light_energy = 0.9
+
+[node name="@Camera3D@8" type="Camera3D" parent="." unique_id=1487859778]
+transform = Transform3D(0.8741573, -0.32617462, 0.3598043, 0, 0.74088246, 0.6716347, -0.4856429, -0.58711433, 0.6476478, 10, 14, 16)
+projection = 1
+size = 12.0

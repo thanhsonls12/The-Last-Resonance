@@ -41,6 +41,13 @@ const ITEM_TO_DECORATION: Dictionary = {
 }
 
 
+static func decoration_mapping() -> Dictionary:
+	var mapping := ITEM_TO_DECORATION.duplicate()
+	mapping.merge(preload("res://src/data/chapter_props.gd").decoration_mapping())
+	mapping.merge(preload("res://src/data/modular_props.gd").decoration_mapping())
+	return mapping
+
+
 static func export_gridmap_to_level_data(gridmap: GridMap, level_title := "Custom Level", chapter := 1) -> LevelData:
 	if not gridmap or not gridmap.mesh_library:
 		return null
@@ -66,6 +73,7 @@ static func export_gridmap_to_level_data(gridmap: GridMap, level_title := "Custo
 	
 	var grid_chars: Dictionary = {}
 	var decorations: Array = []
+	var decor_mapping := decoration_mapping()
 	
 	for cell in used_cells:
 		var item_id := gridmap.get_cell_item(cell)
@@ -79,15 +87,16 @@ static func export_gridmap_to_level_data(gridmap: GridMap, level_title := "Custo
 		# Check if it maps to map character
 		if ITEM_TO_LOGIC.has(item_name):
 			grid_chars[Vector2i(rel_x, rel_z)] = ITEM_TO_LOGIC[item_name]
-		elif ITEM_TO_DECORATION.has(item_name):
+		elif decor_mapping.has(item_name):
 			decorations.append({
-				"type": ITEM_TO_DECORATION[item_name],
+				"type": decor_mapping[item_name],
 				"grid_position": grid_pos,
-				"yaw": 0.0
+				"yaw": rad_to_deg(gridmap.get_basis_with_orthogonal_index(gridmap.get_cell_item_orientation(cell)).get_euler().y)
 			})
-			# Ensure there is a floor tile under decoration
+			# New chapter scenery reserves its anchor cell as wall terrain.
+			# These models do not add puzzle collision by themselves at runtime.
 			if not grid_chars.has(Vector2i(rel_x, rel_z)):
-				grid_chars[Vector2i(rel_x, rel_z)] = " "
+				grid_chars[Vector2i(rel_x, rel_z)] = "#" if preload("res://src/data/chapter_props.gd").ASSETS.has(decor_mapping[item_name]) else " "
 	
 	# Build ASCII map array
 	var map_lines: Array[String] = []
@@ -160,6 +169,7 @@ static func import_level_data_to_gridmap(level_data: LevelData, gridmap: GridMap
 						gridmap.set_cell_item(pos, name_to_id["Floor_Tile"])
 	
 	# Paint Decorations
+	var decor_mapping := decoration_mapping()
 	for deco in level_data.decorations:
 		if not deco is Dictionary:
 			continue
@@ -169,7 +179,8 @@ static func import_level_data_to_gridmap(level_data: LevelData, gridmap: GridMap
 			continue
 		
 		# Find matching item
-		for item_name in ITEM_TO_DECORATION.keys():
-			if ITEM_TO_DECORATION[item_name] == type and name_to_id.has(item_name):
-				gridmap.set_cell_item(pos, name_to_id[item_name])
+		for item_name in decor_mapping.keys():
+			if decor_mapping[item_name] == type and name_to_id.has(item_name):
+				var rotation := Basis(Vector3.UP, deg_to_rad(float(deco.get("yaw", 0.0))))
+				gridmap.set_cell_item(pos, name_to_id[item_name], gridmap.get_orthogonal_index_from_basis(rotation))
 				break

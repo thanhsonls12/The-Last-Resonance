@@ -1,0 +1,30 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/baked/Identity-core_data_cabinet_low.glb" id="1_rs8qy"]
+[ext_resource type="PackedScene" path="res://assets/models/baked/Core-Wall.glb" id="2_ccbc6"]
+[ext_resource type="PackedScene" path="res://assets/models/baked/Identity-core_light_trim.glb" id="3_hphvb"]
+
+[node name="CoreDataWall" type="Node3D" unique_id=2004145882]
+metadata/cluster_id = "core_data_wall"
+metadata/chapter = 4
+metadata/display_name = "Central Core — Data Wall"
+metadata/footprint_cells = Vector2i(3, 3)
+metadata/outward_face = "south"
+metadata/blocked_cells = [Vector2i(-1, -1), Vector2i(0, -1), Vector2i(1, -1)]
+metadata/walkable_cells = [Vector2i(-1, 0), Vector2i(0, 0), Vector2i(1, 0), Vector2i(-1, 1), Vector2i(0, 1), Vector2i(1, 1)]
+metadata/geometry_checked_yaws = PackedFloat32Array(0, 90, 180, 270)
+metadata/visual_camera_review = "pending"
+metadata/notes = "Precise data-wall rhythm; secondary emission stays below Energy Node/Portal prominence."
+metadata/measured_bounds_position = Vector3(-1.37, 0, -1.242)
+metadata/measured_bounds_size = Vector3(2.81, 1.25, 0.68074995)
+
+[node name="Components" type="Node3D" parent="." unique_id=1273231429]
+
+[node name="core_data_cabinet_low" type="Node3D" parent="Components" unique_id=517735266 instance=ExtResource("1_rs8qy")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1, 0, -1)
+
+[node name="core_wall" type="Node3D" parent="Components" unique_id=580324867 instance=ExtResource("2_ccbc6")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, -0.75)
+
+[node name="core_light_trim" type="Node3D" parent="Components" unique_id=1915373239 instance=ExtResource("3_hphvb")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1, 0, -1)
