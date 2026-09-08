@@ -2,7 +2,8 @@ class_name ChapterVisuals
 extends Resource
 
 ## Per-chapter lighting profile for the gameplay scene. Chapter 1 is the cold
-## archive, chapter 2 the warm foundry, and chapter 3 the teal Flooded Sanctuary.
+## archive, chapter 2 the warm foundry, chapter 3 the teal Flooded Sanctuary,
+## and chapter 4 the blue/cyan Central Core reactor.
 ## Loaded by src/game/main.gd.
 
 @export var background: Color = Color(0.002, 0.003, 0.006)

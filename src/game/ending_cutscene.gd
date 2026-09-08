@@ -65,13 +65,14 @@ func _build_ui() -> void:
 	_choice_container.add_child(header)
 
 	var sub := Label.new()
-	sub.text = "Không có ô Goal nào được định sẵn. Tương lai của Asteria nằm ở lựa chọn của ngươi, Kiro."
+	sub.text = "Không còn chỉ thị nào được định sẵn. EVA và Elias chỉ còn là hai nhân chứng cho lựa chọn của Kiro."
 	var ss := LabelSettings.new()
 	ss.font_size = 15
 	ss.font_color = Color(0.7, 0.85, 0.95)
 	sub.label_settings = ss
 	sub.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_choice_container.add_child(sub)
+	_choice_container.add_child(_build_witness_holos())
 
 	# Button Choices Row
 	var btn_hbox := HBoxContainer.new()
@@ -86,9 +87,10 @@ func _build_ui() -> void:
 	# Ending 1 Button
 	var btn1 := _create_choice_button(
 		"I. RESTORE\n(TÁI SINH)",
-		"Kết nối Central Core.\nĐánh thức Resonance Network.",
+		"Cho từng ý thức sống độc lập.\nCần tiếp tục cấp nguồn và bảo trì.",
 		COLOR_CYAN
 	)
+	EchoAudioManager.bind_button_sfx(self, btn1, &"ui_confirm")
 	btn1.pressed.connect(_on_ending_selected.bind("RESTORE"))
 	btn_hbox.add_child(btn1)
 
@@ -98,18 +100,22 @@ func _build_ui() -> void:
 		"Ngắt nguồn vĩnh viễn.\nGiải phóng các mảnh ý thức.",
 		COLOR_AMBER
 	)
+	EchoAudioManager.bind_button_sfx(self, btn2, &"ui_confirm")
 	btn2.pressed.connect(_on_ending_selected.bind("RELEASE"))
 	btn_hbox.add_child(btn2)
 
 	# Ending 3 Button
 	var btn3 := _create_choice_button(
-		"III. PRESERVE\n(BẢO TỒN & TỰ DO)",
-		"Lưu trữ độc lập.\nGiải phóng EVA và Kiro." if has_all_memories else "🔒 YÊU CẦU 15/15 KÝ ỨC\n(Hiện có: %d/%d)" % [mem_count, total_mem],
+		"III. PRESERVE\n(BẢO TỒN)",
+		"Lưu ý thức trong trạng thái ngủ.\nChờ điều kiện hồi sinh an toàn." if has_all_memories else "🔒 YÊU CẦU 15/15 KÝ ỨC\n(Hiện có: %d/%d)" % [mem_count, total_mem],
 		COLOR_EMERALD,
-		not has_all_memories
+		false
 	)
 	if has_all_memories:
+		EchoAudioManager.bind_button_sfx(self, btn3, &"ui_confirm")
 		btn3.pressed.connect(_on_ending_selected.bind("PRESERVE"))
+	else:
+		EchoAudioManager.bind_button_sfx(self, btn3, &"ui_error")
 	btn_hbox.add_child(btn3)
 
 	# 4. Epilogue Panel (Hidden by default)
@@ -191,8 +197,94 @@ func _build_ui() -> void:
 	restart_style.set_border_width_all(2)
 	restart_style.set_corner_radius_all(8)
 	_restart_btn.add_theme_stylebox_override("normal", restart_style)
+	EchoAudioManager.bind_button_sfx(self, _restart_btn, &"ui_cancel")
 	_restart_btn.pressed.connect(_on_return_to_menu)
 	ep_bottom.add_child(_restart_btn)
+
+
+func _build_witness_holos() -> Control:
+	var row := HBoxContainer.new()
+	row.alignment = BoxContainer.ALIGNMENT_CENTER
+	row.add_theme_constant_override("separation", 34)
+	row.add_child(_build_character_holo(
+		"res://assets/models/characters/EVA_v5.glb",
+		Color(0.18, 0.78, 1.0, 0.76),
+		Color(0.72, 0.38, 1.0, 0.95),
+		"EVA // LIVE SIGNAL",
+		0.42,
+		-1.35))
+	row.add_child(_build_character_holo(
+		"res://assets/models/characters/Dr-Elias-Vale_v3.glb",
+		Color(1.0, 0.58, 0.16, 0.78),
+		Color(1.0, 0.88, 0.40, 0.95),
+		"ELIAS // ARCHIVED RECORDING",
+		0.9,
+		-0.85))
+	return row
+
+
+func _build_character_holo(
+		model_path: String,
+		holo_color: Color,
+		rim_color: Color,
+		caption: String,
+		model_scale: float,
+		model_y: float) -> Control:
+	var column := VBoxContainer.new()
+	column.alignment = BoxContainer.ALIGNMENT_CENTER
+	column.add_theme_constant_override("separation", 4)
+	var wrap := SubViewportContainer.new()
+	wrap.custom_minimum_size = Vector2(220, 220)
+	wrap.stretch = true
+	var viewport := SubViewport.new()
+	viewport.transparent_bg = true
+	viewport.size = Vector2i(220, 220)
+	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	wrap.add_child(viewport)
+	var world := Node3D.new()
+	viewport.add_child(world)
+	var light := DirectionalLight3D.new()
+	light.rotation_degrees = Vector3(-35, 40, 0)
+	light.light_energy = 0.85
+	world.add_child(light)
+	var scene := load(model_path) as PackedScene
+	if scene:
+		var character := scene.instantiate() as Node3D
+		character.scale = Vector3.ONE * model_scale
+		character.position = Vector3(0, model_y, 0)
+		var shader := load("res://assets/shaders/hologram_eva.gdshader") as Shader
+		if shader:
+			var mat := ShaderMaterial.new()
+			mat.shader = shader
+			mat.set_shader_parameter("hologram_color", holo_color)
+			mat.set_shader_parameter("rim_color", rim_color)
+			mat.set_shader_parameter("emission_energy", 1.7)
+			mat.set_shader_parameter("scanline_frequency", 80.0)
+			mat.set_shader_parameter("glitch_strength", 0.04 if "LIVE" in caption else 0.10)
+			_apply_mat(character, mat)
+		world.add_child(character)
+	var cam := Camera3D.new()
+	cam.look_at_from_position(Vector3(0, 0.35, 2.5), Vector3(0, 0.2, 0))
+	world.add_child(cam)
+	column.add_child(wrap)
+	var label := Label.new()
+	label.text = caption
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	var settings := LabelSettings.new()
+	settings.font_size = 12
+	settings.font_color = holo_color.lightened(0.15)
+	settings.outline_size = 5
+	settings.outline_color = Color.BLACK
+	label.label_settings = settings
+	column.add_child(label)
+	return column
+
+
+func _apply_mat(node: Node, mat: Material) -> void:
+	if node is MeshInstance3D:
+		(node as MeshInstance3D).material_override = mat
+	for child in node.get_children():
+		_apply_mat(child, mat)
 
 
 func _create_choice_button(title: String, desc: String, accent: Color, is_disabled := false) -> Button:

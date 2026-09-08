@@ -1,6 +1,8 @@
 class_name EchoVfxManager
 extends Node3D
 
+const RENDER_QUALITY = preload("res://src/data/render_quality.gd")
+
 const COLOR_CYAN := Color(0.12, 0.92, 1.0)
 const COLOR_TEAL := Color(0.18, 1.0, 0.78)
 const COLOR_PURPLE := Color(0.68, 0.18, 1.0)
@@ -11,6 +13,8 @@ const COLOR_DUST := Color(0.42, 0.50, 0.62)
 var _time := 0.0
 var _loop_effects: Array[Node3D] = []
 var _loop_phases: Dictionary = {}
+var _sequential_floors := false
+var _visible_floor := 0
 
 
 func _process(delta: float) -> void:
@@ -26,10 +30,13 @@ func _process(delta: float) -> void:
 
 func refresh(logic: GameLogic, board: BoardView) -> void:
 	clear_loops()
+	_sequential_floors = logic.sequential_floors
+	_visible_floor = logic.active_floor
 	for cell in logic.energy_nodes:
-		_add_core_loop(board.world_position(cell) + Vector3(0, 0.12, 0))
+		_add_core_loop(board.world_position(cell) + Vector3(0, 0.12, 0), cell.y)
 	for cell in logic.portals.keys():
-		_add_portal_loop(board.world_position(cell) + Vector3(0, 0.10, 0))
+		_add_portal_loop(board.world_position(cell) + Vector3(0, 0.10, 0), cell.y)
+	set_active_floor(logic.active_floor)
 
 
 func clear_loops() -> void:
@@ -38,6 +45,13 @@ func clear_loops() -> void:
 			root.queue_free()
 	_loop_effects.clear()
 	_loop_phases.clear()
+
+
+func set_active_floor(floor: int) -> void:
+	_visible_floor = floor
+	for root in _loop_effects:
+		if is_instance_valid(root):
+			root.visible = not _sequential_floors or int(root.get_meta("floor", floor)) == floor
 
 
 func play_footstep_dust(position: Vector3) -> void:
@@ -121,8 +135,9 @@ func play_resonance_ping(position: Vector3) -> void:
 	_pulse_ring(position + Vector3(0, 0.20, 0), COLOR_PURPLE, 0.20, 2.8, 0.55)
 
 
-func _add_core_loop(position: Vector3) -> void:
+func _add_core_loop(position: Vector3, floor: int) -> void:
 	var root := Node3D.new()
+	root.set_meta("floor", floor)
 	root.position = position
 	add_child(root)
 	var ring := _ring_mesh(COLOR_TEAL, 0.22, 0.30, 2.8)
@@ -133,8 +148,9 @@ func _add_core_loop(position: Vector3) -> void:
 	_register_loop(root)
 
 
-func _add_portal_loop(position: Vector3) -> void:
+func _add_portal_loop(position: Vector3, floor: int) -> void:
 	var root := Node3D.new()
+	root.set_meta("floor", floor)
 	root.position = position
 	add_child(root)
 	var ring := _ring_mesh(COLOR_PURPLE, 0.22, 0.31, 3.0)
@@ -161,7 +177,7 @@ func _burst(
 	size: float) -> void:
 	var particles := GPUParticles3D.new()
 	particles.position = position
-	particles.amount = amount
+	particles.amount = RENDER_QUALITY.particle_amount(amount)
 	particles.lifetime = lifetime
 	particles.one_shot = true
 	particles.explosiveness = 1.0
@@ -213,8 +229,8 @@ func _ring_mesh(color: Color, inner_radius: float, outer_radius: float, emission
 	var mesh := TorusMesh.new()
 	mesh.inner_radius = inner_radius
 	mesh.outer_radius = outer_radius
-	mesh.rings = 32
-	mesh.ring_segments = 12
+	mesh.rings = RENDER_QUALITY.ring_rings()
+	mesh.ring_segments = RENDER_QUALITY.ring_segments()
 	instance.mesh = mesh
 	instance.material_override = _emissive_material(color, emission)
 	return instance

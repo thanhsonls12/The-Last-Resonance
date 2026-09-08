@@ -12,6 +12,9 @@ extends Resource
 ## Length of the best route verified by tests/verify.gd or tools/validate_levels.py.
 ## Not a proof of optimality; a shorter verified route lowers this number.
 @export var par_moves := 0
+## Absolute star thresholds. 0 uses the difficulty-based defaults.
+@export var three_star_moves_override := 0
+@export var two_star_moves_override := 0
 ## 0.0 = emergency power only, 1.0 = the sector is awake. Drives the unpowered
 ## light baseline so a chapter can brighten level by level.
 @export_range(0.0, 1.0) var power_level := 0.0
@@ -24,6 +27,9 @@ extends Resource
 @export var hint_route := ""
 @export var map: Array[String] = []
 @export var maps: Array[String] = []
+## When enabled, each map layer is a self-contained puzzle. Completing a
+## layer unlocks its elevator; Kiro can only travel upward to the next layer.
+@export var sequential_floors := false
 @export var entities: Array = []
 @export var decorations: Array = []
 @export var memory_fragment := ""
@@ -36,6 +42,8 @@ static func from_dict(index: int, source: Dictionary) -> LevelData:
 	data.chapter = int(source.get("chapter", index / 5 + 1))
 	data.difficulty = int(source.get("difficulty", mini(data.chapter + 1, 5)))
 	data.par_moves = int(source.get("par_moves", 0))
+	data.three_star_moves_override = int(source.get("three_star_moves_override", 0))
+	data.two_star_moves_override = int(source.get("two_star_moves_override", 0))
 	data.power_level = float(source.get("power_level", 0.0))
 	data.landmark = str(source.get("landmark", ""))
 	data.hint_route = str(source.get("hint_route", ""))
@@ -44,6 +52,7 @@ static func from_dict(index: int, source: Dictionary) -> LevelData:
 		data.map.append(str(row))
 	for layer in source.get("maps", []):
 		data.maps.append(str(layer))
+	data.sequential_floors = bool(source.get("sequential_floors", false))
 	var source_entities: Variant = source.get("entities", [])
 	data.entities = source_entities if source_entities is Array else []
 	var source_decorations: Variant = source.get("decorations", [])

@@ -21,9 +21,17 @@ const ICON_PAUSE := preload("res://assets/ui/icons/pause.svg")
 const ICON_PLAY := preload("res://assets/ui/icons/play.svg")
 const ICON_VOLUME_ON := preload("res://assets/ui/icons/volume_on.svg")
 const ICON_VOLUME_OFF := preload("res://assets/ui/icons/volume_off.svg")
+const ICON_ENERGY := preload("res://assets/ui/icons/energy_core.svg")
+const ICON_LOCK := preload("res://assets/ui/icons/lock.svg")
+const ICON_UNLOCK := preload("res://assets/ui/icons/unlock.svg")
+const ICON_CLOSE := preload("res://assets/ui/icons/close.svg")
+const ICON_CHECK := preload("res://assets/ui/icons/check.svg")
 
 var level_label: Label
+var floor_label: Label
+var floor_status_label: Label
 var core_label: Label
+var energy_label: Label
 var lock_label: Label
 var fragment_label: Label
 var win_panel: Control
@@ -34,12 +42,27 @@ var pause_panel: Control
 var bridge_button: Button
 var hint_button: Button
 var hint_label: Label
+var undo_button: Button
+var restart_button: Button
+var menu_button: Button
+var pause_button: Button
 
 var _win_root: Control
 var _win_card: PanelContainer
 var _win_next_btn: Button
+var _win_restart_btn: Button
+var _win_menu_btn: Button
 var _pause_root: Control
+var _pause_card: PanelContainer
+var _pause_resume_btn: Button
+var _pause_restart_btn: Button
+var _pause_menu_btn: Button
 var _pause_audio_btn: Button
+var _styled_buttons: Array[Button] = []
+var _labels: Array[Label] = []
+var _label_defaults: Dictionary = {}
+var _button_accents: Dictionary = {}
+var _compact_layout := false
 
 
 var win_stars_label: Label
@@ -49,18 +72,44 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_build_labels()
 	_build_buttons()
+	if not GameState.settings_changed.is_connected(_on_settings_changed):
+		GameState.settings_changed.connect(_on_settings_changed)
+	if get_viewport() != null and not get_viewport().size_changed.is_connected(_layout_for_viewport):
+		get_viewport().size_changed.connect(_layout_for_viewport)
+	_layout_for_viewport()
+	_apply_accessibility()
 
 
-func set_stats(level_name: String, moves: int, pushes: int, best_moves: int, par_moves: int = -1) -> void:
+func set_stats(level_name: String, moves: int, pushes: int, best_moves: int, par_moves: int = -1, hint_penalty := 0, three_star_max := 0) -> void:
 	var best_text := "--" if best_moves <= 0 else str(best_moves)
-	var par_text := " (Par: %d)" % par_moves if par_moves > 0 else ""
-	level_label.text = "%s   |   Bước: %d%s   |   Đẩy: %d   |   Kỷ lục: %s" % [
+	var score_moves := moves + hint_penalty
+	var target_text := "/%d ★★★" % three_star_max if three_star_max > 0 else ""
+	var par_text := "   |   Par: %d" % par_moves if par_moves > 0 else ""
+	level_label.text = "%s   |   Bước: %d   |   Phí gợi ý: +%d   |   Tính sao: %d%s%s   |   Đẩy: %d   |   Kỷ lục: %s" % [
 		level_name,
 		moves,
+		hint_penalty,
+		score_moves,
+		target_text,
 		par_text,
 		pushes,
 		best_text,
 	]
+
+
+func set_floor(current_floor: int, floor_count: int) -> void:
+	if floor_label == null:
+		return
+	floor_label.visible = floor_count > 1
+	if floor_count > 1:
+		floor_label.text = "TẦNG %d / %d" % [current_floor + 1, floor_count]
+
+
+func set_floor_status(message: String) -> void:
+	if floor_status_label == null:
+		return
+	floor_status_label.text = message
+	floor_status_label.visible = not message.is_empty()
 
 
 func set_core_progress(active: int, total: int) -> void:
@@ -81,6 +130,19 @@ func set_core_progress(active: int, total: int) -> void:
 			else (Color(1.0, 0.82, 0.20) if active > 0 else Color(0.70, 0.88, 1.0, 0.92))
 
 
+func set_energy_nodes(active: int, total: int) -> void:
+	if energy_label == null:
+		return
+	energy_label.visible = total > 0
+	if total <= 0:
+		return
+	energy_label.text = "◆ NÚT NĂNG LƯỢNG: %d/%d" % [active, total]
+	var settings := energy_label.label_settings
+	if settings:
+		settings.font_color = Color(0.25, 1.0, 0.70) if active >= total \
+			else (Color(1.0, 0.82, 0.25) if active > 0 else Color(0.70, 0.88, 1.0, 0.92))
+
+
 func set_fragment(fragment: String) -> void:
 	fragment_label.text = "◆ %s" % fragment
 	fragment_label.visible = not fragment.is_empty()
@@ -92,7 +154,8 @@ func set_lock_progress(active: int, total: int, open: bool) -> void:
 	lock_label.visible = total > 0
 	if total <= 0:
 		return
-	lock_label.text = "KHÓA LIÊN ĐỘNG: %d/%d%s" % [
+	lock_label.text = "%s KHÓA LIÊN ĐỘNG: %d/%d%s" % [
+		"🔓" if open else "🔒",
 		active,
 		total,
 		"  •  ĐÃ MỞ" if open else "",
@@ -111,30 +174,28 @@ func show_win(
 		par_moves: int = -1,
 		next_button_text := "MÀN TIẾP THEO",
 		completion_badge := "◆ NĂNG LƯỢNG ĐÃ KHÔI PHỤC ◆",
-		hints_used: int = -1) -> void:
+		hints_used: int = -1,
+		run: Dictionary = {}) -> void:
 	win_level_label.text = level_name.to_upper()
 	win_sub_badge.text = completion_badge
 
 	if win_stars_label:
-		if moves > 0 and par_moves > 0:
-			if moves <= par_moves:
-				win_stars_label.text = "★ ★ ★   HOÀN HẢO (PERFECT)"
-				win_stars_label.label_settings.font_color = Color(1.0, 0.88, 0.24)
-			elif moves <= roundi(par_moves * 1.35):
-				win_stars_label.text = "★ ★ ☆   XUẤT SẮC (EXCELLENT)"
-				win_stars_label.label_settings.font_color = Color(0.35, 0.92, 1.0)
-			else:
-				win_stars_label.text = "★ ☆ ☆   HOÀN THÀNH (CLEARED)"
-				win_stars_label.label_settings.font_color = Color(0.75, 0.85, 0.95)
+		var stars := int(run.get("stars", 0))
+		if stars > 0:
+			var star_text := "★ ★ ★   XUẤT SẮC (EXCELLENT)" if stars == 3 else ("★ ★ ☆   HOÀN THÀNH" if stars == 2 else "★ ☆ ☆   HOÀN THÀNH")
+			if bool(run.get("perfect", false)):
+				star_text += "   •   HOÀN HẢO (PERFECT)"
+			win_stars_label.text = star_text
+			win_stars_label.label_settings.font_color = Color(1.0, 0.88, 0.24) if stars == 3 else (Color(0.35, 0.92, 1.0) if stars == 2 else Color(0.75, 0.85, 0.95))
 			win_stars_label.visible = true
 		else:
 			win_stars_label.visible = false
 
 	if moves >= 0 and pushes >= 0:
 		var best_str := str(best_moves) if best_moves > 0 else "--"
-		var par_str := " (Par: %d)" % par_moves if par_moves > 0 else ""
-		var hint_str := "   |   Gợi ý: %d" % hints_used if hints_used >= 0 else ""
-		win_stats_label.text = "Bước: %d%s   |   Đẩy: %d   |   Kỷ lục: %s%s" % [moves, par_str, pushes, best_str, hint_str]
+		var penalty := int(run.get("hint_penalty", hints_used))
+		var score_moves := int(run.get("score_moves", moves + maxi(0, penalty)))
+		win_stats_label.text = "Bước: %d   |   Phí gợi ý: +%d   |   Tính sao: %d   |   Par: %d   |   Đẩy: %d   |   Kỷ lục: %s" % [moves, maxi(0, penalty), score_moves, par_moves, pushes, best_str]
 		win_stats_label.visible = true
 	else:
 		win_stats_label.visible = false
@@ -144,15 +205,19 @@ func show_win(
 
 	if _win_root:
 		_win_root.visible = true
-		_win_root.modulate.a = 0.0
-		if _win_card:
-			_win_card.scale = Vector2(0.88, 0.88)
-		
-		var tw := create_tween().set_parallel(true)
-		tw.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-		if _win_card:
-			tw.tween_property(_win_card, "scale", Vector2.ONE, 0.4)
-		tw.tween_property(_win_root, "modulate:a", 1.0, 0.3)
+		if GameState.reduced_motion:
+			_win_root.modulate.a = 1.0
+			if _win_card:
+				_win_card.scale = Vector2.ONE
+		else:
+			_win_root.modulate.a = 0.0
+			if _win_card:
+				_win_card.scale = Vector2(0.88, 0.88)
+			var tw := create_tween().set_parallel(true)
+			tw.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+			if _win_card:
+				tw.tween_property(_win_card, "scale", Vector2.ONE, 0.4)
+			tw.tween_property(_win_root, "modulate:a", 1.0, 0.3)
 
 
 func hide_win() -> void:
@@ -167,6 +232,7 @@ func set_bridge_available(available: bool) -> void:
 		bridge_button.visible = available
 		if available:
 			bridge_button.text = " Triển khai cầu"
+		_layout_for_viewport()
 
 
 func set_hint_available(available: bool) -> void:
@@ -202,7 +268,45 @@ func _build_labels() -> void:
 	level_settings.shadow_size = 6
 	level_settings.shadow_color = Color(0.0, 0.65, 1.0, 0.35)
 	level_label.label_settings = level_settings
+	_register_label(level_label)
 	add_child(level_label)
+
+	floor_label = Label.new()
+	floor_label.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	floor_label.offset_left = -150
+	floor_label.offset_right = -18
+	floor_label.offset_top = 58
+	floor_label.offset_bottom = 88
+	floor_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	floor_label.visible = false
+	floor_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var floor_settings := LabelSettings.new()
+	floor_settings.font_size = 15
+	floor_settings.font_color = Color(0.15, 0.95, 0.75)
+	floor_settings.outline_size = 6
+	floor_settings.outline_color = Color(0.02, 0.04, 0.10, 0.95)
+	floor_label.label_settings = floor_settings
+	_register_label(floor_label)
+	add_child(floor_label)
+
+	floor_status_label = Label.new()
+	floor_status_label.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	floor_status_label.offset_left = -330
+	floor_status_label.offset_right = -18
+	floor_status_label.offset_top = 84
+	floor_status_label.offset_bottom = 108
+	floor_status_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	floor_status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	floor_status_label.visible = false
+	floor_status_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var floor_status_settings := LabelSettings.new()
+	floor_status_settings.font_size = 12
+	floor_status_settings.font_color = Color(1.0, 0.80, 0.26)
+	floor_status_settings.outline_size = 5
+	floor_status_settings.outline_color = Color(0.02, 0.04, 0.10, 0.95)
+	floor_status_label.label_settings = floor_status_settings
+	_register_label(floor_status_label)
+	add_child(floor_status_label)
 
 	core_label = Label.new()
 	core_label.set_anchors_preset(Control.PRESET_TOP_WIDE)
@@ -217,11 +321,26 @@ func _build_labels() -> void:
 	core_settings.shadow_size = 6
 	core_settings.shadow_color = Color(0.0, 0.65, 1.0, 0.35)
 	core_label.label_settings = core_settings
+	_register_label(core_label)
 	add_child(core_label)
+
+	energy_label = Label.new()
+	energy_label.set_anchors_preset(Control.PRESET_TOP_WIDE)
+	energy_label.offset_top = 80
+	energy_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	energy_label.visible = false
+	var energy_settings := LabelSettings.new()
+	energy_settings.font_size = 15
+	energy_settings.font_color = Color(0.70, 0.88, 1.0, 0.92)
+	energy_settings.outline_size = 6
+	energy_settings.outline_color = Color(0.02, 0.04, 0.10, 0.95)
+	energy_label.label_settings = energy_settings
+	_register_label(energy_label)
+	add_child(energy_label)
 
 	lock_label = Label.new()
 	lock_label.set_anchors_preset(Control.PRESET_TOP_WIDE)
-	lock_label.offset_top = 80
+	lock_label.offset_top = 104
 	lock_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	lock_label.visible = false
 	var lock_settings := LabelSettings.new()
@@ -230,6 +349,7 @@ func _build_labels() -> void:
 	lock_settings.outline_size = 6
 	lock_settings.outline_color = Color(0.02, 0.04, 0.10, 0.95)
 	lock_label.label_settings = lock_settings
+	_register_label(lock_label)
 	add_child(lock_label)
 
 	hint_label = Label.new()
@@ -251,6 +371,7 @@ func _build_labels() -> void:
 	hint_settings.shadow_size = 5
 	hint_settings.shadow_color = Color(1.0, 0.45, 0.08, 0.42)
 	hint_label.label_settings = hint_settings
+	_register_label(hint_label)
 	add_child(hint_label)
 
 	fragment_label = Label.new()
@@ -269,6 +390,7 @@ func _build_labels() -> void:
 	fragment_settings.outline_size = 5
 	fragment_settings.outline_color = Color(0.02, 0.04, 0.10, 0.95)
 	fragment_label.label_settings = fragment_settings
+	_register_label(fragment_label)
 	add_child(fragment_label)
 
 	# --- Centered Modal Victory Card ---
@@ -322,6 +444,7 @@ func _build_labels() -> void:
 	badge_s.font_size = 12
 	badge_s.font_color = Color(0.35, 0.92, 1.0, 0.95)
 	win_sub_badge.label_settings = badge_s
+	_register_label(win_sub_badge)
 	vbox.add_child(win_sub_badge)
 
 	var main_title := Label.new()
@@ -335,6 +458,7 @@ func _build_labels() -> void:
 	title_s.shadow_size = 8
 	title_s.shadow_color = Color(1.0, 0.45, 0.10, 0.5)
 	main_title.label_settings = title_s
+	_register_label(main_title)
 	vbox.add_child(main_title)
 
 	var sep := ColorRect.new()
@@ -350,6 +474,7 @@ func _build_labels() -> void:
 	lvl_s.outline_size = 4
 	lvl_s.outline_color = Color.BLACK
 	win_level_label.label_settings = lvl_s
+	_register_label(win_level_label)
 	vbox.add_child(win_level_label)
 
 	win_stars_label = Label.new()
@@ -362,6 +487,7 @@ func _build_labels() -> void:
 	star_s.shadow_size = 4
 	star_s.shadow_color = Color(1.0, 0.65, 0.15, 0.5)
 	win_stars_label.label_settings = star_s
+	_register_label(win_stars_label)
 	vbox.add_child(win_stars_label)
 
 	win_stats_label = Label.new()
@@ -370,6 +496,7 @@ func _build_labels() -> void:
 	st_s.font_size = 14
 	st_s.font_color = Color(0.70, 0.88, 1.0, 0.90)
 	win_stats_label.label_settings = st_s
+	_register_label(win_stats_label)
 	vbox.add_child(win_stats_label)
 
 	# Spacer
@@ -391,34 +518,34 @@ func _build_labels() -> void:
 	vbox.add_child(_win_next_btn)
 
 	# 2. Chơi lại (Restart)
-	var win_restart_btn := Button.new()
-	win_restart_btn.text = "  CHƠI LẠI"
-	win_restart_btn.icon = ICON_RESTART
-	win_restart_btn.expand_icon = true
-	win_restart_btn.custom_minimum_size = Vector2(280, 44)
-	_style_button(win_restart_btn, COLOR_ORANGE)
-	win_restart_btn.pressed.connect(func() -> void:
+	_win_restart_btn = Button.new()
+	_win_restart_btn.text = "  CHƠI LẠI"
+	_win_restart_btn.icon = ICON_RESTART
+	_win_restart_btn.expand_icon = true
+	_win_restart_btn.custom_minimum_size = Vector2(280, 44)
+	_style_button(_win_restart_btn, COLOR_ORANGE)
+	_win_restart_btn.pressed.connect(func() -> void:
 		hide_win()
 		restart_requested.emit()
 	)
-	vbox.add_child(win_restart_btn)
+	vbox.add_child(_win_restart_btn)
 
 	# 3. Về Menu
-	var win_menu_btn := Button.new()
-	win_menu_btn.text = "  VỀ MENU"
-	win_menu_btn.icon = ICON_MENU
-	win_menu_btn.expand_icon = true
-	win_menu_btn.custom_minimum_size = Vector2(280, 44)
-	_style_button(win_menu_btn, Color(0.55, 0.65, 0.80))
-	win_menu_btn.pressed.connect(func() -> void:
+	_win_menu_btn = Button.new()
+	_win_menu_btn.text = "  VỀ MENU"
+	_win_menu_btn.icon = ICON_MENU
+	_win_menu_btn.expand_icon = true
+	_win_menu_btn.custom_minimum_size = Vector2(280, 44)
+	_style_button(_win_menu_btn, Color(0.55, 0.65, 0.80))
+	_win_menu_btn.pressed.connect(func() -> void:
 		hide_win()
 		menu_requested.emit()
 	)
-	vbox.add_child(win_menu_btn)
+	vbox.add_child(_win_menu_btn)
 
 
 func _build_buttons() -> void:
-	var undo_button := Button.new()
+	undo_button = Button.new()
 	undo_button.text = " Hoàn tác"
 	undo_button.icon = ICON_UNDO
 	undo_button.expand_icon = true
@@ -431,7 +558,7 @@ func _build_buttons() -> void:
 	undo_button.pressed.connect(func() -> void: undo_requested.emit())
 	add_child(undo_button)
 
-	var restart_button := Button.new()
+	restart_button = Button.new()
 	restart_button.text = " Chơi lại"
 	restart_button.icon = ICON_RESTART
 	restart_button.expand_icon = true
@@ -459,7 +586,7 @@ func _build_buttons() -> void:
 	bridge_button.pressed.connect(func() -> void: bridge_requested.emit())
 	add_child(bridge_button)
 
-	var menu_button := Button.new()
+	menu_button = Button.new()
 	menu_button.text = " Menu"
 	menu_button.icon = ICON_MENU
 	menu_button.expand_icon = true
@@ -481,7 +608,7 @@ func _build_buttons() -> void:
 	hint_button.pressed.connect(func() -> void: hint_requested.emit())
 	add_child(hint_button)
 
-	var pause_button := Button.new()
+	pause_button = Button.new()
 	pause_button.text = " Tạm dừng"
 	pause_button.icon = ICON_PAUSE
 	pause_button.expand_icon = true
@@ -501,9 +628,12 @@ func set_paused(paused: bool) -> void:
 		_pause_root.visible = paused
 		if paused:
 			_update_pause_audio_text()
-			_pause_root.modulate.a = 0.0
-			var tw := create_tween()
-			tw.tween_property(_pause_root, "modulate:a", 1.0, 0.2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+			if GameState.reduced_motion:
+				_pause_root.modulate.a = 1.0
+			else:
+				_pause_root.modulate.a = 0.0
+				var tw := create_tween()
+				tw.tween_property(_pause_root, "modulate:a", 1.0, 0.2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	elif pause_panel:
 		pause_panel.visible = paused
 
@@ -535,10 +665,10 @@ func _build_pause_panel() -> void:
 	center.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_pause_root.add_child(center)
 
-	var card := PanelContainer.new()
-	card.custom_minimum_size = Vector2(360, 360)
-	card.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	center.add_child(card)
+	_pause_card = PanelContainer.new()
+	_pause_card.custom_minimum_size = Vector2(360, 360)
+	_pause_card.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	center.add_child(_pause_card)
 
 	var card_style := StyleBoxFlat.new()
 	card_style.bg_color = Color(0.018, 0.032, 0.055, 0.96)
@@ -553,7 +683,7 @@ func _build_pause_panel() -> void:
 	card_style.corner_radius_bottom_right = 14
 	card_style.shadow_color = Color(0.0, 0.55, 0.9, 0.4)
 	card_style.shadow_size = 22
-	card.add_theme_stylebox_override("panel", card_style)
+	_pause_card.add_theme_stylebox_override("panel", card_style)
 
 	var margin := MarginContainer.new()
 	margin.add_theme_constant_override("margin_left", 28)
@@ -561,7 +691,7 @@ func _build_pause_panel() -> void:
 	margin.add_theme_constant_override("margin_top", 24)
 	margin.add_theme_constant_override("margin_bottom", 24)
 	margin.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	card.add_child(margin)
+	_pause_card.add_child(margin)
 
 	var content := VBoxContainer.new()
 	content.add_theme_constant_override("separation", 12)
@@ -605,27 +735,27 @@ func _build_pause_panel() -> void:
 	content.add_child(sp)
 
 	# 1. Tiếp tục (Resume)
-	var resume := Button.new()
-	resume.text = "  TIẾP TỤC"
-	resume.icon = ICON_PLAY
-	resume.expand_icon = true
-	resume.custom_minimum_size = Vector2(280, 44)
-	_style_button(resume, COLOR_CYAN)
-	resume.pressed.connect(func() -> void: resume_requested.emit())
-	content.add_child(resume)
+	_pause_resume_btn = Button.new()
+	_pause_resume_btn.text = "  TIẾP TỤC"
+	_pause_resume_btn.icon = ICON_PLAY
+	_pause_resume_btn.expand_icon = true
+	_pause_resume_btn.custom_minimum_size = Vector2(280, 44)
+	_style_button(_pause_resume_btn, COLOR_CYAN)
+	_pause_resume_btn.pressed.connect(func() -> void: resume_requested.emit())
+	content.add_child(_pause_resume_btn)
 
 	# 2. Chơi lại (Restart)
-	var restart := Button.new()
-	restart.text = "  CHƠI LẠI"
-	restart.icon = ICON_RESTART
-	restart.expand_icon = true
-	restart.custom_minimum_size = Vector2(280, 44)
-	_style_button(restart, COLOR_ORANGE)
-	restart.pressed.connect(func() -> void:
+	_pause_restart_btn = Button.new()
+	_pause_restart_btn.text = "  CHƠI LẠI"
+	_pause_restart_btn.icon = ICON_RESTART
+	_pause_restart_btn.expand_icon = true
+	_pause_restart_btn.custom_minimum_size = Vector2(280, 44)
+	_style_button(_pause_restart_btn, COLOR_ORANGE)
+	_pause_restart_btn.pressed.connect(func() -> void:
 		resume_requested.emit()
 		restart_requested.emit()
 	)
-	content.add_child(restart)
+	content.add_child(_pause_restart_btn)
 
 	# 3. Âm thanh Toggle (Audio)
 	_pause_audio_btn = Button.new()
@@ -640,37 +770,272 @@ func _build_pause_panel() -> void:
 	content.add_child(_pause_audio_btn)
 
 	# 4. Về Menu
-	var menu := Button.new()
-	menu.text = "  VỀ MENU"
-	menu.icon = ICON_MENU
-	menu.expand_icon = true
-	menu.custom_minimum_size = Vector2(280, 44)
-	_style_button(menu, Color(0.55, 0.65, 0.80))
-	menu.pressed.connect(func() -> void: menu_requested.emit())
-	content.add_child(menu)
+	_pause_menu_btn = Button.new()
+	_pause_menu_btn.text = "  VỀ MENU"
+	_pause_menu_btn.icon = ICON_MENU
+	_pause_menu_btn.expand_icon = true
+	_pause_menu_btn.custom_minimum_size = Vector2(280, 44)
+	_style_button(_pause_menu_btn, Color(0.55, 0.65, 0.80))
+	_pause_menu_btn.pressed.connect(func() -> void: menu_requested.emit())
+	content.add_child(_pause_menu_btn)
+
+
+func _register_label(label: Label) -> void:
+	if label == null or _labels.has(label):
+		return
+	_labels.append(label)
+	if label.label_settings:
+		_label_defaults[label.get_instance_id()] = {
+			"font_color": label.label_settings.font_color,
+			"outline_size": label.label_settings.outline_size,
+			"outline_color": label.label_settings.outline_color,
+		}
+
+
+func _on_settings_changed() -> void:
+	_update_pause_audio_text()
+	_apply_accessibility()
+	_layout_for_viewport()
+
+
+func _apply_accessibility() -> void:
+	var high := GameState.high_contrast
+	for label in _labels:
+		if not is_instance_valid(label) or label.label_settings == null:
+			continue
+		var defaults: Dictionary = _label_defaults.get(label.get_instance_id(), {})
+		var base_color: Color = defaults.get("font_color", Color.WHITE)
+		var base_outline := int(defaults.get("outline_size", 4))
+		label.label_settings.font_color = Color.WHITE if high else base_color
+		label.label_settings.outline_size = maxi(base_outline, 9) if high else base_outline
+		label.label_settings.outline_color = Color.BLACK if high else defaults.get("outline_color", Color.BLACK)
+	for button in _styled_buttons:
+		if is_instance_valid(button):
+			_apply_button_style(button, _button_accents.get(button.get_instance_id(), COLOR_CYAN))
+	if is_instance_valid(_win_card):
+		_apply_panel_contrast(_win_card, high, Color(0.12, 0.88, 1.0, 0.90))
+	if is_instance_valid(_pause_card):
+		_apply_panel_contrast(_pause_card, high, Color(0.12, 0.82, 1.0, 0.85))
+
+
+func _apply_panel_contrast(panel: PanelContainer, high: bool, accent: Color) -> void:
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color.BLACK if high else Color(0.015, 0.03, 0.055, 0.96)
+	style.border_color = Color.WHITE if high else accent
+	style.set_border_width_all(3 if high else 2)
+	style.set_corner_radius_all(16)
+	style.shadow_size = 24
+	style.shadow_color = Color(0.0, 0.65, 1.0, 0.45)
+	if panel == _win_card:
+		style.content_margin_left = 32.0
+		style.content_margin_right = 32.0
+		style.content_margin_top = 24.0
+		style.content_margin_bottom = 24.0
+	panel.add_theme_stylebox_override("panel", style)
 
 
 func _style_button(button: Button, accent: Color) -> void:
-	button.add_theme_font_size_override("font_size", 16)
-	button.add_theme_color_override("font_color", Color(0.84, 0.94, 1.0))
+	if not _styled_buttons.has(button):
+		_styled_buttons.append(button)
+	_button_accents[button.get_instance_id()] = accent
+	if not button.has_meta("wide_text"):
+		button.set_meta("wide_text", button.text)
+	button.focus_mode = Control.FOCUS_ALL
+	_apply_button_style(button, accent)
+
+
+func _apply_button_style(button: Button, accent: Color) -> void:
+	var high := GameState.high_contrast
+	button.add_theme_font_size_override("font_size", 16 if not _compact_layout else 15)
+	button.add_theme_color_override("font_color", Color.WHITE if high else Color(0.84, 0.94, 1.0))
 	button.add_theme_color_override("font_hover_color", Color.WHITE)
 	button.add_theme_color_override("font_pressed_color", Color.WHITE)
-	button.add_theme_constant_override("icon_max_width", 22)
+	button.add_theme_color_override("font_outline_color", Color.BLACK)
+	button.add_theme_constant_override("outline_size", 3 if high else 0)
+	button.add_theme_constant_override("icon_max_width", 24 if _compact_layout else 22)
 	button.add_theme_constant_override("h_separation", 8)
-	for state in ["normal", "hover", "pressed"]:
+	for state in ["normal", "hover", "pressed", "focus"]:
 		var style := StyleBoxFlat.new()
-		style.bg_color = Color(0.035, 0.065, 0.12, 0.96)
-		style.border_width_left = 2
-		style.border_width_top = 2
-		style.border_width_right = 2
-		style.border_width_bottom = 2
-		style.border_color = accent if state != "normal" else Color(accent.r, accent.g, accent.b, 0.65)
+		style.bg_color = Color.BLACK if high else Color(0.035, 0.065, 0.12, 0.96)
+		style.border_width_left = 3 if high else 2
+		style.border_width_top = 3 if high else 2
+		style.border_width_right = 3 if high else 2
+		style.border_width_bottom = 3 if high else 2
+		style.border_color = Color.WHITE if high else (accent if state != "normal" else Color(accent.r, accent.g, accent.b, 0.65))
 		style.corner_radius_top_left = 10
 		style.corner_radius_top_right = 10
 		style.corner_radius_bottom_left = 10
 		style.corner_radius_bottom_right = 10
-		style.content_margin_left = 16.0
-		style.content_margin_right = 16.0
+		style.content_margin_left = 12.0 if _compact_layout else 16.0
+		style.content_margin_right = 12.0 if _compact_layout else 16.0
 		style.content_margin_top = 8.0
 		style.content_margin_bottom = 8.0
 		button.add_theme_stylebox_override(state, style)
+
+
+func _position_bottom_button(button: Button, left: float, width: float, height: float, bottom_margin: float) -> void:
+	if button == null:
+		return
+	button.anchor_left = 0.0
+	button.anchor_right = 0.0
+	button.anchor_top = 1.0
+	button.anchor_bottom = 1.0
+	button.offset_left = left
+	button.offset_right = left + width
+	button.offset_top = -bottom_margin - height
+	button.offset_bottom = -bottom_margin
+	button.custom_minimum_size = Vector2(width, height)
+
+
+func _position_center_bottom_button(button: Button, width: float, height: float, bottom_margin: float) -> void:
+	if button == null:
+		return
+	button.anchor_left = 0.5
+	button.anchor_right = 0.5
+	button.anchor_top = 1.0
+	button.anchor_bottom = 1.0
+	button.offset_left = -width * 0.5
+	button.offset_right = width * 0.5
+	button.offset_top = -bottom_margin - height
+	button.offset_bottom = -bottom_margin
+	button.custom_minimum_size = Vector2(width, height)
+
+
+func _set_compact_button_text(button: Button, compact: bool, compact_text := "") -> void:
+	if button == null or button == _pause_audio_btn:
+		return
+	button.text = compact_text if compact else str(button.get_meta("wide_text", button.text))
+
+
+func _layout_for_viewport() -> void:
+	if not is_instance_valid(level_label):
+		return
+	var viewport_size := get_viewport().get_visible_rect().size
+	var edge := clampf(minf(viewport_size.x, viewport_size.y) * 0.035, 12.0, 28.0)
+	_compact_layout = viewport_size.x < 760.0 or viewport_size.y < 560.0
+
+	level_label.set_anchors_preset(Control.PRESET_TOP_WIDE)
+	level_label.offset_left = edge + (62.0 if _compact_layout else 20.0)
+	level_label.offset_right = -edge - (62.0 if _compact_layout else 20.0)
+	level_label.offset_top = 8.0 if _compact_layout else 20.0
+	level_label.offset_bottom = 38.0 if _compact_layout else 48.0
+	level_label.label_settings.font_size = 17 if _compact_layout else 22
+
+	floor_label.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	floor_label.offset_left = -(112.0 if _compact_layout else 150.0)
+	floor_label.offset_right = -edge
+	floor_label.offset_top = 44.0 if _compact_layout else 58.0
+	floor_label.offset_bottom = floor_label.offset_top + 26.0
+	floor_label.label_settings.font_size = 13 if _compact_layout else 15
+
+	floor_status_label.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	floor_status_label.offset_left = -(230.0 if _compact_layout else 330.0)
+	floor_status_label.offset_right = -edge
+	floor_status_label.offset_top = 93.0 if _compact_layout else 84.0
+	floor_status_label.offset_bottom = floor_status_label.offset_top + 30.0
+	floor_status_label.label_settings.font_size = 10 if _compact_layout else 12
+
+	core_label.set_anchors_preset(Control.PRESET_TOP_WIDE)
+	core_label.offset_left = edge
+	core_label.offset_right = -edge
+	core_label.offset_top = 44.0 if _compact_layout else 54.0
+	core_label.offset_bottom = core_label.offset_top + 24.0
+	core_label.label_settings.font_size = 14 if _compact_layout else 16
+
+	energy_label.set_anchors_preset(Control.PRESET_TOP_WIDE)
+	energy_label.offset_left = edge
+	energy_label.offset_right = -edge
+	energy_label.offset_top = 67.0 if _compact_layout else 80.0
+	energy_label.offset_bottom = energy_label.offset_top + 22.0
+	energy_label.label_settings.font_size = 13 if _compact_layout else 15
+
+	lock_label.set_anchors_preset(Control.PRESET_TOP_WIDE)
+	lock_label.offset_left = edge
+	lock_label.offset_right = -edge
+	lock_label.offset_top = 88.0 if _compact_layout else 104.0
+	lock_label.offset_bottom = lock_label.offset_top + 24.0
+	lock_label.label_settings.font_size = 13 if _compact_layout else 15
+
+	hint_label.set_anchors_preset(Control.PRESET_TOP_WIDE)
+	hint_label.offset_left = edge
+	hint_label.offset_right = -edge
+	hint_label.offset_top = 118.0 if _compact_layout else 108.0
+	hint_label.offset_bottom = hint_label.offset_top + (40.0 if _compact_layout else 46.0)
+	hint_label.label_settings.font_size = 13 if _compact_layout else 15
+
+	fragment_label.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
+	fragment_label.offset_left = edge + (72.0 if _compact_layout else 150.0)
+	fragment_label.offset_right = -edge - (72.0 if _compact_layout else 150.0)
+	fragment_label.offset_top = -104.0 if _compact_layout else -132.0
+	fragment_label.offset_bottom = -72.0 if _compact_layout else -76.0
+	fragment_label.label_settings.font_size = 13 if _compact_layout else 15
+
+	var bottom_margin := 12.0 if _compact_layout else 24.0
+	var bottom_height := 54.0 if _compact_layout else 56.0
+	if _compact_layout:
+		var gap := 7.0
+		var count := 3 if bridge_button != null and bridge_button.visible else 2
+		var available := maxf(180.0, viewport_size.x - edge * 2.0)
+		var width := maxf(72.0, minf(132.0, (available - gap * float(count - 1)) / float(count)))
+		var total := width * float(count) + gap * float(count - 1)
+		var left := maxf(edge, (viewport_size.x - total) * 0.5)
+		_position_bottom_button(undo_button, left, width, bottom_height, bottom_margin)
+		if count == 3:
+			_position_bottom_button(bridge_button, left + width + gap, width, bottom_height, bottom_margin)
+			_position_bottom_button(restart_button, left + (width + gap) * 2.0, width, bottom_height, bottom_margin)
+		else:
+			_position_bottom_button(restart_button, left + width + gap, width, bottom_height, bottom_margin)
+			_position_bottom_button(bridge_button, (viewport_size.x - width) * 0.5, width, bottom_height, bottom_margin)
+		_set_compact_button_text(undo_button, true)
+		_set_compact_button_text(restart_button, true)
+		_set_compact_button_text(bridge_button, true)
+	else:
+		_position_bottom_button(undo_button, edge, 130.0, bottom_height, bottom_margin)
+		_position_bottom_button(restart_button, viewport_size.x - edge - 130.0, 130.0, bottom_height, bottom_margin)
+		_position_center_bottom_button(bridge_button, 150.0, bottom_height, bottom_margin)
+		_set_compact_button_text(undo_button, false)
+		_set_compact_button_text(restart_button, false)
+		_set_compact_button_text(bridge_button, false)
+
+	menu_button.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	menu_button.offset_left = edge
+	menu_button.offset_top = 10.0
+	menu_button.offset_right = edge + (56.0 if _compact_layout else 110.0)
+	menu_button.offset_bottom = menu_button.offset_top + (52.0 if _compact_layout else 46.0)
+	menu_button.custom_minimum_size = Vector2(menu_button.offset_right - menu_button.offset_left, menu_button.offset_bottom - menu_button.offset_top)
+	_set_compact_button_text(menu_button, _compact_layout)
+	menu_button.tooltip_text = "Menu"
+
+	hint_button.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	hint_button.offset_left = edge
+	hint_button.offset_top = 68.0 if _compact_layout else 64.0
+	hint_button.offset_right = edge + (56.0 if _compact_layout else 110.0)
+	hint_button.offset_bottom = hint_button.offset_top + (52.0 if _compact_layout else 46.0)
+	hint_button.custom_minimum_size = Vector2(hint_button.offset_right - hint_button.offset_left, hint_button.offset_bottom - hint_button.offset_top)
+	_set_compact_button_text(hint_button, _compact_layout, "?")
+	hint_button.tooltip_text = "Gợi ý"
+
+	pause_button.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	pause_button.offset_left = -(edge + (56.0 if _compact_layout else 125.0))
+	pause_button.offset_right = -edge
+	pause_button.offset_top = 10.0
+	pause_button.offset_bottom = pause_button.offset_top + (52.0 if _compact_layout else 46.0)
+	pause_button.custom_minimum_size = Vector2(pause_button.offset_right - pause_button.offset_left, pause_button.offset_bottom - pause_button.offset_top)
+	_set_compact_button_text(pause_button, _compact_layout)
+	pause_button.tooltip_text = "Tạm dừng"
+
+	if is_instance_valid(_win_card):
+		var card_width := minf(520.0, maxf(240.0, viewport_size.x - (24.0 if _compact_layout else 80.0)))
+		_win_card.custom_minimum_size = Vector2(card_width, 350.0 if _compact_layout else 380.0)
+		var win_button_width := maxf(190.0, card_width - 64.0)
+		_win_next_btn.custom_minimum_size.x = win_button_width
+		_win_restart_btn.custom_minimum_size.x = win_button_width
+		_win_menu_btn.custom_minimum_size.x = win_button_width
+	if is_instance_valid(_pause_card):
+		var pause_width := minf(360.0, maxf(240.0, viewport_size.x - 24.0))
+		_pause_card.custom_minimum_size = Vector2(pause_width, 350.0 if _compact_layout else 360.0)
+		var pause_button_width := maxf(180.0, pause_width - 56.0)
+		_pause_resume_btn.custom_minimum_size.x = pause_button_width
+		_pause_restart_btn.custom_minimum_size.x = pause_button_width
+		_pause_audio_btn.custom_minimum_size.x = pause_button_width
+		_pause_menu_btn.custom_minimum_size.x = pause_button_width

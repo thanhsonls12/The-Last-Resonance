@@ -15,6 +15,8 @@ var chapter_intro_card: ChapterIntroCard
 ## Returns the player's current grid cell (logic.player on the scene).
 var player_provider: Callable
 var _story_event_flags := {}
+var _generation := 0
+var _level14_eva_stage := 0
 
 
 func setup(
@@ -29,11 +31,32 @@ func setup(
 
 
 func reset_for_level() -> void:
+	_generation += 1
 	_story_event_flags.clear()
+	_level14_eva_stage = 0
+	if dialogue_box:
+		dialogue_box.cancel()
+	if chapter_intro_card:
+		chapter_intro_card.cancel()
 
 
 ## Runs after every accepted move. Returns true when a dialogue consumed the beat.
 func play_post_step_story(level_index: int, decorations: Array, move_result: Dictionary, player: Vector3i) -> bool:
+	if level_index == 12 and bool(move_result.get("energy_advanced", false)):
+		await play_story_event_once("level_13_soul_echo")
+		return true
+	if level_index == 13 and bool(move_result.get("energy_advanced", false)):
+		_level14_eva_stage = clampi(int(move_result.get("energy_progress_after", _level14_eva_stage + 1)), 1, 4)
+		var eva_cell: Variant = _decoration_cell(decorations, "eva_conduit")
+		if eva_cell is Vector3i:
+			var eva_fixture := board_view.world_position(eva_cell)
+			var player_world := board_view.world_position(player)
+			board_view.set_eva_hologram_stage(
+				_level14_eva_stage,
+				_hologram_projection_position(eva_fixture, player_world),
+				player_world)
+		await play_story_event_once("level_14_eva_node_%d" % _level14_eva_stage)
+		return true
 	if level_index == 1:
 		for deco in decorations:
 			if deco is Dictionary and str(deco.get("type", "")) == "terminal":
@@ -65,7 +88,16 @@ func play_post_step_story(level_index: int, decorations: Array, move_result: Dic
 		var door_state_after: Dictionary = move_result.get("door_state_after", {})
 		for door_position in changed_doors:
 			if bool(door_state_after.get(door_position, false)):
+				var switch_cell: Variant = _decoration_cell(decorations, "reactor_switch")
+				if switch_cell is Vector3i:
+					var switch_world := board_view.world_position(switch_cell)
+					var player_world := board_view.world_position(player)
+					board_view.spawn_eva_hologram(
+						_hologram_projection_position(switch_world, player_world),
+						player_world,
+						4)
 				await play_story_event_once("level_8_eva_lockdown")
+				board_view.dismiss_eva_hologram()
 				return true
 	elif level_index == 8 and bool(move_result.get("teleported", false)):
 		await play_story_event_once("level_9_shared_dream")
@@ -73,7 +105,25 @@ func play_post_step_story(level_index: int, decorations: Array, move_result: Dic
 	elif level_index == 9 and bool(move_result.get("teleported", false)):
 		await play_story_event_once("level_10_resonance_network")
 		return true
+	elif level_index == 10 and bool(move_result.get("elevated", false)):
+		await play_story_event_once("level_11_silence_protocol")
+		return true
 	return false
+
+
+func sync_level_visuals(level_index: int, decorations: Array, player: Vector3i, energy_progress: int) -> void:
+	if level_index != 13:
+		return
+	_level14_eva_stage = clampi(energy_progress, 0, 4)
+	var eva_cell: Variant = _decoration_cell(decorations, "eva_conduit")
+	if not eva_cell is Vector3i:
+		return
+	var eva_fixture := board_view.world_position(eva_cell)
+	var player_world := board_view.world_position(player)
+	board_view.set_eva_hologram_stage(
+		_level14_eva_stage,
+		_hologram_projection_position(eva_fixture, player_world),
+		player_world)
 
 
 func _player_near_decoration(decorations: Array, kind: String, player: Vector3i) -> bool:
@@ -86,6 +136,24 @@ func _player_near_decoration(decorations: Array, kind: String, player: Vector3i)
 			if absi(offset.x) + absi(offset.y) + absi(offset.z) <= 1:
 				return true
 	return false
+
+
+func _decoration_cell(decorations: Array, kind: String) -> Variant:
+	for deco in decorations:
+		if not deco is Dictionary or str(deco.get("type", "")) != kind:
+			continue
+		var position: Variant = deco.get("grid_position", null)
+		if position is Vector3i:
+			return position
+	return null
+
+
+func _hologram_projection_position(fixture_world: Vector3, viewer_world: Vector3, distance := 0.82) -> Vector3:
+	var direction := viewer_world - fixture_world
+	direction.y = 0.0
+	if direction.length_squared() < 0.001:
+		return fixture_world
+	return fixture_world + direction.normalized() * distance
 
 
 func play_story_event_once(event_key: String) -> void:
@@ -125,9 +193,12 @@ func show_push_hint_if_near_core(level_index: int, first_move_hinted: bool, bloc
 
 ## Chapter intro card + opening dialogue; Kiro boots up during chapter 1.
 func play_chapter_start_sequence(chapter: int, vfx: EchoVfxManager, player_position_provider: Callable) -> void:
+	var generation := _generation
 	if chapter_intro_card:
 		chapter_intro_card.show_chapter(chapter)
 		await chapter_intro_card.finished
+		if generation != _generation:
+			return
 
 	if chapter == 1:
 		board_view.set_kiro_powered(false, true)
@@ -136,6 +207,8 @@ func play_chapter_start_sequence(chapter: int, vfx: EchoVfxManager, player_posit
 	if not lines.is_empty() and dialogue_box:
 		var has_powered_on := false
 		var line_handler := func(index: int, speaker: String) -> void:
+			if generation != _generation:
+				return
 			if chapter == 1 and not has_powered_on and (index >= 2 or "KIRO" in speaker.to_upper()):
 				has_powered_on = true
 				_power_on_kiro(vfx, player_position_provider)
@@ -145,6 +218,8 @@ func play_chapter_start_sequence(chapter: int, vfx: EchoVfxManager, player_posit
 		await dialogue_box.dialogue_finished
 		if dialogue_box.line_started.is_connected(line_handler):
 			dialogue_box.line_started.disconnect(line_handler)
+		if generation != _generation:
+			return
 		if chapter == 1 and not has_powered_on:
 			_power_on_kiro(vfx, player_position_provider)
 	elif chapter == 1:
@@ -160,27 +235,72 @@ func _power_on_kiro(vfx: EchoVfxManager, player_position_provider: Callable) -> 
 
 
 ## Win-scene skits for scripted levels. Returns true when it played one.
-func play_win_skit(level_index: int, target_slot: Vector3i, target_world_pos: Vector3) -> bool:
+func play_win_skit(level_index: int, target_slot: Vector3i, target_world_pos: Vector3, decorations: Array = []) -> bool:
+	var generation := _generation
 	if not dialogue_box:
 		return false
 	var lines: Array = []
 	var pre_delay := 0.4
+	var actor := &"eva"
+	var actor_world_pos := target_world_pos
+	var project_from_fixture := false
 	match level_index:
 		0:
 			lines = StoryData.get_dialogue_event("first_puzzle_done")
 		3:
 			lines = StoryData.get_dialogue_event("level_4_eva_contact")
 			pre_delay = 0.35
+		11:
+			lines = StoryData.get_dialogue_event("level_12_elias_testament")
+			pre_delay = 0.55
+			actor = &"elias"
+			var testament_cell: Variant = _decoration_cell(decorations, "elias_testament")
+			if testament_cell is Vector3i:
+				actor_world_pos = board_view.world_position(testament_cell)
+				project_from_fixture = true
+		13:
+			lines = StoryData.get_dialogue_event("level_14_eva_reveal")
+			pre_delay = 0.45
+			var conduit_cell: Variant = _decoration_cell(decorations, "eva_conduit")
+			if conduit_cell is Vector3i:
+				actor_world_pos = board_view.world_position(conduit_cell)
+				project_from_fixture = true
+		14:
+			lines = StoryData.get_dialogue_event("level_15_final_signal")
+			pre_delay = 0.55
+			actor = &"both"
+			var judgement_cell: Variant = _decoration_cell(decorations, "judgement_engine")
+			if judgement_cell is Vector3i:
+				actor_world_pos = board_view.world_position(judgement_cell)
 	if lines.is_empty():
 		return false
 	var player: Vector3i = player_provider.call()
 	var player_world_pos := board_view.world_position(player)
-	board_view.face_player(target_slot - player)
+	if project_from_fixture:
+		actor_world_pos = _hologram_projection_position(actor_world_pos, player_world_pos)
+	var actor_delta := actor_world_pos - player_world_pos
+	board_view.face_player(Vector3i(roundi(actor_delta.x), 0, roundi(actor_delta.z)))
 	await board_view.get_tree().create_timer(pre_delay).timeout
-	board_view.spawn_eva_hologram(target_world_pos, player_world_pos)
+	if generation != _generation:
+		return false
+	match actor:
+		&"elias":
+			board_view.spawn_elias_hologram(actor_world_pos, player_world_pos)
+		&"both":
+			board_view.spawn_eva_hologram(actor_world_pos + Vector3(-0.85, 0, 0), player_world_pos, 4)
+			board_view.spawn_elias_hologram(actor_world_pos + Vector3(0.85, 0, 0), player_world_pos)
+		_:
+			board_view.spawn_eva_hologram(actor_world_pos, player_world_pos, 4)
 	await board_view.get_tree().create_timer(pre_delay).timeout
+	if generation != _generation:
+		return false
 	dialogue_box.play_dialogue(lines)
 	await dialogue_box.dialogue_finished
-	board_view.dismiss_eva_hologram()
+	if generation != _generation:
+		return false
+	if actor in [&"eva", &"both"]:
+		board_view.dismiss_eva_hologram()
+	if actor in [&"elias", &"both"]:
+		board_view.dismiss_elias_hologram()
 	await board_view.get_tree().create_timer(0.3).timeout
 	return true

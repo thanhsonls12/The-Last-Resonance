@@ -23,6 +23,18 @@ var _dragging := false
 var _moved_far := false
 var _press_pos := Vector2.ZERO
 var _press_ms := 0
+var _touch_index := -1
+
+
+func cancel_gesture() -> void:
+	_dragging = false
+	_moved_far = false
+	_touch_index = -1
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_APPLICATION_FOCUS_OUT:
+		cancel_gesture()
 
 
 func setup(p_camera_controller: EchoCameraController) -> void:
@@ -33,9 +45,14 @@ func setup(p_camera_controller: EchoCameraController) -> void:
 func _add_key_action(action: StringName, keys: Array) -> void:
 	if not InputMap.has_action(action):
 		InputMap.add_action(action)
-	if not InputMap.action_get_events(action).is_empty():
-		return
 	for key in keys:
+		var exists := false
+		for event in InputMap.action_get_events(action):
+			if event is InputEventKey and (event.physical_keycode == key or event.keycode == key):
+				exists = true
+				break
+		if exists:
+			continue
 		var input_event := InputEventKey.new()
 		input_event.physical_keycode = key
 		InputMap.action_add_event(action, input_event)
@@ -57,8 +74,20 @@ func _ensure_input_actions() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if get_tree().paused:
+		cancel_gesture()
 		return
-	if event is InputEventMouseButton:
+	if event is InputEventScreenTouch:
+		_handle_touch(event)
+	elif event is InputEventScreenDrag:
+		if event.index == _touch_index:
+			var motion := InputEventMouseMotion.new()
+			motion.position = event.position
+			motion.relative = event.relative
+			_handle_mouse_motion(motion)
+	elif event is InputEventMouse and (event.device == -1 or _touch_index != -1):
+		# Godot emits device -1 mouse events for touch emulation.
+		return
+	elif event is InputEventMouseButton:
 		_handle_mouse_button(event as InputEventMouseButton)
 	elif event is InputEventMouseMotion and _dragging:
 		_handle_mouse_motion(event as InputEventMouseMotion)
@@ -84,6 +113,25 @@ func _unhandled_input(event: InputEvent) -> void:
 		hint_requested.emit()
 	elif event.is_action_pressed("pause_game"):
 		pause_requested.emit()
+
+
+func _handle_touch(event: InputEventScreenTouch) -> void:
+	if event.pressed:
+		if _touch_index != -1:
+			return
+		_touch_index = event.index
+	elif event.index != _touch_index:
+		return
+	if event.canceled:
+		cancel_gesture()
+		return
+	var button := InputEventMouseButton.new()
+	button.button_index = MOUSE_BUTTON_LEFT
+	button.position = event.position
+	button.pressed = event.pressed
+	_handle_mouse_button(button)
+	if not event.pressed:
+		_touch_index = -1
 
 
 func _handle_mouse_button(mb: InputEventMouseButton) -> void:

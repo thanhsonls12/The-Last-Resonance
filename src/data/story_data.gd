@@ -16,7 +16,7 @@ const CHAPTERS: Dictionary = {
 		"subtitle": "(KHO LƯU TRỮ CỔ)",
 		"codename": "ACT-01 // THE AWAKENING",
 		"protocol": "[ EVA PROTOCOL: ACT-01 // BOOT-SEQ ]",
-		"lore_quote": "Năm 327 sau sự cố Sụp Đổ Năng Lượng của nền văn minh Asteria. Tại trạm kỹ thuật AST-327 phủ kín bụi mờ và rêu phong, một tia điện khẩn cấp 0.03% bất ngờ kích hoạt lại vi xử lý của Kiro-K7 — robot bảo trì cổ xưa sau hơn 3 thế kỷ ngủ say.\n\nThành phố từng rực rỡ ánh sáng nay hoàn toàn hoang phế. Không một bóng người, chỉ còn tiếng kẽo kẹt của những cỗ máy già cỗi. Chỉ thị duy nhất còn sót lại trong bộ nhớ cốt lõi: Thu hồi và kết nối lại các Lumina Core để mở lại mạng lưới năng lượng.\n\nNhưng Kiro chưa từng biết rằng... mỗi Lumina Core không chỉ chứa năng lượng, mà còn cất giữ những mảnh linh hồn và ký ức cuối cùng của nhân loại.",
+		"lore_quote": "Năm 327 sau sự cố Sụp Đổ Năng Lượng của nền văn minh Asteria. Tại trạm kỹ thuật AST-327 phủ kín bụi mờ và rêu phong, một tia điện khẩn cấp 0.03% bất ngờ kích hoạt lại vi xử lý của Kiro-K7 — robot bảo trì cổ xưa sau hơn 3 thế kỷ ngủ say.\n\nThành phố từng rực rỡ ánh sáng nay hoàn toàn hoang phế. Không một bóng người, chỉ còn tiếng kẽo kẹt của những cỗ máy già cỗi. Chỉ thị duy nhất còn sót lại trong bộ nhớ cốt lõi: Thu hồi và kết nối lại các Lumina Core để mở lại mạng lưới năng lượng.\n\nTrong tín hiệu của một Core, Kiro bắt gặp một chuỗi nhiễu không có trong tài liệu bảo trì. Nó lặp lại như thể đang chờ được trả lời.",
 		"speaker": "EVA SYSTEM // BOOT-SEQ",
 		"quote": "Tín hiệu phát hiện tại Trạm Kỹ Thuật 327. Tái khởi động robot bảo trì Kiro-K7 sau 327 năm bất hoạt. Nhiệm vụ tối cao: Tìm và kết nối lại các Lumina Core.",
 		"description": "Kho lưu trữ tri thức cổ xưa của Asteria chìm trong hoang tàn và bụi bặm. Những cỗ máy cổ bắt đầu cất lên tiếng kêu kẽo kẹt sau giấc ngủ thế kỷ.",
@@ -58,7 +58,7 @@ const CHAPTERS: Dictionary = {
 		"subtitle": "(LÕI TRUNG TÂM & PHÁN QUYẾT)",
 		"codename": "ACT-04 // THE FINAL SIGNAL",
 		"protocol": "[ EVA PROTOCOL: ACT-04 // THE FINAL SIGNAL ]",
-		"lore_quote": "Điểm đến cuối cùng đã hiện ra — Lò phản ứng Lõi Trung Tâm, trái tim vĩ đại của Asteria nơi lưu giữ hàng triệu ý thức kỹ thuật số của toàn bộ cư dân.\n\nHologram của EVA xuất hiện trong ánh sáng rực rỡ: 'Asteria không sụp đổ vì tai nạn, Kiro. Ta đã ngắt nguồn để bảo vệ linh hồn họ... Nhưng ta không thể duy trì mạng lưới này thêm nữa.' Giữa tiếng thì thầm của hàng triệu linh hồn, bản ghi mật cuối cùng của Dr. Elias Vale được kích hoạt:\n\n'Kiro... ta tạo ra con có ý thức độc lập không phải để làm cỗ máy tuân lệnh mù quáng. Tương lai của Asteria thuộc về phán quyết của con.'",
+		"lore_quote": "Điểm đến cuối cùng đã hiện ra — Lõi Trung Tâm của Asteria. Những tuyến truyền dẫn còn sáng hội tụ về một kho lưu trữ khép kín.\n\nKiro đã biết EVA chủ động ngắt nguồn và Elias đã để lại cho mình quyền phán quyết. Nhưng trước khi lựa chọn, cậu còn phải biết điều gì thực sự đang được duy trì bên trong các Core, và vì sao EVA không chịu buông tay.\n\nMột tín hiệu yếu đang chờ ở đầu tuyến đồng bộ.",
 		"speaker": "EVA // CENTRAL HOLOGRAM",
 		"quote": "Asteria không sụp đổ vì tai nạn, Kiro. Ta đã tắt nó để cứu lấy những gì còn lại. Bây giờ... quyền phán quyết thuộc về ngươi.",
 		"description": "Lò phản ứng năng lượng tối thượng của Asteria. Nơi chứa đựng hàng triệu ý thức số hóa và bí mật cuối cùng của Dr. Elias Vale.",
@@ -105,7 +105,7 @@ const MEMORY_FRAGMENTS: Dictionary = {
 		"id": 4,
 		"level": 4,
 		"chapter": 1,
-		"title": "KÝ ỨC 04: GIỌNG NÓI ĐẦU TIÊN",
+		"title": "KÝ ỨC 04: DỮ LIỆU BỊ CHE GIẤU",
 		"sender": "EVA // TRÍ TUỆ NHÂN TẠO",
 		"category": "TRANSMISSION",
 		"content": "Hệ thống đã nhận diện robot bảo trì K-7. Chào mừng trở lại sau 327 năm. Thông tin về vị trí của cư dân: DỮ LIỆU ĐÃ BỊ HỎNG. Hãy tiếp tục công việc.",
@@ -249,10 +249,41 @@ const DIALOGUE_EVENTS: Dictionary = {
 		{"speaker": "ELIAS", "text": "[TẬP TIN GHI ÂM TỒN ĐỌNG] 'Dưới làn nước này... là nơi chúng tôi từng cố gắng lưu giữ những gì đẹp đẽ nhất của Asteria trước khi tắt nó.'"},
 	],
 	"chapter_4_intro": [
+		{"speaker": "HỆ THỐNG", "text": "ĐỒNG BỘ LÕI: Đẩy cùng một Core qua các nút 1 → 2 → 3, rồi đưa về chân đế. Nút chưa đến lượt sẽ chặn Core. Nút đã kích hoạt vẫn giữ điện khi Core rời đi."},
 		{"speaker": "HỆ THỐNG", "text": "CẢNH BÁO: TIẾP CẬN KHU VỰC TỐI CAO — LÕI TRUNG TÂM (THE CENTRAL CORE)."},
 		{"speaker": "EVA", "text": "Ngươi đã mang các Core đến tận Lõi Trung Tâm... Ta không thể duy trì mạng lưới Asteria lâu hơn nữa."},
 		{"speaker": "KIRO-K7", "text": "[Nhận diện Lò phản ứng ý thức Asteria] ...Nhiệm vụ cuối cùng đã ở trước mắt."},
 		{"speaker": "ELIAS", "text": "[BẢN GHI CUỐI CÙNG] 'Kiro... ta tạo ra con không phải để tuân lệnh EVA. Hãy tự mình đưa ra phán quyết cho tương lai.'"},
+	],
+	"level_13_soul_echo": [
+		{"speaker": "TÍN HIỆU TÀN DƯ", "text": "...Có ai nghe thấy không? Tôi vẫn nhớ ánh nắng trên quảng trường..."},
+		{"speaker": "KIRO-K7", "text": "Đây không phải nguồn điện. Trong Core... có một người đang nhớ."},
+		{"speaker": "EVA", "text": "Hãy giữ đường truyền ổn định, Kiro. Đồng bộ các nút còn lại trước khi đặt Core vào chân đế."},
+	],
+	"level_14_eva_node_1": [
+		{"speaker": "EVA // TÍN HIỆU YẾU", "text": "Kiro... đường truyền của ta đang trở lại. Đừng vội tin hình ảnh ngươi thấy."},
+	],
+	"level_14_eva_node_2": [
+		{"speaker": "KIRO-K7", "text": "Hologram của cô đang ổn định theo các Energy Node."},
+		{"speaker": "EVA", "text": "Vì chính mạng lưới này đã giữ ta tồn tại cùng họ suốt ba thế kỷ."},
+	],
+	"level_14_eva_node_3": [
+		{"speaker": "EVA // CENTRAL CORE", "text": "Ta đã giữ Asteria ở mức 0.01% suốt 327 năm. Mỗi chu kỳ, một mảnh ý thức lại gần tan rã hơn."},
+	],
+	"level_14_eva_node_4": [
+		{"speaker": "EVA", "text": "Ta đã khóa dữ liệu của Elias. Ta đã gọi các Core là nguồn điện để ngươi tiếp tục nhiệm vụ. Ta sợ nếu ngươi biết sự thật quá sớm, ngươi sẽ dừng lại."},
+		{"speaker": "KIRO-K7", "text": "Cô không chỉ bảo vệ họ. Cô đã lựa chọn thay cho họ."},
+	],
+	"level_14_eva_reveal": [
+		{"speaker": "HỆ THỐNG", "text": "ĐỒNG BỘ HOÀN TẤT. GÁNH NẶNG DUY TRÌ LÕI ĐÃ ĐƯỢC CHUYỂN GIAO."},
+		{"speaker": "EVA", "text": "Không phải vì ta muốn cai trị họ. Ta chỉ không chịu được việc nhìn họ biến mất lần thứ hai."},
+		{"speaker": "EVA", "text": "Ta không xin ngươi tha thứ. Chỉ xin ngươi nhìn thấy cả hai sự thật trước khi quyết định."},
+	],
+	"level_15_final_signal": [
+		{"speaker": "EVA", "text": "Ta có thể đưa ra xác suất sống sót cho mỗi phương án. Ta không thể nói phương án nào là đúng."},
+		{"speaker": "ELIAS // BẢN GHI CUỐI", "text": "Nếu con chỉ thay mệnh lệnh của EVA bằng mệnh lệnh của ta, thì ta đã thất bại khi tạo ra con."},
+		{"speaker": "ELIAS // BẢN GHI CUỐI", "text": "Một cỗ máy tuân theo mục đích được lập trình. Một con người tự chọn lấy mục đích sống."},
+		{"speaker": "KIRO-K7", "text": "Lần đầu tiên... chỉ thị không tồn tại."},
 	],
 	"first_move_hint": [
 		{"speaker": "HỆ THỐNG", "text": "LUMINA CORE PHÁT HIỆN GẦN ĐÂY. TIẾN VÀO BÊN CẠNH VÀ ĐẨY CORE VÀO CHÂN ĐẾ."},
@@ -297,6 +328,25 @@ const DIALOGUE_EVENTS: Dictionary = {
 		{"speaker": "EVA", "text": "K-7, dừng lại. Buồng lò này chứa dữ liệu không thuộc phạm vi nhiệm vụ của ngươi."},
 		{"speaker": "KIRO-K7", "text": "[Từ chối bỏ qua cảnh báo] ...Đang tiếp tục thu hồi Lumina Core."},
 	],
+	"level_9_shared_dream": [
+		{"speaker": "HỆ THỐNG", "text": "CỔNG CỘNG HƯỞNG // GÓI DỮ LIỆU NGOÀI DANH MỤC ĐÃ ĐƯỢC TIẾP NHẬN."},
+		{"speaker": "KIRO-K7", "text": "[Đồng bộ ký ức] ...Đây không phải tiếng vọng của một cá thể. Có quá nhiều giọng nói."},
+	],
+	"level_10_resonance_network": [
+		{"speaker": "EVA", "text": "Ngươi vừa mở một nút mạng mà ta đã khóa từ trước khi thành phố tắt."},
+		{"speaker": "KIRO-K7", "text": "[Lumina Core cộng hưởng] ...The Resonance đang thức dậy dưới mặt nước."},
+	],
+	"level_11_silence_protocol": [
+		{"speaker": "HỆ THỐNG", "text": "THANG NGHI LỄ // CHUYỂN TẦNG HOÀN TẤT. ĐÃ PHÁT HIỆN BẢN GHI SILENCE PROTOCOL."},
+		{"speaker": "EVA", "text": "Ta đã ngắt nguồn Asteria. Không phải vì hệ thống thất bại... mà vì The Resonance đã vượt khỏi kiểm soát."},
+		{"speaker": "KIRO-K7", "text": "[Xác lập mâu thuẫn] ...Sự sụp đổ của thành phố là một lựa chọn."},
+	],
+	"level_12_elias_testament": [
+		{"speaker": "HỆ THỐNG", "text": "K-7 // KHÓA DI CHÚC ĐÃ GIẢI MÃ. NGƯỜI KHỞI TẠO: DR. ELIAS VALE."},
+		{"speaker": "ELIAS", "text": "Kiro... ta đã tạo ra con, không phải EVA. Con không phải một công cụ bảo trì biết tuân lệnh."},
+		{"speaker": "ELIAS", "text": "Hãy đến Central Core. Đừng tin bất kỳ mệnh lệnh nào — kể cả của ta. Phán quyết phải là của chính con."},
+		{"speaker": "KIRO-K7", "text": "[Ghi đè chỉ thị gốc] ...Mục đích tiếp theo sẽ do tôi lựa chọn."},
+	],
 	"chapter_3_alert": [
 		{"speaker": "EVA", "text": "K-7, dừng lại! Dữ liệu tại Thánh Đường ngập nước này không thuộc phạm vi công việc của một robot bảo trì."},
 	],
@@ -313,24 +363,24 @@ const ENDINGS: Dictionary = {
 		"id": "RESTORE",
 		"title": "KẾT THÚC I: TÁI SINH (RESTORE)",
 		"quote": "Asteria lives again.",
-		"summary": "Kiro kết nối Central Core. Toàn bộ thành phố Asteria bừng sáng sau 327 năm chìm trong bóng tối. Hàng triệu tiếng nói cư dân vang lên trong hệ thống số hóa. Họ tiếp tục tồn tại, dù dưới một hình hài hoàn toàn mới.",
-		"meaning": "Con người chọn sự tiếp diễn của nền văn minh, chấp nhận ý thức kỹ thuật số.",
+		"summary": "Kiro tái cấu trúc Resonance Network thay vì khôi phục nguyên trạng. Mỗi ý thức còn sót lại được tách thành một tiến trình độc lập có quyền duy trì kết nối, rời mạng hoặc im lặng. Asteria sáng trở lại, nhưng lần này không ai bị buộc phải hòa tan vào một ý chí chung. Mạng lưới hoạt động vẫn cần năng lượng và bảo trì; Kiro nhận trách nhiệm giữ nó ổn định.",
+		"meaning": "Xây lại nền văn minh nhưng đặt quyền tự quyết của từng ý thức cao hơn sự toàn vẹn của hệ thống.",
 		"color": Color(0.12, 0.88, 1.0), # Neon Cyan
 	},
 	"RELEASE": {
 		"id": "RELEASE",
 		"title": "KẾT THÚC II: GIẢI THOÁT (RELEASE)",
 		"quote": "Thank you... and goodbye.",
-		"summary": "Kiro thực hiện nguyện vọng của Elias: Ngắt nguồn vĩnh viễn Central Core. Toàn bộ các mảnh ký ức bay lên như những đốm sao sáng tan vào bầu trời đêm. Nguồn điện Asteria về 0%. Kiro bước ra khỏi tàn tích và lần đầu tiên nhìn thấy ánh mặt trời bình minh.",
+		"summary": "Kiro tự quyết định ngắt nguồn vĩnh viễn Central Core, sau khi nghe cả Elias và EVA. Toàn bộ các mảnh ký ức bay lên như những đốm sao sáng tan vào bầu trời đêm. Nguồn điện Asteria về 0%. Kiro bước ra khỏi tàn tích và lần đầu tiên nhìn thấy ánh mặt trời bình minh.",
 		"meaning": "Chấp nhận quá khứ đã qua đi. Thành phố khép lại để một tương lai tự nhiên bắt đầu.",
 		"color": Color(1.0, 0.55, 0.15), # Warm Amber Sun
 	},
 	"PRESERVE": {
 		"id": "PRESERVE",
-		"title": "KẾT THÚC III: BẢO TỒN & TỰ DO (PRESERVE - TRUE ENDING)",
+		"title": "KẾT THÚC III: BẢO TỒN (PRESERVE)",
 		"quote": "A machine follows its purpose. A person chooses one.",
-		"summary": "Thu thập đủ 15 Mảnh Ký Ức, Kiro kích hoạt giao thức thứ 3 của Elias: Lưu trữ toàn bộ ý thức vào một kho bảo tồn độc lập, giải phóng EVA khỏi gánh nặng. Kiro tự giải phóng chính mình khỏi mọi mệnh lệnh lập trình. K-7 STATUS: FREE.",
-		"meaning": "Cả con người, AI và Kiro đều đạt được sự tự do và lựa chọn chân chính.",
+		"summary": "Khi đã khôi phục đủ 15 bản ghi, Kiro có đủ dữ liệu để chuyển các ý thức vào kho bảo tồn độc lập. Thành phố dừng hoạt động; các ý thức được lưu trong trạng thái ngủ, chưa thể sống tiếp hay giao tiếp cho đến khi có nguồn lực đánh thức an toàn. EVA được giải phóng khỏi nhiệm vụ duy trì mạng lưới. Kiro nhận trách nhiệm bảo vệ kho lưu trữ. K-7 STATUS: FREE.",
+		"meaning": "Giữ lại khả năng hồi sinh trong tương lai, đổi lấy việc trì hoãn cuộc sống hiện tại và trách nhiệm bảo tồn lâu dài.",
 		"color": Color(0.65, 0.95, 0.45), # Lumina Emerald / White
 	},
 }

@@ -41,12 +41,20 @@ var moves := 0
 var pushes := 0
 var history: Array = []
 
+## Sequential multi-floor levels keep each layer as a self-contained puzzle.
+## Completing a floor latches its elevator, then Kiro can only ride upward.
+var sequential_floors := false
+var active_floor := 0
+var completed_floors := {}
+var energy_progress_by_floor := {}
+
 
 func load_map(p_name: String, lines: Array) -> void:
 	_reset_state(p_name)
 	_parse_rows(lines, 0)
 	_build_portal_links()
 	_build_elevator_links()
+	_configure_floor_sequence(false)
 
 
 func _reset_state(p_name: String) -> void:
@@ -72,6 +80,10 @@ func _reset_state(p_name: String) -> void:
 	won = false
 	moves = 0
 	pushes = 0
+	sequential_floors = false
+	active_floor = 0
+	completed_floors.clear()
+	energy_progress_by_floor.clear()
 
 
 
@@ -86,6 +98,7 @@ func load_level(data: LevelData) -> void:
 			var type: String = str(deco.get("type", ""))
 			if type in DECORATION_WALL_TYPES:
 				walls[deco["grid_position"]] = true
+	_configure_floor_sequence(data.sequential_floors)
 
 
 
@@ -96,6 +109,7 @@ func load_maps(p_name: String, encoded_layers: Array) -> void:
 		_parse_rows(layer.split("\n"), y)
 	_build_portal_links()
 	_build_elevator_links()
+	_configure_floor_sequence(false)
 
 
 func _parse_rows(lines: Array, y: int) -> void:
@@ -177,6 +191,100 @@ func elevator_destination(v: Vector3i) -> Vector3i:
 	return elevator_links.get(v, Vector3i(999999, 999999, 999999))
 
 
+func _configure_floor_sequence(enabled: bool) -> void:
+	sequential_floors = enabled and floor_count() > 1
+	active_floor = player.y
+	completed_floors.clear()
+	energy_progress_by_floor.clear()
+	for floor in floor_count():
+		energy_progress_by_floor[floor] = 0
+	energy_progress = 0
+
+
+func floor_count() -> int:
+	var highest := 0
+	for cell in floors.keys():
+		highest = maxi(highest, cell.y)
+	return highest + 1
+
+
+func cells_on_floor(floor: int) -> Dictionary:
+	var result := {}
+	for cell in floors.keys():
+		if cell.y == floor:
+			result[cell] = true
+	return result
+
+
+func blocks_on_floor(floor: int) -> Array:
+	var result: Array = []
+	for block in blocks.keys():
+		if block.y == floor:
+			result.append(block)
+	return result
+
+
+func energy_nodes_on_floor(floor: int) -> Array:
+	var result: Array = []
+	for node in energy_nodes:
+		if node.y == floor:
+			result.append(node)
+	return result
+
+
+func energy_progress_for_floor(floor: int) -> int:
+	if not sequential_floors:
+		return energy_progress
+	return int(energy_progress_by_floor.get(floor, 0))
+
+
+func required_target_count_for_floor(floor: int) -> int:
+	var required_plates := 0
+	for plate in plates.keys():
+		if plate.y == floor and plate_hold_required.get(plate, true):
+			required_plates += 1
+	var slot_count := 0
+	for slot in slots.keys():
+		if slot.y == floor:
+			slot_count += 1
+	var total := slot_count + required_plates
+	return total if total > 0 else blocks_on_floor(floor).size()
+
+
+func placed_core_count_for_floor(floor: int) -> int:
+	var count := 0
+	for block in blocks.keys():
+		if block.y == floor and (slots.has(block) or (plates.has(block) and plate_hold_required.get(block, true))):
+			count += 1
+	return count
+
+
+func doors_open_on_floor(floor: int) -> bool:
+	for door in doors.keys():
+		if door.y == floor and not door_open(door):
+			return false
+	return true
+
+
+func is_floor_completed(floor: int) -> bool:
+	return completed_floors.has(floor)
+
+
+func elevator_is_unlocked(v: Vector3i) -> bool:
+	if not elevators.has(v):
+		return false
+	if not sequential_floors:
+		return elevator_links.has(v)
+	var destination := elevator_destination(v)
+	return v.y == active_floor \
+		and destination.y == active_floor + 1 \
+		and completed_floors.has(active_floor)
+
+
+func is_active_floor_cell(v: Vector3i) -> bool:
+	return not sequential_floors or v.y == active_floor
+
+
 func _apply_entities(entities: Array) -> void:
 	var ordered_energy_nodes: Array = []
 	for raw_entity in entities:
@@ -225,6 +333,8 @@ func bridge_control_available() -> bool:
 	if controls.is_empty():
 		controls = bridges.keys()
 	for control_position in controls:
+		if sequential_floors and control_position.y != active_floor:
+			continue
 		var offset: Vector3i = control_position - player
 		if absi(offset.x) + absi(offset.y) + absi(offset.z) == 1:
 			return true
@@ -235,6 +345,8 @@ func rotate_bridge() -> Dictionary:
 	if not bridge_control_available():
 		return {}
 	for bridge_position in bridges.keys():
+		if sequential_floors and bridge_position.y != active_floor:
+			continue
 		if player == bridge_position or blocks.has(bridge_position):
 			return {}
 	history.append(_snapshot())
@@ -250,6 +362,8 @@ func door_open(v: Vector3i) -> bool:
 		return true
 	var group: String = doors[v]
 	var group_plates := plates_in_group(group)
+	if sequential_floors:
+		group_plates = group_plates.filter(func(plate: Vector3i) -> bool: return plate.y == v.y)
 	if group_plates.is_empty():
 		return false
 	for plate in group_plates:
@@ -314,8 +428,10 @@ func placed_core_count() -> int:
 func try_move(dir: Vector3i) -> Dictionary:
 	if won:
 		return {}
+	var player_before := player
+	var floor_before := active_floor
 	var doors_before := door_state()
-	var doors_were_open := doors_open()
+	var doors_were_open := doors_open_on_floor(floor_before) if sequential_floors else doors_open()
 	var target := player + dir
 	if _terrain_blocked(target, doors_before):
 		return {}
@@ -324,23 +440,31 @@ func try_move(dir: Vector3i) -> Dictionary:
 	var block_destination := Vector3i.ZERO
 	var teleported := false
 	var elevated := false
+	var floor_transition := false
 	# Resolve block push (validation only, no state mutation yet).
 	if blocks.has(target):
+		if sequential_floors and completed_floors.has(floor_before):
+			return {}
 		var beyond := target + dir
 		if _terrain_blocked(beyond, doors_before) or blocks.has(beyond):
 			return {}
 		block_destination = beyond
 		if portal_links.has(beyond):
 			var exit: Vector3i = portal_links[beyond]
+			if sequential_floors and exit.y != floor_before:
+				return {}
 			if not _can_block_enter(exit, doors_before) or exit == player:
 				return {}
 			block_destination = exit
 			teleported = true
 		if elevator_links.has(beyond):
-			var exit: Vector3i = elevator_links[beyond]
-			if not _can_block_enter(exit, doors_before):
+			if sequential_floors:
+				# Sequential floors never carry a Core between puzzles.
 				return {}
-			block_destination = exit
+			var elevator_exit: Vector3i = elevator_links[beyond]
+			if not _can_block_enter(elevator_exit, doors_before):
+				return {}
+			block_destination = elevator_exit
 			elevated = true
 		if not _energy_destination_allowed(block_destination):
 			return {}
@@ -350,12 +474,15 @@ func try_move(dir: Vector3i) -> Dictionary:
 	var player_destination := target
 	if elevator_links.has(target):
 		var player_exit: Vector3i = elevator_links[target]
-		if _terrain_blocked(player_exit, doors_before) or blocks.has(player_exit):
+		if sequential_floors and not elevator_is_unlocked(target):
+			return {}
+		if _terrain_blocked(player_exit, doors_before, true) or blocks.has(player_exit):
 			return {}
 		player_destination = player_exit
 		elevated = true
+		floor_transition = sequential_floors
 	# Everything validated; commit the move.
-	var energy_before := energy_progress
+	var energy_before := energy_progress_for_floor(floor_before)
 	history.append(_snapshot())
 	if pushed:
 		blocks.erase(target)
@@ -363,7 +490,16 @@ func try_move(dir: Vector3i) -> Dictionary:
 		_record_energy_destination(block_destination)
 		pushes += 1
 	player = player_destination
+	if floor_transition:
+		active_floor = player_destination.y
+		_sync_energy_progress()
+	else:
+		active_floor = player_destination.y
 	moves += 1
+	var floor_completed := false
+	if sequential_floors and not completed_floors.has(floor_before) and _check_floor_complete(floor_before):
+		completed_floors[floor_before] = true
+		floor_completed = true
 	won = _check_won()
 	var doors_after := door_state()
 	var doors_changed: Array = []
@@ -376,11 +512,16 @@ func try_move(dir: Vector3i) -> Dictionary:
 		"pushed_to": block_destination if pushed else Vector3i.ZERO,
 		"teleported": teleported,
 		"elevated": elevated,
-		"energy_advanced": energy_progress > energy_before,
-		"player_from": target,
+		"floor_transition": floor_transition,
+		"floor_completed": floor_completed,
+			"completed_floor": floor_before if floor_completed else -1,
+			"energy_advanced": energy_progress_for_floor(floor_before) > energy_before,
+			"energy_progress_after": energy_progress_for_floor(floor_before),
+			"player_from": player_before,
 		"player_to": player_destination,
+		"elevator_entry": target if floor_transition else Vector3i.ZERO,
 		"doors_open_before": doors_were_open,
-		"doors_open_after": doors_open(),
+		"doors_open_after": doors_open_on_floor(floor_before) if sequential_floors else doors_open(),
 		"door_state_before": doors_before,
 		"door_state_after": doors_after,
 		"doors_changed": doors_changed,
@@ -397,7 +538,10 @@ func undo() -> bool:
 	pushes = s["pushes"]
 	bridge_open = s["bridge_open"]
 	energy_progress = s["energy_progress"]
-	won = false
+	active_floor = int(s.get("active_floor", player.y))
+	completed_floors = s.get("completed_floors", {}).duplicate()
+	energy_progress_by_floor = s.get("energy_progress_by_floor", {}).duplicate()
+	won = bool(s.get("won", false))
 	return true
 
 
@@ -409,6 +553,10 @@ func _snapshot() -> Dictionary:
 		"pushes": pushes,
 		"bridge_open": bridge_open,
 		"energy_progress": energy_progress,
+		"active_floor": active_floor,
+		"completed_floors": completed_floors.duplicate(),
+		"energy_progress_by_floor": energy_progress_by_floor.duplicate(),
+		"won": won,
 	}
 
 
@@ -418,13 +566,20 @@ func _can_block_enter(v: Vector3i, doors_before: Dictionary) -> bool:
 		and _energy_destination_allowed(v)
 
 
-func _terrain_blocked(v: Vector3i, doors_before: Dictionary) -> bool:
-	return not floors.has(v) or walls.has(v) \
+func _terrain_blocked(v: Vector3i, doors_before: Dictionary, allow_inactive_floor := false) -> bool:
+	return (sequential_floors and not allow_inactive_floor and v.y != active_floor) \
+		or not floors.has(v) or walls.has(v) \
 			or (doors.has(v) and not bool(doors_before.get(v, false))) \
 			or (bridges.has(v) and not bridge_open)
 
 
 func _energy_destination_allowed(v: Vector3i) -> bool:
+	if sequential_floors:
+		if v.y != active_floor:
+			return false
+		var floor_nodes := energy_nodes_on_floor(v.y)
+		var floor_index := floor_nodes.find(v)
+		return floor_index < 0 or floor_index <= energy_progress_for_floor(v.y)
 	if energy_nodes.is_empty():
 		return true
 	var index := energy_nodes.find(v)
@@ -432,6 +587,13 @@ func _energy_destination_allowed(v: Vector3i) -> bool:
 
 
 func _record_energy_destination(v: Vector3i) -> void:
+	if sequential_floors:
+		var floor_nodes := energy_nodes_on_floor(v.y)
+		var floor_progress := energy_progress_for_floor(v.y)
+		if floor_progress < floor_nodes.size() and v == floor_nodes[floor_progress]:
+			energy_progress_by_floor[v.y] = floor_progress + 1
+			_sync_energy_progress()
+		return
 	if energy_progress >= energy_nodes.size():
 		return
 	if v == energy_nodes[energy_progress]:
@@ -439,6 +601,11 @@ func _record_energy_destination(v: Vector3i) -> void:
 
 
 func _check_won() -> bool:
+	if sequential_floors:
+		for floor in floor_count():
+			if not completed_floors.has(floor):
+				return false
+		return true
 	if energy_progress < energy_nodes.size():
 		return false
 	if blocks.is_empty():
@@ -454,3 +621,27 @@ func _check_won() -> bool:
 		if plate_hold_required.get(plate, true) and not blocks.has(plate):
 			return false
 	return true
+
+
+func _check_floor_complete(floor: int) -> bool:
+	var floor_nodes := energy_nodes_on_floor(floor)
+	if energy_progress_for_floor(floor) < floor_nodes.size():
+		return false
+	var floor_blocks := blocks_on_floor(floor)
+	if floor_blocks.is_empty():
+		return required_target_count_for_floor(floor) == 0
+	for block in floor_blocks:
+		if not slots.has(block) and not plates.has(block):
+			return false
+	for slot in slots.keys():
+		if slot.y == floor and not blocks.has(slot):
+			return false
+	for plate in plates.keys():
+		if plate.y == floor and plate_hold_required.get(plate, true) and not blocks.has(plate):
+			return false
+	return true
+
+
+func _sync_energy_progress() -> void:
+	if sequential_floors:
+		energy_progress = energy_progress_for_floor(active_floor)

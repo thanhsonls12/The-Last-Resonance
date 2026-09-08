@@ -1,6 +1,8 @@
 class_name LevelFlow
 extends RefCounted
 
+const ScoreRules = preload("res://src/core/score_rules.gd")
+
 ## Owns level data, GameLogic instance, and win/lifecycle state.
 ## Does NOT own visuals, audio, story, or input.
 ## Scene controller (main.gd) owns the managers and wires them.
@@ -125,8 +127,9 @@ func get_memory_fragment() -> String:
 	return _data.memory_fragment if _data else ""
 
 
-func complete_current(moves: int, pushes: int, hints_used: int) -> void:
+func complete_current(moves: int, pushes: int, hint_penalty: int) -> void:
 	if _data == null:
 		return
-	var memory_collected := not _data.memory_fragment.is_empty()
-	GameState.complete_level(level_index, moves, pushes, memory_collected, hints_used)
+	var run := ScoreRules.evaluate_run(moves, hint_penalty, _data)
+	run["pushes"] = pushes
+	GameState.complete_level(level_index, run, not _data.memory_fragment.is_empty())
