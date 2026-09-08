@@ -3,10 +3,14 @@ extends SceneTree
 ## Routes come from tools/validate_levels.py, which solves the same .tres
 ## resources the game loads. Each string is the shortest route it found.
 const ROUTES: Array[String] = [
-	"RRDRUU",
-	"RRURULLDLUUDLLLDRRDRUU",
-	"ULURRRRRDDLLDDDLLLLDRRRRRRR",
-	"RRRUDDDLLLDRRLLLLULUUUUUDRRRRRDRUU",
+	"RUULLLLDDRDL",
+	"RRRUULLRRRRLDDRRUULLLDDLLLUU",
+	"LLUUUULLDRLLDRRRRRUULDULDDRURDDLDR",
+	"DRRUURRDLDLLLUURRDRDLRURUURRDLULLDLDDRURUDLLURURDRRUL",
+	"DLLUUULLLDDRRLLUURRRDDLLUDRDDLUULUURDLDRRDRRURRRUULDDDLLL",
+	"LUULUULLDDUURRDDLRRDDLLULUULUURRDLULDRRRDDLDLUUDRRUULLRRRRRDDLLLLDLUUURUL",
+	"DDLDLLLLLUURUURURDLLDDLDDRRRRRURUULULLLRRRURBLDDRDDLDLLLUURDLDRUUURULULDDDD",
+	"LLLLLBRDDLDDLLUULUURRRRRDDDDLUUUUUDLLLLDDRULUUURRRRRLDDLLLDLUUDRRRRRDDDDRRUUUULLLLLLDLU",
 ]
 
 ## Engine check for a plate a Core may leave once it has done its job.
@@ -43,6 +47,16 @@ func _initialize() -> void:
 			passed = false
 	if not _verify_optional_plate():
 		passed = false
+	if not _verify_chapter_two_progress_migration():
+		passed = false
+	if Levels.is_chapter_final(4) or not Levels.is_chapter_final(3):
+		print("FAIL: Content boundary is being treated as a completed chapter")
+		passed = false
+	if Levels.is_chapter_final(6):
+		print("FAIL: Level 7 is not the Chapter II finale (Level 8 is)")
+		passed = false
+	if not _verify_current_level_clamp():
+		passed = false
 
 	print("===================================")
 	print("RESULT: %s" % ("ALL TESTS PASSED" if passed else "TESTS FAILED"))
@@ -73,12 +87,29 @@ func _verify_level(i: int, landmarks: Dictionary) -> bool:
 		return false
 	if not _verify_landmark(i, data, landmarks):
 		return false
+	if logic.has_bridges() and logic.bridge_controls.is_empty():
+		print("FAIL: Level %d has a bridge but no local bridge_switch" % (i + 1))
+		return false
+	if logic.has_bridges() and logic.bridge_control_available():
+		print("FAIL: Level %d starts inside bridge-switch range; local interaction is not tested" % (i + 1))
+		return false
+	if data.difficulty < 1 or data.difficulty > 5:
+		print("FAIL: Level %d difficulty=%d is outside the 1-5 chapter scale" % [
+			i + 1, data.difficulty
+		])
+		return false
 
 	if i >= ROUTES.size():
 		print("FAIL: Level %d has no verification route" % (i + 1))
 		return false
 
 	var route := ROUTES[i]
+	if data.hint_route.is_empty():
+		print("FAIL: Level %d has no offline hint route" % (i + 1))
+		return false
+	if data.hint_route != route:
+		print("FAIL: Level %d hint_route differs from its verification route" % (i + 1))
+		return false
 	if route.length() > data.par_moves:
 		print("FAIL: Level %d par_moves=%d but the verified route needs %d moves" % [
 			i + 1, data.par_moves, route.length()
@@ -161,18 +192,51 @@ func _verify_optional_plate() -> bool:
 	return true
 
 
+func _verify_current_level_clamp() -> bool:
+	var unlocked := 4
+	var stored := 9
+	var clamped := clampi(stored, 0, maxi(0, unlocked - 1))
+	if clamped != 3:
+		print("FAIL: current_level must clamp to unlocked-1 (got %d)" % clamped)
+		return false
+	print("Save cursor: current_level clamps to last unlocked index (PASS)")
+	return true
+
+
+func _verify_chapter_two_progress_migration() -> bool:
+	var migrated := Levels.reconciled_unlocked({"3": {"completed": true}}, 4)
+	if migrated != 5:
+		print("FAIL: Chapter I completion did not migrate to unlock Level 5")
+		return false
+	print("Progress migration: completed Level 4 unlocks Level 5 (PASS)")
+	return true
+
+
 func _replay_route(logic: GameLogic, route: String, level_number: int) -> bool:
+	var portal_crossed := false
 	for step_index in route.length():
 		var step: String = route[step_index]
+		if step == "B":
+			if logic.rotate_bridge().is_empty():
+				print("FAIL: Level %d route cannot rotate bridge at step %d" % [
+					level_number, step_index + 1
+				])
+				return false
+			continue
 		if not DIRECTIONS.has(step):
 			print("FAIL: Level %d route has invalid step '%s'" % [level_number, step])
 			return false
-		if logic.try_move(DIRECTIONS[step]).is_empty():
+		var result := logic.try_move(DIRECTIONS[step])
+		if result.is_empty():
 			print("FAIL: Level %d route blocked at step %d ('%s')" % [
 				level_number, step_index + 1, step
 			])
 			return false
+		portal_crossed = portal_crossed or bool(result.get("teleported", false))
 	if not logic.won:
 		print("FAIL: Level %d route ended without winning" % level_number)
+		return false
+	if level_number in [9, 10] and not portal_crossed:
+		print("FAIL: Level %d verification route never crosses its Portal" % level_number)
 		return false
 	return true

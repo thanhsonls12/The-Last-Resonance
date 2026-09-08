@@ -7,6 +7,7 @@ signal menu_requested
 signal pause_requested
 signal resume_requested
 signal bridge_requested
+signal hint_requested
 signal next_level_requested
 
 const COLOR_CYAN := Color(0.08, 0.78, 1.0)
@@ -31,6 +32,8 @@ var win_stats_label: Label
 var win_sub_badge: Label
 var pause_panel: Control
 var bridge_button: Button
+var hint_button: Button
+var hint_label: Label
 
 var _win_root: Control
 var _win_card: PanelContainer
@@ -39,17 +42,22 @@ var _pause_root: Control
 var _pause_audio_btn: Button
 
 
+var win_stars_label: Label
+
+
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_build_labels()
 	_build_buttons()
 
 
-func set_stats(level_name: String, moves: int, pushes: int, best_moves: int) -> void:
+func set_stats(level_name: String, moves: int, pushes: int, best_moves: int, par_moves: int = -1) -> void:
 	var best_text := "--" if best_moves <= 0 else str(best_moves)
-	level_label.text = "%s   |   Bước: %d   |   Đẩy: %d   |   Kỷ lục: %s" % [
+	var par_text := " (Par: %d)" % par_moves if par_moves > 0 else ""
+	level_label.text = "%s   |   Bước: %d%s   |   Đẩy: %d   |   Kỷ lục: %s" % [
 		level_name,
 		moves,
+		par_text,
 		pushes,
 		best_text,
 	]
@@ -95,17 +103,44 @@ func set_lock_progress(active: int, total: int, open: bool) -> void:
 			else (Color(1.0, 0.78, 0.12) if active > 0 else Color(1.0, 0.30, 0.22))
 
 
-func show_win(level_name: String, moves: int = -1, pushes: int = -1, best_moves: int = -1, is_last_level: bool = false) -> void:
+func show_win(
+		level_name: String,
+		moves: int = -1,
+		pushes: int = -1,
+		best_moves: int = -1,
+		par_moves: int = -1,
+		next_button_text := "MÀN TIẾP THEO",
+		completion_badge := "◆ NĂNG LƯỢNG ĐÃ KHÔI PHỤC ◆",
+		hints_used: int = -1) -> void:
 	win_level_label.text = level_name.to_upper()
+	win_sub_badge.text = completion_badge
+
+	if win_stars_label:
+		if moves > 0 and par_moves > 0:
+			if moves <= par_moves:
+				win_stars_label.text = "★ ★ ★   HOÀN HẢO (PERFECT)"
+				win_stars_label.label_settings.font_color = Color(1.0, 0.88, 0.24)
+			elif moves <= roundi(par_moves * 1.35):
+				win_stars_label.text = "★ ★ ☆   XUẤT SẮC (EXCELLENT)"
+				win_stars_label.label_settings.font_color = Color(0.35, 0.92, 1.0)
+			else:
+				win_stars_label.text = "★ ☆ ☆   HOÀN THÀNH (CLEARED)"
+				win_stars_label.label_settings.font_color = Color(0.75, 0.85, 0.95)
+			win_stars_label.visible = true
+		else:
+			win_stars_label.visible = false
+
 	if moves >= 0 and pushes >= 0:
 		var best_str := str(best_moves) if best_moves > 0 else "--"
-		win_stats_label.text = "Bước: %d   |   Đẩy: %d   |   Kỷ lục: %s" % [moves, pushes, best_str]
+		var par_str := " (Par: %d)" % par_moves if par_moves > 0 else ""
+		var hint_str := "   |   Gợi ý: %d" % hints_used if hints_used >= 0 else ""
+		win_stats_label.text = "Bước: %d%s   |   Đẩy: %d   |   Kỷ lục: %s%s" % [moves, par_str, pushes, best_str, hint_str]
 		win_stats_label.visible = true
 	else:
 		win_stats_label.visible = false
-	
+
 	if _win_next_btn:
-		_win_next_btn.text = "KẾT THÚC HÀNH TRÌNH" if is_last_level else "MÀN TIẾP THEO"
+		_win_next_btn.text = "  %s  [Enter/Space]" % next_button_text.strip_edges()
 
 	if _win_root:
 		_win_root.visible = true
@@ -130,6 +165,28 @@ func hide_win() -> void:
 func set_bridge_available(available: bool) -> void:
 	if bridge_button != null:
 		bridge_button.visible = available
+		if available:
+			bridge_button.text = " Triển khai cầu"
+
+
+func set_hint_available(available: bool) -> void:
+	if hint_button != null:
+		hint_button.visible = available
+	if not available:
+		clear_hint()
+
+
+func set_hint_text(message: String, shown := true) -> void:
+	if hint_label == null:
+		return
+	hint_label.text = message
+	hint_label.visible = shown and not message.is_empty()
+
+
+func clear_hint() -> void:
+	if hint_label != null:
+		hint_label.text = ""
+		hint_label.visible = false
 
 
 func _build_labels() -> void:
@@ -174,6 +231,27 @@ func _build_labels() -> void:
 	lock_settings.outline_color = Color(0.02, 0.04, 0.10, 0.95)
 	lock_label.label_settings = lock_settings
 	add_child(lock_label)
+
+	hint_label = Label.new()
+	hint_label.set_anchors_preset(Control.PRESET_TOP_WIDE)
+	hint_label.offset_left = 16
+	hint_label.offset_right = -16
+	hint_label.offset_top = 108
+	hint_label.offset_bottom = 154
+	hint_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	hint_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	hint_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	hint_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	hint_label.visible = false
+	var hint_settings := LabelSettings.new()
+	hint_settings.font_size = 15
+	hint_settings.font_color = Color(1.0, 0.84, 0.30, 0.98)
+	hint_settings.outline_size = 7
+	hint_settings.outline_color = Color(0.02, 0.04, 0.10, 0.98)
+	hint_settings.shadow_size = 5
+	hint_settings.shadow_color = Color(1.0, 0.45, 0.08, 0.42)
+	hint_label.label_settings = hint_settings
+	add_child(hint_label)
 
 	fragment_label = Label.new()
 	fragment_label.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
@@ -274,6 +352,18 @@ func _build_labels() -> void:
 	win_level_label.label_settings = lvl_s
 	vbox.add_child(win_level_label)
 
+	win_stars_label = Label.new()
+	win_stars_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	var star_s := LabelSettings.new()
+	star_s.font_size = 16
+	star_s.font_color = Color(1.0, 0.88, 0.24)
+	star_s.outline_size = 4
+	star_s.outline_color = Color(0.12, 0.08, 0.02)
+	star_s.shadow_size = 4
+	star_s.shadow_color = Color(1.0, 0.65, 0.15, 0.5)
+	win_stars_label.label_settings = star_s
+	vbox.add_child(win_stars_label)
+
 	win_stats_label = Label.new()
 	win_stats_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	var st_s := LabelSettings.new()
@@ -355,7 +445,7 @@ func _build_buttons() -> void:
 	add_child(restart_button)
 
 	bridge_button = Button.new()
-	bridge_button.text = " Xoay cầu"
+	bridge_button.text = " Triển khai cầu"
 	bridge_button.icon = ICON_BRIDGE
 	bridge_button.expand_icon = true
 	bridge_button.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
@@ -380,6 +470,16 @@ func _build_buttons() -> void:
 	_style_button(menu_button, COLOR_CYAN)
 	menu_button.pressed.connect(func() -> void: menu_requested.emit())
 	add_child(menu_button)
+
+	hint_button = Button.new()
+	hint_button.text = " Gợi ý"
+	hint_button.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	hint_button.offset_left = 16
+	hint_button.offset_top = 64
+	hint_button.custom_minimum_size = Vector2(110, 46)
+	_style_button(hint_button, Color(1.0, 0.78, 0.12))
+	hint_button.pressed.connect(func() -> void: hint_requested.emit())
+	add_child(hint_button)
 
 	var pause_button := Button.new()
 	pause_button.text = " Tạm dừng"

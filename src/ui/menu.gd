@@ -223,13 +223,17 @@ func _render_chapter_levels() -> void:
 		level_btn.custom_minimum_size = Vector2(240, 110)
 		level_btn.disabled = not unlocked
 
-		var level_name: String = str(Levels.ALL[i].get("name", "Màn %d" % (i + 1)))
+		var level_data: LevelData = Levels.get_data(i)
+		var level_name: String = str(level_data.title if level_data else Levels.ALL[i].get("name", "Màn %d" % (i + 1)))
+		var par_moves: int = level_data.par_moves if level_data else 0
 		var best_moves: int = int(record.get("best_moves", 0))
 		var memory_collected: bool = bool(record.get("memory_collected", false))
 
 		if unlocked:
-			var best_str := "★ Kỷ lục: %d bước" % best_moves if best_moves > 0 else "Chưa hoàn thành"
-			var mem_str := " ◆ Ký ức" if memory_collected else ""
+			var stars: int = GameState.get_level_stars(i, par_moves)
+			var star_str := "★★★ " if stars == 3 else ("★★☆ " if stars == 2 else ("★☆☆ " if stars == 1 else ""))
+			var best_str := "%s%d bước (Par %d)" % [star_str, best_moves, par_moves] if best_moves > 0 else "Chưa hoàn thành (Par %d)" % par_moves
+			var mem_str := "  •  ◆ Ký ức" if memory_collected else ""
 			level_btn.text = "MÀN %02d\n%s\n%s%s" % [i + 1, level_name, best_str, mem_str]
 			level_btn.pressed.connect(_on_level_pressed.bind(i))
 		else:
@@ -298,5 +302,5 @@ func _on_next_chapter() -> void:
 
 
 func _on_level_pressed(i: int) -> void:
-	GameState.current_level = i
+	GameState.set_current_level(i)
 	get_tree().change_scene_to_file("res://scenes/game/main.tscn")

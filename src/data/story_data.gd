@@ -279,6 +279,24 @@ const DIALOGUE_EVENTS: Dictionary = {
 	"chapter_2_warn": [
 		{"speaker": "EVA", "text": "Phân khu Lò Rèn đã nhận điện. Cảnh báo: Các công tắc áp lực và cửa chặn cơ khí có thể cản đường ngươi."},
 	],
+	"level_5_council_log": [
+		{"speaker": "HỆ THỐNG", "text": "TUYẾN ÁP LỰC ĐÃ PHẢN HỒI. KHÔI PHỤC BIÊN BẢN HỘI ĐỒNG ASTERIA..."},
+		{"speaker": "ELIAS", "text": "Lumina Core không chỉ tích trữ năng lượng. Chúng đang nuốt chửng dữ liệu thần kinh của con người."},
+		{"speaker": "EVA", "text": "Hiện tượng đó nằm trong ngưỡng cho phép để duy trì Asteria, Tiến sĩ Vale."},
+		{"speaker": "KIRO-K7", "text": "[Đánh dấu mâu thuẫn dữ liệu] ...EVA đã biết về ký ức bên trong các Core."},
+	],
+	"level_6_k_series_mold": [
+		{"speaker": "HỆ THỐNG", "text": "K-SERIES ASSEMBLY // KHUNG MÁY BẢO TRÌ. CHỨC NĂNG: VẬN CHUYỂN LUMINA CORE."},
+		{"speaker": "KIRO-K7", "text": "[Đối chiếu cấu trúc] ...Cùng thiết kế với cơ thể của tôi. Không vũ khí. Không mô-đun cảm xúc."},
+	],
+	"level_7_bridge_warning": [
+		{"speaker": "ELIAS", "text": "[BĂNG GHI NHIỄU] Cầu áp lực chỉ nhận lệnh tại bàn điều khiển cục bộ. EVA đã khóa quyền truy cập từ xa."},
+		{"speaker": "KIRO-K7", "text": "[Cầu đã triển khai] ...Xác nhận tuyến đường cơ khí ổn định."},
+	],
+	"level_8_eva_lockdown": [
+		{"speaker": "EVA", "text": "K-7, dừng lại. Buồng lò này chứa dữ liệu không thuộc phạm vi nhiệm vụ của ngươi."},
+		{"speaker": "KIRO-K7", "text": "[Từ chối bỏ qua cảnh báo] ...Đang tiếp tục thu hồi Lumina Core."},
+	],
 	"chapter_3_alert": [
 		{"speaker": "EVA", "text": "K-7, dừng lại! Dữ liệu tại Thánh Đường ngập nước này không thuộc phạm vi công việc của một robot bảo trì."},
 	],

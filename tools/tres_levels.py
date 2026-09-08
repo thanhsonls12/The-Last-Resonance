@@ -46,6 +46,7 @@ def parse_level(path):
 
 
 def load_levels():
+    """Campaign levels in play order."""
     return [parse_level(p) for p in sorted(LEVEL_DIR.glob("level_*.tres"))]
 
 

@@ -271,8 +271,7 @@ func _on_continue() -> void:
 	if Levels.ALL.is_empty():
 		get_tree().change_scene_to_file("res://scenes/ui/menu.tscn")
 		return
-	var target_lvl := clampi(GameState.current_level, 0, maxi(0, GameState.unlocked - 1))
-	GameState.current_level = target_lvl
+	GameState.set_current_level(GameState.current_level)
 	get_tree().change_scene_to_file("res://scenes/game/main.tscn")
 
 

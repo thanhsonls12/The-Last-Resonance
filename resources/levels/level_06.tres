@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="LevelData" format=3]
+
+[ext_resource type="Script" path="res://src/data/level_data.gd" id="1_level"]
+
+[resource]
+script = ExtResource("1_level")
+id = 5
+title = "Khuôn đúc K-Series"
+chapter = 2
+difficulty = 3
+par_moves = 73
+power_level = 0.4
+landmark = "k_series_mold"
+hint_route = "LUULUULLDDUURRDDLRRDDLLULUULUURRDLULDRRRDDLDLUUDRRUULLRRRRRDDLLLLDLUUURUL"
+map = Array[String](["#########", "#.   #  #", "#k   K  #", "#.$#  # #", "##  $ $ #", "#. $#   #", "# #   @ #", "#########"])
+maps = Array[String]([])
+entities = [{ "type": "plate", "grid_position": Vector3i(1, 0, 2), "group": "K", "hold_required": true }]
+decorations = [{ "type": "broken_robot", "grid_position": Vector3i(0, 0, 0), "yaw": 180.0 }, { "type": "broken_robot", "grid_position": Vector3i(7, 0, 0), "yaw": 180.0 }, { "type": "k_series_mold", "grid_position": Vector3i(0, 0, 3), "scale": 1.35, "yaw": 90.0 }, { "type": "door_frame", "grid_position": Vector3i(0, 0, 5), "yaw": 90.0 }, { "type": "door_frame", "grid_position": Vector3i(1, 0, 7), "yaw": 0.0 }, { "type": "machine", "grid_position": Vector3i(8, 0, 7), "yaw": 0.0 }, { "type": "workbench", "grid_position": Vector3i(6, 0, 0), "yaw": 180.0 }, { "type": "crate", "grid_position": Vector3i(8, 0, 2), "yaw": -90.0 }, { "type": "crate", "grid_position": Vector3i(8, 0, 4), "yaw": -90.0 }, { "type": "data_rack", "grid_position": Vector3i(0, 0, 7), "yaw": 0.0 }, { "type": "conveyor", "grid_position": Vector3i(8, 0, 1), "yaw": -90.0 }, { "type": "conveyor", "grid_position": Vector3i(8, 0, 5), "yaw": -90.0 }, { "type": "lamp", "grid_position": Vector3i(3, 0, 7), "yaw": 0.0 }, { "type": "lamp", "grid_position": Vector3i(1, 0, 0), "yaw": 180.0 }, { "type": "pipe", "grid_position": Vector3i(8, 0, 0), "yaw": 180.0 }, { "type": "pipe", "grid_position": Vector3i(0, 0, 4), "yaw": 90.0 }, { "type": "cable", "grid_position": Vector3i(2, 0, 7), "yaw": 0.0 }, { "type": "cable", "grid_position": Vector3i(2, 0, 0), "yaw": 180.0 }, { "type": "terminal_desk", "grid_position": Vector3i(0, 0, 1), "yaw": 90.0 }, { "type": "rubble", "grid_position": Vector3i(8, 0, 3), "yaw": -90.0 }, { "type": "moss", "grid_position": Vector3i(8, 0, 6) }, { "type": "plant", "grid_position": Vector3i(6, 0, 7), "width": 0.55 }, { "type": "debris", "grid_position": Vector3i(4, 0, 0), "yaw": 180.0 }]
+memory_fragment = "KÝ ỨC 06: [NHẬT KÝ SẢN XUẤT CƠ KHÍ] - 'Dây chuyền K-Series được tối giản hóa tối đa: không vũ khí, không cảm xúc, chỉ di chuyển và đẩy khối nặng. Thiết kế đơn giản nhất lại là thứ bền bỉ nhất.'"

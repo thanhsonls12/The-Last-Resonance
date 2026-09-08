@@ -17,6 +17,11 @@ extends Resource
 @export_range(0.0, 1.0) var power_level := 0.0
 ## Decoration type that makes this room recognisable on sight. Checked by tests.
 @export var landmark := ""
+## A verified, compact route used by the optional in-game hint system. The
+## route is authored offline so mobile builds never have to run a Sokoban
+## solver while the player is interacting with a level. U/D/L/R are movement
+## steps; B toggles a local bridge control.
+@export var hint_route := ""
 @export var map: Array[String] = []
 @export var maps: Array[String] = []
 @export var entities: Array = []
@@ -33,6 +38,7 @@ static func from_dict(index: int, source: Dictionary) -> LevelData:
 	data.par_moves = int(source.get("par_moves", 0))
 	data.power_level = float(source.get("power_level", 0.0))
 	data.landmark = str(source.get("landmark", ""))
+	data.hint_route = str(source.get("hint_route", ""))
 	data.memory_fragment = str(source.get("memory_fragment", ""))
 	for row in source.get("map", []):
 		data.map.append(str(row))

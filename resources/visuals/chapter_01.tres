@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ChapterVisuals" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/data/chapter_visuals.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+background = Color(0.002, 0.003, 0.006, 1)
+ambient = Color(0.14, 0.2, 0.31, 1)
+fog = Color(0.04, 0.08, 0.14, 1)
+fog_awake = Color(0.08, 0.16, 0.26, 1)
+key = Color(0.52, 0.74, 0.98, 1)
+fill = Color(0.58, 0.22, 0.34, 1)
+wash = Color(0.38, 0.54, 0.76, 1)
+ambient_range = Vector2(0.2, 0.42)
+fog_energy_range = Vector2(0.4, 0.7)
+key_range = Vector2(0.38, 0.68)
+fill_range = Vector2(0.12, 0.24)
+wash_range = Vector2(0.22, 0.42)
+powered = Vector3(0.92, 1.72, 0.48)
