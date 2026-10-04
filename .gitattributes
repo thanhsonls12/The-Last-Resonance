@@ -1,0 +1,40 @@
+# Checkout every text file with LF so Godot's own serialisation is byte-stable
+# across Windows, Linux and CI. Without this, a machine with core.autocrlf=true
+# rewrites every .import/.tscn into a whole-tree CRLF diff that carries no change.
+* text=auto eol=lf
+
+# Windows-native launchers stay CRLF.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Godot text formats — pin explicitly so they never drift.
+*.gd text eol=lf
+*.gdshader text eol=lf
+*.tscn text eol=lf
+*.tres text eol=lf
+*.import text eol=lf
+*.uid text eol=lf
+*.godot text eol=lf
+*.cfg text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+
+# Binary assets — never normalise, never diff.
+*.glb binary
+*.gltf binary
+*.blend binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.svg text eol=lf
+*.ttf binary
+*.otf binary
+*.wav binary
+*.ogg binary
+*.mp3 binary
+*.res binary
+*.apk binary
+*.ico binary
+*.icns binary
