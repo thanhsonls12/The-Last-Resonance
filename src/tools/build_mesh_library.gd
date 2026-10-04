@@ -12,6 +12,7 @@ const CATALOG: Array[Dictionary] = [
 	{"name": "Floor_Tile", "path": "res://assets/models/environments/modular_kit/Architecture/Floor-Tile.glb", "scale": 1.0, "offset": Vector3(0, 0, 0), "solid": false},
 	{"name": "Pillar_Wall", "path": "res://assets/models/environments/modular_kit/Architecture/Pillar.glb", "scale": 0.92, "offset": Vector3(0, 0.14, 0), "solid": true},
 	{"name": "Wall_Module", "path": "res://assets/models/environments/modular_kit/Architecture/Wall-Module.glb", "scale": 1.0, "offset": Vector3(0, 0.14, 0), "solid": true},
+	{"name": "Window_Module", "path": "res://assets/models/environments/modular_kit/Architecture/Window-Module.glb", "scale": 1.0, "offset": Vector3(0, 0.14, 0), "solid": true},
 	{"name": "Corner_Wall", "path": "res://assets/models/environments/modular_kit/Architecture/Corner-Wall.glb", "scale": 1.0, "offset": Vector3(0, 0.14, 0), "solid": true},
 	{"name": "Door_Frame", "path": "res://assets/models/environments/modular_kit/Architecture/Door-Frame.glb", "scale": 1.0, "offset": Vector3(0, 0.14, 0), "solid": true},
 	{"name": "Platform_Module", "path": "res://assets/models/environments/modular_kit/Architecture/Platform-Module.glb", "scale": 1.0, "offset": Vector3(0, 0, 0), "solid": false},

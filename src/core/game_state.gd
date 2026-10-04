@@ -21,8 +21,33 @@ var sfx_volume := 1.0
 var haptics_enabled := true
 var reduced_motion := false
 var high_contrast := false
+var unlock_all_levels := false
 var level_records: Dictionary = {}
 var seen_chapters: Array = []
+var echo_chamber: Dictionary = {}
+
+
+func complete_tidal_trial(with_memory: bool) -> void:
+	if bool(echo_chamber.get("completed", false)) and (not with_memory or bool(echo_chamber.get("tidal_unlocked", false))):
+		return
+	echo_chamber["completed"] = true
+	if with_memory:
+		echo_chamber["memory"] = true
+		echo_chamber["tidal_unlocked"] = true
+		if not echo_chamber.has("tidal_equipped"):
+			echo_chamber["tidal_equipped"] = true
+	_save()
+
+
+func equip_tidal_cosmetic(enabled: bool) -> void:
+	if not bool(echo_chamber.get("tidal_unlocked", false)):
+		return
+	echo_chamber["tidal_equipped"] = enabled
+	_save()
+
+
+func kiro_glow_color() -> Color:
+	return Color(.28, .95, .64) if bool(echo_chamber.get("tidal_unlocked", false)) and bool(echo_chamber.get("tidal_equipped", false)) else Color(.12, .92, 1.0)
 
 
 func _ready() -> void:
@@ -30,6 +55,7 @@ func _ready() -> void:
 	if _reconcile_progress():
 		_save()
 	_apply_fullscreen()
+	_apply_audio_settings()
 
 
 func set_fullscreen(on: bool) -> void:
@@ -45,6 +71,7 @@ func set_sfx_enabled(on: bool) -> void:
 	if sfx_enabled == on:
 		return
 	sfx_enabled = on
+	_apply_audio_settings()
 	settings_changed.emit()
 	_save()
 
@@ -54,6 +81,7 @@ func set_master_volume(value: float) -> void:
 	if is_equal_approx(master_volume, next):
 		return
 	master_volume = next
+	_apply_audio_settings()
 	settings_changed.emit()
 	_save()
 
@@ -63,6 +91,7 @@ func set_music_volume(value: float) -> void:
 	if is_equal_approx(music_volume, next):
 		return
 	music_volume = next
+	_apply_audio_settings()
 	settings_changed.emit()
 	_save()
 
@@ -72,6 +101,7 @@ func set_sfx_volume(value: float) -> void:
 	if is_equal_approx(sfx_volume, next):
 		return
 	sfx_volume = next
+	_apply_audio_settings()
 	settings_changed.emit()
 	_save()
 
@@ -100,6 +130,14 @@ func set_high_contrast(on: bool) -> void:
 	_save()
 
 
+func set_unlock_all_levels(on: bool) -> void:
+	if unlock_all_levels == on:
+		return
+	unlock_all_levels = on
+	settings_changed.emit()
+	_save()
+
+
 func haptic_feedback(duration_ms := 18, amplitude := 0.28) -> void:
 	if not haptics_enabled:
 		return
@@ -117,20 +155,75 @@ func _apply_fullscreen() -> void:
 		else DisplayServer.WINDOW_MODE_WINDOWED)
 
 
+func _volume_to_db(value: float) -> float:
+	return -80.0 if value <= 0.001 else linear_to_db(value)
+
+
+func _ensure_audio_buses() -> void:
+	var music_bus := AudioServer.get_bus_index(&"Music")
+	if music_bus < 0:
+		AudioServer.add_bus()
+		music_bus = AudioServer.bus_count - 1
+		AudioServer.set_bus_name(music_bus, &"Music")
+		AudioServer.set_bus_send(music_bus, &"Master")
+	var sfx_bus := AudioServer.get_bus_index(&"SFX")
+	if sfx_bus < 0:
+		AudioServer.add_bus()
+		sfx_bus = AudioServer.bus_count - 1
+		AudioServer.set_bus_name(sfx_bus, &"SFX")
+		AudioServer.set_bus_send(sfx_bus, &"Master")
+
+
+func _apply_audio_settings() -> void:
+	_ensure_audio_buses()
+	var master_bus := AudioServer.get_bus_index(&"Master")
+	if master_bus >= 0:
+		AudioServer.set_bus_volume_db(master_bus, _volume_to_db(master_volume))
+		AudioServer.set_bus_mute(master_bus, not sfx_enabled or master_volume <= 0.001)
+	var music_bus := AudioServer.get_bus_index(&"Music")
+	if music_bus >= 0:
+		AudioServer.set_bus_volume_db(music_bus, _volume_to_db(music_volume))
+		AudioServer.set_bus_mute(music_bus, music_volume <= 0.001)
+	var sfx_bus := AudioServer.get_bus_index(&"SFX")
+	if sfx_bus >= 0:
+		AudioServer.set_bus_volume_db(sfx_bus, _volume_to_db(sfx_volume))
+		AudioServer.set_bus_mute(sfx_bus, sfx_volume <= 0.001)
+
+
 func is_unlocked(i: int) -> bool:
 	if Levels.ALL.is_empty() or i < 0 or i >= Levels.ALL.size():
 		return false
+	if unlock_all_levels:
+		return true
 	return i < unlocked
 
 
 func get_level_record(i: int) -> Dictionary:
-	return level_records.get(str(i), {})
+	var record: Dictionary = level_records.get(str(i), {})
+	if unlock_all_levels:
+		var rec := record.duplicate(true)
+		rec["completed"] = true
+		rec["memory_collected"] = true
+		return rec
+	return record
 
 
 func get_level_achievement(i: int) -> Dictionary:
 	var record := get_level_record(i)
 	var best_run: Dictionary = record.get("best_run", {})
 	var legacy: Dictionary = record.get("legacy_achievement", {})
+	if unlock_all_levels:
+		var base: Dictionary = best_run if not best_run.is_empty() else legacy
+		var result: Dictionary = base.duplicate(true)
+		result["stars"] = 3
+		if not result.has("score_moves"):
+			var par_moves := 0
+			var level_data: LevelData = Levels.get_data(i)
+			if level_data:
+				par_moves = level_data.par_moves
+			result["score_moves"] = par_moves
+			result["actual_moves"] = par_moves
+		return result
 	if best_run.is_empty():
 		return legacy.duplicate(true)
 	if legacy.is_empty() or int(best_run.get("stars", 0)) >= int(legacy.get("stars", 0)):
@@ -207,8 +300,10 @@ func _save() -> void:
 		"haptics_enabled": haptics_enabled,
 		"reduced_motion": reduced_motion,
 		"high_contrast": high_contrast,
+		"unlock_all_levels": unlock_all_levels,
 		"levels": level_records,
 		"seen_chapters": seen_chapters,
+		"echo_chamber": echo_chamber,
 	}
 	var error := ProgressStore.write_progress(SAVE_PATH, data)
 	if error != OK:
@@ -228,10 +323,13 @@ func _load() -> void:
 		haptics_enabled = bool(parsed.get("haptics_enabled", true))
 		reduced_motion = bool(parsed.get("reduced_motion", false))
 		high_contrast = bool(parsed.get("high_contrast", false))
+		unlock_all_levels = bool(parsed.get("unlock_all_levels", false))
 		level_records = parsed.get("levels", {})
 		var loaded_version := int(parsed.get("version", 1))
 		_migrate_level_records(loaded_version)
 		seen_chapters = parsed.get("seen_chapters", [])
+		var trial_data: Variant = parsed.get("echo_chamber", {})
+		echo_chamber = trial_data.duplicate() if trial_data is Dictionary else {}
 		if loaded_version < SAVE_VERSION:
 			_save()
 		return
@@ -292,10 +390,13 @@ func reset_progress() -> void:
 	current_level = 0
 	level_records.clear()
 	seen_chapters.clear()
+	echo_chamber.clear()
 	_save()
 
 
 func memory_fragment_count() -> int:
+	if unlock_all_levels:
+		return Levels.ALL.size()
 	var count := 0
 	for record in level_records.values():
 		if record is Dictionary and bool(record.get("memory_collected", false)):

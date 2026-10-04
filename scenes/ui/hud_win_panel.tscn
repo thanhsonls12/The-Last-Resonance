@@ -1,0 +1,83 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource path="res://src/ui/hud_win_panel.gd" type="Script" id="1"]
+
+[node name="HudWinPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+script = ExtResource("1")
+
+[node name="Backdrop" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+color = Color(0.008, 0.015, 0.025, 0.6)
+
+[node name="Center" type="CenterContainer" parent="Backdrop"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Card" type="PanelContainer" parent="Backdrop/Center"]
+custom_minimum_size = Vector2(440, 380)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Content" type="VBoxContainer" parent="Backdrop/Center/Card"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+mouse_filter = 2
+
+[node name="Badge" type="Label" parent="Backdrop/Center/Card/Content"]
+layout_mode = 2
+text = "◆ NĂNG LƯỢNG ĐÃ KHÔI PHỤC ◆"
+horizontal_alignment = 1
+
+[node name="Title" type="Label" parent="Backdrop/Center/Card/Content"]
+layout_mode = 2
+text = "HOÀN THÀNH"
+horizontal_alignment = 1
+
+[node name="Separator" type="ColorRect" parent="Backdrop/Center/Card/Content"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+color = Color(0.12, 0.88, 1, 0.4)
+
+[node name="LevelLabel" type="Label" parent="Backdrop/Center/Card/Content"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="StarsLabel" type="Label" parent="Backdrop/Center/Card/Content"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="StatsLabel" type="Label" parent="Backdrop/Center/Card/Content"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="Backdrop/Center/Card/Content"]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+
+[node name="NextButton" type="Button" parent="Backdrop/Center/Card/Content"]
+layout_mode = 2
+
+[node name="RestartButton" type="Button" parent="Backdrop/Center/Card/Content"]
+layout_mode = 2
+
+[node name="MenuButton" type="Button" parent="Backdrop/Center/Card/Content"]
+layout_mode = 2

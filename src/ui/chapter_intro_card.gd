@@ -39,7 +39,7 @@ func _build_ui() -> void:
 	# Fullscreen Translucent Backdrop (Allows 3D game level to remain visible)
 	var bg := ColorRect.new()
 	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
-	bg.color = Color(0.008, 0.015, 0.025, 0.45)
+	bg.color = Color(0.008, 0.015, 0.025, 0.28)
 	bg.mouse_filter = Control.MOUSE_FILTER_STOP
 	_root_panel.add_child(bg)
 
@@ -50,20 +50,20 @@ func _build_ui() -> void:
 	_root_panel.add_child(center)
 
 	_card_panel = PanelContainer.new()
-	_card_panel.custom_minimum_size = Vector2(640, 420)
+	_card_panel.custom_minimum_size = Vector2(560, 330)
 	_card_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	center.add_child(_card_panel)
 
 	var margin := MarginContainer.new()
-	margin.add_theme_constant_override("margin_left", 32)
-	margin.add_theme_constant_override("margin_right", 32)
-	margin.add_theme_constant_override("margin_top", 26)
-	margin.add_theme_constant_override("margin_bottom", 24)
+	margin.add_theme_constant_override("margin_left", 26)
+	margin.add_theme_constant_override("margin_right", 26)
+	margin.add_theme_constant_override("margin_top", 20)
+	margin.add_theme_constant_override("margin_bottom", 18)
 	margin.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_card_panel.add_child(margin)
 
 	var vbox := VBoxContainer.new()
-	vbox.add_theme_constant_override("separation", 14)
+	vbox.add_theme_constant_override("separation", 10)
 	vbox.alignment = BoxContainer.ALIGNMENT_CENTER
 	vbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	margin.add_child(vbox)
@@ -166,7 +166,7 @@ func show_chapter(chapter_id: int) -> void:
 
 	# Styling Card Panel
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color.BLACK if GameState.high_contrast else Color(0.015, 0.025, 0.045, 0.90)
+	style.bg_color = Color.BLACK if GameState.high_contrast else Color(0.015, 0.025, 0.045, 0.82)
 	style.border_width_left = 3 if GameState.high_contrast else 2
 	style.border_width_top = 3 if GameState.high_contrast else 2
 	style.border_width_right = 3 if GameState.high_contrast else 2
@@ -215,8 +215,8 @@ func _layout_for_viewport() -> void:
 	var viewport_size := get_viewport().get_visible_rect().size
 	var compact := viewport_size.x < 760.0 or viewport_size.y < 600.0
 	var edge := clampf(minf(viewport_size.x, viewport_size.y) * 0.04, 16.0, 36.0)
-	var card_width := minf(640.0, maxf(260.0, viewport_size.x - edge * 2.0))
-	_card_panel.custom_minimum_size = Vector2(card_width, 390.0 if compact else 420.0)
+	var card_width := minf(560.0, maxf(260.0, viewport_size.x - edge * 2.0))
+	_card_panel.custom_minimum_size = Vector2(card_width, 300.0 if compact else 330.0)
 	_roman_label.label_settings.font_size = 12 if compact else 14
 	_title_label.label_settings.font_size = 21 if compact else 26
 	_subtitle_label.label_settings.font_size = 14 if compact else 16

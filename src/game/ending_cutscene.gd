@@ -18,6 +18,8 @@ var _restart_btn: Button
 
 func _ready() -> void:
 	_build_ui()
+	EchoAudioManager.play_menu_sfx(self, &"hologram_activate", -2.0)
+	EchoAudioManager.create_scene_bgm(self, &"ending", -3.0, 2.0)
 
 
 func _build_ui() -> void:
@@ -218,8 +220,8 @@ func _build_witness_holos() -> Control:
 		Color(1.0, 0.58, 0.16, 0.78),
 		Color(1.0, 0.88, 0.40, 0.95),
 		"ELIAS // ARCHIVED RECORDING",
-		0.9,
-		-0.85))
+		0.82,
+		-1.33))
 	return row
 
 
@@ -237,6 +239,7 @@ func _build_character_holo(
 	wrap.custom_minimum_size = Vector2(220, 220)
 	wrap.stretch = true
 	var viewport := SubViewport.new()
+	viewport.own_world_3d = true
 	viewport.transparent_bg = true
 	viewport.size = Vector2i(220, 220)
 	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
@@ -263,6 +266,13 @@ func _build_character_holo(
 			mat.set_shader_parameter("glitch_strength", 0.04 if "LIVE" in caption else 0.10)
 			_apply_mat(character, mat)
 		world.add_child(character)
+		if not GameState.reduced_motion:
+			var tw := character.create_tween().set_loops()
+			tw.tween_property(character, "position:y", model_y + 0.04, 2.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+			tw.tween_property(character, "position:y", model_y - 0.04, 2.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+			var rot_tw := character.create_tween().set_loops()
+			rot_tw.tween_property(character, "rotation:y", character.rotation.y + deg_to_rad(10.0), 3.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+			rot_tw.tween_property(character, "rotation:y", character.rotation.y - deg_to_rad(10.0), 3.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	var cam := Camera3D.new()
 	cam.look_at_from_position(Vector3(0, 0.35, 2.5), Vector3(0, 0.2, 0))
 	world.add_child(cam)
@@ -324,6 +334,8 @@ func _on_ending_selected(ending_key: String) -> void:
 	var data: Dictionary = StoryData.get_ending_data(ending_key)
 	_choice_container.visible = false
 	_epilogue_panel.visible = true
+	EchoAudioManager.play_menu_sfx(self, &"ending_decision", 0.0)
+	EchoAudioManager.play_menu_sfx(self, &"ending_reveal", -1.0)
 
 	var accent: Color = data.get("color", COLOR_CYAN)
 	_epilogue_title.text = str(data.get("title", ""))

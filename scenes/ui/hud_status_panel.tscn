@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource path="res://src/ui/hud_status_panel.gd" type="Script" id="1"]
+
+[node name="HudStatusPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1")
+
+[node name="LevelLabel" type="Label" parent="."]
+layout_mode = 0
+
+[node name="FloorLabel" type="Label" parent="."]
+layout_mode = 0
+
+[node name="FloorStatusLabel" type="Label" parent="."]
+layout_mode = 0
+
+[node name="CoreLabel" type="Label" parent="."]
+layout_mode = 0
+
+[node name="EnergyLabel" type="Label" parent="."]
+layout_mode = 0
+
+[node name="LockLabel" type="Label" parent="."]
+layout_mode = 0
+
+[node name="HintLabel" type="Label" parent="."]
+layout_mode = 0
+
+[node name="FragmentLabel" type="Label" parent="."]
+layout_mode = 0

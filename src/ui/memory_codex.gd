@@ -32,6 +32,8 @@ var _list_container: VBoxContainer
 var _portrait_rect: TextureRect
 var _sync_bar: ProgressBar
 var _sync_label: Label
+var _detail_panel: PanelContainer
+var _detail_panel_style: StyleBoxFlat
 
 # Typewriter variables
 var _typewriter_tween: Tween
@@ -237,9 +239,11 @@ func _build_ui() -> void:
 
 	# --- Right Panel: Holo Memory Reader & Transcript ---
 	var right_panel := PanelContainer.new()
+	_detail_panel = right_panel
 	right_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	right_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	var rps := StyleBoxFlat.new()
+	_detail_panel_style = rps
 	rps.bg_color = COLOR_PANEL
 	rps.border_color = Color(COLOR_CYAN.r, COLOR_CYAN.g, COLOR_CYAN.b, 0.4)
 	rps.set_border_width_all(1)
@@ -444,8 +448,17 @@ func _select_fragment(frag_id: int) -> void:
 		_detail_status.text = "STATUS: ENCRYPTED // SECTOR-%02d OFFLINE" % frag_id
 		return
 
-	_portrait_rect.modulate = Color.WHITE
 	_portrait_rect.texture = _resolve_portrait(str(frag.get("sender", "")))
+	if not GameState.reduced_motion:
+		_portrait_rect.modulate = Color(1.8, 2.2, 2.6, 1.0)
+		var p_tw := create_tween()
+		p_tw.tween_property(_portrait_rect, "modulate", Color.WHITE, 0.45).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		if _detail_panel_style != null:
+			_detail_panel_style.border_color = Color(COLOR_CYAN.r * 1.5, COLOR_CYAN.g * 1.5, COLOR_CYAN.b * 1.5, 0.95)
+			var b_tw := create_tween()
+			b_tw.tween_property(_detail_panel_style, "border_color", Color(COLOR_CYAN.r, COLOR_CYAN.g, COLOR_CYAN.b, 0.4), 0.55).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	else:
+		_portrait_rect.modulate = Color.WHITE
 
 	_detail_title.text = str(frag.get("title", ""))
 	_detail_sender.text = "NGUỒN PHÁT: %s" % str(frag.get("sender", "VÔ DANH"))
@@ -457,6 +470,7 @@ func _select_fragment(frag_id: int) -> void:
 	_detail_content.text = _full_content_text
 	_detail_content.visible_ratio = 0.0
 
+	EchoAudioManager.play_menu_sfx(self, &"memory_decode", -3.0)
 	# Typewriter reveal animation
 	_typewriter_tween = create_tween()
 	var duration: float = clampf(float(raw_content.length()) * 0.008, 0.35, 1.2)

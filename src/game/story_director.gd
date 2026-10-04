@@ -41,7 +41,10 @@ func reset_for_level() -> void:
 
 
 ## Runs after every accepted move. Returns true when a dialogue consumed the beat.
-func play_post_step_story(level_index: int, decorations: Array, move_result: Dictionary, player: Vector3i) -> bool:
+func play_post_step_story(level_index: int, decorations: Array, move_result: Dictionary, player: Vector3i, won := false) -> bool:
+	if level_index == 0 and bool(move_result.get("energy_advanced", false)) and not won:
+		await play_story_event_once("first_core_connected")
+		return true
 	if level_index == 12 and bool(move_result.get("energy_advanced", false)):
 		await play_story_event_once("level_13_soul_echo")
 		return true
@@ -109,6 +112,27 @@ func play_post_step_story(level_index: int, decorations: Array, move_result: Dic
 		await play_story_event_once("level_11_silence_protocol")
 		return true
 	return false
+
+
+func play_bridge_story(level_index: int) -> bool:
+	if level_index != 6:
+		return false
+	await play_story_event_once("level_7_bridge_warning")
+	return true
+
+
+func fragment_cell(decorations: Array, logic: GameLogic) -> Vector3i:
+	for decoration in decorations:
+		if not decoration is Dictionary:
+			continue
+		var kind := str(decoration.get("type", ""))
+		if kind in ["plinth", "resonance_altar", "elias_testament", "holo", "archive_plinth"]:
+			var cell: Variant = decoration.get("grid_position", null)
+			if cell is Vector3i:
+				return cell
+	if logic != null and not logic.slots.is_empty():
+		return logic.slots.keys()[0]
+	return logic.player if logic != null else Vector3i.ZERO
 
 
 func sync_level_visuals(level_index: int, decorations: Array, player: Vector3i, energy_progress: int) -> void:

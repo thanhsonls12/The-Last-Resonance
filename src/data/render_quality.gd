@@ -42,7 +42,7 @@ static func glow_enabled() -> bool:
 
 
 static func ambient_boost() -> float:
-	return 1.16 if is_mobile() else 1.0
+	return 1.28 if is_mobile() else 1.0
 
 
 static func key_boost() -> float:

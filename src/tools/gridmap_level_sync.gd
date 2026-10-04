@@ -45,6 +45,7 @@ static func decoration_mapping() -> Dictionary:
 	var mapping := ITEM_TO_DECORATION.duplicate()
 	mapping.merge(preload("res://src/data/chapter_props.gd").decoration_mapping())
 	mapping.merge(preload("res://src/data/modular_props.gd").decoration_mapping())
+	mapping.merge(preload("res://src/data/map_expansion.gd").decoration_mapping())
 	return mapping
 
 
@@ -96,7 +97,9 @@ static func export_gridmap_to_level_data(gridmap: GridMap, level_title := "Custo
 			# New chapter scenery reserves its anchor cell as wall terrain.
 			# These models do not add puzzle collision by themselves at runtime.
 			if not grid_chars.has(Vector2i(rel_x, rel_z)):
-				grid_chars[Vector2i(rel_x, rel_z)] = "#" if preload("res://src/data/chapter_props.gd").ASSETS.has(decor_mapping[item_name]) else " "
+				var kind: String = decor_mapping[item_name]
+				var blocked := preload("res://src/data/chapter_props.gd").ASSETS.has(kind) or preload("res://src/data/map_expansion.gd").blocks_anchor(kind)
+				grid_chars[Vector2i(rel_x, rel_z)] = "#" if blocked else " "
 	
 	# Build ASCII map array
 	var map_lines: Array[String] = []

@@ -7,6 +7,11 @@ const COLOR_SURFACE := Color(0.035, 0.065, 0.12, 0.96)
 const COLOR_TEXT := Color(0.84, 0.94, 1.0)
 const COLOR_MUTED := Color(0.62, 0.78, 0.90, 0.88)
 
+signal closed
+
+var is_overlay := false
+var return_scene_path: String = "res://scenes/ui/start_menu.tscn" 
+
 var _scroll: ScrollContainer
 var _panel: PanelContainer
 var _content: VBoxContainer
@@ -15,6 +20,7 @@ var _sfx_toggle: Button
 var _haptics_button: Button
 var _motion_button: Button
 var _contrast_button: Button
+var _unlock_all_button: Button
 var _reset_button: Button
 var _master_slider: HSlider
 var _music_slider: HSlider
@@ -27,9 +33,17 @@ var _sliders: Array[HSlider] = []
 var _labels: Array[Label] = []
 var _syncing := false
 var _reset_confirm := false
+var _reset_timer: SceneTreeTimer
 var _grabber_tex: Texture2D
 var _grabber_hover_tex: Texture2D
 
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if is_overlay and (event.is_action_pressed("pause_game") or (event is InputEventKey and (event as InputEventKey).pressed and (event as InputEventKey).keycode == KEY_ESCAPE)):
+		get_viewport().set_input_as_handled()
+		closed.emit()
+		queue_free()
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -47,15 +61,16 @@ func _ready() -> void:
 func _build_ui() -> void:
 	# Background art is deliberately non-interactive so every touch reaches the
 	# controls even when the device is using edge-to-edge display mode.
-	var bg_tex_rect := TextureRect.new()
-	bg_tex_rect.set_anchors_preset(Control.PRESET_FULL_RECT)
-	bg_tex_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	bg_tex_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
-	bg_tex_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	var bg_tex := load("res://assets/ui/start_menu_background_android_v2.png") as Texture2D
-	if bg_tex != null:
-		bg_tex_rect.texture = bg_tex
-	add_child(bg_tex_rect)
+	if not is_overlay:
+		var bg_tex_rect := TextureRect.new()
+		bg_tex_rect.set_anchors_preset(Control.PRESET_FULL_RECT)
+		bg_tex_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		bg_tex_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+		bg_tex_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		var bg_tex := load("res://assets/ui/start_menu_background_android_v2.png") as Texture2D
+		if bg_tex != null:
+			bg_tex_rect.texture = bg_tex
+		add_child(bg_tex_rect)
 
 	var overlay := ColorRect.new()
 	overlay.color = Color(0.012, 0.018, 0.038, 0.78)
@@ -131,6 +146,11 @@ func _build_ui() -> void:
 	_contrast_button.pressed.connect(func() -> void:
 		GameState.set_high_contrast(not GameState.high_contrast)
 		GameState.haptic_feedback(14, 0.20))
+	_unlock_all_button = _add_toggle_row(access_body, "unlock_all_levels", COLOR_GREEN)
+	_unlock_all_button.pressed.connect(func() -> void:
+		GameState.set_unlock_all_levels(not GameState.unlock_all_levels)
+		GameState.haptic_feedback(14, 0.20)
+		EchoAudioManager.play_menu_sfx(self, &"ui_save", -4.0))
 
 	var display_body := _add_section_card("HIỂN THỊ")
 	_fs_button = _add_toggle_row(display_body, "fullscreen", COLOR_CYAN)
@@ -140,19 +160,28 @@ func _build_ui() -> void:
 	if OS.has_feature("android") or OS.has_feature("ios"):
 		display_body.get_parent().visible = false
 
-	var back := _make_action_button("  QUAY LẠI", COLOR_CYAN)
-	var back_icon := load("res://assets/ui/icons/back.svg") as Texture2D
-	if back_icon:
-		back.icon = back_icon
-		back.expand_icon = true
+	var data_body := _add_section_card("TIẾN ĐỘ & DỮ LIỆU")
+	var data_desc := _make_label("Đặt lại toàn bộ tiến độ các màn chơi và mảnh ký ức về trạng thái ban đầu.", 12, COLOR_MUTED)
+	data_desc.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	data_body.add_child(data_desc)
+
+	_reset_button = _make_danger_button("  XÓA TIẾN ĐỘ CHƠI")
+	var reset_icon := load("res://assets/ui/icons/restart.svg") as Texture2D
+	if reset_icon:
+		_reset_button.icon = reset_icon
+		_reset_button.expand_icon = true
+	data_body.add_child(_reset_button)
+	_reset_button.pressed.connect(_on_reset)
+
+	var back := _make_back_button()
 	_content.add_child(back)
 	EchoAudioManager.bind_button_sfx(self, back, &"ui_cancel")
 	back.pressed.connect(func() -> void:
-		get_tree().change_scene_to_file("res://scenes/ui/start_menu.tscn"))
-
-	_reset_button = _make_ghost_button("Xóa tiến độ chơi")
-	_content.add_child(_reset_button)
-	_reset_button.pressed.connect(_on_reset)
+		if is_overlay:
+			closed.emit()
+			queue_free()
+		else:
+			get_tree().change_scene_to_file(return_scene_path))
 
 	_apply_accessibility()
 
@@ -289,22 +318,62 @@ func _add_toggle_row(parent: Control, key: String, accent: Color) -> Button:
 	return button
 
 
-func _make_action_button(text: String, accent: Color) -> Button:
+func _make_back_button() -> Button:
 	var button := Button.new()
-	button.text = text
-	button.custom_minimum_size = Vector2(0, 52)
+	button.custom_minimum_size = Vector2(0, 50)
 	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_style_button(button, accent)
+	button.focus_mode = Control.FOCUS_ALL
+	button.set_meta("is_back", true)
+
+	var hbox := HBoxContainer.new()
+	hbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	hbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	hbox.set_anchors_preset(Control.PRESET_FULL_RECT)
+	hbox.add_theme_constant_override("separation", 10)
+	button.add_child(hbox)
+
+	var icon_rect := TextureRect.new()
+	var back_icon := load("res://assets/ui/icons/back.svg") as Texture2D
+	if back_icon:
+		icon_rect.texture = back_icon
+	icon_rect.custom_minimum_size = Vector2(18, 18)
+	icon_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	icon_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	icon_rect.modulate = COLOR_CYAN
+	icon_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	hbox.add_child(icon_rect)
+	button.set_meta("back_icon", icon_rect)
+
+	var label := Label.new()
+	label.text = "QUAY LẠI"
+	var ls := LabelSettings.new()
+	ls.font_size = 15
+	ls.font_color = COLOR_TEXT
+	ls.outline_size = 2
+	ls.outline_color = Color(0.01, 0.04, 0.10, 0.95)
+	label.label_settings = ls
+	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	hbox.add_child(label)
+	button.set_meta("back_label", label)
+
+	button.mouse_entered.connect(func() -> void:
+		icon_rect.modulate = Color(0.70, 0.95, 1.0)
+		ls.font_color = Color.WHITE)
+	button.mouse_exited.connect(func() -> void:
+		icon_rect.modulate = Color.WHITE if GameState.high_contrast else COLOR_CYAN
+		ls.font_color = Color.WHITE if GameState.high_contrast else COLOR_TEXT)
+
+	_style_button(button, COLOR_CYAN)
 	return button
 
 
-func _make_ghost_button(text: String) -> Button:
+func _make_danger_button(text: String) -> Button:
 	var button := Button.new()
 	button.text = text
-	button.custom_minimum_size = Vector2(0, 40)
+	button.custom_minimum_size = Vector2(0, 44)
 	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	button.focus_mode = Control.FOCUS_ALL
-	button.set_meta("ghost", true)
+	button.set_meta("danger", true)
 	_style_button(button, COLOR_ORANGE)
 	return button
 
@@ -325,6 +394,7 @@ func _sync_controls() -> void:
 	_update_toggle("haptics", "Phản hồi rung", GameState.haptics_enabled)
 	_update_toggle("reduced_motion", "Giảm chuyển động", GameState.reduced_motion)
 	_update_toggle("high_contrast", "Tương phản cao", GameState.high_contrast)
+	_update_toggle("unlock_all_levels", "Mở khóa toàn bộ màn (3 sao)", GameState.unlock_all_levels)
 	_syncing = false
 	_apply_accessibility()
 
@@ -356,12 +426,26 @@ func _on_settings_changed() -> void:
 func _on_reset() -> void:
 	if not _reset_confirm:
 		_reset_confirm = true
-		_reset_button.text = "Bấm lần nữa để xác nhận"
-		_reset_button.add_theme_color_override("font_color", Color(1.0, 0.28, 0.22))
+		_reset_button.text = "  XÁC NHẬN: BẤM ĐỂ XÓA"
+		_reset_button.set_meta("confirming", true)
+		_apply_button_style(_reset_button, COLOR_ORANGE)
+		EchoAudioManager.play_menu_sfx(self, &"ui_click", -3.0)
+		_reset_timer = get_tree().create_timer(4.5)
+		await _reset_timer.timeout
+		if _reset_confirm and is_instance_valid(_reset_button) and not _reset_button.disabled:
+			_reset_confirm = false
+			_reset_button.text = "  XÓA TIẾN ĐỘ CHƠI"
+			_reset_button.set_meta("confirming", false)
+			_apply_button_style(_reset_button, COLOR_ORANGE)
 		return
+
+	_reset_confirm = false
 	GameState.reset_progress()
-	_reset_button.text = "Đã xóa tiến độ"
+	EchoAudioManager.play_menu_sfx(self, &"ui_save", -2.0)
+	_reset_button.text = "  ✓ ĐÃ XÓA TIẾN ĐỘ"
 	_reset_button.disabled = true
+	_reset_button.set_meta("confirming", false)
+	_apply_button_style(_reset_button, COLOR_GREEN)
 	await get_tree().create_timer(1.0).timeout
 	get_tree().change_scene_to_file("res://scenes/ui/start_menu.tscn")
 
@@ -392,9 +476,18 @@ func _apply_accessibility() -> void:
 	for button in _styled_buttons:
 		if is_instance_valid(button):
 			var accent: Color = button.get_meta("accent", COLOR_CYAN)
-			if bool(button.get_meta("enabled", false)) and not bool(button.get_meta("ghost", false)):
+			if bool(button.get_meta("enabled", false)) and not bool(button.get_meta("ghost", false)) and not bool(button.get_meta("danger", false)):
 				accent = COLOR_GREEN
 			_apply_button_style(button, accent)
+			if bool(button.get_meta("is_back", false)):
+				var back_icon_rect: TextureRect = button.get_meta("back_icon", null)
+				var back_label: Label = button.get_meta("back_label", null)
+				if back_icon_rect:
+					back_icon_rect.modulate = Color.WHITE if high else COLOR_CYAN
+				if back_label and back_label.label_settings:
+					back_label.label_settings.font_color = Color.WHITE if high else COLOR_TEXT
+					back_label.label_settings.outline_size = 8 if high else 2
+					back_label.label_settings.outline_color = Color.BLACK if high else Color(0.01, 0.04, 0.10, 0.95)
 	for slider in _sliders:
 		if is_instance_valid(slider):
 			_style_slider(slider)
@@ -429,9 +522,25 @@ func _style_button(button: Button, accent: Color) -> void:
 func _apply_button_style(button: Button, accent: Color) -> void:
 	var high := GameState.high_contrast
 	var ghost := bool(button.get_meta("ghost", false))
-	var enabled := bool(button.get_meta("enabled", false)) and not ghost
-	button.add_theme_font_size_override("font_size", 16 if ghost else (18 if high else 15))
-	button.add_theme_color_override("font_color", Color.WHITE if high else (COLOR_ORANGE if ghost else COLOR_TEXT))
+	var danger := bool(button.get_meta("danger", false))
+	var confirming := bool(button.get_meta("confirming", false))
+	var is_back := bool(button.get_meta("is_back", false))
+	var enabled := bool(button.get_meta("enabled", false)) and not ghost and not danger
+
+	var font_color: Color
+	if high:
+		font_color = Color.WHITE
+	elif confirming:
+		font_color = Color(1.0, 0.35, 0.35)
+	elif danger:
+		font_color = Color(1.0, 0.72, 0.60)
+	elif ghost:
+		font_color = COLOR_ORANGE
+	else:
+		font_color = COLOR_TEXT
+
+	button.add_theme_font_size_override("font_size", 16 if (ghost or danger) else (18 if high else 15))
+	button.add_theme_color_override("font_color", font_color)
 	button.add_theme_color_override("font_hover_color", Color.WHITE)
 	button.add_theme_color_override("font_pressed_color", Color.WHITE)
 	button.add_theme_color_override("font_outline_color", Color.BLACK)
@@ -442,6 +551,46 @@ func _apply_button_style(button: Button, accent: Color) -> void:
 			style.bg_color = Color(0.0, 0.0, 0.0, 0.98)
 			style.set_border_width_all(3)
 			style.border_color = Color.WHITE
+		elif is_back:
+			if state == "hover":
+				style.bg_color = Color(0.04, 0.18, 0.32, 0.92)
+				style.set_border_width_all(2)
+				style.border_color = Color(0.55, 0.95, 1.0, 1.0)
+				style.shadow_color = Color(COLOR_CYAN.r, COLOR_CYAN.g, COLOR_CYAN.b, 0.55)
+				style.shadow_size = 18
+			elif state == "pressed":
+				style.bg_color = Color(0.06, 0.24, 0.44, 0.98)
+				style.set_border_width_all(2)
+				style.border_color = COLOR_CYAN
+				style.shadow_color = Color(COLOR_CYAN.r, COLOR_CYAN.g, COLOR_CYAN.b, 0.75)
+				style.shadow_size = 20
+			else:
+				style.bg_color = Color(0.02, 0.065, 0.12, 0.85)
+				style.set_border_width_all(1)
+				style.border_color = Color(COLOR_CYAN.r, COLOR_CYAN.g, COLOR_CYAN.b, 0.45)
+				style.shadow_color = Color(0.0, 0.35, 0.70, 0.15)
+				style.shadow_size = 6
+		elif danger:
+			if confirming:
+				style.bg_color = Color(0.24, 0.04, 0.05, 0.85)
+				style.set_border_width_all(2)
+				style.border_color = Color(1.0, 0.25, 0.25, 0.95)
+				style.shadow_color = Color(1.0, 0.2, 0.1, 0.45)
+				style.shadow_size = 14
+			elif state == "hover":
+				style.bg_color = Color(0.20, 0.05, 0.05, 0.80)
+				style.set_border_width_all(1)
+				style.border_color = Color(1.0, 0.50, 0.25, 0.95)
+				style.shadow_color = Color(1.0, 0.3, 0.1, 0.35)
+				style.shadow_size = 12
+			elif state == "pressed":
+				style.bg_color = Color(0.28, 0.06, 0.06, 0.95)
+				style.set_border_width_all(2)
+				style.border_color = Color(1.0, 0.3, 0.15, 1.0)
+			else:
+				style.bg_color = Color(0.12, 0.03, 0.03, 0.50)
+				style.set_border_width_all(1)
+				style.border_color = Color(1.0, 0.38, 0.15, 0.40)
 		elif ghost:
 			style.bg_color = Color(0.12, 0.03, 0.02, 0.35 if state == "normal" else 0.55)
 			style.set_border_width_all(1)
@@ -454,9 +603,9 @@ func _apply_button_style(button: Button, accent: Color) -> void:
 			style.bg_color = COLOR_SURFACE if state == "normal" else Color(0.05, 0.14, 0.24, 0.96)
 			style.set_border_width_all(1)
 			style.border_color = Color(accent.r, accent.g, accent.b, 0.45 if state == "normal" else 0.95)
-		style.set_corner_radius_all(10)
-		style.content_margin_left = 14.0
-		style.content_margin_right = 14.0
+		style.set_corner_radius_all(12 if is_back else 10)
+		style.content_margin_left = 18.0 if is_back else 14.0
+		style.content_margin_right = 18.0 if is_back else 14.0
 		style.content_margin_top = 8.0
 		style.content_margin_bottom = 8.0
 		button.add_theme_stylebox_override(state, style)

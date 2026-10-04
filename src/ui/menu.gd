@@ -35,21 +35,12 @@ func _chapter_display_name(index: int) -> String:
 
 
 func _ready() -> void:
-	_init_chapter_from_progress()
+	EchoAudioManager.create_scene_bgm(self, &"menu", -4.0, 1.5)
 	_build_ui()
 	_render_chapter_levels()
 	if get_viewport() != null and not get_viewport().size_changed.is_connected(_layout_for_viewport):
 		get_viewport().size_changed.connect(_layout_for_viewport)
 	_layout_for_viewport()
-
-
-func _init_chapter_from_progress() -> void:
-	var unlocked_idx := GameState.unlocked - 1
-	for idx in CHAPTERS.size():
-		var ch: Dictionary = CHAPTERS[idx]
-		if unlocked_idx >= int(ch["start"]) and unlocked_idx <= int(ch["end"]):
-			_current_chapter = idx
-			break
 
 
 func _build_ui() -> void:
@@ -211,6 +202,8 @@ func _layout_for_viewport() -> void:
 	var start_idx: int = int(CHAPTERS[_current_chapter]["start"])
 	var end_idx: int = mini(int(CHAPTERS[_current_chapter]["end"]), Levels.ALL.size() - 1)
 	var level_count: int = maxi(1, end_idx - start_idx + 1)
+	if _current_chapter == 3:
+		level_count += 1
 
 	# Bố cục lưới cân xứng tuyệt đối:
 	# - 4 màn: LUÔN bố trí 2x2 (2 cột x 2 hàng), không bao giờ để 3+1 gây lẻ màn
@@ -322,29 +315,68 @@ func _render_chapter_levels() -> void:
 			var mem_str := "  •  ◆ Ký ức" if memory_collected else ""
 			level_btn.text = "MÀN %02d\n%s\n%s%s" % [i + 1, level_name, best_str, mem_str]
 			var unlock_icon := load("res://assets/ui/icons/unlock.svg") as Texture2D
-			if unlock_icon:
-				level_btn.icon = unlock_icon
-				level_btn.expand_icon = true
+			_attach_card_icon(level_btn, unlock_icon)
 			EchoAudioManager.bind_button_sfx(self, level_btn, &"ui_level_select")
 			level_btn.pressed.connect(_on_level_pressed.bind(i))
 		else:
 			level_btn.text = "MÀN %02d\nKhóa" % [i + 1]
 			var lock_icon := load("res://assets/ui/icons/lock.svg") as Texture2D
-			if lock_icon:
-				level_btn.icon = lock_icon
-				level_btn.expand_icon = true
+			_attach_card_icon(level_btn, lock_icon)
 			EchoAudioManager.bind_button_sfx(self, level_btn, &"ui_error")
 			level_btn.pressed.connect(func() -> void: GameState.haptic_feedback(10, 0.12))
 
 		_style_level_card(level_btn, COLOR_CYAN if unlocked else Color(0.25, 0.32, 0.42), unlocked)
 		_grid_container.add_child(level_btn)
 
+	# Thẻ lựa chọn kết truyện ở Chương IV (hiển thị ngay sau Level 15)
+	if _current_chapter == 3:
+		var l15_unlocked: bool = GameState.is_unlocked(14)
+		var l15_record: Dictionary = GameState.get_level_record(14)
+		var l15_completed: bool = bool(l15_record.get("completed", false))
+		var ending_btn := Button.new()
+		ending_btn.custom_minimum_size = Vector2(240, 110)
+		ending_btn.disabled = false
+
+		if l15_completed:
+			ending_btn.text = "PHÁN QUYẾT CUỐI CÙNG\nLõi Trung Tâm\nXem lại các kết truyện"
+			var unlock_icon := load("res://assets/ui/icons/unlock.svg") as Texture2D
+			_attach_card_icon(ending_btn, unlock_icon)
+			EchoAudioManager.bind_button_sfx(self, ending_btn, &"ui_level_select")
+			ending_btn.pressed.connect(_on_ending_pressed)
+			_style_level_card(ending_btn, Color(0.85, 0.70, 1.0), true)
+		else:
+			ending_btn.text = "PHÁN QUYẾT CUỐI CÙNG\nKhóa (Vượt Màn 15)"
+			var lock_icon := load("res://assets/ui/icons/lock.svg") as Texture2D
+			_attach_card_icon(ending_btn, lock_icon)
+			EchoAudioManager.bind_button_sfx(self, ending_btn, &"ui_error")
+			ending_btn.pressed.connect(func() -> void: GameState.haptic_feedback(10, 0.12))
+			_style_level_card(ending_btn, Color(0.25, 0.32, 0.42), false)
+
+		_grid_container.add_child(ending_btn)
+
 	_layout_for_viewport()
 
 
+
+func _attach_card_icon(button: Button, texture: Texture2D) -> void:
+	if texture == null:
+		return
+	var icon_rect := TextureRect.new()
+	icon_rect.texture = texture
+	icon_rect.custom_minimum_size = Vector2(28, 28)
+	icon_rect.set_anchors_preset(Control.PRESET_CENTER_LEFT)
+	icon_rect.offset_left = 18.0
+	icon_rect.offset_top = -14.0
+	icon_rect.offset_right = 46.0
+	icon_rect.offset_bottom = 14.0
+	icon_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	icon_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	icon_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	button.add_child(icon_rect)
+
 func _style_level_card(button: Button, accent: Color, unlocked: bool) -> void:
 	var high := GameState.high_contrast
-	button.add_theme_font_size_override("font_size", 17 if high else 16)
+	button.add_theme_font_size_override("font_size", 16 if high else 14)
 	button.add_theme_color_override("font_color", Color.WHITE if high else Color(0.84, 0.94, 1.0))
 	button.add_theme_color_override("font_hover_color", Color.WHITE)
 	button.add_theme_color_override("font_disabled_color", Color(0.75, 0.75, 0.75) if high else Color(0.35, 0.42, 0.52))
@@ -361,8 +393,8 @@ func _style_level_card(button: Button, accent: Color, unlocked: bool) -> void:
 		style.corner_radius_top_right = 10
 		style.corner_radius_bottom_left = 10
 		style.corner_radius_bottom_right = 10
-		style.content_margin_left = 12.0
-		style.content_margin_right = 12.0
+		style.content_margin_left = 46.0
+		style.content_margin_right = 46.0
 		style.content_margin_top = 10.0
 		style.content_margin_bottom = 10.0
 		button.add_theme_stylebox_override(state, style)
@@ -407,3 +439,7 @@ func _on_next_chapter() -> void:
 func _on_level_pressed(i: int) -> void:
 	GameState.set_current_level(i)
 	get_tree().change_scene_to_file("res://scenes/game/main.tscn")
+
+
+func _on_ending_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/game/ending_cutscene.tscn")

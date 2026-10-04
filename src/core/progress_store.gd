@@ -16,6 +16,12 @@ static func read_valid(path: String) -> Dictionary:
 			return {}
 	if not value.get("levels", {}) is Dictionary or not value.get("seen_chapters", []) is Array:
 		return {}
+	var trial: Variant = value.get("echo_chamber", {})
+	if not trial is Dictionary:
+		return {}
+	for key in ["completed", "memory", "tidal_unlocked", "tidal_equipped"]:
+		if trial.has(key) and not trial[key] is bool:
+			return {}
 	for record in value.get("levels", {}).values():
 		if not record is Dictionary:
 			return {}

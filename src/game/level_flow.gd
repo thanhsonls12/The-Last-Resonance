@@ -127,9 +127,10 @@ func get_memory_fragment() -> String:
 	return _data.memory_fragment if _data else ""
 
 
-func complete_current(moves: int, pushes: int, hint_penalty: int) -> void:
+func complete_current(moves: int, pushes: int, hint_penalty: int) -> Dictionary:
 	if _data == null:
-		return
+		return {}
 	var run := ScoreRules.evaluate_run(moves, hint_penalty, _data)
 	run["pushes"] = pushes
 	GameState.complete_level(level_index, run, not _data.memory_fragment.is_empty())
+	return run

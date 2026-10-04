@@ -56,6 +56,15 @@ func set_active_floor(floor: int) -> void:
 
 func play_footstep_dust(position: Vector3) -> void:
 	_burst(position + Vector3(0, 0.04, 0), COLOR_DUST, 7, 0.48, Vector3.UP, 55.0, 0.35, 0.10)
+	if not GameState.reduced_motion:
+		_pulse_ring(position + Vector3(0, 0.02, 0), Color(0.2, 0.7, 1.0, 0.5), 0.10, 0.45, 0.22)
+
+
+func play_surface_step(position: Vector3, chapter: int) -> void:
+	if GameState.reduced_motion:
+		return
+	var color := Color(.22, .43, .45) if chapter == 3 else (Color(.43, .32, .22) if chapter == 2 else COLOR_DUST)
+	_burst(position + Vector3(0, .13, 0), color, 3 if RENDER_QUALITY.is_mobile() else 5, .30, Vector3.UP, 45.0, .18, .035)
 
 
 func play_push_impact(position: Vector3, direction := Vector3.ZERO) -> void:
@@ -140,9 +149,10 @@ func _add_core_loop(position: Vector3, floor: int) -> void:
 	root.set_meta("floor", floor)
 	root.position = position
 	add_child(root)
-	var ring := _ring_mesh(COLOR_TEAL, 0.22, 0.30, 2.8)
+	var ring := _ring_mesh(COLOR_TEAL, 0.22, 0.30, 2.1)
 	root.add_child(ring)
-	var orb := _sphere_mesh(COLOR_CYAN, 0.10, 3.2)
+	var orb := _sphere_mesh(COLOR_CYAN, 0.065, 1.1)
+	(orb.material_override as StandardMaterial3D).albedo_color.a = .45
 	orb.position.y = 0.14
 	root.add_child(orb)
 	_register_loop(root)
@@ -153,9 +163,9 @@ func _add_portal_loop(position: Vector3, floor: int) -> void:
 	root.set_meta("floor", floor)
 	root.position = position
 	add_child(root)
-	var ring := _ring_mesh(COLOR_PURPLE, 0.22, 0.31, 3.0)
+	var ring := _ring_mesh(COLOR_PURPLE, 0.22, 0.31, 2.2)
 	root.add_child(ring)
-	var inner := _ring_mesh(COLOR_CYAN, 0.12, 0.17, 1.8)
+	var inner := _ring_mesh(COLOR_CYAN, 0.12, 0.17, 1.35)
 	inner.rotation.x = 0.18
 	root.add_child(inner)
 	_register_loop(root)
@@ -217,7 +227,7 @@ func _pulse_ring(position: Vector3, color: Color, start_scale: float, end_scale:
 func _particle_mesh(color: Color, size: float) -> QuadMesh:
 	var mesh := QuadMesh.new()
 	mesh.size = Vector2.ONE * size
-	var material := _emissive_material(color, 2.2)
+	var material := _emissive_material(color, 1.65)
 	material.billboard_mode = BaseMaterial3D.BILLBOARD_ENABLED
 	material.vertex_color_use_as_albedo = true
 	mesh.material = material

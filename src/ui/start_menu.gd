@@ -17,9 +17,13 @@ var _bottom_bar: HBoxContainer
 
 func _ready() -> void:
 	_build_ui()
+	EchoAudioManager.create_scene_bgm(self, &"menu", -4.0, 1.5)
 	if get_viewport() != null and not get_viewport().size_changed.is_connected(_layout_for_viewport):
 		get_viewport().size_changed.connect(_layout_for_viewport)
 	_layout_for_viewport()
+	var intro := preload("res://src/ui/startup_intro.gd").new()
+	intro.logo_material = _logo_rect.material
+	add_child(intro)
 
 
 func _build_ui() -> void:
@@ -148,6 +152,20 @@ void fragment() {
 	EchoAudioManager.bind_button_sfx(self, select_btn, &"ui_click")
 	select_btn.pressed.connect(_on_level_select)
 	_action_box.add_child(select_btn)
+	var trial_btn := Button.new()
+	trial_btn.text = "  PHÒNG VỌNG ÂM"
+	trial_btn.custom_minimum_size = BTN_SIZE
+	_style_button(trial_btn, COLOR_CYAN)
+	EchoAudioManager.bind_button_sfx(self, trial_btn, &"ui_confirm")
+	trial_btn.pressed.connect(func() -> void: get_tree().change_scene_to_file("res://scenes/game/tidal_trial.tscn"))
+	_action_box.add_child(trial_btn)
+	var station_btn := Button.new()
+	station_btn.text = "  TRẠM PHỤC HỒI"
+	station_btn.custom_minimum_size = BTN_SIZE
+	_style_button(station_btn, COLOR_CYAN)
+	EchoAudioManager.bind_button_sfx(self, station_btn, &"ui_confirm")
+	station_btn.pressed.connect(func() -> void: get_tree().change_scene_to_file("res://scenes/game/restoration_station.tscn"))
+	_action_box.add_child(station_btn)
 
 	var archive_btn := Button.new()
 	archive_btn.text = "  THƯ VIỆN KÝ ỨC"
