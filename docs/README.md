@@ -13,8 +13,7 @@ dynamics; module animation; hoàn thiện Core/Foundry/landmark; ngoại cảnh 
 **Phòng Vọng Âm**; visual review desktop; APK debug qua preflight.
 
 **Còn lại:** playtest máy Android thật (chạm, focus, cỡ màn, FPS, nhiệt, RAM và
-thời gian tải). Bốn cluster prefab đã đạt kiểm tra hình học/metadata nhưng vẫn cần
-visual camera review trước khi tái sử dụng trong campaign.
+thời gian tải).
 
 ![Năm landmark truyện](NARRATIVE_LANDMARK_PREVIEW.png)
 

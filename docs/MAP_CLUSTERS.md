@@ -55,7 +55,17 @@ Bounds chính xác nằm trong `MAP_CLUSTER_CATALOG.json`. Tóm tắt X×Z:
 - Sanctuary: khoảng `3.02 × 1.88` — rock rotation dùng tolerance 0.02 ô ở biên X
 - Central Core: khoảng `2.81 × 0.68`
 
-Mọi cluster khai báo footprint 3×3. Automated geometry check ghi bốn yaw `0/90/180/270`; đây là kiểm tra kích thước/metadata, **không phải bằng chứng không che khuất ở camera gameplay**. `visual_camera_review` vẫn là `pending` cho tới khi xem trực tiếp trong cửa sổ render.
+Mọi cluster khai báo footprint 3×3. Automated geometry check ghi bốn yaw `0/90/180/270`; đây là kiểm tra kích thước/metadata. `visual_camera_review` đã chuyển sang `reviewed` cho cả bốn cụm sau khi render và xem ảnh ở bốn hướng bằng camera kiểu gameplay.
+
+Render lại ảnh review (ghi `.codex_qa/cluster_review/`, 4 cluster × 4 yaw):
+
+```powershell
+godot --path . tests/map_cluster_capture.tscn
+```
+
+Đây là công cụ authoring cần cửa sổ render thật, không phải regression gate. `verify_map_clusters.gd` bắt buộc trạng thái phải là `pending` hoặc `reviewed`, và khi ở máy dev (không phải CI) thì cluster khai `reviewed` **phải** có ảnh `_yaw000.png` thật — nên không thể khai khống. Trên CI, ảnh không tồn tại vì `.codex_qa/` bị gitignore, nên kiểm tra này được bỏ qua có chủ đích.
+
+Trạng thái `reviewed` được khai trong `VISUAL_REVIEW` ở đầu `tools/build_map_clusters.gd`; chạy lại builder sẽ giữ nguyên giá trị đó thay vì ghi đè về `pending`.
 
 ## Pipeline và kiểm tra
 

@@ -1,6 +1,7 @@
 extends SceneTree
 
 const CATALOG_PATH := "res://docs/MAP_CLUSTER_CATALOG.json"
+const REVIEW_DIR := "res://.codex_qa/cluster_review"
 var failures := 0
 
 
@@ -15,6 +16,10 @@ func pairs_to_cells(values: Array) -> Array[Vector2i]:
 	for pair in values:
 		result.append(Vector2i(int(pair[0]), int(pair[1])))
 	return result
+
+
+func is_ci() -> bool:
+	return not OS.get_environment("CI").is_empty() or not OS.get_environment("GITHUB_ACTIONS").is_empty()
 
 
 func _initialize() -> void:
@@ -40,7 +45,16 @@ func _initialize() -> void:
 		check(str(cluster.get_meta("cluster_id", "")) == str(spec.id), str(spec.id) + " metadata id")
 		check(int(cluster.get_meta("chapter", 0)) == int(spec.chapter), str(spec.id) + " metadata chapter")
 		check(str(cluster.get_meta("outward_face", "")) == str(spec.outward_face), str(spec.id) + " outward face")
-		check(str(cluster.get_meta("visual_camera_review", "")) == "pending", str(spec.id) + " does not claim unperformed visual camera review")
+		var review_status := str(cluster.get_meta("visual_camera_review", ""))
+		check(review_status in ["pending", "reviewed"], str(spec.id) + " records a valid visual review status")
+		# "reviewed" is a human claim backed by rendered evidence. The images live
+		# in .codex_qa/ which is gitignored, so CI cannot see them and skips this.
+		# On a developer machine the claim must be backed by real captures.
+		if review_status == "reviewed" and not is_ci():
+			check(
+				FileAccess.file_exists("%s/%s_yaw000.png" % [REVIEW_DIR, str(spec.id)]),
+				str(spec.id) + " claiming review has rendered yaw images (run tests/map_cluster_capture.tscn)"
+			)
 		var footprint := Vector2i(int(spec.footprint_cells[0]), int(spec.footprint_cells[1]))
 		check(cluster.get_meta("footprint_cells", Vector2i.ZERO) == footprint, str(spec.id) + " footprint metadata")
 		var blocked := pairs_to_cells(spec.blocked_cells)

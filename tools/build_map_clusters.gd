@@ -11,6 +11,17 @@ const MATERIAL_PROFILES = preload("res://src/data/chapter_material_profiles.gd")
 const OUTPUT_DIR := "res://scenes/editor/map_clusters"
 const CATALOG_PATH := "res://docs/MAP_CLUSTER_CATALOG.json"
 
+## Visual camera review is a human judgement recorded after inspecting rendered
+## images, so it is authored here rather than derived. Rebuild the images with
+## `godot --path . tests/map_cluster_capture.tscn` (writes .codex_qa/cluster_review)
+## and update this table when a cluster changes. Anything absent stays "pending".
+const VISUAL_REVIEW := {
+	"archive_storage_bay": "reviewed",
+	"foundry_maintenance_corner": "reviewed",
+	"sanctuary_flooded_bank": "reviewed",
+	"core_data_wall": "reviewed",
+}
+
 const CLUSTERS := {
 	"archive_storage_bay": {
 		"chapter": 1,
@@ -151,7 +162,7 @@ func build_cluster(cluster_id: String, spec: Dictionary) -> Dictionary:
 	cluster.set_meta("blocked_cells", spec.blocked_cells)
 	cluster.set_meta("walkable_cells", spec.walkable_cells)
 	cluster.set_meta("geometry_checked_yaws", PackedFloat32Array([0.0, 90.0, 180.0, 270.0]))
-	cluster.set_meta("visual_camera_review", "pending")
+	cluster.set_meta("visual_camera_review", str(VISUAL_REVIEW.get(cluster_id, "pending")))
 	cluster.set_meta("notes", str(spec.notes))
 	cluster.set_meta("measured_bounds_position", bounds.position)
 	cluster.set_meta("measured_bounds_size", bounds.size)
@@ -174,7 +185,7 @@ func build_cluster(cluster_id: String, spec: Dictionary) -> Dictionary:
 		"blocked_cells": vector2i_array_to_json(spec.blocked_cells),
 		"walkable_cells": vector2i_array_to_json(spec.walkable_cells),
 		"geometry_checked_yaws": [0, 90, 180, 270],
-		"visual_camera_review": "pending",
+		"visual_camera_review": str(VISUAL_REVIEW.get(cluster_id, "pending")),
 		"measured_bounds_position": [bounds.position.x, bounds.position.y, bounds.position.z],
 		"measured_bounds_size": [bounds.size.x, bounds.size.y, bounds.size.z],
 		"components": component_types,

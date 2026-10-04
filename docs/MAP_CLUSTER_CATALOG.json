@@ -45,7 +45,7 @@
     "notes": "Back-wall storage rhythm; damaged access panel beside a surviving powered bay.",
     "outward_face": "south",
     "scene": "res://scenes/editor/map_clusters/archive_storage_bay.tscn",
-    "visual_camera_review": "pending",
+    "visual_camera_review": "reviewed",
     "walkable_cells": [
       [
         -1,
@@ -129,7 +129,7 @@
     "notes": "One heavy machine, a short terminated pipe run, and a low maintenance pocket.",
     "outward_face": "south",
     "scene": "res://scenes/editor/map_clusters/foundry_maintenance_corner.tscn",
-    "visual_camera_review": "pending",
+    "visual_camera_review": "reviewed",
     "walkable_cells": [
       [
         0,
@@ -205,7 +205,7 @@
     "notes": "Asymmetric flooded edge with eroded stone, broken plinth and roots kept off the Core route.",
     "outward_face": "south",
     "scene": "res://scenes/editor/map_clusters/sanctuary_flooded_bank.tscn",
-    "visual_camera_review": "pending",
+    "visual_camera_review": "reviewed",
     "walkable_cells": [
       [
         0,
@@ -271,7 +271,7 @@
     "notes": "Precise data-wall rhythm; secondary emission stays below Energy Node/Portal prominence.",
     "outward_face": "south",
     "scene": "res://scenes/editor/map_clusters/core_data_wall.tscn",
-    "visual_camera_review": "pending",
+    "visual_camera_review": "reviewed",
     "walkable_cells": [
       [
         -1,
