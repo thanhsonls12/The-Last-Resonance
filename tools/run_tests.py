@@ -173,8 +173,9 @@ def run_one(godot: str, script: Path, level: int | None, timeout: int) -> tuple[
             errors="replace",
             timeout=timeout,
         )
-    except subprocess.TimeoutExpired:
-        return False, f"TIMEOUT after {timeout}s\n"
+    except subprocess.TimeoutExpired as error:
+        output = b"".join((error.stdout or b"", error.stderr or b""))
+        return False, f"TIMEOUT after {timeout}s\n" + output.decode("utf-8", errors="replace")
     output = (completed.stdout or "") + (completed.stderr or "")
     return completed.returncode == 0, output
 
@@ -220,6 +221,7 @@ def main() -> int:
         print("PASS" if passed else "FAIL")
         if not passed:
             failures.append((label, output))
+            print(output.rstrip(), flush=True)
         elif args.verbose:
             print(output)
 
