@@ -81,7 +81,7 @@ func move(direction: Vector3i) -> void:
 		var core: Node3D = board.block_nodes[result.pushed_from]
 		board.block_nodes.erase(result.pushed_from)
 		board.block_nodes[result.pushed_to] = core
-		tween.tween_property(core, "position", board.world_position(result.pushed_to) + Vector3(0,.45,0), .18)
+		tween.tween_property(core, "position", board.world_position(result.pushed_to) + Vector3(0, .45, 0), .18)
 		audio.play_push()
 	await tween.finished
 	board.play_player_animation(&"Idle")

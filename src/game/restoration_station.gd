@@ -87,8 +87,8 @@ func _button(parent: Node, text: String, callback: Callable) -> Button:
 	button.custom_minimum_size = Vector2(120, 48)
 	button.pressed.connect(callback)
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color(.02,.06,.075,.94)
-	style.border_color = Color(.16,.54,.47)
+	style.bg_color = Color(.02, .06, .075, .94)
+	style.border_color = Color(.16, .54, .47)
 	style.set_border_width_all(1)
 	style.set_corner_radius_all(6)
 	style.content_margin_left = 12
@@ -104,7 +104,7 @@ func restore_kiro() -> void:
 	_busy = true
 	info.text = "Trạm đang kiểm tra khớp máy và cân bằng lõi năng lượng…"
 	var original := board.player_node.position
-	var dock := board.player_target(Vector3i(3,0,2), {}) + Vector3(0,.18,0)
+	var dock := board.player_target(Vector3i(3, 0, 2), {}) + Vector3(0, .18, 0)
 	var enter := create_tween()
 	enter.tween_property(board.player_node, "position", dock, .01 if GameState.reduced_motion else .35)
 	await enter.finished

@@ -108,7 +108,7 @@ func layout(viewport_size: Vector2, compact: bool) -> void:
 	# --- TẦNG 1: Thanh thông số màn chơi (Level Header & Stats) ---
 	level_label.set_anchors_preset(Control.PRESET_TOP_WIDE)
 	level_label.offset_left = edge + (62.0 if compact else 125.0)
-	level_label.offset_right = -edge - (62.0 if compact else 135.0)
+	level_label.offset_right = - edge - (62.0 if compact else 135.0)
 	level_label.offset_top = 8.0 if compact else 14.0
 	level_label.offset_bottom = 36.0 if compact else 46.0
 	level_label.label_settings.font_size = 16 if compact else 20
@@ -122,22 +122,22 @@ func layout(viewport_size: Vector2, compact: bool) -> void:
 		var label := entry[0] as Label
 		label.set_anchors_preset(Control.PRESET_TOP_WIDE)
 		label.offset_left = edge
-		label.offset_right = -edge
+		label.offset_right = - edge
 		label.offset_top = float(entry[1])
 		label.offset_bottom = label.offset_top + 24.0
 		label.label_settings.font_size = int(entry[2])
 
 	# --- Tầng và trạng thái tầng ---
 	floor_label.set_anchors_preset(Control.PRESET_TOP_RIGHT)
-	floor_label.offset_left = -(112.0 if compact else 150.0)
-	floor_label.offset_right = -edge
+	floor_label.offset_left = - (112.0 if compact else 150.0)
+	floor_label.offset_right = - edge
 	floor_label.offset_top = 46.0 if compact else 60.0
 	floor_label.offset_bottom = floor_label.offset_top + 26.0
 	floor_label.label_settings.font_size = 13 if compact else 15
 
 	floor_status_label.set_anchors_preset(Control.PRESET_TOP_RIGHT)
-	floor_status_label.offset_left = -(230.0 if compact else 330.0)
-	floor_status_label.offset_right = -edge
+	floor_status_label.offset_left = - (230.0 if compact else 330.0)
+	floor_status_label.offset_right = - edge
 	floor_status_label.offset_top = 96.0 if compact else 88.0
 	floor_status_label.offset_bottom = floor_status_label.offset_top + 30.0
 	floor_status_label.label_settings.font_size = 10 if compact else 12
@@ -145,14 +145,14 @@ func layout(viewport_size: Vector2, compact: bool) -> void:
 	# --- Dòng gợi ý (Hint) ---
 	hint_label.set_anchors_preset(Control.PRESET_TOP_WIDE)
 	hint_label.offset_left = edge
-	hint_label.offset_right = -edge
+	hint_label.offset_right = - edge
 	hint_label.offset_top = 122.0 if compact else 142.0
 	hint_label.offset_bottom = hint_label.offset_top + (40.0 if compact else 46.0)
 	hint_label.label_settings.font_size = 13 if compact else 15
 
 	fragment_label.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
 	fragment_label.offset_left = edge + (72.0 if compact else 150.0)
-	fragment_label.offset_right = -edge - (72.0 if compact else 150.0)
+	fragment_label.offset_right = - edge - (72.0 if compact else 150.0)
 	fragment_label.offset_top = -104.0 if compact else -132.0
 	fragment_label.offset_bottom = -72.0 if compact else -76.0
 	fragment_label.label_settings.font_size = 13 if compact else 15

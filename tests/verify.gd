@@ -461,7 +461,7 @@ func _verify_optional_plate() -> bool:
 	var data := LevelData.new()
 	data.title = "Optional plate"
 	data.map.assign(OPTIONAL_PLATE_MAP)
-	data.entities = [{
+	data.entities = [ {
 		"type": "plate",
 		"grid_position": Vector3i(3, 0, 4),
 		"hold_required": false,

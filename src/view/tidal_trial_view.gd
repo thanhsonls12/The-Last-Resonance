@@ -72,6 +72,6 @@ func sync(trial, animated := false) -> Tween:
 			else:
 				valve_animation.play_backwards("ValveTurn")
 	for cell in board.block_nodes:
-		var lift := .18 if trial.high_water and cell == Vector3i(5,0,2) else 0.0
+		var lift := .18 if trial.high_water and cell == Vector3i(5, 0, 2) else 0.0
 		tween.tween_property(board.block_nodes[cell], "position", board.world_position(cell) + Vector3(0, .45 + lift, 0), duration)
 	return tween

@@ -79,7 +79,7 @@ func _run() -> void:
 	story.play_chapter_start_sequence(1, null, Callable())
 	story.reset_for_level()
 	_check(not card.visible and not dialogue.visible, "Reset must hide the old chapter intro")
-	dialogue.play_dialogue([{"speaker": "EVA", "text": "Test"}])
+	dialogue.play_dialogue([ {"speaker": "EVA", "text": "Test"}])
 	story.reset_for_level()
 	_check(not dialogue.visible and not dialogue._is_typing, "Reset must stop dialogue typing")
 	input.free()

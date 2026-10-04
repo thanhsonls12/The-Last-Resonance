@@ -114,7 +114,7 @@ func get_display() -> Dictionary:
 		return {
 			"stage": stage,
 			"text": _get_fallback_text(),
-			"target": Vector3i.ZERO,  # caller resolves fallback cell
+			"target": Vector3i.ZERO, # caller resolves fallback cell
 			"desynced": desynced
 		}
 
@@ -122,7 +122,7 @@ func get_display() -> Dictionary:
 	return {
 		"stage": stage,
 		"text": _get_stage_text(action),
-		"target": Vector3i.ZERO,  # caller resolves from action
+		"target": Vector3i.ZERO, # caller resolves from action
 		"desynced": false
 	}
 

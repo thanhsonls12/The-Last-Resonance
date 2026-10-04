@@ -10,7 +10,7 @@ const COLOR_MUTED := Color(0.62, 0.78, 0.90, 0.88)
 signal closed
 
 var is_overlay := false
-var return_scene_path: String = "res://scenes/ui/start_menu.tscn" 
+var return_scene_path: String = "res://scenes/ui/start_menu.tscn"
 
 var _scroll: ScrollContainer
 var _panel: PanelContainer
@@ -36,7 +36,6 @@ var _reset_confirm := false
 var _reset_timer: SceneTreeTimer
 var _grabber_tex: Texture2D
 var _grabber_hover_tex: Texture2D
-
 
 
 func _unhandled_input(event: InputEvent) -> void:

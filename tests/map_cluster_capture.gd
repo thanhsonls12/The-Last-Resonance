@@ -63,7 +63,7 @@ func _capture_cluster(scene_path: String) -> void:
 		var pitch_radians := deg_to_rad(PITCH)
 		var offset := Vector3(
 			sin(yaw_radians) * cos(pitch_radians),
-			-sin(pitch_radians),
+			- sin(pitch_radians),
 			cos(yaw_radians) * cos(pitch_radians)
 		) * DISTANCE
 		camera.position = offset

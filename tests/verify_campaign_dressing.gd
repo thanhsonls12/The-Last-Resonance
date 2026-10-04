@@ -134,7 +134,7 @@ func _initialize() -> void:
 			for deco in data.decorations:
 				if deco is Dictionary and str(deco.get("type", "")) == str(kind):
 					matches.append(deco)
-			var pass_name := str(spec.pass)
+			var pass_name := str(spec.pass )
 			check(matches.size() == 1, "Level %d contains exactly one %s %s" % [level_index + 1, pass_name, kind])
 			if matches.size() == 1:
 				var actual: Variant = matches[0].get("grid_position", null)

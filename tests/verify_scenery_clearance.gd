@@ -34,7 +34,7 @@ func _ready() -> void:
 				continue
 			var cell: Vector3i = deco.grid_position
 			if deco.type not in ["bridge_console", "reactor_switch"]:
-				check(raw.walls.has(cell), "L%d %s does not consume a puzzle route" % [index+1, deco.type])
+				check(raw.walls.has(cell), "L%d %s does not consume a puzzle route" % [index + 1, deco.type])
 			check(logic.walls.has(cell), "Solid scenery blocks direct movement and pathfinding")
 			var model: Node3D = board.decor_nodes[i]
 			if index == 8 and deco.type == "sanctuary_pool":
@@ -52,7 +52,7 @@ func _ready() -> void:
 				if not mesh.mesh:
 					continue
 				var bounds: AABB = (model.get_parent().global_transform.affine_inverse() * mesh.global_transform) * mesh.mesh.get_aabb()
-				check(bounds.position.x >= cell.x-.441 and bounds.end.x <= cell.x+.441 and bounds.position.z >= cell.z-.441 and bounds.end.z <= cell.z+.441, "L%d %s/%s stays inside blocked cell: %s" % [index+1, deco.type, mesh.name, bounds])
+				check(bounds.position.x >= cell.x - .441 and bounds.end.x <= cell.x + .441 and bounds.position.z >= cell.z - .441 and bounds.end.z <= cell.z + .441, "L%d %s/%s stays inside blocked cell: %s" % [index + 1, deco.type, mesh.name, bounds])
 		board.free()
 	print("Scenery clearance checks: ", failures, " failures")
 	get_tree().quit(1 if failures else 0)

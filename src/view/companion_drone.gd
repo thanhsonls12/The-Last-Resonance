@@ -44,14 +44,14 @@ func _build_authored_mote() -> void:
 	if _authored_animation:
 		_authored_animation.get_animation("Hover").loop_mode = Animation.LOOP_LINEAR
 		_authored_animation.play("Hover")
-	_glow_material = MeshFactory.mat(Color(.2,.88,1), 1.2)
+	_glow_material = MeshFactory.mat(Color(.2, .88, 1), 1.2)
 	for mesh in model.find_children("*", "MeshInstance3D", true, false):
 		for surface in mesh.mesh.get_surface_count():
 			if mesh.get_active_material(surface).resource_name == "Tidal Signal":
 				mesh.set_surface_override_material(surface, _glow_material)
 	if RenderQuality.local_lights_enabled():
 		_drone_light = OmniLight3D.new()
-		_drone_light.light_color = Color(.3,.88,1)
+		_drone_light.light_color = Color(.3, .88, 1)
 		_drone_light.light_energy = .3
 		_drone_light.omni_range = 1.0
 		add_child(_drone_light)
@@ -85,7 +85,7 @@ func set_hint_focus(world_target: Vector3, active := true) -> void:
 
 func play_victory_cheer() -> void:
 	if GameState.reduced_motion:
-		_set_theme_color(Color(.25,1,.65))
+		_set_theme_color(Color(.25, 1, .65))
 		return
 	_mode = &"celebrate"
 	_celebrate_time = 0.0
@@ -135,7 +135,7 @@ func _process_follow(delta: float) -> void:
 	var bob := 0.0 if GameState.reduced_motion or _idle_since > 3.0 else sin(_idle_time * (TAU / BOB_PERIOD)) * BOB_AMP
 	var desired_pos := _target_node.global_position + (Vector3(.27, .69, -.08) if _idle_since > 3.0 else Vector3(ORBIT_RADIUS, ORBIT_HEIGHT + bob, -0.25))
 	if _perched and is_instance_valid(_perch_skeleton) and _perch_bone >= 0:
-		desired_pos = _perch_skeleton.global_transform * _perch_skeleton.get_bone_global_pose(_perch_bone).origin + Vector3(0,.14,0)
+		desired_pos = _perch_skeleton.global_transform * _perch_skeleton.get_bone_global_pose(_perch_bone).origin + Vector3(0, .14, 0)
 	global_position = global_position.lerp(desired_pos, minf(1.0, delta * FOLLOW_SPEED))
 
 	# Nhìn về hướng Kiro đang quay mặt
@@ -158,7 +158,7 @@ func _process_celebrate(delta: float) -> void:
 	_celebrate_time += delta
 	if _celebrate_time > 2.2:
 		_mode = &"follow"
-		_set_theme_color(Color(.2,.88,1))
+		_set_theme_color(Color(.2, .88, 1))
 		return
 	if not is_instance_valid(_target_node):
 		return

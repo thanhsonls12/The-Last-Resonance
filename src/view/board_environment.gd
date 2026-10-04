@@ -133,7 +133,6 @@ func build(
 		_lighting.register_power_material(violet_ring_mat, 0.40, 0.9)
 
 
-
 func _build_sector_facade(
 		position: Vector3,
 		size: Vector3,

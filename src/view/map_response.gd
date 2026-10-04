@@ -26,7 +26,7 @@ func send_lock_pulse(routes: Array, parent: Node3D, active: bool) -> void:
 		pulses.append(packet)
 		var tween := packet.create_tween()
 		for i in range(1, route.size()):
-			var distance: float = route[i-1].distance_to(route[i])
+			var distance: float = route[i - 1].distance_to(route[i])
 			if distance > .001:
 				tween.tween_property(packet, "position", route[i], clampf(distance / 9.0, .05, .45))
 		var fade := packet.create_tween()
@@ -48,7 +48,7 @@ func cancel_sector(board: Node3D) -> void:
 
 
 func _prune_pulses() -> void:
-	for i in range(pulses.size()-1, -1, -1):
+	for i in range(pulses.size() - 1, -1, -1):
 		if not is_instance_valid(pulses[i]):
 			pulses.remove_at(i)
 		elif not pulses[i].is_visible_in_tree():

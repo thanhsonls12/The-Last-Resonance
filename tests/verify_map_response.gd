@@ -34,7 +34,7 @@ func _ready() -> void:
 		var route: Array = board._gameplay_objects.lock_routes[cell][0]
 		check(route[0].distance_to(board.world_position(cell)) < .2, "Energy starts at the triggering plate")
 		for i in range(1, route.size()):
-			var delta: Vector3 = route[i] - route[i-1]
+			var delta: Vector3 = route[i] - route[i - 1]
 			check(is_zero_approx(delta.x) or is_zero_approx(delta.z), "Packet follows actual right-angle cable geometry")
 		for i in range(5):
 			board.send_lock_pulse(cell, true)

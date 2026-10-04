@@ -194,9 +194,9 @@ func _layout_for_viewport() -> void:
 	var compact := viewport_size.x < 720.0 or viewport_size.y < 560.0
 	var edge := clampf(minf(viewport_size.x, viewport_size.y) * 0.045, 16.0, 40.0)
 	_level_scroll.offset_left = edge
-	_level_scroll.offset_right = -edge
+	_level_scroll.offset_right = - edge
 	_level_scroll.offset_top = 154.0 if compact else 160.0
-	_level_scroll.offset_bottom = -edge
+	_level_scroll.offset_bottom = - edge
 
 	# Tính chính xác số lượng màn chơi của chương hiện tại từ dữ liệu chương
 	var start_idx: int = int(CHAPTERS[_current_chapter]["start"])
@@ -245,7 +245,7 @@ func _layout_for_viewport() -> void:
 		_menu_logo.custom_minimum_size = Vector2(280.0, 48.0)
 	if _top_bar:
 		_top_bar.offset_left = edge
-		_top_bar.offset_right = -edge
+		_top_bar.offset_right = - edge
 		if _top_bar.get_child_count() > 0 and _top_bar.get_child(0) is Button:
 			(_top_bar.get_child(0) as Button).custom_minimum_size.x = 120.0 if compact else 140.0
 	if _chapter_title_label and _chapter_title_label.label_settings:
@@ -355,7 +355,6 @@ func _render_chapter_levels() -> void:
 		_grid_container.add_child(ending_btn)
 
 	_layout_for_viewport()
-
 
 
 func _attach_card_icon(button: Button, texture: Texture2D) -> void:

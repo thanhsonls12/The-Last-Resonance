@@ -124,10 +124,10 @@ const AMBIENCE_DETAIL_STREAMS: Dictionary = {
 }
 
 const AMBIENCE_DETAIL_VOLUME_DB: Dictionary = {
-	&"archive": -8.0,
-	&"foundry": -8.0,
-	&"sanctuary": -8.0,
-	&"core": -8.0,
+	&"archive": - 8.0,
+	&"foundry": - 8.0,
+	&"sanctuary": - 8.0,
+	&"core": - 8.0,
 }
 
 const AMBIENCE_ACCENT_STREAMS: Dictionary = {
@@ -138,10 +138,10 @@ const AMBIENCE_ACCENT_STREAMS: Dictionary = {
 }
 
 const AMBIENCE_ACCENT_VOLUME_DB: Dictionary = {
-	&"archive": -9.0,
-	&"foundry": -9.0,
-	&"sanctuary": -9.0,
-	&"core": -11.0,
+	&"archive": - 9.0,
+	&"foundry": - 9.0,
+	&"sanctuary": - 9.0,
+	&"core": - 11.0,
 }
 
 const LAYER_CORE_HUM = preload("res://assets/audio/sfx/SFX_VFX_Core_Hum_Loop.wav")

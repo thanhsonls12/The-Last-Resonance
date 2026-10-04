@@ -97,7 +97,6 @@ func _reset_state(p_name: String) -> void:
 	energy_progress_by_floor.clear()
 
 
-
 func load_level(data: LevelData) -> void:
 	if data.maps.is_empty():
 		load_map(data.title, data.map)
@@ -110,7 +109,6 @@ func load_level(data: LevelData) -> void:
 			if type in DECORATION_WALL_TYPES:
 				walls[deco["grid_position"]] = true
 	_configure_floor_sequence(data.sequential_floors)
-
 
 
 func load_maps(p_name: String, encoded_layers: Array) -> void:

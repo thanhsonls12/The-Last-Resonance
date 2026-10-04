@@ -131,14 +131,9 @@ func _load_level(i: int) -> void:
 		audio.play_level_start()
 
 
-
-
-
 func _build_environment() -> void:
 	scene_environment = SceneEnvironmentScript.new()
 	add_child(scene_environment)
-
-
 
 
 func _build_camera() -> void:
@@ -184,7 +179,6 @@ func _build_ui() -> void:
 	add_child(chapter_intro_card)
 	story = StoryDirector.new()
 	story.setup(dialogue_box, board_view, chapter_intro_card, func() -> Vector3i: return logic.player)
-
 
 
 func _build_audio() -> void:
@@ -761,7 +755,6 @@ func _on_next_level() -> void:
 			get_tree().change_scene_to_file("res://scenes/ui/menu.tscn")
 		return
 	_load_level(next)
-
 
 
 func _power_up_sector(chapter: int) -> void:

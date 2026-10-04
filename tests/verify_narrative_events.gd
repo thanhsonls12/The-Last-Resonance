@@ -8,7 +8,7 @@ class AutoDialogue extends DialogueBox:
 	func _finish() -> void:
 		dialogue_finished.emit()
 
-const DIRECTIONS := {"U": Vector3i(0,0,-1), "D": Vector3i(0,0,1), "L": Vector3i(-1,0,0), "R": Vector3i(1,0,0)}
+const DIRECTIONS := {"U": Vector3i(0, 0, -1), "D": Vector3i(0, 0, 1), "L": Vector3i(-1, 0, 0), "R": Vector3i(1, 0, 0)}
 var failures := 0
 
 func check(value: bool, message: String) -> void:

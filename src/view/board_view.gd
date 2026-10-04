@@ -71,8 +71,6 @@ var chapter: int = 1
 var palette_name: StringName = &"archive"
 
 
-
-
 var player_node: Node3D:
 	get: return _actors.player_node
 var player_animation: AnimationPlayer:
@@ -433,8 +431,6 @@ func send_lock_pulse(cell: Vector3i, active: bool) -> void:
 
 func is_sector_powered() -> bool:
 	return _lighting.is_powered()
-
-
 
 
 func _board_bounds(logic: GameLogic) -> Dictionary:

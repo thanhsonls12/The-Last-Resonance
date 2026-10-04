@@ -1,7 +1,7 @@
 extends Node3D
 
 ## Visual QA of the real BoardView/camera; no main scene or progress writes.
-const DIRECTIONS := {"U": Vector3i(0,0,-1), "D": Vector3i(0,0,1), "L": Vector3i(-1,0,0), "R": Vector3i(1,0,0)}
+const DIRECTIONS := {"U": Vector3i(0, 0, -1), "D": Vector3i(0, 0, 1), "L": Vector3i(-1, 0, 0), "R": Vector3i(1, 0, 0)}
 const QUALITY = preload("res://src/data/render_quality.gd")
 const CAPTURE_ROOT := "res://.codex_qa/visual_polish"
 
@@ -62,7 +62,7 @@ func _ready() -> void:
 	env.environment.ambient_light_energy = lerpf(profile.ambient_range.x, profile.ambient_range.y, lift) * QUALITY.ambient_boost()
 	var colors := [profile.key, profile.fill, profile.wash]
 	var ranges := [profile.key_range, profile.fill_range, profile.wash_range]
-	var angles := [Vector3(-54,-36,0), Vector3(38,142,0), Vector3(-22,148,0)]
+	var angles := [Vector3(-54, -36, 0), Vector3(38, 142, 0), Vector3(-22, 148, 0)]
 	for i in range(3):
 		var light := DirectionalLight3D.new()
 		add_child(light)

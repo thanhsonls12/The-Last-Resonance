@@ -51,16 +51,16 @@ static func is_better_run(candidate: Dictionary, current: Dictionary) -> bool:
 	if current.is_empty():
 		return true
 	var candidate_rank := [
-		-int(candidate.get("stars", 0)),
-		-int(bool(candidate.get("perfect", false))),
+		- int(candidate.get("stars", 0)),
+		- int(bool(candidate.get("perfect", false))),
 		int(candidate.get("score_moves", 0)),
 		int(candidate.get("actual_moves", 0)),
 		int(candidate.get("hint_penalty", 0)),
 		int(candidate.get("pushes", 0)),
 	]
 	var current_rank := [
-		-int(current.get("stars", 0)),
-		-int(bool(current.get("perfect", false))),
+		- int(current.get("stars", 0)),
+		- int(bool(current.get("perfect", false))),
 		int(current.get("score_moves", 0)),
 		int(current.get("actual_moves", 0)),
 		int(current.get("hint_penalty", 0)),

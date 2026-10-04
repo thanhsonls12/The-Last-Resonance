@@ -239,7 +239,6 @@ static func create_scene_bgm(host: Node, key: StringName, target_db := -4.0, fad
 	return player
 
 
-
 func set_ambience_for_chapter(chapter: int) -> void:
 	match chapter:
 		1:

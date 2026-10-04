@@ -117,8 +117,8 @@ func layout(viewport_size: Vector2, compact: bool) -> void:
 	hint_button.tooltip_text = "Gợi ý"
 
 	pause_button.set_anchors_preset(Control.PRESET_TOP_RIGHT)
-	pause_button.offset_left = -(edge + (56.0 if compact else 125.0))
-	pause_button.offset_right = -edge
+	pause_button.offset_left = - (edge + (56.0 if compact else 125.0))
+	pause_button.offset_right = - edge
 	pause_button.offset_top = 10.0
 	pause_button.offset_bottom = pause_button.offset_top + (52.0 if compact else 46.0)
 	pause_button.custom_minimum_size = Vector2(pause_button.offset_right - pause_button.offset_left, pause_button.offset_bottom - pause_button.offset_top)
@@ -144,8 +144,8 @@ func _position_bottom(button: Button, left: float, width: float, height: float, 
 	button.anchor_bottom = 1.0
 	button.offset_left = left
 	button.offset_right = left + width
-	button.offset_top = -bottom_margin - height
-	button.offset_bottom = -bottom_margin
+	button.offset_top = - bottom_margin - height
+	button.offset_bottom = - bottom_margin
 	button.custom_minimum_size = Vector2(width, height)
 
 
@@ -154,10 +154,10 @@ func _position_center_bottom(button: Button, width: float, height: float, bottom
 	button.anchor_right = 0.5
 	button.anchor_top = 1.0
 	button.anchor_bottom = 1.0
-	button.offset_left = -width * 0.5
+	button.offset_left = - width * 0.5
 	button.offset_right = width * 0.5
-	button.offset_top = -bottom_margin - height
-	button.offset_bottom = -bottom_margin
+	button.offset_top = - bottom_margin - height
+	button.offset_bottom = - bottom_margin
 	button.custom_minimum_size = Vector2(width, height)
 
 

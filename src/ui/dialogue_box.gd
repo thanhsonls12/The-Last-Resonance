@@ -47,7 +47,6 @@ func _ready() -> void:
 	_apply_accessibility()
 
 
-
 func _load_portraits() -> void:
 	if not _portraits.is_empty():
 		return
@@ -183,9 +182,9 @@ func _layout_for_viewport() -> void:
 	var compact := viewport_size.x < 700.0 or viewport_size.y < 560.0
 	var edge := clampf(minf(viewport_size.x, viewport_size.y) * 0.04, 14.0, 42.0)
 	_panel.offset_left = edge
-	_panel.offset_right = -edge
-	_panel.offset_bottom = -edge
-	_panel.offset_top = -(150.0 if compact else 180.0)
+	_panel.offset_right = - edge
+	_panel.offset_bottom = - edge
+	_panel.offset_top = - (150.0 if compact else 180.0)
 	_portrait_frame.custom_minimum_size = Vector2(86.0, 86.0) if compact else Vector2(120.0, 120.0)
 	_dialogue_hbox.add_theme_constant_override("separation", 10 if compact else 20)
 	_text_label.add_theme_font_size_override("normal_font_size", 16 if compact else 19)
@@ -226,7 +225,6 @@ func _input(event: InputEvent) -> void:
 	elif event is InputEventScreenTouch and event.is_pressed():
 		advance()
 		get_viewport().set_input_as_handled()
-
 
 
 func play_dialogue(lines: Array) -> void:

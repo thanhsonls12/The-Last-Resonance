@@ -34,12 +34,12 @@ func _ready() -> void:
 	check(trial.undo() and not trial.solved(), "Undo restores the core before goal")
 	while trial.undo():
 		pass
-	check(trial.logic.player == Vector3i(1,0,1) and not trial.high_water and not trial.memory_collected and not trial.transported, "Undo restores the entire water/memory history")
-	trial.logic.player = Vector3i(2,0,5)
-	trial.logic.blocks = {Vector3i(3,0,5): true}
+	check(trial.logic.player == Vector3i(1, 0, 1) and not trial.high_water and not trial.memory_collected and not trial.transported, "Undo restores the entire water/memory history")
+	trial.logic.player = Vector3i(2, 0, 5)
+	trial.logic.blocks = {Vector3i(3, 0, 5): true}
 	check(trial.move(Vector3i.RIGHT).is_empty(), "Lightweight crossing rejects a heavy core")
 	trial.reset()
-	trial.logic.player = Vector3i(3,0,5)
+	trial.logic.player = Vector3i(3, 0, 5)
 	trial.logic.blocks = {TRIAL.LEFT_DOCK: true}
 	check(trial.toggle_valve() and trial.logic.blocks.has(TRIAL.RIGHT_DOCK), "Raising water transports core between docks")
 	check(trial.logic.walls.has(TRIAL.CROSSING), "High water closes the dry crossing")
@@ -61,7 +61,7 @@ func _ready() -> void:
 		if game.hud.memory_panel.visible:
 			game.hud.memory_panel.hide()
 	check(game.trial.solved() and game.trial.memory_collected, "Playable scene solves through actual input actions")
-	check(game.board.block_nodes.has(Vector3i(5,0,1)), "Rendered core follows raft and final push")
+	check(game.board.block_nodes.has(Vector3i(5, 0, 1)), "Rendered core follows raft and final push")
 	check(GameState.current_level == campaign_before and GameState.level_records == records_before and GameState.echo_chamber == reward_before, "Trial QA does not change campaign progress or real rewards")
 	game.free()
 	print("Tidal trial checks: ", failures, " failures")

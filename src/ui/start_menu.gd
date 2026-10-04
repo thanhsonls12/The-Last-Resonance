@@ -277,14 +277,14 @@ func _layout_for_viewport() -> void:
 				(child as Button).custom_minimum_size.x = button_width
 	if _top_bar:
 		_top_bar.offset_left = edge
-		_top_bar.offset_right = -edge
+		_top_bar.offset_right = - edge
 		if _top_bar.get_child_count() > 2 and _top_bar.get_child(2) is Label:
 			(_top_bar.get_child(2) as Label).visible = not compact
 	if _bottom_bar:
 		_bottom_bar.offset_left = edge
-		_bottom_bar.offset_right = -edge
-		_bottom_bar.offset_bottom = -edge
-		_bottom_bar.offset_top = -edge - 52.0
+		_bottom_bar.offset_right = - edge
+		_bottom_bar.offset_bottom = - edge
+		_bottom_bar.offset_top = - edge - 52.0
 		for child in _bottom_bar.get_children():
 			if child is Button:
 				(child as Button).custom_minimum_size.x = maxf(110.0, minf(150.0, (viewport_size.x - edge * 2.0) * 0.38))

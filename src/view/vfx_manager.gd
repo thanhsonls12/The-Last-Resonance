@@ -131,7 +131,6 @@ func play_boot_sparks(position: Vector3) -> void:
 	_pulse_ring(position + Vector3(0, 0.08, 0), COLOR_CYAN, 0.12, 1.4, 0.50)
 
 
-
 func play_memory_fragment_collect(position: Vector3) -> void:
 	_pulse_ring(position + Vector3(0, 0.25, 0), COLOR_PURPLE, 0.15, 2.2, 0.60)
 	_pulse_ring(position + Vector3(0, 0.30, 0), COLOR_TEAL, 0.20, 1.4, 0.40)
