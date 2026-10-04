@@ -3,100 +3,19 @@ extends Node
 
 const SFX_PLAYER_COUNT := 8
 const DEFAULT_AMBIENCE := &"archive"
+const AUDIO_CATALOG = preload("res://src/data/audio_catalog.gd")
 
-const SFX_STREAMS: Dictionary = {
-	&"move": preload("res://assets/audio/sfx/SFX_Player_Servo.wav"),
-	&"footstep_stone_1": preload("res://assets/audio/sfx/SFX_Player_Footstep_Stone_01.wav"),
-	&"footstep_stone_2": preload("res://assets/audio/sfx/SFX_Player_Footstep_Stone_02.wav"),
-	&"footstep_metal_1": preload("res://assets/audio/sfx/SFX_Player_Footstep_Metal_01.wav"),
-	&"footstep_metal_2": preload("res://assets/audio/sfx/SFX_Player_Footstep_Metal_02.wav"),
-	&"footstep_water_1": preload("res://assets/audio/sfx/SFX_Player_Footstep_Water_01.wav"),
-	&"footstep_water_2": preload("res://assets/audio/sfx/SFX_Player_Footstep_Water_02.wav"),
-	&"push": preload("res://assets/audio/sfx/SFX_Player_Push_Impact.wav"),
-	&"push_scrape": preload("res://assets/audio/sfx/SFX_Box_Scrape.wav"),
-	&"blocked": preload("res://assets/audio/sfx/SFX_Box_Blocked.wav"),
-	&"box_impact": preload("res://assets/audio/sfx/SFX_Box_Impact.wav"),
-	&"plate_press": preload("res://assets/audio/sfx/SFX_PressurePlate_Press.wav"),
-	&"plate_release": preload("res://assets/audio/sfx/SFX_PressurePlate_Release.wav"),
-	&"door": preload("res://assets/audio/sfx/SFX_Door_Open.wav"),
-	&"door_close": preload("res://assets/audio/sfx/SFX_Door_Close.wav"),
-	&"door_unlock": preload("res://assets/audio/sfx/SFX_Door_Unlock.wav"),
-	&"portal": preload("res://assets/audio/sfx/SFX_Portal_Teleport.wav"),
-	&"portal_activate": preload("res://assets/audio/sfx/SFX_Portal_Activate.wav"),
-	&"portal_reject": preload("res://assets/audio/sfx/SFX_Portal_Reject.wav"),
-	&"elevator": preload("res://assets/audio/sfx/SFX_Elevator_Start.wav"),
-	&"elevator_loop": preload("res://assets/audio/sfx/SFX_Elevator_Loop.wav"),
-	&"elevator_stop": preload("res://assets/audio/sfx/SFX_Elevator_Stop.wav"),
-	&"bridge": preload("res://assets/audio/sfx/SFX_Bridge_Rotate.wav"),
-	&"bridge_lock": preload("res://assets/audio/sfx/SFX_Bridge_Lock.wav"),
-	&"box_on_goal": preload("res://assets/audio/sfx/SFX_Box_OnGoal.wav"),
-	&"energy": preload("res://assets/audio/sfx/SFX_Core_Insert.wav"),
-	&"core_pulse": preload("res://assets/audio/sfx/SFX_VFX_Core_Pulse.wav"),
-	&"fragment": preload("res://assets/audio/sfx/SFX_MemoryFragment_Collect.wav"),
-	&"dust": preload("res://assets/audio/sfx/SFX_VFX_Dust_Puff.wav"),
-	&"spark": preload("res://assets/audio/sfx/SFX_VFX_Spark.wav"),
-	&"water_splash": preload("res://assets/audio/sfx/SFX_VFX_Water_Splash.wav"),
-	&"ember": preload("res://assets/audio/sfx/SFX_VFX_Ember_Crackle.wav"),
-	&"steam": preload("res://assets/audio/sfx/SFX_VFX_Steam_Hiss.wav"),
-	&"win": preload("res://assets/audio/sfx/SFX_Level_Complete_Stinger.wav"),
-	&"win_pulse": preload("res://assets/audio/sfx/SFX_VFX_LevelComplete.wav"),
-	&"undo": preload("res://assets/audio/sfx/SFX_Player_Undo.wav"),
-	&"reset": preload("res://assets/audio/sfx/SFX_Player_Reset.wav"),
-	&"ui_click": preload("res://assets/audio/sfx/SFX_UI_Click.wav"),
-	&"ui_confirm": preload("res://assets/audio/sfx/SFX_UI_Confirm.wav"),
-	&"ui_cancel": preload("res://assets/audio/sfx/SFX_UI_Cancel.wav"),
-	&"ui_hover": preload("res://assets/audio/sfx/SFX_UI_Hover.wav"),
-	&"ui_pause_open": preload("res://assets/audio/sfx/SFX_UI_Pause_Open.wav"),
-	&"ui_pause_close": preload("res://assets/audio/sfx/SFX_UI_Pause_Close.wav"),
-	&"ui_slider": preload("res://assets/audio/sfx/SFX_UI_Slider_Tick.wav"),
-	&"ui_error": preload("res://assets/audio/sfx/SFX_UI_Error.wav"),
-	&"ui_level_select": preload("res://assets/audio/sfx/SFX_UI_Level_Select.wav"),
-	&"ui_page_next": preload("res://assets/audio/sfx/SFX_UI_Page_Next.wav"),
-	&"ui_page_prev": preload("res://assets/audio/sfx/SFX_UI_Page_Previous.wav"),
-	&"ui_save": preload("res://assets/audio/sfx/SFX_UI_Save_Complete.wav"),
-	&"bleep_1": preload("res://assets/audio/sfx/SFX_Player_Dialogue_Bleep_01.wav"),
-	&"bleep_2": preload("res://assets/audio/sfx/SFX_Player_Dialogue_Bleep_02.wav"),
-	&"voice_eva": preload("res://assets/audio/sfx/SFX_Voice_EVA.wav"),
-	&"voice_elias": preload("res://assets/audio/sfx/SFX_Voice_Elias.wav"),
-	&"voice_kiro": preload("res://assets/audio/sfx/SFX_Voice_Kiro.wav"),
-	&"voice_system": preload("res://assets/audio/sfx/SFX_Voice_System.wav"),
-}
-
-const AMBIENCE_STREAMS: Dictionary = {
-	&"archive": preload("res://assets/audio/ambience/AMB_Archive_Base_Loop.wav"),
-	&"foundry": preload("res://assets/audio/ambience/AMB_Foundry_Base_Loop.wav"),
-	&"sanctuary": preload("res://assets/audio/ambience/AMB_Sanctuary_Base_Loop.wav"),
-	&"core": preload("res://assets/audio/ambience/AMB_Core_Reactor_Loop.wav"),
-}
-
-const AMBIENCE_DETAIL_STREAMS: Dictionary = {
-	&"archive": preload("res://assets/audio/ambience/AMB_Electrical_Hum_Loop.wav"),
-	&"foundry": preload("res://assets/audio/ambience/AMB_Machinery_Distant_Loop.wav"),
-	&"sanctuary": preload("res://assets/audio/ambience/AMB_Water_Current_Loop.wav"),
-	&"core": preload("res://assets/audio/ambience/AMB_Electrical_Hum_Loop.wav"),
-}
-
-const AMBIENCE_DETAIL_VOLUME_DB: Dictionary = {
-	&"archive": -24.0,
-	&"foundry": -21.0,
-	&"sanctuary": -22.0,
-	&"core": -25.0,
-}
-
-const AMBIENCE_ACCENT_STREAMS: Dictionary = {
-	&"archive": preload("res://assets/audio/ambience/AMB_Wind_Corridor_Loop.wav"),
-	&"foundry": preload("res://assets/audio/ambience/AMB_Foundry_Furnace_Loop.wav"),
-	&"sanctuary": preload("res://assets/audio/ambience/AMB_Water_Drip_Loop.wav"),
-}
-
-const AMBIENCE_ACCENT_VOLUME_DB: Dictionary = {
-	&"archive": -30.0,
-	&"foundry": -28.0,
-	&"sanctuary": -32.0,
-}
-
-const LAYER_CORE_HUM = preload("res://assets/audio/sfx/SFX_VFX_Core_Hum_Loop.wav")
-
+## Compatibility aliases: callers/tests may keep inspecting the manager catalog,
+## while the asset/config registry itself lives in AudioCatalog.
+const SFX_STREAMS = AUDIO_CATALOG.SFX_STREAMS
+const BGM_STREAMS = AUDIO_CATALOG.BGM_STREAMS
+const CHAPTER_BGM = AUDIO_CATALOG.CHAPTER_BGM
+const AMBIENCE_STREAMS = AUDIO_CATALOG.AMBIENCE_STREAMS
+const AMBIENCE_DETAIL_STREAMS = AUDIO_CATALOG.AMBIENCE_DETAIL_STREAMS
+const AMBIENCE_DETAIL_VOLUME_DB = AUDIO_CATALOG.AMBIENCE_DETAIL_VOLUME_DB
+const AMBIENCE_ACCENT_STREAMS = AUDIO_CATALOG.AMBIENCE_ACCENT_STREAMS
+const AMBIENCE_ACCENT_VOLUME_DB = AUDIO_CATALOG.AMBIENCE_ACCENT_VOLUME_DB
+const LAYER_CORE_HUM = AUDIO_CATALOG.LAYER_CORE_HUM
 var sfx_players: Array[AudioStreamPlayer] = []
 var ambience_player: AudioStreamPlayer
 var ambience_detail_player: AudioStreamPlayer
@@ -104,6 +23,9 @@ var ambience_accent_player: AudioStreamPlayer
 var elevator_loop_player: AudioStreamPlayer
 var reactor_layer_player: AudioStreamPlayer
 var voice_player: AudioStreamPlayer
+var bgm_player: AudioStreamPlayer
+var _bgm_key: StringName = &""
+var _bgm_fade_tween: Tween
 var _next_player := 0
 var _ambience_key: StringName = &""
 var _ambience_detail_key: StringName = &""
@@ -113,6 +35,35 @@ var _last_sfx_enabled := true
 var _music_bus := -1
 var _sfx_bus := -1
 var enabled := true
+
+
+static func _looped(src: AudioStreamWAV) -> AudioStreamWAV:
+	var stream := src.duplicate() as AudioStreamWAV
+	stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
+	stream.loop_begin = 0
+	stream.loop_end = int(round(src.get_length() * src.mix_rate))
+	return stream
+
+
+## BGM ships as non-looping .ogg, so a track would otherwise play once and then
+## leave the level silent. Enable looping per playback instance; the imported
+## resource is never mutated because each play duplicates it.
+static func _looped_bgm(src: AudioStream) -> AudioStream:
+	if src == null:
+		return null
+	if src is AudioStreamOggVorbis:
+		var ogg := (src as AudioStreamOggVorbis).duplicate() as AudioStreamOggVorbis
+		ogg.loop = true
+		ogg.loop_offset = 0.0
+		return ogg
+	if src is AudioStreamWAV:
+		return _looped(src as AudioStreamWAV)
+	if src is AudioStreamMP3:
+		var mp3 := (src as AudioStreamMP3).duplicate() as AudioStreamMP3
+		mp3.loop = true
+		mp3.loop_offset = 0.0
+		return mp3
+	return src
 
 
 func _ready() -> void:
@@ -125,15 +76,15 @@ func _ready() -> void:
 		sfx_players.append(player)
 	ambience_player = AudioStreamPlayer.new()
 	ambience_player.name = "AmbiencePlayer"
-	ambience_player.bus = &"Music"
+	ambience_player.bus = &"SFX"
 	add_child(ambience_player)
 	ambience_detail_player = AudioStreamPlayer.new()
 	ambience_detail_player.name = "AmbienceDetailPlayer"
-	ambience_detail_player.bus = &"Music"
+	ambience_detail_player.bus = &"SFX"
 	add_child(ambience_detail_player)
 	ambience_accent_player = AudioStreamPlayer.new()
 	ambience_accent_player.name = "AmbienceAccentPlayer"
-	ambience_accent_player.bus = &"Music"
+	ambience_accent_player.bus = &"SFX"
 	add_child(ambience_accent_player)
 	elevator_loop_player = AudioStreamPlayer.new()
 	elevator_loop_player.name = "ElevatorLoopPlayer"
@@ -142,11 +93,9 @@ func _ready() -> void:
 
 	reactor_layer_player = AudioStreamPlayer.new()
 	reactor_layer_player.name = "ReactorLayerPlayer"
-	reactor_layer_player.bus = &"Music"
+	reactor_layer_player.bus = &"SFX"
 	if LAYER_CORE_HUM is AudioStreamWAV:
-		var hum_stream := LAYER_CORE_HUM.duplicate() as AudioStreamWAV
-		hum_stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
-		reactor_layer_player.stream = hum_stream
+		reactor_layer_player.stream = _looped(LAYER_CORE_HUM)
 	else:
 		reactor_layer_player.stream = LAYER_CORE_HUM
 	reactor_layer_player.volume_db = -80.0
@@ -157,8 +106,14 @@ func _ready() -> void:
 	voice_player.bus = &"SFX"
 	add_child(voice_player)
 
+	bgm_player = AudioStreamPlayer.new()
+	bgm_player.name = "BGMPlayer"
+	bgm_player.bus = &"Music"
+	add_child(bgm_player)
+
 	if not GameState.settings_changed.is_connected(_apply_audio_settings):
 		GameState.settings_changed.connect(_apply_audio_settings)
+	_ensure_audio_buses()
 	_apply_audio_settings()
 	set_ambience(DEFAULT_AMBIENCE)
 
@@ -188,9 +143,11 @@ func _apply_audio_settings() -> void:
 	var master_bus := AudioServer.get_bus_index(&"Master")
 	if master_bus >= 0:
 		AudioServer.set_bus_volume_db(master_bus, _volume_to_db(GameState.master_volume))
-		AudioServer.set_bus_mute(master_bus, not enabled or not GameState.sfx_enabled)
+		AudioServer.set_bus_mute(master_bus, not enabled or not GameState.sfx_enabled or GameState.master_volume <= 0.001)
 	AudioServer.set_bus_volume_db(_music_bus, _volume_to_db(GameState.music_volume))
+	AudioServer.set_bus_mute(_music_bus, GameState.music_volume <= 0.001)
 	AudioServer.set_bus_volume_db(_sfx_bus, _volume_to_db(GameState.sfx_volume))
+	AudioServer.set_bus_mute(_sfx_bus, GameState.sfx_volume <= 0.001)
 
 
 func _process(_delta: float) -> void:
@@ -205,11 +162,82 @@ func _process(_delta: float) -> void:
 			ambience_detail_player.play()
 		if ambience_accent_player.stream:
 			ambience_accent_player.play()
+		if bgm_player != null and bgm_player.stream != null and not bgm_player.playing:
+			bgm_player.play()
 	else:
 		ambience_player.stop()
 		ambience_detail_player.stop()
 		ambience_accent_player.stop()
+		if bgm_player != null:
+			bgm_player.stop()
 		stop_elevator_loop()
+
+
+func play_bgm(key: StringName, fade_duration := 1.5, volume_offset_db := 1.5) -> void:
+	if bgm_player == null:
+		return
+	if _bgm_key == key and bgm_player.playing:
+		return
+	var stream := BGM_STREAMS.get(key) as AudioStream
+	if stream == null:
+		return
+	_bgm_key = key
+	stream = _looped_bgm(stream)
+
+	if _bgm_fade_tween != null and _bgm_fade_tween.is_valid():
+		_bgm_fade_tween.kill()
+
+	if not bgm_player.playing or bgm_player.stream == null:
+		bgm_player.stream = stream
+		bgm_player.volume_db = -80.0
+		if enabled and GameState.sfx_enabled:
+			bgm_player.play()
+		_bgm_fade_tween = create_tween()
+		_bgm_fade_tween.tween_property(bgm_player, "volume_db", volume_offset_db, fade_duration)
+	else:
+		_bgm_fade_tween = create_tween()
+		_bgm_fade_tween.tween_property(bgm_player, "volume_db", -80.0, fade_duration * 0.5)
+		_bgm_fade_tween.tween_callback(func() -> void:
+			bgm_player.stream = stream
+			if enabled and GameState.sfx_enabled:
+				bgm_player.play()
+		)
+		_bgm_fade_tween.tween_property(bgm_player, "volume_db", volume_offset_db, fade_duration * 0.5)
+
+
+func stop_bgm(fade_duration := 1.0) -> void:
+	if bgm_player == null or not bgm_player.playing:
+		return
+	_bgm_key = &""
+	if _bgm_fade_tween != null and _bgm_fade_tween.is_valid():
+		_bgm_fade_tween.kill()
+	_bgm_fade_tween = create_tween()
+	_bgm_fade_tween.tween_property(bgm_player, "volume_db", -80.0, fade_duration)
+	_bgm_fade_tween.tween_callback(bgm_player.stop)
+
+
+## Menu and cutscene scenes own their own audio node, so they cannot use the
+## gameplay manager instance. This builds a looping, fade-in BGM player that
+## honours the Music bus and keeps playing instead of stopping after one pass.
+static func create_scene_bgm(host: Node, key: StringName, target_db := -4.0, fade := 1.5) -> AudioStreamPlayer:
+	if host == null:
+		return null
+	var source := BGM_STREAMS.get(key) as AudioStream
+	if source == null:
+		return null
+	var player := AudioStreamPlayer.new()
+	player.name = "SceneBGMPlayer"
+	player.bus = &"Music"
+	player.stream = _looped_bgm(source)
+	host.add_child(player)
+	if not GameState.sfx_enabled or GameState.music_volume <= 0.001:
+		return player
+	player.volume_db = -80.0
+	player.play()
+	var tw := host.create_tween()
+	tw.tween_property(player, "volume_db", target_db, fade)
+	return player
+
 
 
 func set_ambience_for_chapter(chapter: int) -> void:
@@ -231,23 +259,103 @@ func set_ambience_for_chapter(chapter: int) -> void:
 			set_ambience(DEFAULT_AMBIENCE)
 
 
+## Chapter-scoped music. Keeps a single call site for chapters that share a
+## track, and is a no-op when the requested chapter already owns the mix.
+func set_bgm_for_chapter(chapter: int) -> void:
+	var key: StringName = CHAPTER_BGM.get(chapter, CHAPTER_BGM[1])
+	play_bgm(key)
+
+
+## Audible start-of-level cue. Fires on every level load, after any chapter
+## intro sequence, so the player hears the level begin.
+func play_level_start() -> void:
+	_play_sfx(&"level_start", -4.0)
+
+
+func play_goal_lock() -> void:
+	_play_sfx(&"goal_lock", -3.5)
+	_play_sfx(&"player_success_beep", -9.0)
+
+
+func play_checkpoint() -> void:
+	_play_sfx(&"checkpoint", -3.0)
+
+
+func play_door_locked() -> void:
+	_play_sfx(&"door_locked", -3.5)
+	_play_sfx(&"terminal_error", -9.0)
+
+
+func play_switch(on: bool) -> void:
+	_play_sfx(&"switch_on" if on else &"switch_off", -4.5)
+
+
+func play_terminal(error := false) -> void:
+	_play_sfx(&"terminal_error" if error else &"terminal_on", -4.0)
+
+
+func play_portal_charge() -> void:
+	_play_sfx(&"portal_charge", -6.0)
+
+
+func play_conveyor_start() -> void:
+	_play_sfx(&"conveyor_start", -5.0)
+
+
+func play_conveyor_loop() -> void:
+	_play_sfx(&"conveyor_loop", -10.0)
+
+
+func play_conveyor_stop() -> void:
+	_play_sfx(&"conveyor_stop", -5.0)
+
+
+func play_debris() -> void:
+	_play_sfx(&"debris_rumble", -6.0)
+
+
+func play_interact() -> void:
+	_play_sfx(&"player_interact", -4.0)
+
+
+func play_turn() -> void:
+	_play_sfx(&"player_turn", -8.0)
+
+
+func play_push_start() -> void:
+	_play_sfx(&"player_push_start", -5.0)
+
+
+func play_robot_alert() -> void:
+	_play_sfx(&"player_robot_alert", -5.0)
+	_play_sfx(&"player_robot_beep", -10.0)
+
+
+func play_low_battery() -> void:
+	_play_sfx(&"player_low_battery", -5.0)
+
+
+func play_damage_glitch() -> void:
+	_play_sfx(&"player_damage_glitch", -3.0)
+
+
 func set_ambience(key: StringName) -> void:
-	if ambience_player == null or _ambience_key == key:
+	if ambience_player == null:
 		return
-	var stream := AMBIENCE_STREAMS.get(key) as AudioStreamWAV
-	if stream == null:
-		return
-	stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
-	ambience_player.stream = stream
-	ambience_player.volume_db = -14.0
-	_ambience_key = key
-	_set_ambience_detail(key)
-	_set_ambience_accent(key)
+	var source := AMBIENCE_STREAMS.get(key) as AudioStreamWAV
+	if source != null and (_ambience_key != key or ambience_player.stream == null):
+		ambience_player.stream = _looped(source)
+		ambience_player.volume_db = -7.0
+		_ambience_key = key
+		_set_ambience_detail(key)
+		_set_ambience_accent(key)
+
 	if enabled and GameState.sfx_enabled:
-		ambience_player.play()
-		if ambience_detail_player.stream:
+		if ambience_player.stream != null and not ambience_player.playing:
+			ambience_player.play()
+		if ambience_detail_player != null and ambience_detail_player.stream != null and not ambience_detail_player.playing:
 			ambience_detail_player.play()
-		if ambience_accent_player.stream:
+		if ambience_accent_player != null and ambience_accent_player.stream != null and not ambience_accent_player.playing:
 			ambience_accent_player.play()
 
 
@@ -260,10 +368,8 @@ func _set_ambience_detail(key: StringName) -> void:
 		ambience_detail_player.stream = null
 		_ambience_detail_key = &""
 		return
-	var stream := source.duplicate() as AudioStreamWAV
-	stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
-	ambience_detail_player.stream = stream
-	ambience_detail_player.volume_db = float(AMBIENCE_DETAIL_VOLUME_DB.get(key, -24.0))
+	ambience_detail_player.stream = _looped(source)
+	ambience_detail_player.volume_db = float(AMBIENCE_DETAIL_VOLUME_DB.get(key, 0.0))
 	_ambience_detail_key = key
 
 
@@ -276,10 +382,8 @@ func _set_ambience_accent(key: StringName) -> void:
 		ambience_accent_player.stream = null
 		_ambience_accent_key = &""
 		return
-	var stream := source.duplicate() as AudioStreamWAV
-	stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
-	ambience_accent_player.stream = stream
-	ambience_accent_player.volume_db = float(AMBIENCE_ACCENT_VOLUME_DB.get(key, -30.0))
+	ambience_accent_player.stream = _looped(source)
+	ambience_accent_player.volume_db = float(AMBIENCE_ACCENT_VOLUME_DB.get(key, 0.0))
 	_ambience_accent_key = key
 
 
@@ -338,9 +442,7 @@ func play_elevator_loop() -> void:
 	var source := SFX_STREAMS.get(&"elevator_loop") as AudioStreamWAV
 	if source == null:
 		return
-	var stream := source.duplicate() as AudioStreamWAV
-	stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
-	elevator_loop_player.stream = stream
+	elevator_loop_player.stream = _looped(source)
 	elevator_loop_player.volume_db = -8.0
 	elevator_loop_player.play()
 
@@ -427,6 +529,22 @@ func play_ui_save() -> void:
 	_play_sfx(&"ui_save", -4.0)
 
 
+func play_hologram() -> void:
+	_play_sfx(&"hologram_activate", -2.0)
+
+
+func play_ending_decision() -> void:
+	_play_sfx(&"ending_decision", 0.0)
+
+
+func play_ending_reveal() -> void:
+	_play_sfx(&"ending_reveal", -1.0)
+
+
+func play_memory_decode() -> void:
+	_play_sfx(&"memory_decode", -3.0)
+
+
 static func play_menu_sfx(host: Node, key: StringName, volume_db := -5.0) -> void:
 	if host == null or not GameState.sfx_enabled:
 		return
@@ -501,7 +619,7 @@ func update_core_resonance_layer(connected_cores: int, total_cores: int) -> void
 		return
 	
 	var progress: float = clampf(float(connected_cores) / float(total_cores), 0.0, 1.0)
-	var target_vol: float = lerpf(-24.0, -10.0, progress)
+	var target_vol: float = lerpf(-14.0, -3.0, progress)
 	var target_pitch: float = lerpf(0.95, 1.25, progress)
 	
 	if not reactor_layer_player.playing:
