@@ -92,10 +92,16 @@ func _run() -> void:
 	board.build(logic, data.decorations)
 	_check(board.palette_name == &"central_core", "Chapter 4 must select the Central Core palette")
 	_check(board.energy_nodes.size() == 3, "Level 13 must render all energy nodes")
+	var first_child_count := board.get_child_count()
+	var first_player := board.player_node
 	for i in logic.energy_nodes.size():
 		var node: Node3D = board.energy_nodes[logic.energy_nodes[i]]
 		var number := node.get_node_or_null("NodeNumber") as Label3D
 		_check(number != null and number.text == str(i + 1), "Energy nodes must show activation order")
+	board.build(logic, data.decorations)
+	_check(board.get_child_count() == first_child_count, "Rebuilding BoardView must not accumulate board-local nodes")
+	_check(board.player_node != null and board.player_node != first_player, "Rebuilding BoardView replaces actor presentation cleanly")
+	_check(board.block_nodes.size() == logic.blocks.size(), "Rebuilding BoardView resets gameplay-object registries")
 	board.free()
 	camera.free()
 	dialogue.free()

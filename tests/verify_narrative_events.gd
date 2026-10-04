@@ -45,5 +45,18 @@ func _run() -> void:
 		board.queue_free()
 		dialogue.queue_free()
 		await get_tree().process_frame
+
+	var dialogue := AutoDialogue.new()
+	add_child(dialogue)
+	var director := StoryDirector.new()
+	director.setup(dialogue, null, null, Callable())
+	var events: Array[String] = []
+	director.story_event_played.connect(func(key: String): events.append(key))
+	await director.play_post_step_story(0, [], {"energy_advanced": true}, Vector3i.ZERO, false)
+	await director.play_post_step_story(0, [], {"energy_advanced": true}, Vector3i.ZERO, false)
+	await director.play_bridge_story(6)
+	await director.play_bridge_story(6)
+	check(events == ["first_core_connected", "level_7_bridge_warning"], "main story leaks moved into StoryDirector and remain one-shot")
+	dialogue.queue_free()
 	print("Narrative events: ", failures, " failures")
 	get_tree().quit(1 if failures else 0)
