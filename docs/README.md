@@ -1,12 +1,16 @@
 # Tài liệu — The Last Resonance
 
+Refactor: [kế hoạch theo chức năng](plan/done/functional-refactor.md) · [kiến trúc sau refactor](REFACTOR_ARCHITECTURE.md). Kế hoạch đã hoàn tất nằm trong [plan/done/](plan/done/).
+
 Godot 4.7 · 15 màn · 4 chương · tối ưu cảm ứng Android.
 
-**Cập nhật trạng thái:** 2026-09-08.
+**Cập nhật trạng thái:** 2026-10-02.
 
 **Đã xong:** campaign; save có phục hồi/migration; unlock tới ending; chấm sao và
-phí gợi ý; kit map; dressing; environment dynamics; visual review desktop; APK debug
-qua preflight.
+phí gợi ý; refactor theo chức năng (RF-00 → RF-08); kit map; dressing; environment
+dynamics; module animation; hoàn thiện Core/Foundry/landmark; ngoại cảnh sector;
+ánh sáng dễ quan sát; nước chương 3; phản hồi map; nhạc theo chương; phòng thử
+**Phòng Vọng Âm**; visual review desktop; APK debug qua preflight.
 
 **Còn lại:** playtest máy Android thật (chạm, focus, cỡ màn, FPS, nhiệt, RAM và
 thời gian tải). Bốn cluster prefab đã đạt kiểm tra hình học/metadata nhưng vẫn cần
@@ -31,10 +35,11 @@ Hai tầng (thang một chiều): **L11, L12, L14**. Spec: [LEVEL_MAP_BLUEPRINT.
 | --- | ---: | --- | --- |
 | Chapter props + identity | 23 | [preview](CHAPTER_PROPS_PREVIEW.png) | [CHAPTER_MAP_PROPS.md](CHAPTER_MAP_PROPS.md) |
 | Modular kit | 20 | [preview](MODULAR_KIT_PREVIEW.png) | [MODULAR_MAP_KIT.md](MODULAR_MAP_KIT.md) |
+| Kit bổ sung (2026-10-01) | 13 | [preview](MAP_EXPANSION_GODOT_PREVIEW.png) | [MAP_KIT_EXPANSION.md](MAP_KIT_EXPANSION.md) |
 | Cluster prefab editor | 4 | — | [MAP_CLUSTERS.md](MAP_CLUSTERS.md) |
 | Narrative landmarks | 5 | trên | cùng [CHAPTER_MAP_PROPS](CHAPTER_MAP_PROPS.md) |
 
-MeshLibrary: **79** item. Scenery không thêm collision; puzzle do `resources/levels/*.tres`.
+MeshLibrary: **91** item. Scenery không thêm collision; puzzle do `resources/levels/*.tres`.
 
 ![Chapter props](CHAPTER_PROPS_PREVIEW.png)
 
@@ -45,6 +50,10 @@ MeshLibrary: **79** item. Scenery không thêm collision; puzzle do `resources/l
 | Chủ đề | File |
 | --- | --- |
 | Vật liệu / weathering theo chương | [CHAPTER_MATERIAL_PASS.md](CHAPTER_MATERIAL_PASS.md) |
+| Animation Blender + FX module trong campaign | [MODULE_MOTION.md](MODULE_MOTION.md) |
+| Sàn / tường theo chương trong 15 màn | [CAMPAIGN_SURFACES.md](CAMPAIGN_SURFACES.md) |
+| Core, máy và landmark nâng cấp sau refactor | [ASSET_POLISH.md](ASSET_POLISH.md) |
+| Model Blender cho cửa / cầu / thang gameplay | [AUTHORED_MECHANISMS.md](AUTHORED_MECHANISMS.md) |
 | Ambience + SFX plate | [AUDIO_ENVIRONMENT_PASS.md](AUDIO_ENVIRONMENT_PASS.md) |
 | Visual desktop (đã review 15 màn) | [VISUAL_POLISH_PASS.md](VISUAL_POLISH_PASS.md) |
 | Render mobile (bỏ glow/sao/nhiều đèn) | [MOBILE_RENDER_PASS.md](MOBILE_RENDER_PASS.md) |
@@ -59,15 +68,15 @@ phí gợi ý không tăng bước thật hay thay par, nhưng được cộng v
 
 ## Kiểm tra
 
-Snapshot 2026-09-08 trên Godot 4.7.2:
+Checkpoint refactor 2026-10-02 trên Godot 4.7.2:
 
 | Nhóm | Kết quả |
 | --- | --- |
 | Solver/par `validate_levels.py` | PASS — 15/15 màn giải được, par khớp route tối ưu |
-| Godot `tests/verify*.gd` | PASS — 16/16 nhóm regression |
-| Placement `validate_map_decorations.py` | PASS — 295 decoration, 15 màn |
-| Asset audit `audit_assets.py` | PASS — 287 file, không có literal reference bị thiếu |
-| Android `validate_android_export.py` | PASS — APK arm64 63.010.089 byte, 777 entry |
+| Godot `tools/run_tests.py` | PASS — **35/35** regression, gồm 4 lần chạy `asset_pilot_runtime` theo level |
+| Placement `validate_map_decorations.py` | PASS — 930 decoration, 15 màn |
+| Asset audit `audit_assets.py` | PASS — 329 file, không có literal reference bị thiếu |
+| Android `validate_android_export.py` | Chưa chạy lại sau refactor; cần preflight + playtest thiết bị trước nộp |
 
 Các lệnh cốt lõi:
 
@@ -76,8 +85,8 @@ trên Windows cũng được PowerShell tự nhận).
 
 ```powershell
 python tools/validate_levels.py
-godot --headless --path . -s tests/verify.gd
-godot --headless --path . tests/verify_interactions.tscn
+python tools/run_tests.py
+python tools/run_tests.py -g gameplay ui
 python tools/validate_map_decorations.py
 python tools/audit_assets.py
 python tools/validate_android_export.py
@@ -93,5 +102,19 @@ props, modular kit, material, dynamics và visual review. Chi tiết lịch sử
 [archive/ASSET_PILOT.md](archive/ASSET_PILOT.md).
 
 Capture visual (cần cửa sổ, ghi `.codex_qa/visual_polish/`): `tests/asset_pilot_capture.tscn`, `tests/narrative_map_capture.tscn`.
+
+Ngoại cảnh bốn chương: [SECTOR_EXTERIOR.md](SECTOR_EXTERIOR.md).
+
+Sửa vật thể lấn/xuyên lối đi: [SCENERY_CLEARANCE.md](SCENERY_CLEARANCE.md).
+
+Ánh sáng dễ quan sát: [LIGHTING_READABILITY.md](LIGHTING_READABILITY.md).
+
+Nước chương 3: [SANCTUARY_WATER.md](SANCTUARY_WATER.md).
+
+Phản hồi map và nhân vật: [MAP_RESPONSES.md](MAP_RESPONSES.md).
+
+Bản thử van nước/ký ức/ngoại hình: [TIDAL_ECHO_TRIAL.md](TIDAL_ECHO_TRIAL.md).
+
+Bộ model Blender, Mote và trạm phục hồi: [ECHO_BLENDER_EXPANSION.md](ECHO_BLENDER_EXPANSION.md).
 
 Pass cũ: [archive/](archive/README.md).

@@ -1,12 +1,12 @@
 {
   "method": "Static declarations; includes constant concatenation, %s and brace-template candidates. No runtime reachability, GLB embedded dependency, visual or audio validation.",
-  "total_files": 287,
-  "total_bytes": 95967506,
+  "total_files": 329,
+  "total_bytes": 115277404,
   "status_counts": {
-    "project_reference": 199,
-    "no_reference_found": 37,
-    "tooling_or_test_only": 48,
-    "dynamic_candidate": 3
+    "project_reference": 257,
+    "no_reference_found": 18,
+    "tooling_or_test_only": 47,
+    "dynamic_candidate": 7
   },
   "missing_literal_references": {},
   "identical_content_groups": [],
@@ -170,6 +170,22 @@
     [
       "assets/models/baked/Window-Module.glb",
       "assets/models/environments/modular_kit/Architecture/Window-Module.glb"
+    ],
+    [
+      "assets/models/map_expansion/archive_floor_variant.glb",
+      "assets/models/map_surfaces/archive_floor_variant.glb"
+    ],
+    [
+      "assets/models/map_expansion/core_floor_variant.glb",
+      "assets/models/map_surfaces/core_floor_variant.glb"
+    ],
+    [
+      "assets/models/map_expansion/foundry_floor_variant.glb",
+      "assets/models/map_surfaces/foundry_floor_variant.glb"
+    ],
+    [
+      "assets/models/map_expansion/sanctuary_floor_variant.glb",
+      "assets/models/map_surfaces/sanctuary_floor_variant.glb"
     ]
   ],
   "assets": [
@@ -181,8 +197,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 66,
+          "file": "src/data/audio_catalog.gd",
+          "line": 113,
           "scope": "project",
           "method": "literal"
         }
@@ -197,8 +213,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 69,
+          "file": "src/data/audio_catalog.gd",
+          "line": 116,
           "scope": "project",
           "method": "literal"
         }
@@ -213,14 +229,14 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 73,
+          "file": "src/data/audio_catalog.gd",
+          "line": 120,
           "scope": "project",
           "method": "literal"
         },
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 76,
+          "file": "src/data/audio_catalog.gd",
+          "line": 123,
           "scope": "project",
           "method": "literal"
         }
@@ -235,8 +251,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 67,
+          "file": "src/data/audio_catalog.gd",
+          "line": 114,
           "scope": "project",
           "method": "literal"
         }
@@ -251,8 +267,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 88,
+          "file": "src/data/audio_catalog.gd",
+          "line": 135,
           "scope": "project",
           "method": "literal"
         }
@@ -267,8 +283,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 74,
+          "file": "src/data/audio_catalog.gd",
+          "line": 121,
           "scope": "project",
           "method": "literal"
         }
@@ -283,8 +299,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 68,
+          "file": "src/data/audio_catalog.gd",
+          "line": 115,
           "scope": "project",
           "method": "literal"
         }
@@ -299,8 +315,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 75,
+          "file": "src/data/audio_catalog.gd",
+          "line": 122,
           "scope": "project",
           "method": "literal"
         }
@@ -315,8 +331,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 89,
+          "file": "src/data/audio_catalog.gd",
+          "line": 136,
           "scope": "project",
           "method": "literal"
         }
@@ -331,8 +347,116 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 87,
+          "file": "src/data/audio_catalog.gd",
+          "line": 134,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 137,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/music/BGM_Candlepower.ogg",
+      "group": "audio/music",
+      "bytes": 4132099,
+      "sha256": "d50eead5e779f56049aa978520f6261be29edbe8a0eb9018b91e448afb021ee4",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 96,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/music/BGM_Divider.ogg",
+      "group": "audio/music",
+      "bytes": 2026056,
+      "sha256": "365d686ddf86dc3894642f60b5eeb040d4aa226c1832de3a3786268438cfb85e",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 98,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/music/bgm_ending.ogg",
+      "group": "audio/music",
+      "bytes": 2636712,
+      "sha256": "0b03b28fb8e80ddb0a6d029444a8e4ee251583817eb3a83392a83164db17dd5c",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 95,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/music/bgm_gameplay_main.ogg",
+      "group": "audio/music",
+      "bytes": 3538424,
+      "sha256": "46b78f248ff4018b075b832935a6771241012e49a16ee4daa8528d5462ac47cc",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 94,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 97,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/music/BGM_Kaleetan_Full.ogg",
+      "group": "audio/music",
+      "bytes": 4957471,
+      "sha256": "ff02dadd6d02490f1370b2de6d51a943625ad87d95bdf750b2426b8206aba9e1",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 99,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/music/bgm_menu.ogg",
+      "group": "audio/music",
+      "bytes": 945560,
+      "sha256": "90592bd7e4380593e2c5955c33a0db005e0883405bce4cdc0b9b537f994a5910",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 93,
           "scope": "project",
           "method": "literal"
         }
@@ -347,8 +471,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 17,
+          "file": "src/data/audio_catalog.gd",
+          "line": 16,
           "scope": "project",
           "method": "literal"
         }
@@ -363,8 +487,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 18,
+          "file": "src/data/audio_catalog.gd",
+          "line": 17,
           "scope": "project",
           "method": "literal"
         }
@@ -379,8 +503,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 32,
+          "file": "src/data/audio_catalog.gd",
+          "line": 31,
           "scope": "project",
           "method": "literal"
         }
@@ -395,8 +519,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 16,
+          "file": "src/data/audio_catalog.gd",
+          "line": 15,
           "scope": "project",
           "method": "literal"
         }
@@ -411,8 +535,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 31,
+          "file": "src/data/audio_catalog.gd",
+          "line": 30,
           "scope": "project",
           "method": "literal"
         }
@@ -427,8 +551,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 30,
+          "file": "src/data/audio_catalog.gd",
+          "line": 29,
           "scope": "project",
           "method": "literal"
         }
@@ -440,8 +564,15 @@
       "group": "audio/sfx",
       "bytes": 172844,
       "sha256": "1d287444cd580db57fa18c36359ab058d2be11ed738155b9d0f3c8b0f8ed3d98",
-      "status": "no_reference_found",
-      "references": [],
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 71,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
       "license_status": "unverified"
     },
     {
@@ -449,8 +580,15 @@
       "group": "audio/sfx",
       "bytes": 240044,
       "sha256": "8baf6ded07d3ce7295a0720b768af09b0a579af1350c13c495523fbdee5c8bcb",
-      "status": "no_reference_found",
-      "references": [],
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 79,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
       "license_status": "unverified"
     },
     {
@@ -458,8 +596,15 @@
       "group": "audio/sfx",
       "bytes": 153644,
       "sha256": "de6578f53ea2ea2292b7016f2cee285ba446847a0ea3b2e036517e019bfa51a1",
-      "status": "no_reference_found",
-      "references": [],
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 78,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
       "license_status": "unverified"
     },
     {
@@ -467,8 +612,15 @@
       "group": "audio/sfx",
       "bytes": 124844,
       "sha256": "eb71e23665a7a472b709cdbb85c7b91ffe49e555b24801ef59d20f8a8ba5e89e",
-      "status": "no_reference_found",
-      "references": [],
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 80,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
       "license_status": "unverified"
     },
     {
@@ -479,8 +631,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 33,
+          "file": "src/data/audio_catalog.gd",
+          "line": 32,
           "scope": "project",
           "method": "literal"
         }
@@ -492,8 +644,15 @@
       "group": "audio/sfx",
       "bytes": 172844,
       "sha256": "031624aa7cca5a0ac1e332c957d9eae586765540d98bcfd23f3afcd591794699",
-      "status": "no_reference_found",
-      "references": [],
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 81,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
       "license_status": "unverified"
     },
     {
@@ -504,8 +663,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 22,
+          "file": "src/data/audio_catalog.gd",
+          "line": 21,
           "scope": "project",
           "method": "literal"
         }
@@ -517,8 +676,15 @@
       "group": "audio/sfx",
       "bytes": 46124,
       "sha256": "34b2bbfb7563382bf44e8e3cb3c385da18ee830c146000077ca1a8ee9321d957",
-      "status": "no_reference_found",
-      "references": [],
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 72,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
       "license_status": "unverified"
     },
     {
@@ -529,8 +695,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 21,
+          "file": "src/data/audio_catalog.gd",
+          "line": 20,
           "scope": "project",
           "method": "literal"
         }
@@ -545,8 +711,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 23,
+          "file": "src/data/audio_catalog.gd",
+          "line": 22,
           "scope": "project",
           "method": "literal"
         }
@@ -561,8 +727,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 28,
+          "file": "src/data/audio_catalog.gd",
+          "line": 27,
           "scope": "project",
           "method": "literal"
         }
@@ -577,8 +743,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 27,
+          "file": "src/data/audio_catalog.gd",
+          "line": 26,
           "scope": "project",
           "method": "literal"
         }
@@ -593,8 +759,40 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 29,
+          "file": "src/data/audio_catalog.gd",
+          "line": 28,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Ending_Decision.wav",
+      "group": "audio/sfx",
+      "bytes": 308744,
+      "sha256": "c27c3f5e0634849d80c44b39595ebb53254f4925b7482f15715c84d2b6c8eafe",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 66,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Ending_Reveal.wav",
+      "group": "audio/sfx",
+      "bytes": 264644,
+      "sha256": "20c666f87db49b9d5b54a363ecb17793b34f8123d2e48e6356495b894ad0b1b7",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 67,
           "scope": "project",
           "method": "literal"
         }
@@ -606,8 +804,31 @@
       "group": "audio/sfx",
       "bytes": 92204,
       "sha256": "c101c10b0782b59735c61dc9aebe00b18d7f94594f339706d76c7d95e1f88c85",
-      "status": "no_reference_found",
-      "references": [],
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 70,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Hologram_Activate.wav",
+      "group": "audio/sfx",
+      "bytes": 158804,
+      "sha256": "3437c17933e175c0f7d2891eda9bb1868a0a98927340b1ca59fec6ea2c8f2719",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 65,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
       "license_status": "unverified"
     },
     {
@@ -618,8 +839,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 41,
+          "file": "src/data/audio_catalog.gd",
+          "line": 40,
           "scope": "project",
           "method": "literal"
         }
@@ -640,8 +861,31 @@
       "group": "audio/sfx",
       "bytes": 134444,
       "sha256": "022eddf9ada66753f2aead4d1b18fae6985a0e34ceffa78d94001914c244bb95",
-      "status": "no_reference_found",
-      "references": [],
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 69,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/audio/sfx/SFX_Memory_Decode.wav",
+      "group": "audio/sfx",
+      "bytes": 105884,
+      "sha256": "605748ca1f9e022dccd2813b3dd0945bef39c9344b4ea4228182d7d5c101ba72",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 68,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
       "license_status": "unverified"
     },
     {
@@ -652,8 +896,14 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 35,
+          "file": "src/data/audio_catalog.gd",
+          "line": 34,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/ui/startup_intro.gd",
+          "line": 72,
           "scope": "project",
           "method": "literal"
         }
@@ -665,8 +915,15 @@
       "group": "audio/sfx",
       "bytes": 76844,
       "sha256": "cb2960f52c05085b50bf7e1d14faf5180fcc67467e47ad92ecc55f27153c98f9",
-      "status": "no_reference_found",
-      "references": [],
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 89,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
       "license_status": "unverified"
     },
     {
@@ -677,8 +934,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 57,
+          "file": "src/data/audio_catalog.gd",
+          "line": 59,
           "scope": "project",
           "method": "literal"
         }
@@ -693,8 +950,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 58,
+          "file": "src/data/audio_catalog.gd",
+          "line": 60,
           "scope": "project",
           "method": "literal"
         }
@@ -709,8 +966,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 11,
+          "file": "src/data/audio_catalog.gd",
+          "line": 10,
           "scope": "project",
           "method": "literal"
         }
@@ -725,8 +982,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 12,
+          "file": "src/data/audio_catalog.gd",
+          "line": 11,
           "scope": "project",
           "method": "literal"
         }
@@ -741,8 +998,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 9,
+          "file": "src/data/audio_catalog.gd",
+          "line": 8,
           "scope": "project",
           "method": "literal"
         }
@@ -757,8 +1014,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 10,
+          "file": "src/data/audio_catalog.gd",
+          "line": 9,
           "scope": "project",
           "method": "literal"
         }
@@ -773,8 +1030,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 13,
+          "file": "src/data/audio_catalog.gd",
+          "line": 12,
           "scope": "project",
           "method": "literal"
         }
@@ -789,8 +1046,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 14,
+          "file": "src/data/audio_catalog.gd",
+          "line": 13,
           "scope": "project",
           "method": "literal"
         }
@@ -802,8 +1059,15 @@
       "group": "audio/sfx",
       "bytes": 38444,
       "sha256": "e1ba424caf66cba6f24c5c0c8c79c51563aed54ebee7a9f1cc4f3232b713678c",
-      "status": "no_reference_found",
-      "references": [],
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 82,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
       "license_status": "unverified"
     },
     {
@@ -811,8 +1075,15 @@
       "group": "audio/sfx",
       "bytes": 115248,
       "sha256": "99273d643fbde590ccb0d7c75a395c81dca1bf9e5f3664a6b3bd7693bd01a020",
-      "status": "no_reference_found",
-      "references": [],
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 88,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
       "license_status": "unverified"
     },
     {
@@ -823,8 +1094,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 15,
+          "file": "src/data/audio_catalog.gd",
+          "line": 14,
           "scope": "project",
           "method": "literal"
         }
@@ -836,8 +1107,15 @@
       "group": "audio/sfx",
       "bytes": 73004,
       "sha256": "330b03fcb066b631e80519a3e88566603e7863bc22174cf4aba8e83188d6a1f2",
-      "status": "no_reference_found",
-      "references": [],
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 84,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
       "license_status": "unverified"
     },
     {
@@ -848,8 +1126,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 44,
+          "file": "src/data/audio_catalog.gd",
+          "line": 43,
           "scope": "project",
           "method": "literal"
         }
@@ -861,8 +1139,15 @@
       "group": "audio/sfx",
       "bytes": 88364,
       "sha256": "fba14b30eb9f80649048d51200126a6e82a825f9bb5ee4ef6438f2f7703ecc54",
-      "status": "no_reference_found",
-      "references": [],
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 87,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
       "license_status": "unverified"
     },
     {
@@ -870,8 +1155,15 @@
       "group": "audio/sfx",
       "bytes": 34604,
       "sha256": "75da77f5e5eec7322e50c9f40c4c0a5e67683ab433edb80ed6a8d9207b784b99",
-      "status": "no_reference_found",
-      "references": [],
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 86,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
       "license_status": "unverified"
     },
     {
@@ -882,8 +1174,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 8,
+          "file": "src/data/audio_catalog.gd",
+          "line": 7,
           "scope": "project",
           "method": "literal"
         }
@@ -895,8 +1187,15 @@
       "group": "audio/sfx",
       "bytes": 57648,
       "sha256": "2cb85e10d4bd7c3c66a368f2a281fc1fa6a198a6f6a769a33650353ac7328d15",
-      "status": "no_reference_found",
-      "references": [],
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 85,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
       "license_status": "unverified"
     },
     {
@@ -904,8 +1203,15 @@
       "group": "audio/sfx",
       "bytes": 34604,
       "sha256": "d099049dbd471089a7fed5f4b64ae339c7c86946e390d463ef62afe12f39f151",
-      "status": "no_reference_found",
-      "references": [],
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 83,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
       "license_status": "unverified"
     },
     {
@@ -916,8 +1222,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 43,
+          "file": "src/data/audio_catalog.gd",
+          "line": 42,
           "scope": "project",
           "method": "literal"
         }
@@ -932,8 +1238,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 25,
+          "file": "src/data/audio_catalog.gd",
+          "line": 24,
           "scope": "project",
           "method": "literal"
         }
@@ -945,8 +1251,15 @@
       "group": "audio/sfx",
       "bytes": 345644,
       "sha256": "7a44f2d95322a1a56412f7491ed11790aafcab6ecea72c0ba06bda33e614c37a",
-      "status": "no_reference_found",
-      "references": [],
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 77,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
       "license_status": "unverified"
     },
     {
@@ -957,8 +1270,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 26,
+          "file": "src/data/audio_catalog.gd",
+          "line": 25,
           "scope": "project",
           "method": "literal"
         }
@@ -973,8 +1286,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 24,
+          "file": "src/data/audio_catalog.gd",
+          "line": 23,
           "scope": "project",
           "method": "literal"
         }
@@ -989,8 +1302,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 19,
+          "file": "src/data/audio_catalog.gd",
+          "line": 18,
           "scope": "project",
           "method": "literal"
         }
@@ -1005,8 +1318,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 20,
+          "file": "src/data/audio_catalog.gd",
+          "line": 19,
           "scope": "project",
           "method": "literal"
         }
@@ -1018,8 +1331,15 @@
       "group": "audio/sfx",
       "bytes": 38444,
       "sha256": "6adedc2876b60b90aa14840c42262e21f9d2a63bb126222025ac54c50e2c986b",
-      "status": "no_reference_found",
-      "references": [],
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 74,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
       "license_status": "unverified"
     },
     {
@@ -1027,8 +1347,15 @@
       "group": "audio/sfx",
       "bytes": 42284,
       "sha256": "e084d3b0662ab6e89aabaca8a3aaf48c654e69cb3baa9ec957750d722141fee0",
-      "status": "no_reference_found",
-      "references": [],
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 73,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
       "license_status": "unverified"
     },
     {
@@ -1036,8 +1363,15 @@
       "group": "audio/sfx",
       "bytes": 76844,
       "sha256": "bb188385d952ec12a4034dfd9a57608e7ae30388e80884beaabf6615769441d4",
-      "status": "no_reference_found",
-      "references": [],
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 76,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
       "license_status": "unverified"
     },
     {
@@ -1045,8 +1379,15 @@
       "group": "audio/sfx",
       "bytes": 99884,
       "sha256": "576c6f57786d07b399da51ebb699c42bf88c486bb39f428778a022193dc02412",
-      "status": "no_reference_found",
-      "references": [],
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 75,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
       "license_status": "unverified"
     },
     {
@@ -1054,8 +1395,15 @@
       "group": "audio/sfx",
       "bytes": 26924,
       "sha256": "f8bc2012fe61a3f0ec7fa745d565ca3a7e1b87b05891f9cd63e64434e0ad8976",
-      "status": "no_reference_found",
-      "references": [],
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 47,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
       "license_status": "unverified"
     },
     {
@@ -1066,8 +1414,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 47,
+          "file": "src/data/audio_catalog.gd",
+          "line": 46,
           "scope": "project",
           "method": "literal"
         }
@@ -1082,8 +1430,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 45,
+          "file": "src/data/audio_catalog.gd",
+          "line": 44,
           "scope": "project",
           "method": "literal"
         }
@@ -1098,8 +1446,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 46,
+          "file": "src/data/audio_catalog.gd",
+          "line": 45,
           "scope": "project",
           "method": "literal"
         }
@@ -1114,8 +1462,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 52,
+          "file": "src/data/audio_catalog.gd",
+          "line": 54,
           "scope": "project",
           "method": "literal"
         }
@@ -1130,8 +1478,14 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 48,
+          "file": "src/data/audio_catalog.gd",
+          "line": 49,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 50,
           "scope": "project",
           "method": "literal"
         }
@@ -1146,8 +1500,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 53,
+          "file": "src/data/audio_catalog.gd",
+          "line": 55,
           "scope": "project",
           "method": "literal"
         }
@@ -1162,8 +1516,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 54,
+          "file": "src/data/audio_catalog.gd",
+          "line": 56,
           "scope": "project",
           "method": "literal"
         }
@@ -1178,8 +1532,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 55,
+          "file": "src/data/audio_catalog.gd",
+          "line": 57,
           "scope": "project",
           "method": "literal"
         }
@@ -1194,8 +1548,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 50,
+          "file": "src/data/audio_catalog.gd",
+          "line": 52,
           "scope": "project",
           "method": "literal"
         }
@@ -1210,8 +1564,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 49,
+          "file": "src/data/audio_catalog.gd",
+          "line": 51,
           "scope": "project",
           "method": "literal"
         }
@@ -1223,8 +1577,15 @@
       "group": "audio/sfx",
       "bytes": 38444,
       "sha256": "790f90acd55a216d54b1720f3608f4d5fec66fc55162ea29fba9a84c6c00c04b",
-      "status": "no_reference_found",
-      "references": [],
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/audio_catalog.gd",
+          "line": 48,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
       "license_status": "unverified"
     },
     {
@@ -1235,8 +1596,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 56,
+          "file": "src/data/audio_catalog.gd",
+          "line": 58,
           "scope": "project",
           "method": "literal"
         }
@@ -1251,8 +1612,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 51,
+          "file": "src/data/audio_catalog.gd",
+          "line": 53,
           "scope": "project",
           "method": "literal"
         }
@@ -1267,8 +1628,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 98,
+          "file": "src/data/audio_catalog.gd",
+          "line": 147,
           "scope": "project",
           "method": "literal"
         }
@@ -1283,8 +1644,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 34,
+          "file": "src/data/audio_catalog.gd",
+          "line": 33,
           "scope": "project",
           "method": "literal"
         }
@@ -1299,8 +1660,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 36,
+          "file": "src/data/audio_catalog.gd",
+          "line": 35,
           "scope": "project",
           "method": "literal"
         }
@@ -1315,8 +1676,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 39,
+          "file": "src/data/audio_catalog.gd",
+          "line": 38,
           "scope": "project",
           "method": "literal"
         }
@@ -1331,8 +1692,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 42,
+          "file": "src/data/audio_catalog.gd",
+          "line": 41,
           "scope": "project",
           "method": "literal"
         }
@@ -1347,8 +1708,14 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 37,
+          "file": "src/data/audio_catalog.gd",
+          "line": 36,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/module_motion.gd",
+          "line": 7,
           "scope": "project",
           "method": "literal"
         }
@@ -1363,8 +1730,14 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 40,
+          "file": "src/data/audio_catalog.gd",
+          "line": 39,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/module_motion.gd",
+          "line": 8,
           "scope": "project",
           "method": "literal"
         }
@@ -1379,8 +1752,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 38,
+          "file": "src/data/audio_catalog.gd",
+          "line": 37,
           "scope": "project",
           "method": "literal"
         }
@@ -1395,8 +1768,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 60,
+          "file": "src/data/audio_catalog.gd",
+          "line": 62,
           "scope": "project",
           "method": "literal"
         }
@@ -1411,8 +1784,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 59,
+          "file": "src/data/audio_catalog.gd",
+          "line": 61,
           "scope": "project",
           "method": "literal"
         }
@@ -1427,8 +1800,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 61,
+          "file": "src/data/audio_catalog.gd",
+          "line": 63,
           "scope": "project",
           "method": "literal"
         }
@@ -1443,8 +1816,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/audio_manager.gd",
-          "line": 62,
+          "file": "src/data/audio_catalog.gd",
+          "line": 64,
           "scope": "project",
           "method": "literal"
         }
@@ -1643,6 +2016,12 @@
           "line": 32,
           "scope": "project",
           "method": "literal"
+        },
+        {
+          "file": "src/ui/tidal_trial_hud.gd",
+          "line": 68,
+          "scope": "project",
+          "method": "literal"
         }
       ],
       "license_status": "unverified"
@@ -1757,8 +2136,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 40,
+          "file": "src/view/board_actors.gd",
+          "line": 9,
           "scope": "project",
           "method": "literal"
         }
@@ -1785,14 +2164,20 @@
           "method": "literal"
         },
         {
-          "file": "src/view/board_view.gd",
-          "line": 88,
+          "file": "src/view/board_decorations.gd",
+          "line": 45,
           "scope": "project",
           "method": "constant_concat"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -1807,14 +2192,20 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 90,
+          "file": "src/view/board_decorations.gd",
+          "line": 47,
           "scope": "project",
           "method": "constant_concat"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -1824,19 +2215,31 @@
     {
       "path": "assets/models/baked/Archive-Data-Vault.glb",
       "group": "models/baked",
-      "bytes": 31840,
-      "sha256": "a761e3f029211c48790518f17ef8edeb3cadc906d57d70fc3c026f1d9372b1fb",
+      "bytes": 40496,
+      "sha256": "de7e68827f094e3c8714300a323adb1e413c70636c5e018bcec60c99933a1039",
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 89,
+          "file": "scenes/editor/asset_polish_showcase.tscn",
+          "line": 12,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/board_decorations.gd",
+          "line": 46,
           "scope": "project",
           "method": "constant_concat"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -1846,8 +2249,8 @@
     {
       "path": "assets/models/baked/Archive-Holo-Projector.glb",
       "group": "models/baked",
-      "bytes": 23220,
-      "sha256": "cbf942cb4f1c7ddb5664f79f9df12f7e89de617db62a8c923d683bb20b4c0788",
+      "bytes": 28528,
+      "sha256": "fe6953d1af826c50880345c668899249488a33b8afb70ed27c0609e5b9c9d0e4",
       "status": "project_reference",
       "references": [
         {
@@ -1857,14 +2260,20 @@
           "method": "literal"
         },
         {
-          "file": "src/view/board_view.gd",
-          "line": 93,
+          "file": "src/view/board_decorations.gd",
+          "line": 50,
           "scope": "project",
           "method": "constant_concat"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -1879,20 +2288,26 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 92,
+          "file": "src/view/board_decorations.gd",
+          "line": 49,
           "scope": "project",
           "method": "constant_concat"
         },
         {
-          "file": "src/view/board_view.gd",
-          "line": 110,
+          "file": "src/view/board_decorations.gd",
+          "line": 65,
           "scope": "project",
           "method": "constant_concat"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -1907,14 +2322,20 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 69,
+          "file": "src/view/board_decorations.gd",
+          "line": 26,
           "scope": "project",
           "method": "constant_concat"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -1929,20 +2350,32 @@
       "status": "project_reference",
       "references": [
         {
+          "file": "scenes/editor/asset_polish_showcase.tscn",
+          "line": 18,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
           "file": "scenes/editor/modular_map_showcase.tscn",
           "line": 15,
           "scope": "tooling",
           "method": "literal"
         },
         {
-          "file": "src/view/board_view.gd",
-          "line": 91,
+          "file": "src/view/board_decorations.gd",
+          "line": 48,
           "scope": "project",
           "method": "constant_concat"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -1957,14 +2390,20 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 72,
+          "file": "src/view/board_decorations.gd",
+          "line": 29,
           "scope": "project",
           "method": "constant_concat"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -1976,11 +2415,29 @@
       "group": "models/baked",
       "bytes": 78512,
       "sha256": "0eb56dcec7bd151efcf2489aae37cb32baa9f5fd0a338cf63500a2d3ff57494d",
-      "status": "tooling_or_test_only",
+      "status": "project_reference",
       "references": [
+        {
+          "file": "src/view/board_gameplay_objects.gd",
+          "line": 17,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tests/verify_authored_mechanisms.gd",
+          "line": 27,
+          "scope": "test",
+          "method": "literal"
+        },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -1995,14 +2452,20 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 85,
+          "file": "src/view/board_decorations.gd",
+          "line": 42,
           "scope": "project",
           "method": "constant_concat"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -2017,20 +2480,32 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 73,
+          "file": "scenes/editor/animated_module_showcase.tscn",
+          "line": 5,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/board_decorations.gd",
+          "line": 30,
           "scope": "project",
           "method": "constant_concat"
         },
         {
-          "file": "src/view/board_view.gd",
-          "line": 103,
+          "file": "src/view/board_decorations.gd",
+          "line": 60,
           "scope": "project",
           "method": "constant_concat"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -2045,14 +2520,20 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 87,
+          "file": "src/view/board_decorations.gd",
+          "line": 44,
           "scope": "project",
           "method": "constant_concat"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -2067,14 +2548,38 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 78,
+          "file": "scenes/editor/animated_module_showcase.tscn",
+          "line": 4,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/board_decorations.gd",
+          "line": 35,
           "scope": "project",
           "method": "constant_concat"
         },
         {
+          "file": "tests/verify_module_motion.gd",
+          "line": 132,
+          "scope": "test",
+          "method": "literal"
+        },
+        {
+          "file": "tests/verify_module_motion.gd",
+          "line": 149,
+          "scope": "test",
+          "method": "literal"
+        },
+        {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -2089,14 +2594,20 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 79,
+          "file": "src/view/board_decorations.gd",
+          "line": 36,
           "scope": "project",
           "method": "constant_concat"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -2111,14 +2622,20 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 97,
+          "file": "src/view/board_decorations.gd",
+          "line": 54,
           "scope": "project",
           "method": "constant_concat"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -2128,25 +2645,49 @@
     {
       "path": "assets/models/baked/Conveyor.glb",
       "group": "models/baked",
-      "bytes": 100720,
-      "sha256": "2e23810322467f56a6a51381f87ab064e9fb1c0bf0ccc4ac70bbf48208542566",
+      "bytes": 106664,
+      "sha256": "d55e6eef1bf6402ba71ea1664a6d6d33c9331726cf4badedbec4d448ccfb142a",
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 82,
+          "file": "scenes/editor/animated_module_showcase.tscn",
+          "line": 8,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "scenes/editor/asset_polish_showcase.tscn",
+          "line": 11,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/board_decorations.gd",
+          "line": 39,
           "scope": "project",
           "method": "constant_concat"
         },
         {
-          "file": "src/view/board_view.gd",
-          "line": 102,
+          "file": "src/view/board_decorations.gd",
+          "line": 59,
           "scope": "project",
           "method": "constant_concat"
+        },
+        {
+          "file": "tests/verify_module_motion.gd",
+          "line": 159,
+          "scope": "test",
+          "method": "literal"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -2156,10 +2697,22 @@
     {
       "path": "assets/models/baked/Core-Generator.glb",
       "group": "models/baked",
-      "bytes": 33528,
-      "sha256": "bcc79b88dc5e91a263048d7c900875fca3efd871ddf3ece96f4597c7917e009d",
+      "bytes": 38840,
+      "sha256": "732d7d1c1edebc50562f4723bc136e738dc65b4c1133fcd92f81e0b17d0a48e4",
       "status": "project_reference",
       "references": [
+        {
+          "file": "scenes/editor/animated_module_showcase.tscn",
+          "line": 17,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "scenes/editor/asset_polish_showcase.tscn",
+          "line": 6,
+          "scope": "tooling",
+          "method": "literal"
+        },
         {
           "file": "scenes/editor/modular_map_showcase.tscn",
           "line": 38,
@@ -2177,6 +2730,12 @@
           "line": 88,
           "scope": "tooling",
           "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
         }
       ],
       "license_status": "unverified"
@@ -2184,10 +2743,22 @@
     {
       "path": "assets/models/baked/Core-Hologram-Dais.glb",
       "group": "models/baked",
-      "bytes": 23160,
-      "sha256": "2f49a7b8cc88aa01c2802f9ba2dca9517e02316e94a0d3ee1147d64c21898121",
+      "bytes": 31664,
+      "sha256": "be3f96a276ef85172c54091ca009be46f58f13af5fcf33bad1c5170c5d890260",
       "status": "project_reference",
       "references": [
+        {
+          "file": "scenes/editor/animated_module_showcase.tscn",
+          "line": 18,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "scenes/editor/asset_polish_showcase.tscn",
+          "line": 7,
+          "scope": "tooling",
+          "method": "literal"
+        },
         {
           "file": "scenes/editor/modular_map_showcase.tscn",
           "line": 39,
@@ -2205,6 +2776,12 @@
           "line": 88,
           "scope": "tooling",
           "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
         }
       ],
       "license_status": "unverified"
@@ -2212,19 +2789,31 @@
     {
       "path": "assets/models/baked/Core-Pedestal.glb",
       "group": "models/baked",
-      "bytes": 95680,
-      "sha256": "f8c07a5649e0bcff07e77cd6ac0c6eb0d8e91edc79ef3d6d70ca55534689959a",
+      "bytes": 109744,
+      "sha256": "af490a435d6ecf591d03dcab854863e59db9e1a064aa39fb54edfcd720fa690a",
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 62,
+          "file": "scenes/editor/asset_polish_showcase.tscn",
+          "line": 5,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/board_gameplay_objects.gd",
+          "line": 13,
           "scope": "project",
           "method": "constant_concat"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -2249,6 +2838,12 @@
           "line": 88,
           "scope": "tooling",
           "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
         }
       ],
       "license_status": "unverified"
@@ -2256,10 +2851,22 @@
     {
       "path": "assets/models/baked/Core-Reactor.glb",
       "group": "models/baked",
-      "bytes": 54876,
-      "sha256": "a58997bf5c2e8d1fd6e6a56150796b3ea1461d3978c45bffa1f55b041da73c67",
+      "bytes": 71732,
+      "sha256": "cf96bca1d8d0205450b872b1c713aa72848065e5fef35b7c2c1dbec8efb8a482",
       "status": "project_reference",
       "references": [
+        {
+          "file": "scenes/editor/animated_module_showcase.tscn",
+          "line": 16,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "scenes/editor/asset_polish_showcase.tscn",
+          "line": 16,
+          "scope": "tooling",
+          "method": "literal"
+        },
         {
           "file": "scenes/editor/modular_map_showcase.tscn",
           "line": 37,
@@ -2275,6 +2882,12 @@
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -2311,6 +2924,12 @@
           "line": 88,
           "scope": "tooling",
           "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
         }
       ],
       "license_status": "unverified"
@@ -2323,14 +2942,20 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 70,
+          "file": "src/view/board_decorations.gd",
+          "line": 27,
           "scope": "project",
           "method": "constant_concat"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -2345,14 +2970,20 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 74,
+          "file": "src/view/board_decorations.gd",
+          "line": 31,
           "scope": "project",
           "method": "constant_concat"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -2367,14 +2998,20 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 83,
+          "file": "src/view/board_decorations.gd",
+          "line": 40,
           "scope": "project",
           "method": "constant_concat"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -2386,11 +3023,29 @@
       "group": "models/baked",
       "bytes": 82388,
       "sha256": "a2f89b781d02d54f9ae2ef1711f11afbcf6f07788209559e071ef677bc6016cd",
-      "status": "tooling_or_test_only",
+      "status": "project_reference",
       "references": [
+        {
+          "file": "src/view/board_gameplay_objects.gd",
+          "line": 16,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tests/verify_authored_mechanisms.gd",
+          "line": 23,
+          "scope": "test",
+          "method": "literal"
+        },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -2402,11 +3057,29 @@
       "group": "models/baked",
       "bytes": 85796,
       "sha256": "7c591e1a829aadd08522dcd5c9932ece7816339cd13bd3ed67630ba7b3ed2824",
-      "status": "tooling_or_test_only",
+      "status": "project_reference",
       "references": [
+        {
+          "file": "src/view/board_gameplay_objects.gd",
+          "line": 18,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
+          "file": "tests/verify_authored_mechanisms.gd",
+          "line": 30,
+          "scope": "test",
+          "method": "literal"
+        },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -2425,6 +3098,12 @@
           "line": 88,
           "scope": "tooling",
           "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
         }
       ],
       "license_status": "unverified"
@@ -2432,19 +3111,37 @@
     {
       "path": "assets/models/baked/Energy-Core.glb",
       "group": "models/baked",
-      "bytes": 70592,
-      "sha256": "67e4a24ff1f676b1e1c62a6e45b6a2186474d2bd9be40148c6768e2cb9528026",
+      "bytes": 85488,
+      "sha256": "1220b911ca2ae9bac78344ad6ed4eb6b846706b2903eaeaf88e1f7ff0eceef13",
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 63,
+          "file": "scenes/editor/animated_module_showcase.tscn",
+          "line": 19,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "scenes/editor/asset_polish_showcase.tscn",
+          "line": 4,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/board_gameplay_objects.gd",
+          "line": 14,
           "scope": "project",
           "method": "constant_concat"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -2459,14 +3156,26 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 59,
+          "file": "src/view/board_geometry.gd",
+          "line": 7,
           "scope": "project",
           "method": "constant_concat"
         },
         {
+          "file": "tools/build_campaign_floor_skins.py",
+          "line": 14,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -2476,10 +3185,22 @@
     {
       "path": "assets/models/baked/Foundry-Furnace.glb",
       "group": "models/baked",
-      "bytes": 31768,
-      "sha256": "e567d96264ff06a4665eef6957eb9b4481cea3d1ab33256b8cf5d53f479885bc",
+      "bytes": 47264,
+      "sha256": "01aea67c6ec11cbbd444ff0bfeb4a0280c3a99c1e6ed9e47b3a905e516b7c665",
       "status": "project_reference",
       "references": [
+        {
+          "file": "scenes/editor/animated_module_showcase.tscn",
+          "line": 10,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "scenes/editor/asset_polish_showcase.tscn",
+          "line": 8,
+          "scope": "tooling",
+          "method": "literal"
+        },
         {
           "file": "scenes/editor/modular_map_showcase.tscn",
           "line": 21,
@@ -2503,6 +3224,12 @@
           "line": 88,
           "scope": "tooling",
           "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
         }
       ],
       "license_status": "unverified"
@@ -2510,8 +3237,8 @@
     {
       "path": "assets/models/baked/Foundry-Gear.glb",
       "group": "models/baked",
-      "bytes": 113396,
-      "sha256": "8eadab7b16b55979c2ffe28f665f546a976af8acc84545d3c50b8aa1c50cefce",
+      "bytes": 118536,
+      "sha256": "e3a56d390c8b3f5a6f03de8892b30a55a582d68a372d10febff6cfb34cd34626",
       "status": "project_reference",
       "references": [
         {
@@ -2523,6 +3250,12 @@
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -2547,6 +3280,12 @@
           "line": 88,
           "scope": "tooling",
           "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
         }
       ],
       "license_status": "unverified"
@@ -2559,6 +3298,12 @@
       "status": "project_reference",
       "references": [
         {
+          "file": "scenes/editor/animated_module_showcase.tscn",
+          "line": 11,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
           "file": "src/data/chapter_props.gd",
           "line": 12,
           "scope": "project",
@@ -2569,6 +3314,12 @@
           "line": 88,
           "scope": "tooling",
           "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
         }
       ],
       "license_status": "unverified"
@@ -2576,10 +3327,22 @@
     {
       "path": "assets/models/baked/Foundry-Press.glb",
       "group": "models/baked",
-      "bytes": 39176,
-      "sha256": "ea3234ad0686f544731f118fa8068797ee5899357dabe6ffdf96f1f257790910",
+      "bytes": 52488,
+      "sha256": "a9576abc8c075abb6aedd0222a143b3ddc799b9acf930324c56152fb96bec68c",
       "status": "project_reference",
       "references": [
+        {
+          "file": "scenes/editor/animated_module_showcase.tscn",
+          "line": 9,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "scenes/editor/asset_polish_showcase.tscn",
+          "line": 9,
+          "scope": "tooling",
+          "method": "literal"
+        },
         {
           "file": "scenes/editor/map_clusters/foundry_maintenance_corner.tscn",
           "line": 3,
@@ -2603,6 +3366,12 @@
           "line": 88,
           "scope": "tooling",
           "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
         }
       ],
       "license_status": "unverified"
@@ -2610,19 +3379,37 @@
     {
       "path": "assets/models/baked/Hologram-Projector.glb",
       "group": "models/baked",
-      "bytes": 64280,
-      "sha256": "63eb5ce8ca58ace64fb97a16d451513d853290dde054e6caab85a0204c6d3afe",
+      "bytes": 72788,
+      "sha256": "b6d78c2a45fd506c4f103150e51e730eb977d9fd79a5ee2d935d00415550f0fd",
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 71,
+          "file": "scenes/editor/animated_module_showcase.tscn",
+          "line": 7,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "scenes/editor/asset_polish_showcase.tscn",
+          "line": 19,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/board_decorations.gd",
+          "line": 28,
           "scope": "project",
           "method": "constant_concat"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -2659,6 +3446,12 @@
           "line": 88,
           "scope": "tooling",
           "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
         }
       ],
       "license_status": "unverified"
@@ -2691,6 +3484,12 @@
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -2727,6 +3526,12 @@
           "line": 88,
           "scope": "tooling",
           "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
         }
       ],
       "license_status": "unverified"
@@ -2759,6 +3564,12 @@
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -2795,6 +3606,12 @@
           "line": 88,
           "scope": "tooling",
           "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
         }
       ],
       "license_status": "unverified"
@@ -2827,6 +3644,12 @@
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -2863,6 +3686,12 @@
           "line": 88,
           "scope": "tooling",
           "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
         }
       ],
       "license_status": "unverified"
@@ -2897,6 +3726,12 @@
           "line": 88,
           "scope": "tooling",
           "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
         }
       ],
       "license_status": "unverified"
@@ -2904,25 +3739,37 @@
     {
       "path": "assets/models/baked/Machine-Unit.glb",
       "group": "models/baked",
-      "bytes": 86916,
-      "sha256": "823ea818f36240ef2a0094c1d7e4e6d58e900fcb0d2ed7376993916b088006fa",
+      "bytes": 108508,
+      "sha256": "df817d9322123ced291b646fecc113b0e169196716bf64d553d496b272b6612c",
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 81,
+          "file": "scenes/editor/asset_polish_showcase.tscn",
+          "line": 10,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/board_decorations.gd",
+          "line": 38,
           "scope": "project",
           "method": "constant_concat"
         },
         {
-          "file": "src/view/board_view.gd",
-          "line": 101,
+          "file": "src/view/board_decorations.gd",
+          "line": 58,
           "scope": "project",
           "method": "constant_concat"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -2941,6 +3788,12 @@
           "line": 88,
           "scope": "tooling",
           "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
         }
       ],
       "license_status": "unverified"
@@ -2953,14 +3806,20 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 76,
+          "file": "src/view/board_decorations.gd",
+          "line": 33,
           "scope": "project",
           "method": "constant_concat"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -2981,8 +3840,8 @@
           "method": "literal"
         },
         {
-          "file": "src/view/board_view.gd",
-          "line": 112,
+          "file": "src/view/board_decorations.gd",
+          "line": 67,
           "scope": "project",
           "method": "constant_concat"
         },
@@ -2995,6 +3854,12 @@
         {
           "file": "tools/build_narrative_gallery.gd",
           "line": 11,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -3015,8 +3880,8 @@
           "method": "literal"
         },
         {
-          "file": "src/view/board_view.gd",
-          "line": 113,
+          "file": "src/view/board_decorations.gd",
+          "line": 68,
           "scope": "project",
           "method": "constant_concat"
         },
@@ -3029,6 +3894,12 @@
         {
           "file": "tools/build_narrative_gallery.gd",
           "line": 11,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -3038,10 +3909,16 @@
     {
       "path": "assets/models/baked/Narrative-judgement_engine.glb",
       "group": "models/baked",
-      "bytes": 10076,
-      "sha256": "d80f4bb312f516d75cafdca3dc8c99715ea9117b4e4ae1084c28a7d52dede004",
+      "bytes": 17168,
+      "sha256": "172d51d8a5de8efa37ba959f21b70d1c193a8677706f2407272bf95d7ef392e8",
       "status": "project_reference",
       "references": [
+        {
+          "file": "scenes/editor/asset_polish_showcase.tscn",
+          "line": 17,
+          "scope": "tooling",
+          "method": "literal"
+        },
         {
           "file": "scenes/editor/narrative_landmarks.tscn",
           "line": 8,
@@ -3049,8 +3926,8 @@
           "method": "literal"
         },
         {
-          "file": "src/view/board_view.gd",
-          "line": 114,
+          "file": "src/view/board_decorations.gd",
+          "line": 69,
           "scope": "project",
           "method": "constant_concat"
         },
@@ -3063,6 +3940,12 @@
         {
           "file": "tools/build_narrative_gallery.gd",
           "line": 11,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -3083,8 +3966,8 @@
           "method": "literal"
         },
         {
-          "file": "src/view/board_view.gd",
-          "line": 111,
+          "file": "src/view/board_decorations.gd",
+          "line": 66,
           "scope": "project",
           "method": "constant_concat"
         },
@@ -3097,6 +3980,12 @@
         {
           "file": "tools/build_narrative_gallery.gd",
           "line": 11,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -3117,8 +4006,8 @@
           "method": "literal"
         },
         {
-          "file": "src/view/board_view.gd",
-          "line": 106,
+          "file": "src/view/board_decorations.gd",
+          "line": 63,
           "scope": "project",
           "method": "constant_concat"
         },
@@ -3133,6 +4022,12 @@
           "line": 11,
           "scope": "tooling",
           "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
         }
       ],
       "license_status": "unverified"
@@ -3145,14 +4040,20 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 60,
+          "file": "src/view/board_geometry.gd",
+          "line": 8,
           "scope": "project",
           "method": "constant_concat"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -3167,14 +4068,20 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 80,
+          "file": "src/view/board_decorations.gd",
+          "line": 37,
           "scope": "project",
           "method": "constant_concat"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -3184,19 +4091,37 @@
     {
       "path": "assets/models/baked/Plant-Cluster.glb",
       "group": "models/baked",
-      "bytes": 70392,
-      "sha256": "4e275075b0e15fd0d6214926f13c0e7e6b9940050878badf5cf82593390dbaec",
+      "bytes": 75780,
+      "sha256": "65d79fada8982a13a5582ad68da550e10554b2cb68bb08bc8cb795e23b8047d5",
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 75,
+          "file": "scenes/editor/animated_module_showcase.tscn",
+          "line": 13,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "scenes/editor/asset_polish_showcase.tscn",
+          "line": 15,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/board_decorations.gd",
+          "line": 32,
           "scope": "project",
           "method": "constant_concat"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -3215,6 +4140,12 @@
           "line": 88,
           "scope": "tooling",
           "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
         }
       ],
       "license_status": "unverified"
@@ -3224,17 +4155,17 @@
       "group": "models/baked",
       "bytes": 62244,
       "sha256": "3df555c8023b6046b1d7ab7bf0f4d54dfcbe150c42944406ac05f04dc03fce50",
-      "status": "project_reference",
+      "status": "tooling_or_test_only",
       "references": [
-        {
-          "file": "src/view/board_view.gd",
-          "line": 109,
-          "scope": "project",
-          "method": "constant_concat"
-        },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -3244,19 +4175,49 @@
     {
       "path": "assets/models/baked/Pressure-Plate.glb",
       "group": "models/baked",
-      "bytes": 67384,
-      "sha256": "1cd2549f2c6b85ad88821bf86b5d656159f0cdabf82c71fe66ad75fdbc8a4e1c",
+      "bytes": 68000,
+      "sha256": "48edbcc94b6b411048e6ea38ca2a5ad2b92402f9208383ac78628aa853e3cbfa",
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 64,
+          "file": "scenes/editor/animated_module_showcase.tscn",
+          "line": 20,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "scenes/editor/asset_polish_showcase.tscn",
+          "line": 20,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/board_gameplay_objects.gd",
+          "line": 15,
           "scope": "project",
           "method": "constant_concat"
         },
         {
+          "file": "tests/verify_module_motion.gd",
+          "line": 114,
+          "scope": "test",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_animated_module_showcase.gd",
+          "line": 64,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -3271,14 +4232,20 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 94,
+          "file": "src/view/board_decorations.gd",
+          "line": 51,
           "scope": "project",
           "method": "constant_concat"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -3293,14 +4260,20 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 77,
+          "file": "src/view/board_decorations.gd",
+          "line": 34,
           "scope": "project",
           "method": "constant_concat"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -3315,14 +4288,20 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 86,
+          "file": "src/view/board_decorations.gd",
+          "line": 43,
           "scope": "project",
           "method": "constant_concat"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -3343,8 +4322,20 @@
           "method": "literal"
         },
         {
+          "file": "src/view/board_decorations.gd",
+          "line": 64,
+          "scope": "project",
+          "method": "constant_concat"
+        },
+        {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -3375,6 +4366,12 @@
           "line": 88,
           "scope": "tooling",
           "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
         }
       ],
       "license_status": "unverified"
@@ -3382,10 +4379,22 @@
     {
       "path": "assets/models/baked/Sanctuary-Shrine.glb",
       "group": "models/baked",
-      "bytes": 34676,
-      "sha256": "de9834b41087e2a645f6e4e51daa1ab892cd90dddc07632f3b32855c6e57088b",
+      "bytes": 46240,
+      "sha256": "836a30512569f271ccc5a256f336d8359d68b6d30319316deed7a2ad3f354981",
       "status": "project_reference",
       "references": [
+        {
+          "file": "scenes/editor/animated_module_showcase.tscn",
+          "line": 15,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "scenes/editor/asset_polish_showcase.tscn",
+          "line": 13,
+          "scope": "tooling",
+          "method": "literal"
+        },
         {
           "file": "scenes/editor/modular_map_showcase.tscn",
           "line": 34,
@@ -3403,6 +4412,12 @@
           "line": 88,
           "scope": "tooling",
           "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
         }
       ],
       "license_status": "unverified"
@@ -3410,10 +4425,22 @@
     {
       "path": "assets/models/baked/Sanctuary-Tree.glb",
       "group": "models/baked",
-      "bytes": 44504,
-      "sha256": "bbd6a62d28c6ff7c45132e59a7ab407abba82a8b1065e47a3caa88fb26ba797c",
+      "bytes": 49868,
+      "sha256": "f0d13e3341307fc5192f76805f0968fb9e31942ebee626f3d0cf508fbd9b634e",
       "status": "project_reference",
       "references": [
+        {
+          "file": "scenes/editor/animated_module_showcase.tscn",
+          "line": 12,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "scenes/editor/asset_polish_showcase.tscn",
+          "line": 14,
+          "scope": "tooling",
+          "method": "literal"
+        },
         {
           "file": "scenes/editor/modular_map_showcase.tscn",
           "line": 33,
@@ -3431,6 +4458,12 @@
           "line": 88,
           "scope": "tooling",
           "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
         }
       ],
       "license_status": "unverified"
@@ -3438,10 +4471,16 @@
     {
       "path": "assets/models/baked/Sanctuary-Vine-Arch.glb",
       "group": "models/baked",
-      "bytes": 138672,
-      "sha256": "c753843b0ccfb58a4e375a57c2ababe8f1e62206f6dc7f68eb14e64a7370c53e",
+      "bytes": 144072,
+      "sha256": "0311102a9b64cb497fab6b7fe511828f944cfb06de1e98c48a073869f79b5d49",
       "status": "project_reference",
       "references": [
+        {
+          "file": "scenes/editor/animated_module_showcase.tscn",
+          "line": 14,
+          "scope": "tooling",
+          "method": "literal"
+        },
         {
           "file": "src/data/chapter_props.gd",
           "line": 19,
@@ -3451,6 +4490,12 @@
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -3465,14 +4510,20 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 84,
+          "file": "src/view/board_decorations.gd",
+          "line": 41,
           "scope": "project",
           "method": "constant_concat"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -3487,14 +4538,20 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 95,
+          "file": "src/view/board_decorations.gd",
+          "line": 52,
           "scope": "project",
           "method": "constant_concat"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -3509,20 +4566,26 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 100,
+          "file": "src/view/board_decorations.gd",
+          "line": 57,
           "scope": "project",
           "method": "constant_concat"
         },
         {
-          "file": "src/view/board_view.gd",
-          "line": 105,
+          "file": "src/view/board_decorations.gd",
+          "line": 62,
           "scope": "project",
           "method": "constant_concat"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -3532,25 +4595,37 @@
     {
       "path": "assets/models/baked/Terminal.glb",
       "group": "models/baked",
-      "bytes": 77100,
-      "sha256": "f5a9b7e31af861ff6c350db2fb8544c84fefa4344faeb6399c1c868f9a936928",
+      "bytes": 81456,
+      "sha256": "e4f301f389ef1e7d7e25c73c40d3b5aa7e8b98351dbe106382017c87a8ddc359",
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 99,
+          "file": "scenes/editor/animated_module_showcase.tscn",
+          "line": 6,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/board_decorations.gd",
+          "line": 56,
           "scope": "project",
           "method": "constant_concat"
         },
         {
-          "file": "src/view/board_view.gd",
-          "line": 104,
+          "file": "src/view/board_decorations.gd",
+          "line": 61,
           "scope": "project",
           "method": "constant_concat"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -3565,14 +4640,20 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 61,
+          "file": "src/view/board_geometry.gd",
+          "line": 9,
           "scope": "project",
           "method": "constant_concat"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -3587,14 +4668,20 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 96,
+          "file": "src/view/board_decorations.gd",
+          "line": 53,
           "scope": "project",
           "method": "constant_concat"
         },
         {
           "file": "tools/build_map_clusters.gd",
           "line": 88,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/polish_map_assets.py",
+          "line": 187,
           "scope": "tooling",
           "method": "dynamic_candidate"
         }
@@ -3610,13 +4697,13 @@
       "references": [
         {
           "file": "src/game/ending_cutscene.gd",
-          "line": 217,
+          "line": 219,
           "scope": "project",
           "method": "literal"
         },
         {
-          "file": "src/view/board_view.gd",
-          "line": 50,
+          "file": "src/view/board_actors.gd",
+          "line": 13,
           "scope": "project",
           "method": "literal"
         }
@@ -3632,15 +4719,187 @@
       "references": [
         {
           "file": "src/game/ending_cutscene.gd",
-          "line": 210,
+          "line": 212,
           "scope": "project",
           "method": "literal"
         },
         {
-          "file": "src/view/board_view.gd",
-          "line": 43,
+          "file": "src/view/board_actors.gd",
+          "line": 12,
           "scope": "project",
           "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/echo_expansion/dry_crossing.glb",
+      "group": "models/echo_expansion",
+      "bytes": 60560,
+      "sha256": "95dd3f0b0794f3ba1e79348b83abfd36d52e4005a32d83cbcae4257a5aa759e8",
+      "status": "dynamic_candidate",
+      "references": [
+        {
+          "file": "src/view/tidal_trial_view.gd",
+          "line": 13,
+          "scope": "project",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tests/verify_echo_expansion.gd",
+          "line": 15,
+          "scope": "test",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/echo_expansion/kiro_tidal_pack.glb",
+      "group": "models/echo_expansion",
+      "bytes": 67740,
+      "sha256": "a38d8beecf18b3dab027ecf9193818d2173a7c7f84740e3331fcd9594aec359a",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_actors.gd",
+          "line": 132,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/tidal_trial_view.gd",
+          "line": 13,
+          "scope": "project",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tests/verify_echo_expansion.gd",
+          "line": 15,
+          "scope": "test",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/echo_expansion/memory_echo.glb",
+      "group": "models/echo_expansion",
+      "bytes": 65800,
+      "sha256": "41f8575d3283987191f5d3a181b76af40b7a66c48ebcc46af1e890254701ebdf",
+      "status": "dynamic_candidate",
+      "references": [
+        {
+          "file": "src/view/tidal_trial_view.gd",
+          "line": 13,
+          "scope": "project",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tests/verify_echo_expansion.gd",
+          "line": 15,
+          "scope": "test",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/echo_expansion/mote.glb",
+      "group": "models/echo_expansion",
+      "bytes": 78172,
+      "sha256": "4eae23ebfa4221110c7238abfc87627821a6baa57551c6eac0c7a9cda8214305",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/companion_drone.gd",
+          "line": 39,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/tidal_trial_view.gd",
+          "line": 13,
+          "scope": "project",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tests/verify_echo_expansion.gd",
+          "line": 15,
+          "scope": "test",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/echo_expansion/restoration_station.glb",
+      "group": "models/echo_expansion",
+      "bytes": 89708,
+      "sha256": "b0c37909455d1530777faa8bdd4384fad812755b8c6ce350c1000394a0dbf1e4",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/game/restoration_station.gd",
+          "line": 27,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/tidal_trial_view.gd",
+          "line": 13,
+          "scope": "project",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tests/verify_echo_expansion.gd",
+          "line": 15,
+          "scope": "test",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/echo_expansion/tidal_raft.glb",
+      "group": "models/echo_expansion",
+      "bytes": 60556,
+      "sha256": "2965603730795a0e27ee1ab5493598f48ac7601a96c7de1e6367e3b195346b08",
+      "status": "dynamic_candidate",
+      "references": [
+        {
+          "file": "src/view/tidal_trial_view.gd",
+          "line": 13,
+          "scope": "project",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tests/verify_echo_expansion.gd",
+          "line": 15,
+          "scope": "test",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/echo_expansion/tidal_valve.glb",
+      "group": "models/echo_expansion",
+      "bytes": 73080,
+      "sha256": "9d9419181f504f1d307ef301b7b876afe56283e51decd4c9f8f35417049c20f6",
+      "status": "dynamic_candidate",
+      "references": [
+        {
+          "file": "src/view/tidal_trial_view.gd",
+          "line": 13,
+          "scope": "project",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tests/verify_echo_expansion.gd",
+          "line": 15,
+          "scope": "test",
+          "method": "dynamic_candidate"
         }
       ],
       "license_status": "unverified"
@@ -3733,7 +4992,7 @@
       "references": [
         {
           "file": "src/tools/build_mesh_library.gd",
-          "line": 15,
+          "line": 16,
           "scope": "tooling",
           "method": "literal"
         }
@@ -3749,7 +5008,7 @@
       "references": [
         {
           "file": "src/tools/build_mesh_library.gd",
-          "line": 16,
+          "line": 17,
           "scope": "tooling",
           "method": "literal"
         }
@@ -3797,7 +5056,7 @@
       "references": [
         {
           "file": "src/tools/build_mesh_library.gd",
-          "line": 17,
+          "line": 18,
           "scope": "tooling",
           "method": "literal"
         }
@@ -3813,7 +5072,7 @@
       "references": [
         {
           "file": "src/tools/build_mesh_library.gd",
-          "line": 18,
+          "line": 19,
           "scope": "tooling",
           "method": "literal"
         }
@@ -3829,7 +5088,7 @@
       "references": [
         {
           "file": "src/tools/build_mesh_library.gd",
-          "line": 19,
+          "line": 20,
           "scope": "tooling",
           "method": "literal"
         }
@@ -3857,8 +5116,15 @@
       "group": "models/environments",
       "bytes": 66240,
       "sha256": "a790e50dc98d4d24b700757e58d26239c67ee5325af02757209aec5d8df6cba5",
-      "status": "no_reference_found",
-      "references": [],
+      "status": "tooling_or_test_only",
+      "references": [
+        {
+          "file": "src/tools/build_mesh_library.gd",
+          "line": 15,
+          "scope": "tooling",
+          "method": "literal"
+        }
+      ],
       "license_status": "unverified"
     },
     {
@@ -3886,7 +5152,7 @@
       "references": [
         {
           "file": "src/tools/build_mesh_library.gd",
-          "line": 49,
+          "line": 50,
           "scope": "tooling",
           "method": "literal"
         }
@@ -3902,7 +5168,7 @@
       "references": [
         {
           "file": "src/tools/build_mesh_library.gd",
-          "line": 48,
+          "line": 49,
           "scope": "tooling",
           "method": "literal"
         }
@@ -3918,7 +5184,7 @@
       "references": [
         {
           "file": "src/tools/build_mesh_library.gd",
-          "line": 52,
+          "line": 53,
           "scope": "tooling",
           "method": "literal"
         }
@@ -3934,7 +5200,7 @@
       "references": [
         {
           "file": "src/tools/build_mesh_library.gd",
-          "line": 22,
+          "line": 23,
           "scope": "tooling",
           "method": "literal"
         }
@@ -3950,7 +5216,7 @@
       "references": [
         {
           "file": "src/tools/build_mesh_library.gd",
-          "line": 23,
+          "line": 24,
           "scope": "tooling",
           "method": "literal"
         }
@@ -3960,19 +5226,19 @@
     {
       "path": "assets/models/gameplay/Core/Memory-Fragment.glb",
       "group": "models/gameplay",
-      "bytes": 874628,
-      "sha256": "34b8036cd6b777bd18c492b1d00b24050e5469265e23fa79ee223c662c3c9d53",
+      "bytes": 66892,
+      "sha256": "acc5cd3ad7278481077322838ff963b7b1612cbb4ab2df054aa90e5db191e9ec",
       "status": "project_reference",
       "references": [
         {
           "file": "src/tools/build_mesh_library.gd",
-          "line": 24,
+          "line": 25,
           "scope": "tooling",
           "method": "literal"
         },
         {
-          "file": "src/view/board_view.gd",
-          "line": 49,
+          "file": "src/view/board_gameplay_objects.gd",
+          "line": 21,
           "scope": "project",
           "method": "literal"
         }
@@ -4003,14 +5269,14 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 48,
+          "file": "src/view/board_decorations.gd",
+          "line": 55,
           "scope": "project",
           "method": "literal"
         },
         {
-          "file": "src/view/board_view.gd",
-          "line": 98,
+          "file": "src/view/board_gameplay_objects.gd",
+          "line": 19,
           "scope": "project",
           "method": "literal"
         }
@@ -4026,7 +5292,7 @@
       "references": [
         {
           "file": "src/tools/build_mesh_library.gd",
-          "line": 31,
+          "line": 32,
           "scope": "tooling",
           "method": "literal"
         }
@@ -4042,7 +5308,7 @@
       "references": [
         {
           "file": "src/tools/build_mesh_library.gd",
-          "line": 32,
+          "line": 33,
           "scope": "tooling",
           "method": "literal"
         }
@@ -4058,7 +5324,7 @@
       "references": [
         {
           "file": "src/tools/build_mesh_library.gd",
-          "line": 27,
+          "line": 28,
           "scope": "tooling",
           "method": "literal"
         }
@@ -4074,7 +5340,7 @@
       "references": [
         {
           "file": "src/tools/build_mesh_library.gd",
-          "line": 30,
+          "line": 31,
           "scope": "tooling",
           "method": "literal"
         }
@@ -4090,7 +5356,7 @@
       "references": [
         {
           "file": "src/tools/build_mesh_library.gd",
-          "line": 26,
+          "line": 27,
           "scope": "tooling",
           "method": "literal"
         }
@@ -4106,7 +5372,7 @@
       "references": [
         {
           "file": "src/tools/build_mesh_library.gd",
-          "line": 29,
+          "line": 30,
           "scope": "tooling",
           "method": "literal"
         }
@@ -4122,7 +5388,7 @@
       "references": [
         {
           "file": "src/tools/build_mesh_library.gd",
-          "line": 28,
+          "line": 29,
           "scope": "tooling",
           "method": "literal"
         }
@@ -4138,8 +5404,484 @@
       "references": [
         {
           "file": "src/tools/build_mesh_library.gd",
-          "line": 25,
+          "line": 26,
           "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/map_expansion/archive_floor_variant.glb",
+      "group": "models/map_expansion",
+      "bytes": 13264,
+      "sha256": "eaa5f11354f9f85402597a366b822e426c43628cce34acf92c13729b273ce9d5",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/map_expansion_showcase.tscn",
+          "line": 4,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/map_expansion.gd",
+          "line": 12,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_campaign_floor_skins.py",
+          "line": 19,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/build_map_expansion.py",
+          "line": 217,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/map_expansion/archive_wall_variant.glb",
+      "group": "models/map_expansion",
+      "bytes": 17440,
+      "sha256": "2643355d69b239d31d73f862f30321f199a6c6d16c13a6efd44479ebea0dbaba",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/map_expansion_showcase.tscn",
+          "line": 5,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/map_expansion.gd",
+          "line": 13,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_map_expansion.py",
+          "line": 217,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/map_expansion/core_floor_variant.glb",
+      "group": "models/map_expansion",
+      "bytes": 18528,
+      "sha256": "2d385c511f29aaf204a62d64ce84b4869e5ca8b6fabc56546e903fc61018700e",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/map_expansion_showcase.tscn",
+          "line": 10,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/map_expansion.gd",
+          "line": 18,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_campaign_floor_skins.py",
+          "line": 19,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/build_map_expansion.py",
+          "line": 217,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/map_expansion/core_wall_variant.glb",
+      "group": "models/map_expansion",
+      "bytes": 16372,
+      "sha256": "0670067d77718ed520c7ccd152177c9f16e2e67cb9851329fe3d459f25d962f6",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/map_expansion_showcase.tscn",
+          "line": 11,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/map_expansion.gd",
+          "line": 19,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_map_expansion.py",
+          "line": 217,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/map_expansion/elevator_deck_fascia.glb",
+      "group": "models/map_expansion",
+      "bytes": 7036,
+      "sha256": "e5d7c482d5be78fc6103e3078ea3974dbdfb9871eecbc57e878dec21286ad320",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/map_expansion_showcase.tscn",
+          "line": 15,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/map_expansion.gd",
+          "line": 22,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_map_expansion.py",
+          "line": 217,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/map_expansion/elevator_support_brace.glb",
+      "group": "models/map_expansion",
+      "bytes": 10632,
+      "sha256": "6b6132f56ff53dc08940b7822dd050a4741526541880935d2d043ebb73530d94",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/map_expansion_showcase.tscn",
+          "line": 14,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/map_expansion.gd",
+          "line": 21,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_map_expansion.py",
+          "line": 217,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/map_expansion/elevator_support_column.glb",
+      "group": "models/map_expansion",
+      "bytes": 7968,
+      "sha256": "721d91b84d2419fcb17ed2e26bae2d53f4c750aaa9ac17decee7b5a223add56f",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/map_expansion_showcase.tscn",
+          "line": 13,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/map_expansion.gd",
+          "line": 20,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_map_expansion.py",
+          "line": 217,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/map_expansion/elevator_threshold.glb",
+      "group": "models/map_expansion",
+      "bytes": 10556,
+      "sha256": "57bbc3108f0ce1086c015d830c80fca74fd7a8711a4206ced5d4f063f573d0af",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/map_expansion_showcase.tscn",
+          "line": 16,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/map_expansion.gd",
+          "line": 23,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_map_expansion.py",
+          "line": 217,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/map_expansion/energy_node.glb",
+      "group": "models/map_expansion",
+      "bytes": 53760,
+      "sha256": "4cb6cdb8e455193544073b8c71a89bef74536f8cd5ffba64dc0042ffde7725d8",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/map_expansion_showcase.tscn",
+          "line": 12,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/map_expansion.gd",
+          "line": 4,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_map_expansion.py",
+          "line": 217,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/map_expansion/foundry_floor_variant.glb",
+      "group": "models/map_expansion",
+      "bytes": 17952,
+      "sha256": "c203884781605fad87eeb5ad5a9fd0910f31ffc5d7e46b9800dde8d9fb671c82",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/map_expansion_showcase.tscn",
+          "line": 6,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/map_expansion.gd",
+          "line": 14,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_campaign_floor_skins.py",
+          "line": 19,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/build_map_expansion.py",
+          "line": 217,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/map_expansion/foundry_wall_variant.glb",
+      "group": "models/map_expansion",
+      "bytes": 17996,
+      "sha256": "62f8ef5daf246a86c306244f4702384b1e0e25ee071471583cfde25f5a17d1a7",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/map_expansion_showcase.tscn",
+          "line": 7,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/map_expansion.gd",
+          "line": 15,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_map_expansion.py",
+          "line": 217,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/map_expansion/sanctuary_floor_variant.glb",
+      "group": "models/map_expansion",
+      "bytes": 9652,
+      "sha256": "ce4a33c9432930ba1d5255a70cbccb6185b07ff6a909ecedc2aec7001fc551d2",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/map_expansion_showcase.tscn",
+          "line": 8,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/map_expansion.gd",
+          "line": 16,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_campaign_floor_skins.py",
+          "line": 19,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        },
+        {
+          "file": "tools/build_map_expansion.py",
+          "line": 217,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/map_expansion/sanctuary_wall_variant.glb",
+      "group": "models/map_expansion",
+      "bytes": 16020,
+      "sha256": "7b389ee54afcecb222118af0764bb665aeba50fad3b56a49ba8f00b90b111762",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "scenes/editor/map_expansion_showcase.tscn",
+          "line": 9,
+          "scope": "tooling",
+          "method": "literal"
+        },
+        {
+          "file": "src/data/map_expansion.gd",
+          "line": 17,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "tools/build_map_expansion.py",
+          "line": 217,
+          "scope": "tooling",
+          "method": "dynamic_candidate"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/map_surfaces/archive_floor_variant.glb",
+      "group": "models/map_surfaces",
+      "bytes": 20948,
+      "sha256": "2dc6dd1b89704e66928839ab125378c710759384e00e424988800c623cc096e9",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/map_expansion.gd",
+          "line": 6,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/board_geometry.gd",
+          "line": 13,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/map_surfaces/core_floor_variant.glb",
+      "group": "models/map_surfaces",
+      "bytes": 26084,
+      "sha256": "2aaf227a3198b0a2f2f1c7d86165f8f7785f6100ddda7eb73474bd0da4f4873d",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/map_expansion.gd",
+          "line": 9,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/board_geometry.gd",
+          "line": 16,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/map_surfaces/foundry_floor_variant.glb",
+      "group": "models/map_surfaces",
+      "bytes": 25496,
+      "sha256": "95b1b723cfd5ce4bd9dee3c4b591ba9252c3cca15bf3783dae8550747b5f05b8",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/map_expansion.gd",
+          "line": 7,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/board_geometry.gd",
+          "line": 14,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/map_surfaces/sanctuary_floor_variant.glb",
+      "group": "models/map_surfaces",
+      "bytes": 17208,
+      "sha256": "d0954fd33986e4c1e91263696bfea44615aba0fae6088070a9a6ea3146439cce",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/data/map_expansion.gd",
+          "line": 8,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/board_geometry.gd",
+          "line": 15,
+          "scope": "project",
           "method": "literal"
         }
       ],
@@ -4738,7 +6480,7 @@
       "references": [
         {
           "file": "src/tools/build_mesh_library.gd",
-          "line": 36,
+          "line": 37,
           "scope": "tooling",
           "method": "literal"
         }
@@ -4754,7 +6496,7 @@
       "references": [
         {
           "file": "src/tools/build_mesh_library.gd",
-          "line": 37,
+          "line": 38,
           "scope": "tooling",
           "method": "literal"
         }
@@ -4770,7 +6512,7 @@
       "references": [
         {
           "file": "src/tools/build_mesh_library.gd",
-          "line": 35,
+          "line": 36,
           "scope": "tooling",
           "method": "literal"
         }
@@ -4786,7 +6528,7 @@
       "references": [
         {
           "file": "src/tools/build_mesh_library.gd",
-          "line": 38,
+          "line": 39,
           "scope": "tooling",
           "method": "literal"
         }
@@ -4818,7 +6560,7 @@
       "references": [
         {
           "file": "src/tools/build_mesh_library.gd",
-          "line": 44,
+          "line": 45,
           "scope": "tooling",
           "method": "literal"
         }
@@ -4834,7 +6576,7 @@
       "references": [
         {
           "file": "src/tools/build_mesh_library.gd",
-          "line": 41,
+          "line": 42,
           "scope": "tooling",
           "method": "literal"
         }
@@ -4850,7 +6592,7 @@
       "references": [
         {
           "file": "src/tools/build_mesh_library.gd",
-          "line": 42,
+          "line": 43,
           "scope": "tooling",
           "method": "literal"
         }
@@ -4866,7 +6608,7 @@
       "references": [
         {
           "file": "src/tools/build_mesh_library.gd",
-          "line": 43,
+          "line": 44,
           "scope": "tooling",
           "method": "literal"
         }
@@ -4882,7 +6624,7 @@
       "references": [
         {
           "file": "src/tools/build_mesh_library.gd",
-          "line": 45,
+          "line": 46,
           "scope": "tooling",
           "method": "literal"
         }
@@ -4898,7 +6640,7 @@
       "references": [
         {
           "file": "src/tools/build_mesh_library.gd",
-          "line": 53,
+          "line": 54,
           "scope": "tooling",
           "method": "literal"
         }
@@ -4914,7 +6656,7 @@
       "references": [
         {
           "file": "src/tools/build_mesh_library.gd",
-          "line": 54,
+          "line": 55,
           "scope": "tooling",
           "method": "literal"
         }
@@ -4930,7 +6672,7 @@
       "references": [
         {
           "file": "src/tools/build_mesh_library.gd",
-          "line": 55,
+          "line": 56,
           "scope": "tooling",
           "method": "literal"
         }
@@ -4946,7 +6688,7 @@
       "references": [
         {
           "file": "src/tools/build_mesh_library.gd",
-          "line": 50,
+          "line": 51,
           "scope": "tooling",
           "method": "literal"
         }
@@ -4962,8 +6704,72 @@
       "references": [
         {
           "file": "src/tools/build_mesh_library.gd",
-          "line": 51,
+          "line": 52,
           "scope": "tooling",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/signage/sector_1.glb",
+      "group": "models/signage",
+      "bytes": 12800,
+      "sha256": "76b07b12208e7280e7a12c50e48576bcf289a3caf1f4ae337725f3d7fd7740b9",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_decorations.gd",
+          "line": 12,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/signage/sector_2.glb",
+      "group": "models/signage",
+      "bytes": 13080,
+      "sha256": "a4a214ba2676fd0b1f2f80d26c58410464de4332801ee9506829e9ed1741df43",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_decorations.gd",
+          "line": 13,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/signage/sector_3.glb",
+      "group": "models/signage",
+      "bytes": 13360,
+      "sha256": "d6f63a0ea602b36f815d5772e1dc2358fb05b9db7d6e77749717f70a6fe3d791",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_decorations.gd",
+          "line": 14,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/models/signage/sector_4.glb",
+      "group": "models/signage",
+      "bytes": 13308,
+      "sha256": "ebcf0676de318469ac7364dc5b62bea797cbb279f01c36108bf9cdd1ed64cc9d",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/board_decorations.gd",
+          "line": 15,
+          "scope": "project",
           "method": "literal"
         }
       ],
@@ -4977,8 +6783,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 45,
+          "file": "src/view/board_gameplay_objects.gd",
+          "line": 20,
           "scope": "project",
           "method": "literal"
         }
@@ -4994,13 +6800,13 @@
       "references": [
         {
           "file": "src/game/ending_cutscene.gd",
-          "line": 255,
+          "line": 258,
           "scope": "project",
           "method": "literal"
         },
         {
-          "file": "src/view/board_view.gd",
-          "line": 44,
+          "file": "src/view/board_actors.gd",
+          "line": 14,
           "scope": "project",
           "method": "literal"
         }
@@ -5015,8 +6821,46 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 46,
+          "file": "src/view/board_decorations.gd",
+          "line": 6,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/view/environment_dynamics.gd",
+          "line": 5,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/shaders/module_hologram.gdshader",
+      "group": "shaders",
+      "bytes": 902,
+      "sha256": "af9b0ad35fa42131003a2d3d7e84b1e99279baf12cc413a4c1d127825ffebadc",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/module_motion.gd",
+          "line": 6,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/shaders/module_signal.gdshader",
+      "group": "shaders",
+      "bytes": 1184,
+      "sha256": "fecc3964b2b5a7987f0d1b88f26d5c0e999bbd35abaeae863f120af811d568e6",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/module_motion.gd",
+          "line": 5,
           "scope": "project",
           "method": "literal"
         }
@@ -5031,8 +6875,24 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/board_view.gd",
-          "line": 47,
+          "file": "src/view/board_gameplay_objects.gd",
+          "line": 22,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
+      "path": "assets/shaders/sanctuary_basin.gdshader",
+      "group": "shaders",
+      "bytes": 2065,
+      "sha256": "13424201e5474a6931848c1b18317a71d9c9661afb310a4276635371bce01929",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/sector_exterior.gd",
+          "line": 171,
           "scope": "project",
           "method": "literal"
         }
@@ -5056,6 +6916,22 @@
       "license_status": "unverified"
     },
     {
+      "path": "assets/shaders/void_mist.gdshader",
+      "group": "shaders",
+      "bytes": 641,
+      "sha256": "31ab77e60d4962b2036c04361c83988e06ecb8fec3c426f9451edb3a9ee5c8d4",
+      "status": "project_reference",
+      "references": [
+        {
+          "file": "src/view/void_environment.gd",
+          "line": 4,
+          "scope": "project",
+          "method": "literal"
+        }
+      ],
+      "license_status": "unverified"
+    },
+    {
       "path": "assets/ui/endings/ending_preserve_cg.jpg",
       "group": "ui",
       "bytes": 821163,
@@ -5064,7 +6940,7 @@
       "references": [
         {
           "file": "src/game/ending_cutscene.gd",
-          "line": 334,
+          "line": 346,
           "scope": "project",
           "method": "dynamic_candidate"
         }
@@ -5080,7 +6956,7 @@
       "references": [
         {
           "file": "src/game/ending_cutscene.gd",
-          "line": 334,
+          "line": 346,
           "scope": "project",
           "method": "dynamic_candidate"
         }
@@ -5096,7 +6972,7 @@
       "references": [
         {
           "file": "src/game/ending_cutscene.gd",
-          "line": 334,
+          "line": 346,
           "scope": "project",
           "method": "dynamic_candidate"
         }
@@ -5112,13 +6988,13 @@
       "references": [
         {
           "file": "src/ui/memory_codex.gd",
-          "line": 84,
+          "line": 86,
           "scope": "project",
           "method": "literal"
         },
         {
           "file": "src/ui/settings.gd",
-          "line": 144,
+          "line": 336,
           "scope": "project",
           "method": "literal"
         }
@@ -5133,8 +7009,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/game_hud.gd",
-          "line": 18,
+          "file": "src/ui/hud_controls.gd",
+          "line": 17,
           "scope": "project",
           "method": "literal"
         }
@@ -5146,15 +7022,8 @@
       "group": "ui",
       "bytes": 261,
       "sha256": "2bfe965d064f3e6cf15ede2c370fec9dd837ddca1c75589d4d82deb0573273a2",
-      "status": "project_reference",
-      "references": [
-        {
-          "file": "src/view/game_hud.gd",
-          "line": 28,
-          "scope": "project",
-          "method": "literal"
-        }
-      ],
+      "status": "no_reference_found",
+      "references": [],
       "license_status": "unverified"
     },
     {
@@ -5162,15 +7031,8 @@
       "group": "ui",
       "bytes": 245,
       "sha256": "e46bfe42b0fe479167c185d0a8dc96c9b5a1ce715412c469cd6744790d4dd3a9",
-      "status": "project_reference",
-      "references": [
-        {
-          "file": "src/view/game_hud.gd",
-          "line": 27,
-          "scope": "project",
-          "method": "literal"
-        }
-      ],
+      "status": "no_reference_found",
+      "references": [],
       "license_status": "unverified"
     },
     {
@@ -5178,15 +7040,8 @@
       "group": "ui",
       "bytes": 473,
       "sha256": "17df1f50996fd8ae51f4f551dba0affec6b5d8331f45636678a866c659a610c4",
-      "status": "project_reference",
-      "references": [
-        {
-          "file": "src/view/game_hud.gd",
-          "line": 24,
-          "scope": "project",
-          "method": "literal"
-        }
-      ],
+      "status": "no_reference_found",
+      "references": [],
       "license_status": "unverified"
     },
     {
@@ -5207,19 +7062,19 @@
       "references": [
         {
           "file": "src/ui/memory_codex.gd",
-          "line": 385,
+          "line": 389,
           "scope": "project",
           "method": "literal"
         },
         {
           "file": "src/ui/menu.gd",
-          "line": 332,
+          "line": 323,
           "scope": "project",
           "method": "literal"
         },
         {
-          "file": "src/view/game_hud.gd",
-          "line": 25,
+          "file": "src/ui/menu.gd",
+          "line": 349,
           "scope": "project",
           "method": "literal"
         }
@@ -5235,7 +7090,7 @@
       "references": [
         {
           "file": "src/ui/start_menu.gd",
-          "line": 155,
+          "line": 173,
           "scope": "project",
           "method": "literal"
         }
@@ -5250,14 +7105,26 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/ui/start_menu.gd",
-          "line": 145,
+          "file": "src/ui/hud_controls.gd",
+          "line": 18,
           "scope": "project",
           "method": "literal"
         },
         {
-          "file": "src/view/game_hud.gd",
-          "line": 19,
+          "file": "src/ui/hud_pause_panel.gd",
+          "line": 14,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/ui/hud_win_panel.gd",
+          "line": 14,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/ui/start_menu.gd",
+          "line": 149,
           "scope": "project",
           "method": "literal"
         }
@@ -5272,8 +7139,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/game_hud.gd",
-          "line": 20,
+          "file": "src/ui/hud_controls.gd",
+          "line": 19,
           "scope": "project",
           "method": "literal"
         }
@@ -5288,14 +7155,20 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/ui/start_menu.gd",
-          "line": 135,
+          "file": "src/ui/hud_pause_panel.gd",
+          "line": 15,
           "scope": "project",
           "method": "literal"
         },
         {
-          "file": "src/view/game_hud.gd",
-          "line": 21,
+          "file": "src/ui/hud_win_panel.gd",
+          "line": 12,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/ui/start_menu.gd",
+          "line": 139,
           "scope": "project",
           "method": "literal"
         }
@@ -5311,7 +7184,7 @@
       "references": [
         {
           "file": "src/ui/start_menu.gd",
-          "line": 238,
+          "line": 256,
           "scope": "project",
           "method": "literal"
         }
@@ -5326,8 +7199,26 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/game_hud.gd",
-          "line": 17,
+          "file": "src/ui/hud_controls.gd",
+          "line": 16,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/ui/hud_pause_panel.gd",
+          "line": 13,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/ui/hud_win_panel.gd",
+          "line": 13,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/ui/settings.gd",
+          "line": 169,
           "scope": "project",
           "method": "literal"
         }
@@ -5342,8 +7233,14 @@
       "status": "project_reference",
       "references": [
         {
+          "file": "src/ui/hud_pause_panel.gd",
+          "line": 16,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
           "file": "src/ui/start_menu.gd",
-          "line": 223,
+          "line": 241,
           "scope": "project",
           "method": "literal"
         }
@@ -5358,8 +7255,8 @@
       "status": "project_reference",
       "references": [
         {
-          "file": "src/view/game_hud.gd",
-          "line": 16,
+          "file": "src/ui/hud_controls.gd",
+          "line": 15,
           "scope": "project",
           "method": "literal"
         }
@@ -5375,19 +7272,19 @@
       "references": [
         {
           "file": "src/ui/memory_codex.gd",
-          "line": 394,
+          "line": 398,
           "scope": "project",
           "method": "literal"
         },
         {
           "file": "src/ui/menu.gd",
-          "line": 324,
+          "line": 317,
           "scope": "project",
           "method": "literal"
         },
         {
-          "file": "src/view/game_hud.gd",
-          "line": 26,
+          "file": "src/ui/menu.gd",
+          "line": 342,
           "scope": "project",
           "method": "literal"
         }
@@ -5399,15 +7296,8 @@
       "group": "ui",
       "bytes": 238,
       "sha256": "734aa6654f50fb825b31ee6be5907176fe9a92fbcefd8675f041ebcdacce54c6",
-      "status": "project_reference",
-      "references": [
-        {
-          "file": "src/view/game_hud.gd",
-          "line": 23,
-          "scope": "project",
-          "method": "literal"
-        }
-      ],
+      "status": "no_reference_found",
+      "references": [],
       "license_status": "unverified"
     },
     {
@@ -5415,15 +7305,8 @@
       "group": "ui",
       "bytes": 258,
       "sha256": "b95f8443d0652204e3e380b77ef2f5667549f434260b89cd2dce86078668c09e",
-      "status": "project_reference",
-      "references": [
-        {
-          "file": "src/view/game_hud.gd",
-          "line": 22,
-          "scope": "project",
-          "method": "literal"
-        }
-      ],
+      "status": "no_reference_found",
+      "references": [],
       "license_status": "unverified"
     },
     {
@@ -5435,7 +7318,7 @@
       "references": [
         {
           "file": "src/ui/menu.gd",
-          "line": 109,
+          "line": 100,
           "scope": "project",
           "method": "literal"
         }
@@ -5451,7 +7334,13 @@
       "references": [
         {
           "file": "src/ui/start_menu.gd",
-          "line": 98,
+          "line": 102,
+          "scope": "project",
+          "method": "literal"
+        },
+        {
+          "file": "src/ui/startup_intro.gd",
+          "line": 43,
           "scope": "project",
           "method": "literal"
         }
@@ -5473,7 +7362,7 @@
         },
         {
           "file": "src/ui/memory_codex.gd",
-          "line": 473,
+          "line": 487,
           "scope": "project",
           "method": "literal"
         }
@@ -5495,7 +7384,7 @@
         },
         {
           "file": "src/ui/memory_codex.gd",
-          "line": 471,
+          "line": 485,
           "scope": "project",
           "method": "literal"
         }
@@ -5517,7 +7406,7 @@
         },
         {
           "file": "src/ui/memory_codex.gd",
-          "line": 475,
+          "line": 489,
           "scope": "project",
           "method": "literal"
         }
@@ -5539,13 +7428,13 @@
         },
         {
           "file": "src/ui/memory_codex.gd",
-          "line": 439,
+          "line": 443,
           "scope": "project",
           "method": "literal"
         },
         {
           "file": "src/ui/memory_codex.gd",
-          "line": 476,
+          "line": 490,
           "scope": "project",
           "method": "literal"
         }
@@ -5561,31 +7450,31 @@
       "references": [
         {
           "file": "src/game/ending_cutscene.gd",
-          "line": 27,
+          "line": 29,
           "scope": "project",
           "method": "literal"
         },
         {
           "file": "src/ui/memory_codex.gd",
-          "line": 48,
+          "line": 50,
           "scope": "project",
           "method": "literal"
         },
         {
           "file": "src/ui/menu.gd",
-          "line": 61,
+          "line": 52,
           "scope": "project",
           "method": "literal"
         },
         {
           "file": "src/ui/settings.gd",
-          "line": 55,
+          "line": 70,
           "scope": "project",
           "method": "literal"
         },
         {
           "file": "src/ui/start_menu.gd",
-          "line": 31,
+          "line": 35,
           "scope": "project",
           "method": "literal"
         }
