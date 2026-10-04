@@ -10,6 +10,7 @@ func _initialize() -> void:
 		previous[id] = library.get_item_name(id)
 	preload("res://src/data/chapter_props.gd").add_to_library(library)
 	preload("res://src/data/modular_props.gd").add_to_library(library)
+	preload("res://src/data/map_expansion.gd").add_to_library(library)
 	for id in previous:
 		assert(library.get_item_name(id) == previous[id], "Existing item ID changed")
 	var error := ResourceSaver.save(library, path)

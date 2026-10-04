@@ -1,11 +1,14 @@
 extends Node
 
 const GAME_SCENE := preload("res://scenes/game/main.tscn")
+## One signature prop per dressing family the level actually places. Keep these
+## in step with resources/levels/*.tres: a name listed here that no longer sits
+## in the level fails the run rather than passing quietly.
 const EXPECTED := {
 	2: ["kit_floor_edge", "kit_rail_straight", "kit_floor_corner"],
-	6: ["kit_pipe_straight", "kit_pipe_elbow", "foundry_furnace"],
+	6: ["kit_pipe_straight", "kit_pipe_elbow", "foundry_maintenance_box"],
 	11: ["kit_water_edge", "kit_water_corner", "kit_water_tile"],
-	14: ["kit_floor_edge", "kit_rail_straight", "core_wall"],
+	14: ["kit_floor_edge", "kit_rail_straight", "core_data_cabinet_low"],
 }
 var failures := 0
 

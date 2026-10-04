@@ -5,10 +5,10 @@ from pathlib import Path
 from tres_levels import load_levels
 
 PILOTS = {
-    "level_02": {"kit_floor_edge", "kit_rail_straight", "kit_floor_corner", "kit_floor_end_reverse", "kit_floor_inner_corner", "kit_rail_end_reverse"},
-    "level_06": {"kit_pipe_straight", "kit_pipe_elbow", "foundry_furnace"},
+    "level_02": {"kit_floor_edge", "kit_rail_straight", "kit_floor_corner", "kit_floor_end_reverse", "kit_floor_inner_corner"},
+    "level_06": {"kit_pipe_straight", "kit_pipe_elbow", "foundry_maintenance_box"},
     "level_11": {"kit_water_edge", "kit_water_corner", "kit_water_tile"},
-    "level_14": {"kit_floor_edge", "kit_rail_straight", "core_wall", "kit_floor_end_reverse", "kit_floor_inner_corner", "kit_rail_end_reverse"},
+    "level_14": {"kit_floor_edge", "kit_rail_straight", "core_data_cabinet_low", "kit_floor_end_reverse", "kit_floor_inner_corner", "kit_rail_end_reverse"},
 }
 MODULAR_PREFIXES = ("kit_",)
 LOW_WALL_PREFIX = "kit_wall_low_"

@@ -5,6 +5,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 from tres_levels import load_levels
+from validate_levels import DECORATION_WALL_TYPES
 
 
 KNOWN_MODULAR = {
@@ -15,6 +16,8 @@ KNOWN_MODULAR = {
     "kit_water_tile", "kit_water_edge", "kit_water_corner", "kit_water_inner_corner",
 }
 WALL_LOW_MODULAR = {"kit_wall_low_straight", "kit_wall_low_corner", "kit_wall_low_end"}
+SURFACE_FLOORS = {chapter + "_floor_variant" for chapter in ("archive", "foundry", "sanctuary", "core")}
+SURFACE_WALLS = {chapter + "_wall_variant" for chapter in ("archive", "foundry", "sanctuary", "core")}
 CHAPTER_IDENTITY_PROPS = {
     "archive_access_panel_broken", "archive_storage_tray_low",
     "foundry_maintenance_box", "foundry_pipe_support",
@@ -98,10 +101,16 @@ def main() -> int:
                     neighbors = {(x + 1, y, z), (x - 1, y, z), (x, y, z + 1), (x, y, z - 1)}
                     if not (neighbors & walkable):
                         failures.append(f"{name}: low wall {kind} has no adjacent playable floor at {pos}")
-                elif pos not in walkable:
+                elif kind not in DECORATION_WALL_TYPES and pos not in walkable:
                     failures.append(f"{name}: modular {kind} is on a wall cell {pos}")
+            if kind in DECORATION_WALL_TYPES and pos in walkable and kind not in ENTITY_MOUNTED_DECORATIONS:
+                failures.append(f"{name}: solid {kind} must stay on a blocked cell {pos}")
             if kind in CHAPTER_IDENTITY_PROPS and pos in walkable:
                 failures.append(f"{name}: chapter identity prop {kind} must replace an already blocked wall cell {pos}")
+            if kind in SURFACE_FLOORS and pos not in walkable:
+                failures.append(f"{name}: floor skin {kind} is on a blocked cell {pos}")
+            if kind in SURFACE_WALLS and pos in walkable:
+                failures.append(f"{name}: wall skin {kind} must remain on a blocked cell {pos}")
             profile = deco.get("dynamic_profile")
             if profile is not None and profile not in KNOWN_DYNAMIC_PROFILES:
                 failures.append(f"{name}: unknown dynamic_profile {profile!r} on {kind} at {pos}")

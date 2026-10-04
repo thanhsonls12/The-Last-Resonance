@@ -1,0 +1,197 @@
+[
+  {
+    "level": "level_01",
+    "chapter": 1,
+    "layers": [
+      {
+        "floor": 0,
+        "floor_skins": 14,
+        "low_walls": 1
+      }
+    ],
+    "puzzle_sha256": "d8c89d7ac4d71c158d3ea44c6e55c647002bb8951f89edf6272e7b89fdc8e6cf"
+  },
+  {
+    "level": "level_02",
+    "chapter": 1,
+    "layers": [
+      {
+        "floor": 0,
+        "floor_skins": 13,
+        "low_walls": 1
+      }
+    ],
+    "puzzle_sha256": "5eb5977ad5f4c813a02ed27441375e85673d23ed26fdf326fa26e0078167b1c0"
+  },
+  {
+    "level": "level_03",
+    "chapter": 1,
+    "layers": [
+      {
+        "floor": 0,
+        "floor_skins": 14,
+        "low_walls": 4
+      }
+    ],
+    "puzzle_sha256": "58dbb071fd60c3a66bf8c2ffbaafd1b4fe7bf849c373a7e1c49809d35e1f0521"
+  },
+  {
+    "level": "level_04",
+    "chapter": 1,
+    "layers": [
+      {
+        "floor": 0,
+        "floor_skins": 9,
+        "low_walls": 5
+      }
+    ],
+    "puzzle_sha256": "2c7b4a53f4ed892a5698a3b314b787ac57e6aab2db9f70bb5eda99f0e1d5c456"
+  },
+  {
+    "level": "level_05",
+    "chapter": 2,
+    "layers": [
+      {
+        "floor": 0,
+        "floor_skins": 20,
+        "low_walls": 10
+      }
+    ],
+    "puzzle_sha256": "c6d3d110ce74bcd40b8e16cad853af702eb2d7760c19e5c8cdfbcc4930740691"
+  },
+  {
+    "level": "level_06",
+    "chapter": 2,
+    "layers": [
+      {
+        "floor": 0,
+        "floor_skins": 13,
+        "low_walls": 6
+      }
+    ],
+    "puzzle_sha256": "c4073c4086ee2fdfac89ec6033fac2d5718671c11f15ecbf3324324803c1099e"
+  },
+  {
+    "level": "level_07",
+    "chapter": 2,
+    "layers": [
+      {
+        "floor": 0,
+        "floor_skins": 13,
+        "low_walls": 10
+      }
+    ],
+    "puzzle_sha256": "d23851d49691b901537b3c289219ce0d034e7076ab16b0e7425bafb84cf5ab00"
+  },
+  {
+    "level": "level_08",
+    "chapter": 2,
+    "layers": [
+      {
+        "floor": 0,
+        "floor_skins": 20,
+        "low_walls": 22
+      }
+    ],
+    "puzzle_sha256": "0035da444a72bcd8a808fea2349813bfadb4b87f26af5394a9e5deb838676d66"
+  },
+  {
+    "level": "level_09",
+    "chapter": 3,
+    "layers": [
+      {
+        "floor": 0,
+        "floor_skins": 19,
+        "low_walls": 48
+      }
+    ],
+    "puzzle_sha256": "cceaf06d28d1e395ddc282d5974d49675da90a4a45e1bbb874428380b365d9b6"
+  },
+  {
+    "level": "level_10",
+    "chapter": 3,
+    "layers": [
+      {
+        "floor": 0,
+        "floor_skins": 23,
+        "low_walls": 40
+      }
+    ],
+    "puzzle_sha256": "0a4c25067cec9e7784ffc1f14c18ad6f2c385701bf318efe55fe7eb3047943b4"
+  },
+  {
+    "level": "level_11",
+    "chapter": 3,
+    "layers": [
+      {
+        "floor": 0,
+        "floor_skins": 17,
+        "low_walls": 16
+      },
+      {
+        "floor": 1,
+        "floor_skins": 10,
+        "low_walls": 18
+      }
+    ],
+    "puzzle_sha256": "29e24c338a2b09c0111403a8442dc62357df3ffd85852ebce105b0197edae914"
+  },
+  {
+    "level": "level_12",
+    "chapter": 3,
+    "layers": [
+      {
+        "floor": 0,
+        "floor_skins": 23,
+        "low_walls": 48
+      },
+      {
+        "floor": 1,
+        "floor_skins": 12,
+        "low_walls": 18
+      }
+    ],
+    "puzzle_sha256": "2beab67db800282925bfd508ece9014f5a4234495731f58ea6249aea0315c7cd"
+  },
+  {
+    "level": "level_13",
+    "chapter": 4,
+    "layers": [
+      {
+        "floor": 0,
+        "floor_skins": 19,
+        "low_walls": 22
+      }
+    ],
+    "puzzle_sha256": "5f5b1701042a55b4052d92fb7e05e895217375786028f2e6467b3233d5555ccf"
+  },
+  {
+    "level": "level_14",
+    "chapter": 4,
+    "layers": [
+      {
+        "floor": 0,
+        "floor_skins": 22,
+        "low_walls": 27
+      },
+      {
+        "floor": 1,
+        "floor_skins": 21,
+        "low_walls": 23
+      }
+    ],
+    "puzzle_sha256": "d40d572f2707fe7c5c89aea1c1e3964bd6d635f3af686ed2e28f22d7cad93c41"
+  },
+  {
+    "level": "level_15",
+    "chapter": 4,
+    "layers": [
+      {
+        "floor": 0,
+        "floor_skins": 11,
+        "low_walls": 24
+      }
+    ],
+    "puzzle_sha256": "5716bbd5aa98dd91d1e13aae92889b9c93525a7be695900ae337cfa0e47a680a"
+  }
+]

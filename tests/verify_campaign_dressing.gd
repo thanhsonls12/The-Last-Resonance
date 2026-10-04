@@ -193,7 +193,11 @@ func _initialize() -> void:
 	check(l2_identity.get("kit_wall_low_straight") == Vector3i(3, 0, 5), "Level 2 keeps its reviewed low wall")
 
 	var level1: LevelData = Levels.get_data(0)
-	check(level1.decorations.size() == 29, "Level 1 D4 replacements do not increase decoration density")
+	var original_d4_count := 0
+	for deco in level1.decorations:
+		if str(deco.get("surface_pass", "")) != "chapter_surface" or deco.has("replaces_type"):
+			original_d4_count += 1
+	check(original_d4_count == 29, "Level 1 original D4 prop roster is retained beneath surface pass")
 	check(level1.landmark == "holo", "Level 1 keeps Holo as its first-story landmark")
 
 	print("Campaign D1/D2/D3/D4 dressing checks: ", failures, " failures")

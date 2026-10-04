@@ -2,7 +2,7 @@
 
 **20 loại** (`kit_*`): mép sàn, lan can, tường thấp, ống, nước. Scale GLB 2× → runtime `0.5`. Pivot tâm ô, mặt sàn.
 
-MeshLibrary project: **79** item. Desktop đã xem trong camera gameplay; Android chưa benchmark.
+MeshLibrary project: **91** item, gồm 12 scenery mới trong [kit bổ sung](MAP_KIT_EXPANSION.md). Desktop đã xem trong camera gameplay; Android chưa benchmark.
 
 ![Ghép thử bốn chương](MODULAR_KIT_PREVIEW.png)
 

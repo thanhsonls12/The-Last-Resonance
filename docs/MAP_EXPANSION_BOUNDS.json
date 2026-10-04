@@ -1,0 +1,236 @@
+[
+  {
+    "type": "energy_node",
+    "path": "assets/models/map_expansion/energy_node.glb",
+    "bounds_min": [
+      -0.36,
+      0.0,
+      -0.36
+    ],
+    "bounds_max": [
+      0.36,
+      0.098,
+      0.36
+    ],
+    "triangles": 868,
+    "surfaces": 4,
+    "source": "tools/build_map_expansion.py",
+    "gameplay_collision": false
+  },
+  {
+    "type": "archive_floor_variant",
+    "path": "assets/models/map_expansion/archive_floor_variant.glb",
+    "bounds_min": [
+      -0.49,
+      0.0,
+      -0.49
+    ],
+    "bounds_max": [
+      0.49,
+      0.042,
+      0.49
+    ],
+    "triangles": 144,
+    "surfaces": 3,
+    "source": "tools/build_map_expansion.py",
+    "gameplay_collision": false
+  },
+  {
+    "type": "archive_wall_variant",
+    "path": "assets/models/map_expansion/archive_wall_variant.glb",
+    "bounds_min": [
+      -0.49,
+      0.0,
+      -0.1265
+    ],
+    "bounds_max": [
+      0.49,
+      0.36,
+      0.1265
+    ],
+    "triangles": 204,
+    "surfaces": 3,
+    "source": "tools/build_map_expansion.py",
+    "gameplay_collision": false
+  },
+  {
+    "type": "foundry_floor_variant",
+    "path": "assets/models/map_expansion/foundry_floor_variant.glb",
+    "bounds_min": [
+      -0.49,
+      0.0,
+      -0.49
+    ],
+    "bounds_max": [
+      0.49,
+      0.04,
+      0.49
+    ],
+    "triangles": 213,
+    "surfaces": 4,
+    "source": "tools/build_map_expansion.py",
+    "gameplay_collision": false
+  },
+  {
+    "type": "foundry_wall_variant",
+    "path": "assets/models/map_expansion/foundry_wall_variant.glb",
+    "bounds_min": [
+      -0.49,
+      0.0,
+      -0.12
+    ],
+    "bounds_max": [
+      0.49,
+      0.36,
+      0.12
+    ],
+    "triangles": 204,
+    "surfaces": 4,
+    "source": "tools/build_map_expansion.py",
+    "gameplay_collision": false
+  },
+  {
+    "type": "sanctuary_floor_variant",
+    "path": "assets/models/map_expansion/sanctuary_floor_variant.glb",
+    "bounds_min": [
+      -0.49,
+      0.0,
+      -0.49
+    ],
+    "bounds_max": [
+      0.49,
+      0.033,
+      0.49
+    ],
+    "triangles": 80,
+    "surfaces": 4,
+    "source": "tools/build_map_expansion.py",
+    "gameplay_collision": false
+  },
+  {
+    "type": "sanctuary_wall_variant",
+    "path": "assets/models/map_expansion/sanctuary_wall_variant.glb",
+    "bounds_min": [
+      -0.49,
+      0.0,
+      -0.116
+    ],
+    "bounds_max": [
+      0.49,
+      0.36,
+      0.116
+    ],
+    "triangles": 180,
+    "surfaces": 4,
+    "source": "tools/build_map_expansion.py",
+    "gameplay_collision": false
+  },
+  {
+    "type": "core_floor_variant",
+    "path": "assets/models/map_expansion/core_floor_variant.glb",
+    "bounds_min": [
+      -0.49,
+      0.0,
+      -0.49
+    ],
+    "bounds_max": [
+      0.49,
+      0.036,
+      0.49
+    ],
+    "triangles": 220,
+    "surfaces": 4,
+    "source": "tools/build_map_expansion.py",
+    "gameplay_collision": false
+  },
+  {
+    "type": "core_wall_variant",
+    "path": "assets/models/map_expansion/core_wall_variant.glb",
+    "bounds_min": [
+      -0.49,
+      0.0,
+      -0.122
+    ],
+    "bounds_max": [
+      0.49,
+      0.36,
+      0.122
+    ],
+    "triangles": 180,
+    "surfaces": 4,
+    "source": "tools/build_map_expansion.py",
+    "gameplay_collision": false
+  },
+  {
+    "type": "elevator_support_column",
+    "path": "assets/models/map_expansion/elevator_support_column.glb",
+    "bounds_min": [
+      -0.16,
+      0.0,
+      -0.16
+    ],
+    "bounds_max": [
+      0.16,
+      1.14,
+      0.16
+    ],
+    "triangles": 72,
+    "surfaces": 3,
+    "source": "tools/build_map_expansion.py",
+    "gameplay_collision": false
+  },
+  {
+    "type": "elevator_support_brace",
+    "path": "assets/models/map_expansion/elevator_support_brace.glb",
+    "bounds_min": [
+      -0.5,
+      0.0,
+      -0.09
+    ],
+    "bounds_max": [
+      0.5,
+      1.14,
+      0.09
+    ],
+    "triangles": 116,
+    "surfaces": 3,
+    "source": "tools/build_map_expansion.py",
+    "gameplay_collision": false
+  },
+  {
+    "type": "elevator_deck_fascia",
+    "path": "assets/models/map_expansion/elevator_deck_fascia.glb",
+    "bounds_min": [
+      -0.5,
+      -0.2,
+      -0.516
+    ],
+    "bounds_max": [
+      0.5,
+      0.0,
+      -0.406
+    ],
+    "triangles": 60,
+    "surfaces": 3,
+    "source": "tools/build_map_expansion.py",
+    "gameplay_collision": false
+  },
+  {
+    "type": "elevator_threshold",
+    "path": "assets/models/map_expansion/elevator_threshold.glb",
+    "bounds_min": [
+      -0.4,
+      0.0,
+      -0.49
+    ],
+    "bounds_max": [
+      0.4,
+      0.025,
+      -0.31
+    ],
+    "triangles": 108,
+    "surfaces": 3,
+    "source": "tools/build_map_expansion.py",
+    "gameplay_collision": false
+  }
+]

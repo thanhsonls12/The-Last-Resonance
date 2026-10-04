@@ -32,7 +32,10 @@ func _ready() -> void:
 		var item: Node3D = board.decor_nodes[i]
 		var cell: Vector3i = decorations[i].grid_position
 		var floor_height := board.world_position(cell).y - board.world_position(Vector3i.ZERO).y
-		check(item.position.is_equal_approx(Vector3(cell.x + .1, BoardView.FLOOR_TOP_Y + floor_height + .12, 2)), "decoration position respects floor and offsets")
+		if decorations[i].type in GameLogic.DECORATION_WALL_TYPES:
+			check(is_equal_approx(item.position.y, BoardView.FLOOR_TOP_Y + floor_height + .12), "solid decoration preserves floor height while its mesh footprint is centered")
+		else:
+			check(item.position.is_equal_approx(Vector3(cell.x + .1, BoardView.FLOOR_TOP_Y + floor_height + .12, 2)), "decoration position respects floor and offsets")
 		check(item.scale.is_equal_approx(Vector3.ONE * .4), "runtime scale matches kit convention")
 		check(is_equal_approx(item.rotation.y, PI / 2), "runtime yaw")
 	board.free()

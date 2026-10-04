@@ -10,7 +10,18 @@ const DECORATION_WALL_TYPES := [
 	"data_rack", "archive_shelf", "workbench", "crate", "machine",
 	"broken_robot", "broken_wall", "broken_pillar", "rock", "door_frame",
 	"archive_lock_node", "foundry_line", "k_series_mold", "bridge_console",
-	"reactor_switch",
+	"reactor_switch", "window",
+	"plant", "sanctuary_tree", "sanctuary_rocks", "sanctuary_vine_arch",
+	"core_generator", "core_reactor", "core_hologram_dais", "resonance_altar",
+	"kit_rail_straight", "kit_rail_corner", "kit_rail_end", "kit_rail_end_reverse",
+	"kit_pipe_straight", "kit_pipe_elbow", "kit_pipe_tee", "kit_pipe_end",
+	"kit_water_edge", "kit_water_corner", "kit_water_inner_corner",
+	"railing", "terminal_desk", "terminal", "bookshelf", "data_vault", "plinth",
+	"broken_column", "pipe", "conveyor", "foundry_furnace", "foundry_press",
+	"foundry_gear", "foundry_pipe_valve", "foundry_maintenance_box", "foundry_pipe_support",
+	"sanctuary_shrine", "sanctuary_broken_plinth_low", "sanctuary_bank_root",
+	"core_wall", "core_data_cabinet_low", "soul_archive", "silence_reliquary",
+	"elias_testament", "eva_conduit", "judgement_engine", "sanctuary_pool",
 ]
 
 var level_name := ""
@@ -472,6 +483,8 @@ func try_move(dir: Vector3i) -> Dictionary:
 		pushed_from = target
 	# Resolve player destination (validation only).
 	var player_destination := target
+	if elevators.has(target) and sequential_floors and not elevator_is_unlocked(target):
+		return {}
 	if elevator_links.has(target):
 		var player_exit: Vector3i = elevator_links[target]
 		if sequential_floors and not elevator_is_unlocked(target):

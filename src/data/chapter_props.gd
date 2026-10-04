@@ -1,7 +1,7 @@
 @tool
 extends RefCounted
 
-## Scenery only: no puzzle mechanics or automatic blocked cells.
+## Scenery assets; solid types are classified by GameLogic.DECORATION_WALL_TYPES.
 ## GLBs use the existing 2-unit authoring grid; runtime scale is 0.5.
 const ASSETS := {
 	"archive_access_panel_broken": "res://assets/models/baked/Identity-archive_access_panel_broken.glb",

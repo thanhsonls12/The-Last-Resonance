@@ -1,6 +1,6 @@
 # Bộ vật thể dựng map theo chương
 
-**23 loại** chapter-prop (15 roster + 8 identity nhỏ) + 5 landmark GLB riêng. MeshLibrary toàn project: **79** item. Scenery không collision.
+**23 loại** chapter-prop (15 roster + 8 identity nhỏ) + 5 landmark GLB riêng. MeshLibrary toàn project: **91** item, gồm [kit bổ sung](MAP_KIT_EXPANSION.md). Scenery không collision.
 
 ![Cùng tỷ lệ](CHAPTER_PROPS_PREVIEW.png)
 
@@ -32,13 +32,13 @@
 | IV | `core_data_cabinet_low` | Tủ dữ liệu thấp | Mép phòng lõi, nhịp hình học chính xác |
 | IV | `core_light_trim` | Nẹp dẫn sáng thấp | Viền kiến trúc; emission phụ, không thay Energy Node |
 
-Chương I vẫn tái sử dụng bộ Archive hiện có cho props lớn, nhưng Đợt B bổ sung hai silhouette nhỏ riêng để Chapter I không chỉ dựa vào asset generic. Các tên cốt truyện cũ như `sanctuary_pool` và `judgement_engine` vẫn giữ cách ánh xạ hiện tại.
+Chương I vẫn tái sử dụng bộ Archive hiện có cho props lớn, nhưng Đợt B bổ sung hai silhouette nhỏ riêng để Chapter I không chỉ dựa vào asset generic. `sanctuary_pool` dùng Sanctuary-Pool, có nước dạng lỏng và giữ vị trí trên ô chặn. Chi tiết: [SANCTUARY_WATER.md](SANCTUARY_WATER.md).
 
 ## Dùng trong Godot
 
 - `scenes/editor/chapter_props_gallery.tscn` vẫn là gallery của 15 props roster gốc. Cụm Đợt B được xem trong `scenes/editor/modular_map_showcase.tscn`, nơi mỗi chapter ghép landmark/prop lớn với hai identity prop nhỏ.
-- Đặt map: mở `scenes/editor/gridmap_level_editor.tscn`; tìm item có tiền tố `Prop_` trong MeshLibrary. Mốc 51 item của đợt props đầu đã được thay thế bởi thư viện hiện tại 79 item.
-- MeshLibrary hiện có 79 item tổng cộng; installer giữ nguyên ID cũ khi thêm 8 props B.
+- Đặt map: mở `scenes/editor/gridmap_level_editor.tscn`; tìm item có tiền tố `Prop_` trong MeshLibrary. Mốc 51 item của đợt props đầu đã được thay thế bởi thư viện hiện tại 91 item.
+- MeshLibrary hiện có 91 item tổng cộng; installer giữ nguyên ID cũ khi thêm props B và kit bổ sung.
 - GridMap export/import nhận biết đủ 23 chapter-prop type và giữ yaw khi xoay quanh trục Y theo bước 90 độ.
 - Runtime dùng catalog chung `src/data/chapter_props.gd`; BoardView đọc các loại mới từ `LevelData.decorations`.
 

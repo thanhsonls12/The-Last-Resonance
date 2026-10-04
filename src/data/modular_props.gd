@@ -2,7 +2,7 @@
 extends RefCounted
 
 ## Visual modules. Grid centers stay fixed; +Y is up, -Z is north.
-## No collision or puzzle mechanics are introduced by these decorations.
+## Rails, pipes and water banks use blocked cells; floor and water tiles remain walkable.
 const ASSETS := {
 	"kit_floor_edge": "res://assets/models/modular/floor_edge.glb",
 	"kit_floor_corner": "res://assets/models/modular/floor_corner.glb",
