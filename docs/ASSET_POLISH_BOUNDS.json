@@ -1,0 +1,137 @@
+[
+  {
+    "asset": "Energy-Core",
+    "path": "assets/models/baked/Energy-Core.glb",
+    "triangles": 1040,
+    "bounds_min": [
+      -0.29250001907348633,
+      0.20750001072883606,
+      -0.2874999940395355
+    ],
+    "bounds_max": [
+      0.29250001907348633,
+      0.7925000190734863,
+      0.2874999940395355
+    ]
+  },
+  {
+    "asset": "Core-Pedestal",
+    "path": "assets/models/baked/Core-Pedestal.glb",
+    "triangles": 1456,
+    "bounds_min": [
+      -0.36000001430511475,
+      0.0,
+      -0.36000001430511475
+    ],
+    "bounds_max": [
+      0.36000001430511475,
+      0.3400000035762787,
+      0.36000001430511475
+    ]
+  },
+  {
+    "asset": "Foundry-Furnace",
+    "path": "assets/models/baked/Foundry-Furnace.glb",
+    "triangles": 612,
+    "bounds_min": [
+      -0.44999998807907104,
+      0.0,
+      -0.41750001907348633
+    ],
+    "bounds_max": [
+      0.44999998807907104,
+      1.475000023841858,
+      0.41749998927116394
+    ]
+  },
+  {
+    "asset": "Foundry-Press",
+    "path": "assets/models/baked/Foundry-Press.glb",
+    "triangles": 624,
+    "bounds_min": [
+      -0.5,
+      0.0,
+      -0.2750000059604645
+    ],
+    "bounds_max": [
+      0.5,
+      0.8500000238418579,
+      0.2750000059604645
+    ]
+  },
+  {
+    "asset": "Machine-Unit",
+    "path": "assets/models/baked/Machine-Unit.glb",
+    "triangles": 1372,
+    "bounds_min": [
+      -0.38749998807907104,
+      0.0,
+      -0.2731248736381531
+    ],
+    "bounds_max": [
+      0.38749998807907104,
+      1.0899999141693115,
+      0.2731249928474426
+    ]
+  },
+  {
+    "asset": "Archive-Data-Vault",
+    "path": "assets/models/baked/Archive-Data-Vault.glb",
+    "triangles": 516,
+    "bounds_min": [
+      -0.6100000143051147,
+      0.0,
+      -0.20999999344348907
+    ],
+    "bounds_max": [
+      0.6100000143051147,
+      1.3200000524520874,
+      0.20999999344348907
+    ]
+  },
+  {
+    "asset": "Sanctuary-Shrine",
+    "path": "assets/models/baked/Sanctuary-Shrine.glb",
+    "triangles": 468,
+    "bounds_min": [
+      -0.5,
+      0.0,
+      -0.4000000059604645
+    ],
+    "bounds_max": [
+      0.5,
+      1.2999999523162842,
+      0.4000000059604645
+    ]
+  },
+  {
+    "asset": "Core-Reactor",
+    "path": "assets/models/baked/Core-Reactor.glb",
+    "triangles": 796,
+    "bounds_min": [
+      -0.5400001406669617,
+      0.0,
+      -0.5399999618530273
+    ],
+    "bounds_max": [
+      0.5399999022483826,
+      1.2999999523162842,
+      0.5399999618530273
+    ]
+  },
+  {
+    "asset": "Narrative-judgement_engine",
+    "path": "assets/models/baked/Narrative-judgement_engine.glb",
+    "triangles": 144,
+    "bounds_min": [
+      -0.4099999964237213,
+      0.0,
+      -0.4099999964237213
+    ],
+    "bounds_max": [
+      0.4099999964237213,
+      0.41999998688697815,
+      0.4099999964237213
+    ]
+  }
+]

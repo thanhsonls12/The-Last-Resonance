@@ -1,0 +1,407 @@
+[
+  {
+    "path": "assets/models/baked/Conveyor.glb",
+    "source": "art/animated_modules/Conveyor.blend",
+    "clip": "Idle",
+    "duration": 8.0,
+    "modes": [
+      "rollers"
+    ],
+    "bounds_blender_min": [
+      -1.0199999809265137,
+      -0.64000004529953,
+      0.0
+    ],
+    "bounds_blender_max": [
+      1.0199999809265137,
+      0.6399999856948853,
+      0.5769678950309753
+    ],
+    "animated_parts": [
+      "Motion_Conveyor_Roller_0",
+      "Motion_Conveyor_Roller_0.7",
+      "Motion_Conveyor_Roller_0.35",
+      "Motion_Conveyor_Roller_-0.7",
+      "Motion_Conveyor_Roller_-0.35"
+    ]
+  },
+  {
+    "path": "assets/models/baked/Foundry-Press.glb",
+    "source": "art/animated_modules/Foundry-Press.blend",
+    "clip": "Idle",
+    "duration": 8.0,
+    "modes": [
+      "piston"
+    ],
+    "bounds_blender_min": [
+      -1.0,
+      -0.550000011920929,
+      0.0
+    ],
+    "bounds_blender_max": [
+      1.0,
+      0.550000011920929,
+      1.7000000476837158
+    ],
+    "animated_parts": [
+      "Motion_PressStroke"
+    ]
+  },
+  {
+    "path": "assets/models/baked/Foundry-Gear.glb",
+    "source": "art/animated_modules/Foundry-Gear.blend",
+    "clip": "Idle",
+    "duration": 8.0,
+    "modes": [
+      "gear"
+    ],
+    "bounds_blender_min": [
+      -1.1730000972747803,
+      -1.1729999780654907,
+      -6.231232418940635e-08
+    ],
+    "bounds_blender_max": [
+      1.1729999780654907,
+      1.1729999780654907,
+      0.4400002360343933
+    ],
+    "animated_parts": [
+      "Motion_DriveGear"
+    ]
+  },
+  {
+    "path": "assets/models/baked/Machine-Unit.glb",
+    "source": "art/animated_modules/Machine-Unit.blend",
+    "clip": "Idle",
+    "duration": 8.0,
+    "modes": [
+      "exhaust"
+    ],
+    "bounds_blender_min": [
+      -0.7749999761581421,
+      -0.5462499856948853,
+      0.0
+    ],
+    "bounds_blender_max": [
+      0.7749999761581421,
+      0.5462497472763062,
+      2.179999828338623
+    ],
+    "animated_parts": [
+      "Motion_ExhaustPressure"
+    ]
+  },
+  {
+    "path": "assets/models/baked/Hologram-Projector.glb",
+    "source": "art/animated_modules/Hologram-Projector.blend",
+    "clip": "Idle",
+    "duration": 8.0,
+    "modes": [
+      "hologram"
+    ],
+    "bounds_blender_min": [
+      -0.6847607493400574,
+      -0.7109491229057312,
+      0.0
+    ],
+    "bounds_blender_max": [
+      0.6847607493400574,
+      0.7109491229057312,
+      2.022152900695801
+    ],
+    "animated_parts": [
+      "Motion_HologramOrbit",
+      "Motion_HologramGlyph"
+    ]
+  },
+  {
+    "path": "assets/models/baked/Archive-Holo-Projector.glb",
+    "source": "art/animated_modules/Archive-Holo-Projector.blend",
+    "clip": "Idle",
+    "duration": 8.0,
+    "modes": [
+      "archive_hologram"
+    ],
+    "bounds_blender_min": [
+      -0.7200000286102295,
+      -0.7200000286102295,
+      0.0
+    ],
+    "bounds_blender_max": [
+      0.7200000286102295,
+      0.7200000286102295,
+      0.6800000071525574
+    ],
+    "animated_parts": [
+      "Motion_ArchiveProjection"
+    ]
+  },
+  {
+    "path": "assets/models/baked/Core-Reactor.glb",
+    "source": "art/animated_modules/Core-Reactor.blend",
+    "clip": "Idle",
+    "duration": 8.0,
+    "modes": [
+      "reactor"
+    ],
+    "bounds_blender_min": [
+      -1.0820002555847168,
+      -1.0819998979568481,
+      0.0
+    ],
+    "bounds_blender_max": [
+      1.0819997787475586,
+      1.0819998979568481,
+      2.5999999046325684
+    ],
+    "animated_parts": [
+      "Motion_ReactorSuspension",
+      "Motion_ReactorCrystal"
+    ]
+  },
+  {
+    "path": "assets/models/baked/Core-Generator.glb",
+    "source": "art/animated_modules/Core-Generator.blend",
+    "clip": "Idle",
+    "duration": 8.0,
+    "modes": [
+      "generator"
+    ],
+    "bounds_blender_min": [
+      -1.0,
+      -1.0,
+      0.0
+    ],
+    "bounds_blender_max": [
+      1.0,
+      1.0,
+      2.375
+    ],
+    "animated_parts": [
+      "Motion_GeneratorRotor"
+    ]
+  },
+  {
+    "path": "assets/models/baked/Core-Hologram-Dais.glb",
+    "source": "art/animated_modules/Core-Hologram-Dais.blend",
+    "clip": "Idle",
+    "duration": 8.0,
+    "modes": [
+      "dais"
+    ],
+    "bounds_blender_min": [
+      -0.8999999761581421,
+      -0.8999999761581421,
+      0.0
+    ],
+    "bounds_blender_max": [
+      0.8999999761581421,
+      0.8999999761581421,
+      2.0299999713897705
+    ],
+    "animated_parts": [
+      "Motion_HologramFloat",
+      "Motion_HologramTurn"
+    ]
+  },
+  {
+    "path": "assets/models/baked/Plant-Cluster.glb",
+    "source": "art/animated_modules/Plant-Cluster.blend",
+    "clip": "Idle",
+    "duration": 8.0,
+    "modes": [
+      "plant"
+    ],
+    "bounds_blender_min": [
+      -0.8476358652114868,
+      -0.3780996799468994,
+      -0.01844361424446106
+    ],
+    "bounds_blender_max": [
+      0.8225957155227661,
+      0.3493168354034424,
+      1.4006401300430298
+    ],
+    "animated_parts": [
+      "Motion_VegetationWind"
+    ]
+  },
+  {
+    "path": "assets/models/baked/Sanctuary-Tree.glb",
+    "source": "art/animated_modules/Sanctuary-Tree.blend",
+    "clip": "Idle",
+    "duration": 8.0,
+    "modes": [
+      "tree"
+    ],
+    "bounds_blender_min": [
+      -1.1382935047149658,
+      -0.7999999523162842,
+      0.0
+    ],
+    "bounds_blender_max": [
+      1.1382935047149658,
+      0.7999998927116394,
+      3.1999998092651367
+    ],
+    "animated_parts": [
+      "Motion_CanopyWind"
+    ]
+  },
+  {
+    "path": "assets/models/baked/Sanctuary-Vine-Arch.glb",
+    "source": "art/animated_modules/Sanctuary-Vine-Arch.blend",
+    "clip": "Idle",
+    "duration": 8.0,
+    "modes": [
+      "vine"
+    ],
+    "bounds_blender_min": [
+      -0.9599999785423279,
+      -0.38099873065948486,
+      0.0
+    ],
+    "bounds_blender_max": [
+      0.9599999785423279,
+      0.38099873065948486,
+      2.0799999237060547
+    ],
+    "animated_parts": [
+      "Motion_HangingVines"
+    ]
+  },
+  {
+    "path": "assets/models/baked/Sanctuary-Shrine.glb",
+    "source": "art/animated_modules/Sanctuary-Shrine.blend",
+    "clip": "Idle",
+    "duration": 8.0,
+    "modes": [
+      "shrine"
+    ],
+    "bounds_blender_min": [
+      -1.0,
+      -0.800000011920929,
+      0.0
+    ],
+    "bounds_blender_max": [
+      1.0,
+      0.800000011920929,
+      2.5999999046325684
+    ],
+    "animated_parts": [
+      "Motion_ShrineResonance"
+    ]
+  },
+  {
+    "path": "assets/models/baked/Energy-Core.glb",
+    "source": "art/animated_modules/Energy-Core.blend",
+    "clip": "Idle",
+    "duration": 8.0,
+    "modes": [
+      "core"
+    ],
+    "bounds_blender_min": [
+      -0.5850000381469727,
+      -0.574999988079071,
+      0.4150000214576721
+    ],
+    "bounds_blender_max": [
+      0.5850000381469727,
+      0.5769999623298645,
+      1.5850000381469727
+    ],
+    "animated_parts": [
+      "Motion_EnergyCore_Ring_X",
+      "Motion_EnergyCore_Ring_Z"
+    ]
+  },
+  {
+    "path": "assets/models/baked/Core-Pedestal.glb",
+    "source": "art/animated_modules/Core-Pedestal.blend",
+    "clip": "Idle",
+    "duration": 8.0,
+    "modes": [
+      "pedestal"
+    ],
+    "bounds_blender_min": [
+      -0.7200000286102295,
+      -0.7200000286102295,
+      0.0
+    ],
+    "bounds_blender_max": [
+      0.7200000286102295,
+      0.7200000286102295,
+      0.6800000071525574
+    ],
+    "animated_parts": [
+      "Motion_PedestalResonance"
+    ]
+  },
+  {
+    "path": "assets/models/baked/Terminal.glb",
+    "source": "art/animated_modules/Terminal.blend",
+    "clip": "Idle",
+    "duration": 8.0,
+    "modes": [
+      "terminal"
+    ],
+    "bounds_blender_min": [
+      -0.6800000071525574,
+      -0.47999998927116394,
+      0.0
+    ],
+    "bounds_blender_max": [
+      0.6800000071525574,
+      0.47999998927116394,
+      1.464233636856079
+    ],
+    "animated_parts": [
+      "Motion_TerminalScan"
+    ]
+  },
+  {
+    "path": "assets/models/baked/Pressure-Plate.glb",
+    "source": "art/animated_modules/Pressure-Plate.blend",
+    "clip": "Press",
+    "duration": 0.13333333333333333,
+    "modes": [
+      "plate"
+    ],
+    "bounds_blender_min": [
+      -0.6200000047683716,
+      -0.6200000047683716,
+      0.0
+    ],
+    "bounds_blender_max": [
+      0.6200000047683716,
+      0.6200000047683716,
+      0.3449999988079071
+    ],
+    "animated_parts": [
+      "Motion_PlateCompression"
+    ]
+  },
+  {
+    "path": "assets/models/gameplay/Core/Memory-Fragment.glb",
+    "source": "art/animated_modules/gameplay_Core_Memory-Fragment.blend",
+    "clip": "Idle",
+    "duration": 8.0,
+    "modes": [
+      "fragment"
+    ],
+    "bounds_blender_min": [
+      -6.400000095367432,
+      -4.71999979019165,
+      -0.3250000476837158
+    ],
+    "bounds_blender_max": [
+      6.400000095367432,
+      3.0,
+      2.4600000381469727
+    ],
+    "animated_parts": [
+      "Motion_MemoryOrbit",
+      "Motion_MemorySuspension"
+    ]
+  }
+]
