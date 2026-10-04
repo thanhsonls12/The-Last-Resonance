@@ -76,7 +76,7 @@ Checkpoint refactor 2026-10-02 trên Godot 4.7.2:
 | Godot `tools/run_tests.py` | PASS — **35/35** regression, gồm 4 lần chạy `asset_pilot_runtime` theo level |
 | Placement `validate_map_decorations.py` | PASS — 930 decoration, 15 màn |
 | Asset audit `audit_assets.py` | PASS — 329 file, không có literal reference bị thiếu |
-| Android `validate_android_export.py` | Chưa chạy lại sau refactor; cần preflight + playtest thiết bị trước nộp |
+| Android `validate_android_export.py` | PASS — APK export lại sau refactor: 81.881.736 byte, 949 entry |
 
 Các lệnh cốt lõi:
 

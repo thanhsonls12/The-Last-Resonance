@@ -128,6 +128,9 @@ Capture/generator không phải regression gate và vẫn được loại khỏi
 - Solver: **15/15 màn solvable; optimal = par**.
 - Placement validator: **930 decorations / 15 màn**, bounded, entity-safe, landmark-backed.
 - Asset audit: **329 file**, không có literal reference bị thiếu.
+- Android preflight: APK debug **export lại từ cây đã refactor** và PASS —
+  81.881.736 byte, 949 entry (bản trước refactor 63.010.089 byte / 777 entry; phần
+  tăng gần đúng 17,39 MB nhạc theo chương mới).
 - Headless editor load được dùng để bắt parse/import errors.
 - `.gitattributes` đã pin `*.gd/.tscn/.tres/.import/...` về LF; các file cũ được
   renormalize một lần nên working tree không còn diff CRLF giả.

@@ -9,9 +9,9 @@ scene environment) mà không đổi luật puzzle hay par. Các pass hình ản
 animation bake từ Blender, hoàn thiện Core/Foundry/landmark, ngoại cảnh sector, ánh
 sáng dễ quan sát, nước chương 3, nhạc theo chương và phòng thử **Phòng Vọng Âm**.
 Mọi thay đổi được xác nhận bằng **35/35 regression headless**, solver **15/15 màn
-solvable và optimal = par**, placement **930 decoration** trên 15 màn, và asset audit
-**329 file** không thiếu tham chiếu. APK debug đã qua preflight ở checkpoint trước
-nhưng **chưa chạy lại sau refactor**.
+solvable và optimal = par**, placement **930 decoration** trên 15 màn, asset audit
+**329 file** không thiếu tham chiếu, và APK debug **export lại sau refactor** rồi qua
+preflight (81.881.736 byte, 949 entry).
 
 Chưa có benchmark FPS, nhiệt, RAM hoặc cảm giác chạm trên thiết bị Android thật;
 headless PASS không thay thế nghe nhạc, xem animation và chơi trên máy thật.
