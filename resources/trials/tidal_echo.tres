@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/data/level_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = 100
+title = "Vọng âm dưới mặt nước"
+chapter = 3
+power_level = 0.22
+map = Array[String](["#########", "#@  #.  #", "# $ #   #", "#   #   #", "#   #   #", "#       #", "#########"])
+decorations = [{"type": "sanctuary_tree", "grid_position": Vector3i(0,0,3)}, {"type": "sanctuary_rocks", "grid_position": Vector3i(8,0,4)}, {"type": "kit_water_tile", "grid_position": Vector3i(4,0,1), "water_gap": true}, {"type": "kit_water_tile", "grid_position": Vector3i(4,0,2), "water_gap": true}, {"type": "kit_water_tile", "grid_position": Vector3i(4,0,3), "water_gap": true}, {"type": "kit_water_tile", "grid_position": Vector3i(4,0,4), "water_gap": true}, {"type": "kit_water_tile", "grid_position": Vector3i(4,0,5), "water_gap": true}]
+memory_fragment = "NHẬT KÝ THÁNH ĐƯỜNG — Người giữ van cuối cùng: 'Chúng tôi hạ nước mỗi tối để nghe tiếng chuông dưới lòng hồ. Đêm ấy, chuông vẫn vang dù chẳng còn ai ở đó.'"
